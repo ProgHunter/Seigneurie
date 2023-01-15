@@ -1,23 +1,14 @@
-using UnityEngine;
-
-namespace Ressource
+namespace Ressources
 {
     public abstract class AbstractRessource
     {
-        #region members
-        public string ID;
         public string Nom;
-        public Sprite Icone;
-        public string Description;
         public int Quantite;
-        #endregion members
-    }
+        public int QuantiteProduite = 50;
 
-    public enum RessourceEnum
-    {
-        POPULATION = 0,
-        NOURRITURE = 1,
-        BOIS = 2,
-        MINERAUX = 3,
+        public void FaireProduction()
+        {
+            Quantite += QuantiteProduite;
+        }
     }
 }

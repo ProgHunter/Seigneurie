@@ -11,12 +11,6 @@ namespace UI
 
         private AbstractRessource _ressource;
 
-        public TextMeshProUGUI Nombre
-        {
-            get => _nombre;
-            set => _nombre = value;
-        }
-
         public AbstractRessource Ressource
         {
             set
@@ -24,6 +18,11 @@ namespace UI
                 _ressource = value;
                 _nom.text = _ressource.Nom;
             }
+        }
+
+        public void UpdateValeur()
+        {
+            _nombre.text = _ressource.Quantite.ToString();
         }
     }
 }

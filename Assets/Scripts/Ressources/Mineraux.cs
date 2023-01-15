@@ -5,7 +5,7 @@ namespace Ressource
         public Mineraux() : base()
         {
             this.ID = "R3_Mineraux";
-            this.Nom = "Minéraux";
+            this.Nom = "MinÃ©raux";
             this.Icone = null;  // TODO
             this.Description = "";
         }

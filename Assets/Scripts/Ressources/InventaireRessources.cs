@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 namespace Ressource
@@ -43,7 +42,7 @@ namespace Ressource
             }
             catch (KeyNotFoundException)
             {
-                UnityEngine.Debug.Log("<color=red>Erreur: </color>La ressource " + ressource + " n'est pas dans le dictionnaire.");
+                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
             }
 
             return quantite;
@@ -68,7 +67,7 @@ namespace Ressource
             }
             catch (KeyNotFoundException)
             {
-                UnityEngine.Debug.Log("<color=red>Erreur: </color>La ressource " + ressource + " n'est pas dans le dictionnaire.");
+                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
                 return false;
             }
 
@@ -84,7 +83,7 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Attribu un valeur spécifique à une ressource dans l'inventaire.
+        /// Attribue une valeur spécifique à une ressource dans l'inventaire.
         /// </summary>
         /// <param name="ressource">La ressource à attribuer</param>
         /// <param name="quantite">La quantité à attribuer</param>
@@ -96,7 +95,7 @@ namespace Ressource
             }
             catch (KeyNotFoundException)
             {
-                UnityEngine.Debug.Log("<color=red>Erreur: </color>La ressource " + ressource + " n'est pas dans le dictionnaire.");
+                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
             }
         }
     }

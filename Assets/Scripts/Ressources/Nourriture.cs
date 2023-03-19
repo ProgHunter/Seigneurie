@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Nourriture : MonoBehaviour
+namespace Ressource
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Nourriture : AbstractRessource
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public Nourriture() : base()
+        {
+            this.ID = "R1_Nourriture";
+            this.Nom = "Nourriture";
+            this.Icone = null;  // TODO
+            this.Description = "";
+        }
     }
 }

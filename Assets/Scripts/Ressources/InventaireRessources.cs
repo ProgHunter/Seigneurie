@@ -7,16 +7,11 @@ namespace Ressource
     public sealed class InventaireRessources
     {
         private static readonly InventaireRessources _instance = new InventaireRessources();
-        public Dictionary<RessourceEnum, int> QuantiteRessources;
+        public LotRessources _quantiteRessources;
 
-        private InventaireRessources()
+        private InventaireRessources(int qtPopulation = 100, int qtNourriture = 100, int qtBois = 100, int qtMineraux = 100)
         {
-            QuantiteRessources = new Dictionary<RessourceEnum, int>();
-            Array ressourcesArray = Enum.GetValues(typeof(RessourceEnum));
-            foreach (RessourceEnum ressource in ressourcesArray)
-                QuantiteRessources.Add(ressource, 100);
-            // TODO: Remplacer la valeur placeholder 100 par une fonction pour récupérer la valeur
-            //       de base du jeu et éventuellement de la sauvegarde.
+            _quantiteRessources = new LotRessources(qtPopulation, qtNourriture, qtBois, qtMineraux);
         }
 
         public static InventaireRessources Instance
@@ -34,18 +29,7 @@ namespace Ressource
         /// <returns>La quantité de la ressource en inventaire</returns>
         public int AccesQuantiteRessource(RessourceEnum ressource)
         {
-            int quantite = 0;
-
-            try
-            {
-                quantite = QuantiteRessources[ressource];
-            }
-            catch (KeyNotFoundException)
-            {
-                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
-            }
-
-            return quantite;
+            return _quantiteRessources.AccesRessource(ressource);
         }
 
         /// <summary>
@@ -63,11 +47,10 @@ namespace Ressource
 
             try
             {
-                inventaire = QuantiteRessources[ressource];
+                inventaire = _quantiteRessources.AccesRessource(ressource);
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
                 return false;
             }
 
@@ -77,7 +60,7 @@ namespace Ressource
             else if (result > 1000)
                 result = 1000;
             // TODO: Remplacer la valeur placeholder 1000 par la valeur maximale de cette ressource
-            QuantiteRessources[ressource] = result;
+            _quantiteRessources.AttribuerRessource(ressource, result);
 
             return true;
         }
@@ -89,14 +72,7 @@ namespace Ressource
         /// <param name="quantite">La quantité à attribuer</param>
         public void AttribuerRessource(RessourceEnum ressource, int quantite)
         {
-            try
-            {
-                QuantiteRessources[ressource] = quantite;
-            }
-            catch (KeyNotFoundException)
-            {
-                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
-            }
+            _quantiteRessources.AttribuerRessource(ressource, quantite);
         }
     }
 }

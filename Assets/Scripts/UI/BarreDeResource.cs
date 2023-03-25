@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Ressources;
+using Ressource;
 using UnityEngine;
 
 namespace UI

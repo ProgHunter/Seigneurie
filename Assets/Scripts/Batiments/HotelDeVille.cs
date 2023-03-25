@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Ressources;
+using Ressource;
 using UI;
 using UnityEngine;
 
@@ -15,9 +15,7 @@ public class HotelDeVille : MonoBehaviour
     {
         _ressources = new List<AbstractRessource>
         {
-            new Nourriture(),
-            new Bois(),
-            new Mineraux()
+            
         };
         _barreDeResource.Setup(_ressources);
     }
@@ -31,7 +29,8 @@ public class HotelDeVille : MonoBehaviour
             TempsEcoule = 0f;
             foreach (AbstractRessource ressource in _ressources)
             {
-                ressource.FaireProduction();
+                ressource.Quantite += 5;
+                //ressource.FaireProduction();
             }
 
             _barreDeResource.UpdateRessources();

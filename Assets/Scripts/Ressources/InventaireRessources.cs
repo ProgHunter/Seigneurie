@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 namespace Ressource
 {
     public sealed class InventaireRessources
     {
-        private static readonly InventaireRessources _instance = new InventaireRessources();
-        public LotRessources _quantiteRessources;
+        private static readonly InventaireRessources _instance = new();
+        public LotRessources QuantiteRessources;
 
         private InventaireRessources(int qtPopulation = 100, int qtNourriture = 100, int qtBois = 100, int qtMineraux = 100)
         {
-            _quantiteRessources = new LotRessources(qtPopulation, qtNourriture, qtBois, qtMineraux);
+            QuantiteRessources = new LotRessources(qtPopulation, qtNourriture, qtBois, qtMineraux);
         }
 
         public static InventaireRessources Instance
@@ -29,7 +27,7 @@ namespace Ressource
         /// <returns>La quantité de la ressource en inventaire</returns>
         public int AccesQuantiteRessource(RessourceEnum ressource)
         {
-            return _quantiteRessources.AccesRessource(ressource);
+            return QuantiteRessources.AccesRessource(ressource);
         }
 
         /// <summary>
@@ -47,7 +45,7 @@ namespace Ressource
 
             try
             {
-                inventaire = _quantiteRessources.AccesRessource(ressource);
+                inventaire = QuantiteRessources.AccesRessource(ressource);
             }
             catch (KeyNotFoundException)
             {
@@ -60,7 +58,7 @@ namespace Ressource
             else if (result > 1000)
                 result = 1000;
             // TODO: Remplacer la valeur placeholder 1000 par la valeur maximale de cette ressource
-            _quantiteRessources.AttribuerRessource(ressource, result);
+            QuantiteRessources.AttribuerRessource(ressource, result);
 
             return true;
         }
@@ -72,7 +70,7 @@ namespace Ressource
         /// <param name="quantite">La quantité à attribuer</param>
         public void AttribuerRessource(RessourceEnum ressource, int quantite)
         {
-            _quantiteRessources.AttribuerRessource(ressource, quantite);
+            QuantiteRessources.AttribuerRessource(ressource, quantite);
         }
     }
 }

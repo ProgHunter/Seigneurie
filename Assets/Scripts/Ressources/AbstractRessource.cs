@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,6 @@ namespace Ressource
         public string Nom;
         public Sprite Icone;
         public string Description;
-        public int Quantite;
         #endregion members
     }
 
@@ -25,16 +23,18 @@ namespace Ressource
 
     public struct LotRessources
     {
+        public Dictionary<RessourceEnum, int> RessourcesDic;
+
         public LotRessources(int qtPopulation = 0, int qtNourriture = 0, int qtBois = 0, int qtMineraux = 0)
         {
-            RessourcesDic = new Dictionary<RessourceEnum, int>();
-            RessourcesDic.Add(RessourceEnum.POPULATION, qtPopulation);
-            RessourcesDic.Add(RessourceEnum.NOURRITURE, qtNourriture);
-            RessourcesDic.Add(RessourceEnum.BOIS, qtBois);
-            RessourcesDic.Add(RessourceEnum.MINERAUX, qtMineraux);
+            RessourcesDic = new Dictionary<RessourceEnum, int>
+            {
+                { RessourceEnum.POPULATION, qtPopulation },
+                { RessourceEnum.NOURRITURE, qtNourriture },
+                { RessourceEnum.BOIS,       qtBois       },
+                { RessourceEnum.MINERAUX,   qtMineraux   }
+            };
         }
-
-        public Dictionary<RessourceEnum, int> RessourcesDic;
 
         /// <summary>
         /// Donne accès à la quantité d'une ressource.

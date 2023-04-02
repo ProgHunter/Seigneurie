@@ -60,8 +60,8 @@ namespace Batiment
         public void AttribuerQteBatiment(BatimentEnum batiment, int qte)
         {
             _batiments.AttribuerQteBatiment(batiment, qte);
-
         }
+
         public void AttribuerQteMaxBatiment(BatimentEnum batiment, int qte)
         {
             _batiments.AttribuerQteMaxBatiment(batiment, qte);

@@ -4,59 +4,80 @@ using Batiment;
 public class TestGestionnaireBatiments
 {
     [Test]
-    public void TestAccesQteMaison()
+    public void TestAttribuerEtAccesQteMaison()
     {
-        var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
-        Assert.AreEqual(1, qte);
+        var qteAttribuee = 2;
+        GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteAttribuee);
+        
+        var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
+        
+        Assert.AreEqual(qteAttribuee, qteRetour);
     }
 
     [Test]
-    public void TestAccesQteFerme()
+    public void TestAttribuerEtAccesQteFerme()
     {
-        var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.FERME);
-        Assert.AreEqual(0, qte);
+        var qteAttribuee = 2;
+        GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteAttribuee);
+        
+        var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.FERME);
+        
+        Assert.AreEqual(qteAttribuee, qteRetour);
     }
 
     [Test]
-    public void TestAccesQteScierie()
+    public void TestAttribuerEtAccesQteScierie()
     {
-        var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.SCIERIE);
-        Assert.AreEqual(0, qte);
+        var qteAttribuee = 2;
+        GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, qteAttribuee);
+
+        var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.SCIERIE);
+
+        Assert.AreEqual(qteAttribuee, qteRetour);
     }
 
     [Test]
-    public void TestAccesQteMine()
+    public void TestAttribuerEtAccesQteMine()
     {
-        var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MINE);
-        Assert.AreEqual(0, qte);
+        var qteAttribuee = 2;
+        GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MINE, qteAttribuee);
+
+        var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MINE);
+
+        Assert.AreEqual(qteAttribuee, qteRetour);
     }
 
     [Test]
-    public void TestAccesQteHotelDeVille()
+    public void TestAttribuerEtAccesQteHotelDeVille()
     {
-        var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.HOTELDEVILLE);
-        Assert.AreEqual(0, qte);
+        var qteAttribuee = 2;
+        GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteAttribuee);
+
+        var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.HOTELDEVILLE);
+
+        Assert.AreEqual(qteAttribuee, qteRetour);
     }
 
     [Test]
-    public void TestAccesQteMaxMaison()
+    public void TestAttribuerEtAccesQteMaxMaison()
     {
-        var qteMax = GestionnaireBatiments.Instance.AccesQteMaxBatiment(BatimentEnum.MAISON);
-        Assert.AreEqual(1000, qteMax);
+        var qteAttribuee = 3;
+        GestionnaireBatiments.Instance.AttribuerQteMaxBatiment(BatimentEnum.MAISON, qteAttribuee);
+
+        var qteRetour = GestionnaireBatiments.Instance.AccesQteMaxBatiment(BatimentEnum.MAISON);
+
+        Assert.AreEqual(qteAttribuee, qteRetour);
     }
 
     [Test]
-    public void TestAttribuerQteMaxMaison()
+    public void TestConstruction3Maisons2Max()
     {
-        var qteMax = 3;
+        var qteDebut = 0;
+        var qteMax = 2;
+        // Initialisation des données du test
+        GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
         GestionnaireBatiments.Instance.AttribuerQteMaxBatiment(BatimentEnum.MAISON, qteMax);
-        var résultat = GestionnaireBatiments.Instance.AccesQteMaxBatiment(BatimentEnum.MAISON);
-        Assert.AreEqual(qteMax, résultat);
-    }
 
-    [Test]
-    public void TestConstructionMaisons()
-    {
         // Démarrer la première construction
         var retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
         Assert.IsTrue(retour);
@@ -76,7 +97,7 @@ public class TestGestionnaireBatiments
 
         // On devrait avoir une maison de plus
         var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
-        Assert.AreEqual(2, qte);
+        Assert.AreEqual(qteDebut + 1, qte);
 
         // La première construction devrait être fini, une nouvelle peut être lancé
         retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
@@ -86,7 +107,7 @@ public class TestGestionnaireBatiments
         retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot);
         Assert.IsTrue(retour);
 
-        // On est au Maximum de maison, le démarrage de la construction est refusé
+        // On est au Maximum de maison, le démarrage de la 3e construction est refusé
         retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
         Assert.IsTrue(!retour);
 
@@ -96,7 +117,6 @@ public class TestGestionnaireBatiments
 
         // On est toujours au maximum de construction
         qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
-        var qteMax = GestionnaireBatiments.Instance.AccesQteMaxBatiment(BatimentEnum.MAISON);
         Assert.AreEqual(qteMax, qte);
     }
 }

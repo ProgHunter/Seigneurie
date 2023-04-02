@@ -9,10 +9,10 @@ namespace Batiment
         #region members
         private static readonly GestionnaireBatiments _instance = new();
         private LotBatiments _batiments;
-        public Dictionary<BatimentEnum, AbstraitBatimentConfig> batimentConfigDic;
+        public Dictionary<BatimentEnum, AbstraitBatimentConfig> batimentConfigDict;
         /// <summary>
-        /// <see cref="BatimentEnum"/> constitu le batiment en contruction
-        /// <see cref="int"/> effort restant pour compléter la construction
+        /// <see cref="BatimentEnum"/> Constitue le bâtiment en contruction
+        /// <see cref="int"/> Effort restant pour compléter la construction
         /// </summary>
         public Paire<BatimentEnum, int> enConstruction = null;
         #endregion members
@@ -29,7 +29,7 @@ namespace Batiment
                                           new Qte(qteMine, qteMaxMine),
                                           new Qte(qteHotelDeVille, qteMaxHotelDeVille));
 
-            batimentConfigDic = new Dictionary<BatimentEnum, AbstraitBatimentConfig>
+            batimentConfigDict = new Dictionary<BatimentEnum, AbstraitBatimentConfig>
             {
                 { BatimentEnum.MAISON,       new MaisonConfig()       },
                 { BatimentEnum.FERME,        new FermeConfig()        },
@@ -82,7 +82,7 @@ namespace Batiment
             {
                 enConstruction = new Paire<BatimentEnum, int>();
                 enConstruction.Item1 = batiment;
-                enConstruction.Item2 = batimentConfigDic[batiment].effortConstruction;
+                enConstruction.Item2 = batimentConfigDict[batiment].effortConstruction;
             }
             catch (KeyNotFoundException)
             {

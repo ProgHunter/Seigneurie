@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Batiment;
 
-public class TestBatiment
+public class TestGestionnaireBatiments
 {
     [Test]
     public void TestAccesQteMaison()
@@ -62,7 +62,7 @@ public class TestBatiment
         Assert.IsTrue(retour);
 
         // La construction n'est pas fini
-        int effortTot = GestionnaireBatiments.Instance.batimentConfigDic[BatimentEnum.MAISON].effortConstruction;
+        int effortTot = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MAISON].effortConstruction;
         retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot / 2);
         Assert.IsTrue(!retour);
 

@@ -5,14 +5,14 @@ namespace Batiment
 {
     public abstract class AbstraitBatimentConfig
     {
-        #region members
+        #region membres
         public string id;
         public string nom;
         public Sprite icone;
         public string description;
         public LotRessources coutConstruction;
         public int effortConstruction;
-        #endregion members
+        #endregion membres
     }
 
     public enum BatimentEnum

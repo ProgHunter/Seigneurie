@@ -1,16 +1,17 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Ressource
 {
     public abstract class AbstraitRessourceConfig
     {
-        #region members
-        public string ID;
-        public string Nom;
-        public Sprite Icone;
-        public string Description;
-        #endregion members
+        #region membres
+        public string id;
+        public string nom;
+        public Sprite icone;
+        public string description;
+        public int qteBase;
+        public int qteMax;
+        #endregion membres
     }
 
     public enum RessourceEnum

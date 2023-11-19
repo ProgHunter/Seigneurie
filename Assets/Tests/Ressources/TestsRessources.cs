@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Ressource;
 
-namespace Tests
+namespace Test
 {
     public class TestInventaireRessources
     {
@@ -50,7 +50,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestModifierNouritureAjout()
+        public void TestModifierQteNouritureAjout()
         {
             var qteAttribuee = 100;
             var qteAjoutee = 100;
@@ -65,7 +65,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestModifierNouritureSoustraction()
+        public void TestModifierQteNouritureSoustraction()
         {
             var qteAttribuee = 300;
             var qteAjoutee = -100;
@@ -80,22 +80,21 @@ namespace Tests
         }
 
         [Test]
-        public void TestModifierNouritureNegatif()
+        public void TestModifierQteNouritureDepasseMin()
         {
-            var qteAttribuee = 200;
+            var qteMin = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.NOURRITURE);
+            InventaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteMin);
+
             var qteAjoutee = -300;
-
-            InventaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
-
             var resultOK = InventaireRessources.Instance.ModifierQteRessource(RessourceEnum.NOURRITURE, qteAjoutee);
             var qteRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             Assert.AreEqual(false, resultOK);
-            Assert.AreEqual(qteAttribuee, qteRetour);
+            Assert.AreEqual(qteMin, qteRetour);
         }
 
         [Test]
-        public void TestModifierPopulationMax()
+        public void TestModifierQtePopulationDepasseMax()
         {
             var qteAttribuee = 100;
 
@@ -105,12 +104,12 @@ namespace Tests
             var resultOK = InventaireRessources.Instance.ModifierQteRessource(RessourceEnum.POPULATION, qteMax);
             var qteRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
 
-            Assert.AreEqual(true, resultOK);
+            Assert.AreEqual(false, resultOK);
             Assert.AreEqual(qteMax, qteRetour);
         }
 
         [Test]
-        public void TestModifierNouritureMax()
+        public void TestModifierQteNouritureDepasseMax()
         {
             var qteAttribuee = 100;
 
@@ -120,12 +119,12 @@ namespace Tests
             var resultOK = InventaireRessources.Instance.ModifierQteRessource(RessourceEnum.NOURRITURE, qteMax);
             var qteRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
 
-            Assert.AreEqual(true, resultOK);
+            Assert.AreEqual(false, resultOK);
             Assert.AreEqual(qteMax, qteRetour);
         }
 
         [Test]
-        public void TestModifierBoisMax()
+        public void TestModifierQteBoisDepasseMax()
         {
             var qteAttribuee = 100;
 
@@ -135,12 +134,12 @@ namespace Tests
             var resultOK = InventaireRessources.Instance.ModifierQteRessource(RessourceEnum.BOIS, qteMax);
             var qteRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
 
-            Assert.AreEqual(true, resultOK);
+            Assert.AreEqual(false, resultOK);
             Assert.AreEqual(qteMax, qteRetour);
         }
 
         [Test]
-        public void TestModifierMinerauxMax()
+        public void TestModifierQteMinerauxDepasseMax()
         {
             var qteAttribuee = 100;
 
@@ -150,7 +149,7 @@ namespace Tests
             var resultOK = InventaireRessources.Instance.ModifierQteRessource(RessourceEnum.MINERAUX, qteMax);
             var qteRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
 
-            Assert.AreEqual(true, resultOK);
+            Assert.AreEqual(false, resultOK);
             Assert.AreEqual(qteMax, qteRetour);
         }
     }

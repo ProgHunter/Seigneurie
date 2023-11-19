@@ -67,6 +67,28 @@ namespace Batiment
             _batiments.AttribuerQteMaxBatiment(batiment, qte);
         }
 
+        public bool ConstructionEnCours()
+        {
+            return enConstruction != null;
+        }
+
+        public int AccesEffortConstructionTotal()
+        {
+            if (!ConstructionEnCours())
+                return 0;
+
+            BatimentEnum batiment = enConstruction.Item1;
+            return batimentConfigDict[batiment].effortConstruction;
+        }
+
+        public int AccesEffortConstructionRestant()
+        {
+            if (!ConstructionEnCours())
+                return 0;
+
+            return enConstruction.Item2;
+        }
+
         /// <summary>
         /// Démarrer une nouvelle construction.
         /// Une seul construction à la fois. Refusé si déjà au max de ce type de bâtiment.
@@ -76,7 +98,7 @@ namespace Batiment
         public bool DemarrerConstruction(BatimentEnum batiment)
         {
             // Un seule construction à la fois
-            if (enConstruction != null)
+            if (ConstructionEnCours())
                 return false;
 
             // Si on est à la limite max, on ne commance pas la nouvelle construction

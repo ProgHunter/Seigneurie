@@ -23,7 +23,7 @@ namespace Ressource
         /// Constructeur pour un lot de ressources qui exprime seulement une quantité.
         /// Pas de min ni de max spécifié.
         /// </summary>
-        public LotRessources(int qtePopulation, int qteNourriture, int qteBois, int qteMineraux)
+        public LotRessources(int qtePopulation = 0, int qteNourriture= 0, int qteBois = 0, int qteMineraux = 0)
         {
             ressourcesDict = new Dictionary<RessourceEnum, Qte>
             {
@@ -70,6 +70,27 @@ namespace Ressource
             {
                 Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
             }
+        }
+
+        /// <summary>
+        /// Donne accès à la quantité minimal d'une ressource.
+        /// </summary>
+        /// <param name="ressource">Le type de ressource</param>
+        /// <returns>La quantité minimal de la ressource</returns>
+        public int AccesQteMinRessource(RessourceEnum ressource)
+        {
+            int qteMin = 0;
+
+            try
+            {
+                qteMin = ressourcesDict[ressource].qteMin;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
+            }
+
+            return qteMin;
         }
 
         /// <summary>

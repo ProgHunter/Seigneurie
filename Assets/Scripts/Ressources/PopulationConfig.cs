@@ -2,12 +2,21 @@ namespace Ressource
 {
     public class PopulationConfig : AbstraitRessourceConfig
     {
+        public int croissancePourcent;
+        public int mortaliteFaminePourcent;
+        public int faimPourcent;
+
         public PopulationConfig() : base()
         {
-            ID = "R0_Population";
-            Nom = "Population";
-            Icone = null;  // TODO
-            Description = "";
+            id = "R0_Population";
+            nom = "Population";
+            icone = null;  // TODO
+            description = "";
+            qteBase = 100;
+            qteMax = 1_000_000;
+            croissancePourcent = 5;
+            mortaliteFaminePourcent = 5;
+            faimPourcent = 50;
         }
     }
 }

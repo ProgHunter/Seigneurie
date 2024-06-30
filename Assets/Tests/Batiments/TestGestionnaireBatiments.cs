@@ -64,7 +64,7 @@ namespace Test
         public void TestAttribuerEtAccesQteMaxMaison()
         {
             var qteAttribuee = 3;
-            GestionnaireBatiments.Instance.AttribuerQteMaxBatiment(BatimentEnum.MAISON, qteAttribuee);
+            GestionnaireBatiments.Instance.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteAttribuee);
 
             var qteRetour = GestionnaireBatiments.Instance.AccesQteMaxBatiment(BatimentEnum.MAISON);
 
@@ -78,14 +78,14 @@ namespace Test
             var qteMax = 2;
             // Initialisation des données du test
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
-            GestionnaireBatiments.Instance.AttribuerQteMaxBatiment(BatimentEnum.MAISON, qteMax);
+            GestionnaireBatiments.Instance.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteMax);
 
             // Démarrer la première construction
             var retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
             Assert.IsTrue(retour);
 
             // La construction n'est pas fini
-            int effortTot = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MAISON].effortConstruction;
+            var effortTot = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MAISON].effortConstruction;
             retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot / 2);
             Assert.IsTrue(!retour);
 

@@ -42,14 +42,14 @@ namespace Production
             LotRessources ressourcesProduites = new();
             foreach (KeyValuePair<RessourceEnum, AbstraitProduction> ressource in _productionRessourceDict)
             {
-                int production = ressource.Value.CalculerProduction();
+                long production = ressource.Value.CalculerProduction();
                 Debug.Log($"Production de {production} pour la ressource {ressource.Key}.");
                 ressourcesProduites.AttribuerQteRessource(ressource.Key, production);
             }
-            InventaireRessources.Instance.ModifierQteRessource(ressourcesProduites);
+            InventaireRessources.Instance.AjouterQteRessourceAvecLimites(ressourcesProduites);
 
             // Progression de la construction
-            int effort = _productionEffortConstruction.CalculerProduction();
+            long effort = _productionEffortConstruction.CalculerProduction();
             GestionnaireBatiments.Instance.AvancerConstruction(effort);
         }
     }

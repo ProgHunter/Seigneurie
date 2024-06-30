@@ -14,6 +14,7 @@ namespace Ressource
             description = "";
             qteBase = 100;
             qteMax = 1_000_000;
+            qteMin = 2;
             croissancePourcent = 5;
             mortaliteFaminePourcent = 5;
             faimPourcent = 50;

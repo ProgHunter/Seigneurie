@@ -14,14 +14,14 @@ namespace Batiment
         /// <see cref="BatimentEnum"/> Constitue le bâtiment en contruction
         /// <see cref="int"/> Effort restant pour compléter la construction
         /// </summary>
-        public Paire<BatimentEnum, int> enConstruction = null;
+        public Paire<BatimentEnum, long> enConstruction = null;
         #endregion members
 
-        private GestionnaireBatiments(int qteMaison = 1,       int qteMaxMaison = 1000, 
-                                      int qteFerme = 0,        int qteMaxFerme = 1000, 
-                                      int qteScierie = 0,      int qteMaxScierie = 100, 
-                                      int qteMine = 0,         int qteMaxMine = 100,
-                                      int qteHotelDeVille = 0, int qteMaxHotelDeVille = 1)
+        private GestionnaireBatiments(long qteMaison = 1,       long qteMaxMaison = 1000, 
+                                      long qteFerme = 0,        long qteMaxFerme = 1000, 
+                                      long qteScierie = 0,      long qteMaxScierie = 100, 
+                                      long qteMine = 0,         long qteMaxMine = 100,
+                                      long qteHotelDeVille = 0, long qteMaxHotelDeVille = 1)
         {
             _batiments = new LotBatiments(new Qte(qteMaison, qteMaxMaison),
                                           new Qte(qteFerme, qteMaxFerme),
@@ -47,24 +47,24 @@ namespace Batiment
             }
         }
 
-        public int AccesQteBatiment(BatimentEnum batiment)
+        public long AccesQteBatiment(BatimentEnum batiment)
         {
             return _batiments.AccesQteBatiment(batiment);
         }
 
-        public int AccesQteMaxBatiment(BatimentEnum batiment)
+        public long AccesQteMaxBatiment(BatimentEnum batiment)
         {
             return _batiments.AccesQteMaxBatiment(batiment);
         }
 
-        public void AttribuerQteBatiment(BatimentEnum batiment, int qte)
+        public void AttribuerQteBatiment(BatimentEnum batiment, long qte)
         {
             _batiments.AttribuerQteBatiment(batiment, qte);
         }
 
-        public void AttribuerQteMaxBatiment(BatimentEnum batiment, int qte)
+        public void ModifierLimiteMaxBatiment(BatimentEnum batiment, long qte)
         {
-            _batiments.AttribuerQteMaxBatiment(batiment, qte);
+            _batiments.ModifierLimiteMaxBatiment(batiment, qte);
         }
 
         public bool ConstructionEnCours()
@@ -72,7 +72,7 @@ namespace Batiment
             return enConstruction != null;
         }
 
-        public int AccesEffortConstructionTotal()
+        public long AccesEffortConstructionTotal()
         {
             if (!ConstructionEnCours())
                 return 0;
@@ -81,7 +81,7 @@ namespace Batiment
             return batimentConfigDict[batiment].effortConstruction;
         }
 
-        public int AccesEffortConstructionRestant()
+        public long AccesEffortConstructionRestant()
         {
             if (!ConstructionEnCours())
                 return 0;
@@ -107,7 +107,7 @@ namespace Batiment
 
             try
             {
-                enConstruction = new Paire<BatimentEnum, int>();
+                enConstruction = new Paire<BatimentEnum, long>();
                 enConstruction.Item1 = batiment;
                 enConstruction.Item2 = batimentConfigDict[batiment].effortConstruction;
             }
@@ -126,7 +126,7 @@ namespace Batiment
         /// </summary>
         /// <param name="effort">L'effort à soustraire de la construction</param>
         /// <returns>Vrai quand la contruction est complétée</returns>
-        public bool AvancerConstruction(int effort)
+        public bool AvancerConstruction(long effort)
         {
             // Aucune construction en cours
             if (enConstruction == null)

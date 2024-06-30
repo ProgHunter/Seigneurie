@@ -7,6 +7,6 @@ namespace Production
         ///                                  Sert purement de configuration pour balancer la production dans le jeu.
         /// </summary>
         public int efficacitePourcent = 100;
-        public abstract int CalculerProduction();
+        public abstract long CalculerProduction();
     }
 }

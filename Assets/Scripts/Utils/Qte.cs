@@ -2,11 +2,11 @@ namespace Utils
 {
     public class Qte
     {
-        public int qte;
-        public int qteMax;
-        public int qteMin;
+        public long qte;
+        public long qteMax;
+        public long qteMin;
 
-        public Qte(int qte = 0, int qteMax = 0, int qteMin = 0)
+        public Qte(long qte = 0, long qteMax = 0, long qteMin = 0)
         {
             this.qte = qte;
             this.qteMax = qteMax;

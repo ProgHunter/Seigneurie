@@ -13,14 +13,14 @@ namespace Production
         /// e : L'exposant calculé à partir de l'indice de parallélisation
         /// </summary>
         /// <returns>E(p) soit l'effort produit par un nombre de population</returns>
-        public override int CalculerProduction()
+        public override long CalculerProduction()
         {
             if (!GestionnaireBatiments.Instance.ConstructionEnCours())
                 return 0;
 
             int professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].professionPourcent;
-            int popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            int nbPopTravaille = popActuelle * professionPourcent / 100;
+            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            long nbPopTravaille = popActuelle * professionPourcent / 100;
             if (nbPopTravaille <= 0)
                 return 0;
 
@@ -33,9 +33,9 @@ namespace Production
         /// basé sur le nombre de population y travaillant actuellement
         /// </summary>
         /// <returns>L'estimé du nombre de ticks restants</returns>
-        public int EstimeNombreTicksRestants()
+        public long EstimeNombreTicksRestants()
         {
-            int effortRestant = GestionnaireBatiments.Instance.AccesEffortConstructionRestant();
+            long effortRestant = GestionnaireBatiments.Instance.AccesEffortConstructionRestant();
             if (effortRestant <= 0)
                 return 0;
 
@@ -52,7 +52,7 @@ namespace Production
         private float CalculerExposantEffortConstruction()
         {
             float parallelisable = (float)((Macon)GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON]).parallelisablePourcent / 100;
-            int effotConstructionTotal = GestionnaireBatiments.Instance.AccesEffortConstructionTotal();
+            long effotConstructionTotal = GestionnaireBatiments.Instance.AccesEffortConstructionTotal();
 
             return (Mathf.Log(parallelisable) / Mathf.Log(effotConstructionTotal)) + 1;
         }

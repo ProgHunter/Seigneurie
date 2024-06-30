@@ -7,28 +7,40 @@ namespace Utils
         /// <summary>
         /// P(t) = (K * Po * e^(r*t)) / (Po * e^(r*t) + K + Po)
         /// </summary>
-        /// <param name="tick">t</param>
-        /// <param name="nbPopBase">Po</param>
-        /// <param name="capaciteMax">K</param>
-        /// <param name="croissancePourcent">r</param>
-        /// <returns>P(t) soit la population au tick t (arondi plafond)</returns>
-        public static int FonctionLogistique(double tick, int nbPopBase, int capaciteMax, float croissance)
+        /// <param name="tick">t, entier positif dans l'interval [0, max double]</param>
+        /// <param name="popMin">Po, entier positif dans l'interval [1, max long]</param>
+        /// <param name="capaciteMax">K, entier positif dans l'interval [popMin+1, max long]</param>
+        /// <param name="croissance">r, taux de croissance dans l'interval [0.01, 1]</param>
+        /// <returns>P(t) soit la population au tick t. [popMin, capaciteMax]</returns>
+        public static double FonctionLogistique(double tick, long popMin, long capaciteMax, float croissance)
         {
-            double expP0 = Math.Exp((double)croissance * tick) * nbPopBase;
-            return (int)Math.Ceiling((capaciteMax * expP0) / (expP0 + capaciteMax + nbPopBase));
+            if (croissance <= 0)
+                return popMin;
+            // Prévenir une division par zéro
+            popMin = popMin < 1 ? 1 : popMin;
+            capaciteMax = capaciteMax < popMin ? popMin + 1 : capaciteMax;
+
+            double expP0 = Math.Exp(tick * croissance) * popMin;
+            return (capaciteMax * expP0) / (expP0 + capaciteMax + popMin);
         }
 
         /// <summary>
-        /// t(P) = ln((-P * (K - Po)) / ((P - K) * Po)) / r
+        /// t(P) = ln(-(P * (K - Po)) / ((P - K) * Po)) / r
         /// </summary>
-        /// <param name="popActuelle">P</param>
-        /// <param name="nbPopBase">Po</param>
-        /// <param name="capaciteMax">K</param>
-        /// <param name="croissance">r</param>
-        /// <returns>t(P) soit le tick correspodant à la quantité de population actuelle sur la courbe</returns>
-        public static double FonctionLogistiqueTickIsole(int popActuelle, int nbPopBase, int capaciteMax, float croissance)
+        /// <param name="popActuelle">P, entier positif dans l'interval [popMin, capaciteMax[</param>
+        /// <param name="popMin">Po, entier positif dans l'interval [1, max long]</param>
+        /// <param name="capaciteMax">K, entier positif dans l'interval [popMin+1, max long]</param>
+        /// <param name="croissance">r, taux de croissance dans l'interval [0.01, 1]</param>
+        /// <returns>t(P) soit le tick correspodant à la quantité de population actuelle sur la courbe. [0, max double]</returns>
+        public static double FonctionLogistiqueTickIsole(long popActuelle, long popMin, long capaciteMax, float croissance)
         {
-            return Math.Log((double)(-popActuelle * (capaciteMax - nbPopBase)) / ((popActuelle - capaciteMax) * nbPopBase)) / croissance;
+            popActuelle = popActuelle <= popMin ? popMin : popActuelle;
+            // Empècher la division par zéro ou le log d'un négatif
+            capaciteMax = capaciteMax <= popActuelle ? capaciteMax + 1 : capaciteMax;
+            
+            croissance = croissance <= 0 ? (float)0.01 : croissance;
+
+            return Math.Log(-(double)(popActuelle * (capaciteMax - popMin)) / ((popActuelle - capaciteMax) * popMin)) / croissance;
         }
 
         /// <summary>
@@ -37,7 +49,7 @@ namespace Utils
         /// <param name="parallelisable">p</param>
         /// <param name="nbPersonnes">s</param>
         /// <returns>S(s) soit </returns>
-        public static int TempsExecutionParalleleAmdahl(float parallelisable, int nbPersonnes)
+        public static ulong TempsExecutionParalleleAmdahl(float parallelisable, long nbPersonnes)
         {
             return 1; //?
         }

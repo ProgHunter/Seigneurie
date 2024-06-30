@@ -10,6 +10,7 @@ namespace Ressource
         public Sprite icone;
         public string description;
         public int qteBase;
+        public int qteMin;
         public int qteMax;
         #endregion membres
     }

@@ -10,6 +10,7 @@ namespace Ressource
             description = "";
             qteBase = 1000;
             qteMax = 1_000_000;
+            qteMin = 0;
         }
     }
 }

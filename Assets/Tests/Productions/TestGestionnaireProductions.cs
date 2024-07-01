@@ -12,11 +12,11 @@ namespace Test
         public void TestProfessions0Pourcent()
         {
             // Mettre toutes les professions à 0%
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.NATALITE].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.BUCHERON].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MINEUR].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].AttribuerPourcentProfession(0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -46,11 +46,11 @@ namespace Test
         public void TestProfessions25Pourcent0Batiments()
         {
             // Mettre toutes les productions de ressources à 25%
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.NATALITE].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.BUCHERON].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MINEUR].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].AttribuerPourcentProfession(0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
 
             // Aucun batiments
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
@@ -89,11 +89,11 @@ namespace Test
         public void TestProfessions25PourcentAvecBatiments()
         {
             // Mettre toutes les productions de ressources à 25%
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.NATALITE].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.BUCHERON].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MINEUR].AttribuerPourcentProfession(25);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].AttribuerPourcentProfession(0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
 
             // Création de bâtiments
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 1000);
@@ -133,11 +133,11 @@ namespace Test
         public void TestMaconConstruction()
         {
             // Attribuer des maçons
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.NATALITE].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].AttribuerPourcentProfession(50);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.BUCHERON].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MINEUR].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].AttribuerPourcentProfession(50);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 50);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 50);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -167,11 +167,11 @@ namespace Test
         public void TestFamine()
         {
             // Mettre toutes les professions à 0%
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.NATALITE].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.BUCHERON].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MINEUR].AttribuerPourcentProfession(0);
-            GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].AttribuerPourcentProfession(0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
 
             // Attribuer des ressources de base
             var qtePopBase = 10000;

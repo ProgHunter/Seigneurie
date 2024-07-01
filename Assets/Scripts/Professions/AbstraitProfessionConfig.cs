@@ -15,21 +15,6 @@ namespace Profession
         /// </summary>
         public int professionPourcent = 0;
         #endregion membres
-
-        /// <summary>
-        /// Attribut le pourcentage à la profession
-        /// Rectifie le pourcent si n'est pas entre 0 et 100 (inclusivement)
-        /// </summary>
-        /// <param name="pourcent"></param>
-        public void AttribuerPourcentProfession(int pourcent)
-        {
-            if (pourcent > 100)
-                pourcent = 100;
-            else if (pourcent < 0)
-                pourcent = 0;
-
-            professionPourcent = pourcent;
-        }
     }
 
     public enum ProfessionEnum

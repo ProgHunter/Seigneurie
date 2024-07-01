@@ -1,6 +1,6 @@
-using Ressource;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Profession
 {
@@ -30,21 +30,69 @@ namespace Profession
         }
 
         /// <summary>
+        /// Retourne le pourcentage attribué à la profession
+        /// </summary>
+        /// <param name="profession"></param>
+        /// <returns></returns>
+        public int AccederPourcent(ProfessionEnum profession)
+        {
+            int pourcent = 0;
+
+            try
+            {
+                pourcent = professionDict[profession].professionPourcent;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La profession {profession} n'est pas dans le dictionnaire.");
+            }
+
+            return pourcent;
+        }
+
+        /// <summary>
+        /// Attribut un pourcentage à la profession.
+        /// Aucune validation!
+        /// </summary>
+        /// <param name="profession">La profession que l'ont veut attribuer un pourcentage</param>
+        /// <param name="pourcent">Le pourcentage à attribuer</param>
+        public void AttribuerPourcent(ProfessionEnum profession, int pourcent)
+        {
+            try
+            {
+                professionDict[profession].professionPourcent = pourcent;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La profession {profession} n'est pas dans le dictionnaire.");
+            }
+        }
+
+        /// <summary>
         /// Attribuer un pourcentage de population à une profession
-        /// La modification est refusée si le pourcentage total de toutes les professions
+        /// La modification est ajustée si le pourcentage total de toutes les professions
         /// dépasserait 100% ensemble. Elle l'est aussi si le pourcentage est plus petit que 0.
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <param name="pourcent">Le pourcentage</param>
-        /// <returns>Vrai si la modification est accepté</returns>
-        public bool AttribuerPourcent(ProfessionEnum profession, int pourcent)
+        /// <returns>Vrai si la modification respecte les lmites</returns>
+        public bool AttribuerPourcentValide(ProfessionEnum profession, int pourcent)
         {
-            int delta = pourcent - professionDict[profession].professionPourcent;
-            if (pourcent < 0 || delta > PourcentPopLibre())
-                return false;
+            int pourcentLibre = PourcentPopLibre();
+            bool estValide = true;
+            
+            if (pourcent < 0)
+            {
+                pourcent = 0;
+                estValide = false;
+            } else if ((pourcent - AccederPourcent(profession)) > pourcentLibre)
+            {
+                pourcent = PourcentPopLibre();
+                estValide = false;
+            }
 
-            professionDict[profession].professionPourcent = pourcent;
-            return true;
+            AttribuerPourcent(profession, pourcent);
+            return estValide;
         }
 
         /// <summary>

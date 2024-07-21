@@ -8,13 +8,13 @@ namespace Ressource
 
         public PopulationConfig() : base()
         {
-            id = "R0_Population";
-            nom = "Population";
-            icone = null;  // TODO
-            description = "";
-            qteBase = 100;
-            qteMax = 1_000_000;
-            qteMin = 2;
+            Id = "R0_Population";
+            Nom = "Population";
+            Icone = null;  // TODO
+            Description = "";
+            QteBase = 100;
+            QteMax = 1_000_000;
+            QteMin = 2;
             croissancePourcent = 5;
             mortaliteFaminePourcent = 5;
             faimPourcent = 50;

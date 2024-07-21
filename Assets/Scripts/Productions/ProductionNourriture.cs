@@ -44,7 +44,7 @@ namespace Production
             long nbFermes = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.FERME);
             bonusFermes = bonusFermes * nbFermes + 1;
 
-            return (long)(nbPopTravaille * efficacitePourcent / 100 * bonusFermes);
+            return (long)(nbPopTravaille * efficacitePourcent * bonusFermes / 100);
         }
 
         private long ConsommationPopulation()

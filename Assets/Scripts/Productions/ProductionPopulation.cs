@@ -22,7 +22,7 @@ namespace Production
             if (capaciteMax < 0 || popActuelle < 0 || popActuelle + 1 >= capaciteMax)
                 return 0;
 
-            long popMin = InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION].qteMin;
+            long popMin = InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION].QteMin;
             popMin = popMin < 1 ? 1 : popMin;
 
             int croissancePc = ((PopulationConfig)InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION]).croissancePourcent;

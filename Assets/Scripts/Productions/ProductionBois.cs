@@ -20,10 +20,10 @@ namespace Production
                 return 0;
             // Calcul du bonus de production des scieries
             float bonusScieries = (float)((ScierieConfig)GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.SCIERIE]).bonusProductionPourcent / 100;
-            long nbFermes = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.SCIERIE);
-            bonusScieries = bonusScieries * nbFermes + 1;
+            long nbScieries = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.SCIERIE);
+            bonusScieries = bonusScieries * nbScieries + 1;
 
-            return (long)(nbPopTravaille * efficacitePourcent / 100 * bonusScieries);
+            return (long)(nbPopTravaille * efficacitePourcent * bonusScieries / 100);
         }
     }
 }

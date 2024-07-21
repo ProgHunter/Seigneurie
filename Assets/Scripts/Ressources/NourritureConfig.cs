@@ -4,13 +4,13 @@ namespace Ressource
     {
         public NourritureConfig() : base()
         {
-            id = "R1_Nourriture";
-            nom = "Nourriture";
-            icone = null;  // TODO
-            description = "";
-            qteBase = 1000;
-            qteMax = 1_000_000;
-            qteMin = 0;
+            Id = "R1_Nourriture";
+            Nom = "Nourriture";
+            Icone = null;  // TODO
+            Description = "";
+            QteBase = 1000;
+            QteMax = 1_000_000;
+            QteMin = 0;
         }
     }
 }

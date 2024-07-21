@@ -20,21 +20,21 @@ namespace Ressource
                 { RessourceEnum.MINERAUX,   new MinerauxConfig()   }
             };
 
-            long qtePopulation = ressourceConfigDict[RessourceEnum.POPULATION].qteBase;
-            long qteMinPopulation = ressourceConfigDict[RessourceEnum.POPULATION].qteMin;
-            long qteMaxPopulation = ressourceConfigDict[RessourceEnum.POPULATION].qteMax;
+            long qtePopulation = ressourceConfigDict[RessourceEnum.POPULATION].QteBase;
+            long qteMinPopulation = ressourceConfigDict[RessourceEnum.POPULATION].QteMin;
+            long qteMaxPopulation = ressourceConfigDict[RessourceEnum.POPULATION].QteMax;
 
-            long qteNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].qteBase;
-            long qteMinNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].qteMin;
-            long qteMaxNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].qteMax;
+            long qteNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].QteBase;
+            long qteMinNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].QteMin;
+            long qteMaxNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].QteMax;
 
-            long qteBois = ressourceConfigDict[RessourceEnum.BOIS].qteBase;
-            long qteMinBois = ressourceConfigDict[RessourceEnum.BOIS].qteMin;
-            long qteMaxBois = ressourceConfigDict[RessourceEnum.BOIS].qteMax;
+            long qteBois = ressourceConfigDict[RessourceEnum.BOIS].QteBase;
+            long qteMinBois = ressourceConfigDict[RessourceEnum.BOIS].QteMin;
+            long qteMaxBois = ressourceConfigDict[RessourceEnum.BOIS].QteMax;
 
-            long qteMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].qteBase;
-            long qteMinMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].qteMin;
-            long qteMaxMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].qteMax;
+            long qteMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].QteBase;
+            long qteMinMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].QteMin;
+            long qteMaxMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].QteMax;
 
             _quantiteRessources = new LotRessources(new Qte(qtePopulation, qteMaxPopulation, qteMinPopulation),
                                                     new Qte(qteNourriture, qteMaxNourriture, qteMinNourriture),

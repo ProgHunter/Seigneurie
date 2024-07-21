@@ -5,13 +5,13 @@ namespace Ressource
     public abstract class AbstraitRessourceConfig
     {
         #region membres
-        public string id;
-        public string nom;
-        public Sprite icone;
-        public string description;
-        public int qteBase;
-        public int qteMin;
-        public int qteMax;
+        public string Id;
+        public string Nom;
+        public Sprite Icone;
+        public string Description;
+        public int QteBase;
+        public int QteMin;
+        public int QteMax;
         #endregion membres
     }
 

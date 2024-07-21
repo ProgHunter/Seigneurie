@@ -25,19 +25,26 @@ namespace Production
                 return 0;
 
             float exposant = CalculerExposantEffortConstruction();
-            return (int)(Mathf.Pow(nbPopTravaille, exposant) * efficacitePourcent / 100);
+            return (long)(Mathf.Pow(nbPopTravaille, exposant) * efficacitePourcent / 100);
         }
 
         /// <summary>
         /// Estime le nombre de ticks restants avant de compléter la construction 
         /// basé sur le nombre de population y travaillant actuellement
         /// </summary>
-        /// <returns>L'estimé du nombre de ticks restants</returns>
+        /// <returns>
+        /// L'estimé du nombre de ticks restants
+        /// "-1" si "infini", ex: on ne fournira pas d'effort pour compléter la contruction
+        /// </returns>
         public long EstimeNombreTicksRestants()
         {
             long effortRestant = GestionnaireBatiments.Instance.AccesEffortConstructionRestant();
             if (effortRestant <= 0)
                 return 0;
+
+            long effortProduit = CalculerProduction();
+            if (effortProduit <= 0)
+                return -1;
 
             return Mathf.CeilToInt((float)effortRestant / CalculerProduction());
         }

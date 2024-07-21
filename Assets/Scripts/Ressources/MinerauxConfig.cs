@@ -4,13 +4,13 @@ namespace Ressource
     {
         public MinerauxConfig() : base()
         {
-            id = "R3_Mineraux";
-            nom = "Minéraux";
-            icone = null;  // TODO
-            description = "";
-            qteBase = 100;
-            qteMax = 10_000;
-            qteMin = 0;
+            Id = "R3_Mineraux";
+            Nom = "Minéraux";
+            Icone = null;  // TODO
+            Description = "";
+            QteBase = 100;
+            QteMax = 10_000;
+            QteMin = 0;
         }
     }
 }

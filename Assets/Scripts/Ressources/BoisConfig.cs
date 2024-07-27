@@ -4,10 +4,13 @@ namespace Ressource
     {
         public BoisConfig() : base()
         {
-            ID = "R2_Bois";
+            Id = "R2_Bois";
             Nom = "Bois";
             Icone = null;  // TODO
             Description = "";
+            QteBase = 100;
+            QteMax = 10_000;
+            QteMin = 0;
         }
     }
 }

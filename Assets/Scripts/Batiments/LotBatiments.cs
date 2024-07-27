@@ -28,7 +28,7 @@ namespace Batiment
         /// <returns>Vrai si le nombre a été incrémenté</returns>
         public bool AjouterUnBatiment(BatimentEnum batiment)
         {
-            int qte;
+            long qte;
 
             try
             {
@@ -51,9 +51,9 @@ namespace Batiment
         /// </summary>
         /// <param name="batiment">Le bâtiment dont on veut avoir la quantité</param>
         /// <returns>La quantité de ce bâtiment</returns>
-        public int AccesQteBatiment(BatimentEnum batiment)
+        public long AccesQteBatiment(BatimentEnum batiment)
         {
-            int quantite = 0;
+            long quantite = 0;
 
             try
             {
@@ -74,7 +74,7 @@ namespace Batiment
         /// </summary>
         /// <param name="batiment">Le bâtiment</param>
         /// <param name="qte">La quantité à attribuer</param>
-        public void AttribuerQteBatiment(BatimentEnum batiment, int qte)
+        public void AttribuerQteBatiment(BatimentEnum batiment, long qte)
         {
             try
             {
@@ -91,9 +91,9 @@ namespace Batiment
         /// </summary>
         /// <param name="batiment">Le bâtiment dont on veut avoir la quantité maximal</param>
         /// <returns>La quantité de ce bâtiment</returns>
-        public int AccesQteMaxBatiment(BatimentEnum batiment)
+        public long AccesQteMaxBatiment(BatimentEnum batiment)
         {
-            int qteMax = 0;
+            long qteMax = 0;
 
             try
             {
@@ -112,7 +112,7 @@ namespace Batiment
         /// </summary>
         /// <param name="batiment">Le bâtiment</param>
         /// <param name="qteMax">La quantité à attribuer</param>
-        public void AttribuerQteMaxBatiment(BatimentEnum batiment, int qteMax)
+        public void ModifierLimiteMaxBatiment(BatimentEnum batiment, long qteMax)
         {
             try
             {

@@ -4,6 +4,7 @@ namespace Batiment
 {
     public class FermeConfig : AbstraitBatimentConfig
     {
+        public int bonusProductionPourcent;
         public FermeConfig() : base()
         {
             id = "B1_Ferme";
@@ -12,6 +13,7 @@ namespace Batiment
             description = "Permet d'augmenter production de nourriture.";
             coutConstruction = new LotRessources(0, 0, 50, 10);
             effortConstruction = 20;
+            bonusProductionPourcent = 5;
         }
     }
 }

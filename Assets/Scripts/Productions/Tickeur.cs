@@ -16,11 +16,11 @@ namespace Production
         void Start()
         {
             // Mettre toutes les productions de ressources à 25%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0f);
 
             // Création de bâtiments
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 100);

@@ -21,38 +21,38 @@ namespace Production
         /// Ex: On a 1000 de nourriture, on produit 500, et on consomme 2000 => Il manque 25 pourcent de la consommation.
         /// </summary>
         /// <returns>Le pourcentage de la consommation non couvert.</returns>
-        public int CalculManqueNourriturePourcent()
+        public float CalculManqueNourriturePourcent()
         {
             long consommation = ConsommationPopulation();
             long nourritureDisponible = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE) + ProductionFermiers() - consommation;
 
             long nourritureManquante = nourritureDisponible >= 0 ? 0 : -nourritureDisponible;
 
-            return (int)(nourritureManquante * 100 / consommation);
+            return nourritureManquante / consommation;
         }
 
         private long ProductionFermiers()
         {
             // Calcul de l'effort des fermiers
-            long professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].professionPourcent;
+            float professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].professionPourcent;
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            long nbPopTravaille = popActuelle * professionPourcent / 100;
+            long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;
             // Calcul du bonus de production des fermes
-            float bonusFermes = (float)((FermeConfig)GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.FERME]).bonusProductionPourcent / 100;
+            float bonusFermes = ((FermeConfig)GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.FERME]).bonusProductionPourcent;
             long nbFermes = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.FERME);
             bonusFermes = bonusFermes * nbFermes + 1;
 
-            return (long)(nbPopTravaille * efficacitePourcent * bonusFermes / 100);
+            return (long)(nbPopTravaille * efficacitePourcent * bonusFermes);
         }
 
         private long ConsommationPopulation()
         {
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            long indiceDeFaim = ((PopulationConfig)InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION]).faimPourcent;
+            float indiceDeFaim = ((PopulationConfig)InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION]).faimPourcent;
 
-            return popActuelle * indiceDeFaim / 100;
+            return (long)(popActuelle * indiceDeFaim);
         }
     }
 }

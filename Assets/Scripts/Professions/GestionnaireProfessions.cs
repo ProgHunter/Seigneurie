@@ -34,9 +34,9 @@ namespace Profession
         /// </summary>
         /// <param name="profession"></param>
         /// <returns></returns>
-        public int AccederPourcent(ProfessionEnum profession)
+        public float AccederPourcent(ProfessionEnum profession)
         {
-            int pourcent = 0;
+            float pourcent = 0f;
 
             try
             {
@@ -56,7 +56,7 @@ namespace Profession
         /// </summary>
         /// <param name="profession">La profession que l'ont veut attribuer un pourcentage</param>
         /// <param name="pourcent">Le pourcentage à attribuer</param>
-        public void AttribuerPourcent(ProfessionEnum profession, int pourcent)
+        public void AttribuerPourcent(ProfessionEnum profession, float pourcent)
         {
             try
             {
@@ -76,9 +76,9 @@ namespace Profession
         /// <param name="profession">La profession</param>
         /// <param name="pourcent">Le pourcentage</param>
         /// <returns>Vrai si la modification respecte les lmites</returns>
-        public bool AttribuerPourcentValide(ProfessionEnum profession, int pourcent)
+        public bool AttribuerPourcentValide(ProfessionEnum profession, float pourcent)
         {
-            int pourcentLibre = PourcentPopLibre();
+            float pourcentLibre = PourcentPopLibre();
             bool estValide = true;
             
             if (pourcent < 0)
@@ -99,9 +99,9 @@ namespace Profession
         /// Le pourcentage de population sans profession
         /// </summary>
         /// <returns>Le pourcentage de population libre</returns>
-        public int PourcentPopLibre()
+        public float PourcentPopLibre()
         {
-            int pourcentPopLibre = 100;
+            float pourcentPopLibre = 1.0f;
             foreach (ProfessionEnum profession in Enum.GetValues(typeof(ProfessionEnum)))
             {
                 pourcentPopLibre -= professionDict[profession].professionPourcent;

@@ -13,7 +13,7 @@ namespace Profession
         /// <see cref="professionPourcent"/> Pourcentage de la population affecté à la profession
         ///                                  TODO : À changer de place éventuellement?
         /// </summary>
-        public int professionPourcent = 0;
+        public float professionPourcent = 0f;
         #endregion membres
     }
 

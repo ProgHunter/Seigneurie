@@ -4,7 +4,7 @@ namespace Batiment
 {
     public class MineConfig : AbstraitBatimentConfig
     {
-        public int bonusProductionPourcent;
+        public float bonusProductionPourcent;
         public MineConfig() : base()
         {
             id = "B3_Mine";
@@ -13,7 +13,7 @@ namespace Batiment
             description = "Permet d'augmenter production de minéraux.";
             coutConstruction = new LotRessources(0, 0, 50, 10);
             effortConstruction = 20;
-            bonusProductionPourcent = 5;
+            bonusProductionPourcent = 0.05f;
         }
     }
 }

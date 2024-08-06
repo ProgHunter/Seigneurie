@@ -38,7 +38,7 @@ namespace Utils
             // Empècher la division par zéro ou le log d'un négatif
             capaciteMax = capaciteMax <= popActuelle ? capaciteMax + 1 : capaciteMax;
             
-            croissance = croissance <= 0 ? (float)0.01 : croissance;
+            croissance = croissance <= 0 ? 0.01f : croissance;
 
             return Math.Log(-(double)(popActuelle * (capaciteMax - popMin)) / ((popActuelle - capaciteMax) * popMin)) / croissance;
         }

@@ -12,7 +12,7 @@ namespace Test
             var tick = 1;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = 1;
+            var croissance = 1f;
 
             var popAvecCroissance = MathUtils.FonctionLogistique(tick, nbPopBase, capaciteMax, croissance);
 
@@ -25,7 +25,7 @@ namespace Test
             var tick = 6;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = 1;
+            var croissance = 1f;
 
             var popAvecCroissance = MathUtils.FonctionLogistique(tick, nbPopBase, capaciteMax, croissance);
 
@@ -38,7 +38,7 @@ namespace Test
             var tick = 6;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = (float)0.5;
+            var croissance = 0.5f;
 
             var popAvecCroissance = MathUtils.FonctionLogistique(tick, nbPopBase, capaciteMax, croissance);
 
@@ -51,7 +51,7 @@ namespace Test
             var tick = 6;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = (float)0;
+            var croissance = 0f;
 
             var popAvecCroissance = MathUtils.FonctionLogistique(tick, nbPopBase, capaciteMax, croissance);
 
@@ -64,7 +64,7 @@ namespace Test
             var popActuelle = 50;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = 1;
+            var croissance = 1f;
 
             var tick = MathUtils.FonctionLogistiqueTickIsole(popActuelle, nbPopBase, capaciteMax, croissance);
 
@@ -77,7 +77,7 @@ namespace Test
             var popActuelle = 50;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = (float)0.01;
+            var croissance = 0.01f;
 
             var tick = MathUtils.FonctionLogistiqueTickIsole(popActuelle, nbPopBase, capaciteMax, croissance);
 
@@ -90,7 +90,7 @@ namespace Test
             var popActuelle = 10;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = 1;
+            var croissance = 1f;
 
             var tick = MathUtils.FonctionLogistiqueTickIsole(popActuelle, nbPopBase, capaciteMax, croissance);
 
@@ -103,7 +103,7 @@ namespace Test
             var popActuelle = 52;
             var nbPopBase = 2;
             var capaciteMax = 100;
-            var croissance = 1;
+            var croissance = 1f;
             // TODO: Debug 52pop -> 3,97ticks
             var tick = MathUtils.FonctionLogistiqueTickIsole(popActuelle, nbPopBase, capaciteMax, croissance);
             // 4ticks -> 51,70pop

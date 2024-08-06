@@ -12,11 +12,11 @@ namespace Test
         public void TestProfessions0Pourcent()
         {
             // Mettre toutes les professions à 0%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0f);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -46,11 +46,11 @@ namespace Test
         public void TestProfessions25Pourcent0Batiments()
         {
             // Mettre toutes les productions de ressources à 25%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0f);
 
             // Aucun batiments
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
@@ -89,11 +89,11 @@ namespace Test
         public void TestProfessions25PourcentAvecBatiments()
         {
             // Mettre toutes les productions de ressources à 25%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0.25f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0f);
 
             // Création de bâtiments
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 1000);
@@ -133,11 +133,11 @@ namespace Test
         public void TestMaconConstruction()
         {
             // Attribuer des maçons
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 50);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 50);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0.5f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0.5f);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -167,11 +167,11 @@ namespace Test
         public void TestFamine()
         {
             // Mettre toutes les professions à 0%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0f);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0f);
 
             // Attribuer des ressources de base
             var qtePopBase = 10000;

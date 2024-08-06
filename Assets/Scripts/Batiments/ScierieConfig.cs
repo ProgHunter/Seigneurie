@@ -4,7 +4,7 @@ namespace Batiment
 {
     public class ScierieConfig : AbstraitBatimentConfig
     {
-        public int bonusProductionPourcent;
+        public float bonusProductionPourcent;
         public ScierieConfig() : base()
         {
             id = "B2_Scierie";
@@ -13,7 +13,7 @@ namespace Batiment
             description = "Permet d'augmenter production de bois.";
             coutConstruction = new LotRessources(0, 0, 50, 10);
             effortConstruction = 20;
-            bonusProductionPourcent = 5;
+            bonusProductionPourcent = 0.05f;
         }
     }
 }

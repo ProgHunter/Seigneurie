@@ -2,15 +2,17 @@ using UnityEngine;
 
 namespace Ressource
 {
-    public abstract class AbstractRessource
+    public abstract class AbstraitRessourceConfig
     {
-        #region members
-        public string ID;
+        #region membres
+        public string Id;
         public string Nom;
         public Sprite Icone;
         public string Description;
-        public int Quantite;
-        #endregion members
+        public int QteBase;
+        public int QteMin;
+        public int QteMax;
+        #endregion membres
     }
 
     public enum RessourceEnum

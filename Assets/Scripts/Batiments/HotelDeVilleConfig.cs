@@ -1,3 +1,5 @@
+using Codice.Client.BaseCommands;
+using JetBrains.Annotations;
 using Ressource;
 
 namespace Batiment
@@ -12,6 +14,7 @@ namespace Batiment
             description = "Essentiel à l'organisation d'une seigneurie. Permet d'accéder aux batiments plus avancés.";
             coutConstruction = new LotRessources(0, 0, 2000, 500);
             effortConstruction = 1000;
+            prerequis = new LotBatiments(10, 1);
         }
     }
 }

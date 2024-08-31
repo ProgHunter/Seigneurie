@@ -15,7 +15,7 @@ namespace Production
         /// <returns>E(p) soit l'effort produit par un nombre de population</returns>
         public override long CalculerProduction()
         {
-            if (!GestionnaireBatiments.Instance.ConstructionEnCours())
+            if (!GestionnaireBatiments.Instance.ConstructionEstEnCours())
                 return 0;
 
             float professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].professionPourcent;

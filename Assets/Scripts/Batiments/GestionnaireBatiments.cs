@@ -67,14 +67,36 @@ namespace Batiment
             _batiments.ModifierLimiteMaxBatiment(batiment, qte);
         }
 
-        public bool ConstructionEnCours()
+        /// <summary>
+        /// Indique si le bâtiment est déverrouillé.
+        /// On valide avec le prérequis du bâtiment.
+        /// Si le bâtiment est verouillé, on ne doit pas pouvoir le construire.
+        /// </summary>
+        /// <returns>Vrai si le batiment est disponible pour être construit</returns>
+        public bool EstDeverrouille(BatimentEnum batiment)
+        {
+            LotBatiments prerequis;
+            try
+            {
+                prerequis = batimentConfigDict[batiment].prerequis;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
+                return true;
+            }
+
+            return _batiments >= prerequis;
+        }
+
+        public bool ConstructionEstEnCours()
         {
             return enConstruction != null;
         }
 
         public long AccesEffortConstructionTotal()
         {
-            if (!ConstructionEnCours())
+            if (!ConstructionEstEnCours())
                 return 0;
 
             BatimentEnum batiment = enConstruction.Item1;
@@ -83,7 +105,7 @@ namespace Batiment
 
         public long AccesEffortConstructionRestant()
         {
-            if (!ConstructionEnCours())
+            if (!ConstructionEstEnCours())
                 return 0;
 
             return enConstruction.Item2;
@@ -97,12 +119,12 @@ namespace Batiment
         /// <returns>Vrai si la construction peut être démarrée</returns>
         public bool DemarrerConstruction(BatimentEnum batiment)
         {
-            // Un seule construction à la fois
-            if (ConstructionEnCours())
-                return false;
-
+            // S'il y a déjà une construction en cours, ou
+            // Si le bâtiment n'est pas encore disponible, ou
             // Si on est à la limite max, on ne commance pas la nouvelle construction
-            if (_batiments.AccesQteBatiment(batiment) >= _batiments.AccesQteMaxBatiment(batiment))
+            if (ConstructionEstEnCours() ||
+                !EstDeverrouille(batiment) ||
+                (_batiments.AccesQteBatiment(batiment) >= _batiments.AccesQteMaxBatiment(batiment)))
                 return false;
 
             try
@@ -142,6 +164,15 @@ namespace Batiment
             _batiments.AjouterUnBatiment(enConstruction.Item1);
             enConstruction = null;
             return true;
+        }
+
+        /// <summary>
+        /// Annuler une construction en cours.
+        /// Le coût ne sera pas remboursé et la progression ne sera pas sauvegardé.
+        /// </summary>
+        public void AnnulerConstruction()
+        {
+            enConstruction = null;
         }
     }
 }

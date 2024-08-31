@@ -1,3 +1,4 @@
+using Ressource;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -17,6 +18,22 @@ namespace Batiment
                 { BatimentEnum.SCIERIE,      qteScierie      },
                 { BatimentEnum.MINE,         qteMine         },
                 { BatimentEnum.HOTELDEVILLE, qteHotelDeVille }
+            };
+        }
+
+        /// <summary>
+        /// Constructeur pour un lot de bâtiments qui exprime seulement une quantité.
+        /// Pas de min ni de max spécifié.
+        /// </summary>
+        public LotBatiments(long qteMaison = 0, long qteFerme = 0, long qteScierie = 0, long qteMine = 0, long qteHotelDeVille = 0)
+        {
+            batimentsDic = new Dictionary<BatimentEnum, Qte>
+            {
+                { BatimentEnum.MAISON,       new Qte(qteMaison)       },
+                { BatimentEnum.FERME,        new Qte(qteFerme)        },
+                { BatimentEnum.SCIERIE,      new Qte(qteScierie)      },
+                { BatimentEnum.MINE,         new Qte(qteMine)         },
+                { BatimentEnum.HOTELDEVILLE, new Qte(qteHotelDeVille) }
             };
         }
 
@@ -122,6 +139,48 @@ namespace Batiment
             {
                 Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
             }
+        }
+
+        /// <summary>
+        /// Compare si le premier lot de batiments est plus petit ou égale au deuxième.
+        /// On vient comparer la quantité pour chaque type de batiment.
+        /// </summary>
+        /// <param name="lot1">Premier lot de batiments</param>
+        /// <param name="lot2">Deuxième lot de batiments</param>
+        /// <returns>Vrai si la quantité de chaque type de batiment est plus petit ou égale</returns>
+        public static bool operator <=(LotBatiments lot1, LotBatiments lot2)
+        {
+            foreach (KeyValuePair<BatimentEnum, Qte> qteBatiment in lot1.batimentsDic)
+            {
+                var qteBatimentLot1 = qteBatiment.Value.qte;
+                var qteBatimentLot2 = lot2.batimentsDic[qteBatiment.Key].qte;
+
+                if (qteBatimentLot1 > qteBatimentLot2)
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Compare si le premier lot de batiments est plus grand ou égale au deuxième.
+        /// On vient comparer la quantité pour chaque type de batiment.
+        /// </summary>
+        /// <param name="lot1">Premier lot de batiments</param>
+        /// <param name="lot2">Deuxième lot de batiments</param>
+        /// <returns>Vrai si la quantité de chaque type de batiment est plus grand ou égale</returns>
+        public static bool operator >=(LotBatiments lot1, LotBatiments lot2)
+        {
+            foreach (KeyValuePair<BatimentEnum, Qte> qteBatiment in lot1.batimentsDic)
+            {
+                var qteBatimentLot1 = qteBatiment.Value.qte;
+                var qteBatimentLot2 = lot2.batimentsDic[qteBatiment.Key].qte;
+
+                if (qteBatimentLot1 < qteBatimentLot2)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

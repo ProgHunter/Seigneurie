@@ -14,6 +14,7 @@ namespace Batiment
             coutConstruction = new LotRessources(0, 0, 50, 10);
             effortConstruction = 20;
             bonusProductionPourcent = 0.05f;
+            prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

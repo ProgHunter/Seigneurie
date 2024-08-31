@@ -91,7 +91,7 @@ namespace Test
 
             // Une seul construction à la fois
             retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
-            Assert.IsTrue(!retour);
+            Assert.IsFalse(retour);
 
             // Construction complétée
             retour = GestionnaireBatiments.Instance.AvancerConstruction((effortTot / 2) + 1);
@@ -111,15 +111,52 @@ namespace Test
 
             // On est au Maximum de maison, le démarrage de la 3e construction est refusé
             retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
-            Assert.IsTrue(!retour);
+            Assert.IsFalse(retour);
 
             // On ne peut avancer si aucune construction n'est en cours
             retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot);
-            Assert.IsTrue(!retour);
+            Assert.IsFalse(retour);
 
             // On est toujours au maximum de construction
             qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
             Assert.AreEqual(qteMax, qte);
+        }
+
+        [Test]
+        public void TestConstructionBatimentVerrouille()
+        {
+            var qteMaisons = 0L;
+            var qteFermes = 0L;
+            var qteHDV = 0L;
+            // Initialisation des données du test avec 0 bâtiments
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteHDV);
+            GestionnaireBatiments.Instance.AnnulerConstruction();
+
+            // Essayer de démarrer la contruction de l'hotel de ville alors qu'elle est verrouillée
+            // Il faut minimalement 10 maisons et 1 ferme pour la déverrouiller
+            var retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
+            Assert.IsFalse(retour);
+
+            // Cas où il manque encore 1 maison
+            var prerequisHDV = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.HOTELDEVILLE].prerequis;
+            qteMaisons = prerequisHDV.AccesQteBatiment(BatimentEnum.MAISON) - 1;
+            qteFermes = prerequisHDV.AccesQteBatiment(BatimentEnum.FERME) + 1;
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
+
+            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
+            Assert.IsFalse(retour);
+
+            // Cas où on a exactement le prérequis pour construire l'hotel de ville
+            qteMaisons = prerequisHDV.AccesQteBatiment(BatimentEnum.MAISON);
+            qteFermes = prerequisHDV.AccesQteBatiment(BatimentEnum.FERME);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
+
+            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
+            Assert.IsTrue(retour);
         }
     }
 }

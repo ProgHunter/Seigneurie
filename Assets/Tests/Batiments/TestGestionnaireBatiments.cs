@@ -85,7 +85,7 @@ namespace Test
             Assert.IsTrue(retour);
 
             // La construction n'est pas fini
-            var effortTot = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MAISON].effortConstruction;
+            var effortTot = GestionnaireBatiments.Instance.AccesEffortConstructionTotal(BatimentEnum.MAISON);
             retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot / 2);
             Assert.IsTrue(!retour);
 
@@ -140,7 +140,7 @@ namespace Test
             Assert.IsFalse(retour);
 
             // Cas où il manque encore 1 maison
-            var prerequisHDV = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.HOTELDEVILLE].prerequis;
+            var prerequisHDV = GestionnaireBatiments.Instance.AccesPrerequis(BatimentEnum.HOTELDEVILLE);
             qteMaisons = prerequisHDV.AccesQteBatiment(BatimentEnum.MAISON) - 1;
             qteFermes = prerequisHDV.AccesQteBatiment(BatimentEnum.FERME) + 1;
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);

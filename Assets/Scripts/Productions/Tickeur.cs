@@ -9,7 +9,7 @@ namespace Production
     public class Tickeur : MonoBehaviour
     {
         // Tick à chaque 2 secondes
-        public float nbSecEntreTicks = 2f;
+        public float NbSecEntreTicks = 2f;
 
         // Appelé avant la première mise à jour de l'image
         // Innitialise des valeurs pour les ressources, batiments et professions
@@ -38,7 +38,7 @@ namespace Production
             InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
             // Commencer les ticks
-            InvokeRepeating("Tick", nbSecEntreTicks, nbSecEntreTicks);
+            InvokeRepeating("Tick", NbSecEntreTicks, NbSecEntreTicks);
         }
 
         // Production à chaque tick

@@ -4,10 +4,10 @@ namespace Profession
     {
         public Natalite() : base()
         {
-            id = "P0_Natalite";
-            nom = "Natalité";
-            icone = null; // TODO
-            description = "Contribut à la natalité dans la Seigneurie";
+            Id = "P0_Natalite";
+            Nom = "Natalité";
+            Icone = null; // TODO
+            Description = "Contribut à la natalité dans la Seigneurie";
         }
     }
 }

@@ -156,8 +156,8 @@ namespace Test
 
             // Production! Une maison devrait être construite en nbTicksMax ou moins
             var nbTicks = 0;
-            var nbTicksMax = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MAISON].effortConstruction;
-            while (GestionnaireBatiments.Instance.ConstructionEstEnCours() && nbTicks <= nbTicksMax)
+            var nbTicksMax = GestionnaireBatiments.Instance.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            while (GestionnaireBatiments.Instance.ConstructionEstEnCours() && nbTicks < nbTicksMax)
             {
                 GestionnaireProductions.Instance.Production();
                 nbTicks++;

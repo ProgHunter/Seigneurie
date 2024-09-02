@@ -6,12 +6,14 @@ namespace Profession
 {
     public sealed class GestionnaireProfessions
     {
+        #region members
         private static readonly GestionnaireProfessions _instance = new();
-        public Dictionary<ProfessionEnum, AbstraitProfessionConfig> professionDict;
+        public Dictionary<ProfessionEnum, AbstraitProfessionConfig> ProfessionDict;
+        #endregion members
 
         public GestionnaireProfessions()
         {
-            professionDict = new Dictionary<ProfessionEnum, AbstraitProfessionConfig>
+            ProfessionDict = new Dictionary<ProfessionEnum, AbstraitProfessionConfig>
             {
                 { ProfessionEnum.NATALITE, new Natalite() },
                 { ProfessionEnum.FERMIER,  new Fermier()  },
@@ -40,7 +42,7 @@ namespace Profession
 
             try
             {
-                pourcent = professionDict[profession].professionPourcent;
+                pourcent = ProfessionDict[profession].ProfessionPourcent;
             }
             catch (KeyNotFoundException)
             {
@@ -60,7 +62,7 @@ namespace Profession
         {
             try
             {
-                professionDict[profession].professionPourcent = pourcent;
+                ProfessionDict[profession].ProfessionPourcent = pourcent;
             }
             catch (KeyNotFoundException)
             {
@@ -104,7 +106,7 @@ namespace Profession
             float pourcentPopLibre = 1.0f;
             foreach (ProfessionEnum profession in Enum.GetValues(typeof(ProfessionEnum)))
             {
-                pourcentPopLibre -= professionDict[profession].professionPourcent;
+                pourcentPopLibre -= ProfessionDict[profession].ProfessionPourcent;
             }
 
             return pourcentPopLibre;

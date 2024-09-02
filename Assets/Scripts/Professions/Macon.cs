@@ -2,15 +2,15 @@ namespace Profession
 {
     public class Macon : AbstraitProfessionConfig
     {
-        public float parallelisablePourcent;
+        public float ParallelisablePourcent;
 
         public Macon() : base()
         {
-            id = "P4_Macon";
-            nom = "Maçon";
-            icone = null; // TODO
-            description = "Contribut à la construction dans la Seigneurie";
-            parallelisablePourcent = 0.75f;
+            Id = "P4_Macon";
+            Nom = "Maçon";
+            Icone = null; // TODO
+            Description = "Contribut à la construction dans la Seigneurie";
+            ParallelisablePourcent = 0.75f;
         }
     }
 }

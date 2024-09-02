@@ -4,10 +4,10 @@ namespace Profession
     {
         public Mineur() : base()
         {
-            id = "P3_Mineur";
-            nom = "Mineur";
-            icone = null; // TODO
-            description = "Contribut à la production de minéraux dans la Seigneurie";
+            Id = "P3_Mineur";
+            Nom = "Mineur";
+            Icone = null; // TODO
+            Description = "Contribut à la production de minéraux dans la Seigneurie";
         }
     }
 }

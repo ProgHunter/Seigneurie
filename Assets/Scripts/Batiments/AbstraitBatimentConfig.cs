@@ -7,15 +7,15 @@ namespace Batiment
     {
         #region membres
         /// <summary>
-        /// <see cref="prerequis"/> Indique les bâtiments prérequis pour débloquer celui-ci.
+        /// <see cref="Prerequis"/> Indique les bâtiments prérequis pour débloquer celui-ci.
         /// </summary>
-        public string id;
-        public string nom;
-        public Sprite icone;
-        public string description;
-        public LotRessources coutConstruction;
-        public int effortConstruction;
-        public LotBatiments prerequis;
+        public string Id;
+        public string Nom;
+        public Sprite Icone;
+        public string Description;
+        public LotRessources CoutConstruction;
+        public int EffortConstruction;
+        public LotBatiments Prerequis;
         #endregion membres
     }
 

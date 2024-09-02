@@ -7,11 +7,11 @@ namespace Batiment
 {
     public class LotBatiments
     {
-        public Dictionary<BatimentEnum, Qte> batimentsDic;
+        public Dictionary<BatimentEnum, Qte> BatimentsDic;
 
         public LotBatiments(Qte qteMaison, Qte qteFerme, Qte qteScierie, Qte qteMine, Qte qteHotelDeVille)
         {
-            batimentsDic = new Dictionary<BatimentEnum, Qte>
+            BatimentsDic = new Dictionary<BatimentEnum, Qte>
             {
                 { BatimentEnum.MAISON,       qteMaison       },
                 { BatimentEnum.FERME,        qteFerme        },
@@ -27,7 +27,7 @@ namespace Batiment
         /// </summary>
         public LotBatiments(long qteMaison = 0, long qteFerme = 0, long qteScierie = 0, long qteMine = 0, long qteHotelDeVille = 0)
         {
-            batimentsDic = new Dictionary<BatimentEnum, Qte>
+            BatimentsDic = new Dictionary<BatimentEnum, Qte>
             {
                 { BatimentEnum.MAISON,       new Qte(qteMaison)       },
                 { BatimentEnum.FERME,        new Qte(qteFerme)        },
@@ -49,17 +49,17 @@ namespace Batiment
 
             try
             {
-                qte = batimentsDic[batiment].qte;
+                qte = BatimentsDic[batiment].qte;
             }
             catch (KeyNotFoundException)
             {
                 return false;
             }
 
-            if (++qte > batimentsDic[batiment].qteMax)
+            if (++qte > BatimentsDic[batiment].qteMax)
                 return false;
 
-            batimentsDic[batiment].qte = qte;
+            BatimentsDic[batiment].qte = qte;
             return true;
         }
 
@@ -74,7 +74,7 @@ namespace Batiment
 
             try
             {
-                quantite = batimentsDic[batiment].qte;
+                quantite = BatimentsDic[batiment].qte;
             }
             catch (KeyNotFoundException)
             {
@@ -95,7 +95,7 @@ namespace Batiment
         {
             try
             {
-                batimentsDic[batiment].qte = qte;
+                BatimentsDic[batiment].qte = qte;
             }
             catch (KeyNotFoundException)
             {
@@ -114,7 +114,7 @@ namespace Batiment
 
             try
             {
-                qteMax = batimentsDic[batiment].qteMax;
+                qteMax = BatimentsDic[batiment].qteMax;
             }
             catch (KeyNotFoundException)
             {
@@ -133,7 +133,7 @@ namespace Batiment
         {
             try
             {
-                batimentsDic[batiment].qteMax = qteMax;
+                BatimentsDic[batiment].qteMax = qteMax;
             }
             catch (KeyNotFoundException)
             {
@@ -150,10 +150,10 @@ namespace Batiment
         /// <returns>Vrai si la quantité de chaque type de batiment est plus petit ou égale</returns>
         public static bool operator <=(LotBatiments lot1, LotBatiments lot2)
         {
-            foreach (KeyValuePair<BatimentEnum, Qte> qteBatiment in lot1.batimentsDic)
+            foreach (KeyValuePair<BatimentEnum, Qte> qteBatiment in lot1.BatimentsDic)
             {
                 var qteBatimentLot1 = qteBatiment.Value.qte;
-                var qteBatimentLot2 = lot2.batimentsDic[qteBatiment.Key].qte;
+                var qteBatimentLot2 = lot2.BatimentsDic[qteBatiment.Key].qte;
 
                 if (qteBatimentLot1 > qteBatimentLot2)
                     return false;
@@ -171,10 +171,10 @@ namespace Batiment
         /// <returns>Vrai si la quantité de chaque type de batiment est plus grand ou égale</returns>
         public static bool operator >=(LotBatiments lot1, LotBatiments lot2)
         {
-            foreach (KeyValuePair<BatimentEnum, Qte> qteBatiment in lot1.batimentsDic)
+            foreach (KeyValuePair<BatimentEnum, Qte> qteBatiment in lot1.BatimentsDic)
             {
                 var qteBatimentLot1 = qteBatiment.Value.qte;
-                var qteBatimentLot2 = lot2.batimentsDic[qteBatiment.Key].qte;
+                var qteBatimentLot2 = lot2.BatimentsDic[qteBatiment.Key].qte;
 
                 if (qteBatimentLot1 < qteBatimentLot2)
                     return false;

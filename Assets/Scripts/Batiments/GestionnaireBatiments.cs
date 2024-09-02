@@ -9,12 +9,12 @@ namespace Batiment
         #region members
         private static readonly GestionnaireBatiments _instance = new();
         private LotBatiments _batiments;
-        public Dictionary<BatimentEnum, AbstraitBatimentConfig> batimentConfigDict;
+        public Dictionary<BatimentEnum, AbstraitBatimentConfig> BatimentConfigDict;
         /// <summary>
         /// <see cref="BatimentEnum"/> Constitue le bâtiment en contruction
         /// <see cref="int"/> Effort restant pour compléter la construction
         /// </summary>
-        public Paire<BatimentEnum, long> enConstruction = null;
+        public Paire<BatimentEnum, long> EnConstruction = null;
         #endregion members
 
         private GestionnaireBatiments(long qteMaison = 1,       long qteMaxMaison = 1000, 
@@ -29,7 +29,7 @@ namespace Batiment
                                           new Qte(qteMine, qteMaxMine),
                                           new Qte(qteHotelDeVille, qteMaxHotelDeVille));
 
-            batimentConfigDict = new Dictionary<BatimentEnum, AbstraitBatimentConfig>
+            BatimentConfigDict = new Dictionary<BatimentEnum, AbstraitBatimentConfig>
             {
                 { BatimentEnum.MAISON,       new MaisonConfig()       },
                 { BatimentEnum.FERME,        new FermeConfig()        },
@@ -67,6 +67,33 @@ namespace Batiment
             _batiments.ModifierLimiteMaxBatiment(batiment, qte);
         }
 
+        public LotBatiments AccesPrerequis(BatimentEnum batiment)
+        {
+            LotBatiments prerequis = null;
+
+            try
+            {
+                prerequis = BatimentConfigDict[batiment].Prerequis;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
+                return new LotBatiments();
+            }
+
+            return prerequis;
+        }
+
+        /// <summary>
+        /// Valide si les bâtiments mentionnés dans le lot sont construits et en quantité suffisante.
+        /// </summary>
+        /// <param name="prerequis">Le lot de bâtiments qui constitu le prérequis</param>
+        /// <returns>Vrai si on a au moins la même quantité que spécifiée dans le lot</returns>
+        public bool PrerequisEstRespecte(LotBatiments prerequis)
+        {
+            return _batiments >= prerequis;
+        }
+
         /// <summary>
         /// Indique si le bâtiment est déverrouillé.
         /// On valide avec le prérequis du bâtiment.
@@ -75,32 +102,37 @@ namespace Batiment
         /// <returns>Vrai si le batiment est disponible pour être construit</returns>
         public bool EstDeverrouille(BatimentEnum batiment)
         {
-            LotBatiments prerequis;
-            try
-            {
-                prerequis = batimentConfigDict[batiment].prerequis;
-            }
-            catch (KeyNotFoundException)
-            {
-                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
-                return true;
-            }
-
-            return _batiments >= prerequis;
+            return PrerequisEstRespecte(AccesPrerequis(batiment));
         }
 
         public bool ConstructionEstEnCours()
         {
-            return enConstruction != null;
+            return EnConstruction != null;
         }
 
-        public long AccesEffortConstructionTotal()
+        public long AccesEffortConstructionTotal(BatimentEnum batiment)
+        {
+            int EffortConstructionTotal = 0;
+
+            try
+            {
+                EffortConstructionTotal = BatimentConfigDict[batiment].EffortConstruction;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
+                return 0;
+            }
+
+            return EffortConstructionTotal;
+        }
+
+        public long AccesEffortConstructionTotalEnCours()
         {
             if (!ConstructionEstEnCours())
                 return 0;
 
-            BatimentEnum batiment = enConstruction.Item1;
-            return batimentConfigDict[batiment].effortConstruction;
+            return AccesEffortConstructionTotal(EnConstruction.Item1);
         }
 
         public long AccesEffortConstructionRestant()
@@ -108,7 +140,7 @@ namespace Batiment
             if (!ConstructionEstEnCours())
                 return 0;
 
-            return enConstruction.Item2;
+            return EnConstruction.Item2;
         }
 
         /// <summary>
@@ -129,14 +161,14 @@ namespace Batiment
 
             try
             {
-                enConstruction = new Paire<BatimentEnum, long>();
-                enConstruction.Item1 = batiment;
-                enConstruction.Item2 = batimentConfigDict[batiment].effortConstruction;
+                EnConstruction = new Paire<BatimentEnum, long>();
+                EnConstruction.Item1 = batiment;
+                EnConstruction.Item2 = BatimentConfigDict[batiment].EffortConstruction;
             }
             catch (KeyNotFoundException)
             {
                 Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
-                enConstruction = null;
+                EnConstruction = null;
                 return false;
             }
 
@@ -151,18 +183,18 @@ namespace Batiment
         public bool AvancerConstruction(long effort)
         {
             // Aucune construction en cours
-            if (enConstruction == null)
+            if (EnConstruction == null)
                 return false;
 
-            enConstruction.Item2 -= effort;
+            EnConstruction.Item2 -= effort;
 
             // S'il reste de l'effort à fournir pour la construction, elle reste en cours
-            if (enConstruction.Item2 > 0)
+            if (EnConstruction.Item2 > 0)
                 return false;
 
             // La construction est complétée
-            _batiments.AjouterUnBatiment(enConstruction.Item1);
-            enConstruction = null;
+            _batiments.AjouterUnBatiment(EnConstruction.Item1);
+            EnConstruction = null;
             return true;
         }
 
@@ -172,7 +204,7 @@ namespace Batiment
         /// </summary>
         public void AnnulerConstruction()
         {
-            enConstruction = null;
+            EnConstruction = null;
         }
     }
 }

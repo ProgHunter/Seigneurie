@@ -4,17 +4,17 @@ namespace Batiment
 {
     public class ScierieConfig : AbstraitBatimentConfig
     {
-        public float bonusProductionPourcent;
+        public float BonusProductionPourcent;
         public ScierieConfig() : base()
         {
-            id = "B2_Scierie";
-            nom = "Scierie";
-            icone = null;  // TODO
-            description = "Permet d'augmenter production de bois.";
-            coutConstruction = new LotRessources(0, 0, 50, 10);
-            effortConstruction = 20;
-            bonusProductionPourcent = 0.05f;
-            prerequis = new LotBatiments(0,0,0,0,1);  // Hotel de ville
+            Id = "B2_Scierie";
+            Nom = "Scierie";
+            Icone = null;  // TODO
+            Description = "Permet d'augmenter production de bois.";
+            CoutConstruction = new LotRessources(0, 0, 50, 10);
+            EffortConstruction = 20;
+            BonusProductionPourcent = 0.05f;
+            Prerequis = new LotBatiments(0, 0, 0, 0, 1);  // Hotel de ville
         }
     }
 }

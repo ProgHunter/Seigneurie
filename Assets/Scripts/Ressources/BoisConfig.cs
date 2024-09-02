@@ -1,3 +1,6 @@
+using Batiment;
+using Utils;
+
 namespace Ressource
 {
     public class BoisConfig : AbstraitRessourceConfig
@@ -8,9 +11,8 @@ namespace Ressource
             Nom = "Bois";
             Icone = null;  // TODO
             Description = "";
-            QteBase = 100;
-            QteMax = 10_000;
-            QteMin = 0;
+            Qte = new Qte(100 /*Qte de base*/, 10_000 /*Max*/, 0 /*Min*/);
+            Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

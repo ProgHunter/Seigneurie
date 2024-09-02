@@ -1,3 +1,6 @@
+using Utils;
+using Batiment;
+
 namespace Ressource
 {
     public class NourritureConfig : AbstraitRessourceConfig
@@ -8,9 +11,8 @@ namespace Ressource
             Nom = "Nourriture";
             Icone = null;  // TODO
             Description = "";
-            QteBase = 1000;
-            QteMax = 1_000_000;
-            QteMin = 0;
+            Qte = new Qte(1000 /*Qte de base*/, 1_000_000 /*Max*/, 0 /*Min*/);
+            Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

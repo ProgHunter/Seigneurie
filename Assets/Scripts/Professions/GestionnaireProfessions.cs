@@ -1,3 +1,4 @@
+using Batiment;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,6 +75,7 @@ namespace Profession
         /// Attribuer un pourcentage de population à une profession
         /// La modification est ajustée si le pourcentage total de toutes les professions
         /// dépasserait 100% ensemble. Elle l'est aussi si le pourcentage est plus petit que 0.
+        /// On ne peut attribuer un pourcentage à une profession verrouillée.
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <param name="pourcent">Le pourcentage</param>
@@ -83,7 +85,7 @@ namespace Profession
             float pourcentLibre = PourcentPopLibre();
             bool estValide = true;
             
-            if (pourcent < 0)
+            if (!EstDeverrouille(profession) || pourcent < 0)
             {
                 pourcent = 0;
                 estValide = false;
@@ -110,6 +112,28 @@ namespace Profession
             }
 
             return pourcentPopLibre;
+        }
+
+        /// <summary>
+        /// Indique si la profession est déverrouillée.
+        /// Si le prérequis de la profession n'est pas rencontré, celle-ci est verrouillée.
+        /// </summary>
+        /// <param name="profession">La profession dont on valide le prérequis.</param>
+        /// <returns>Vrai si la profession est déverrouillée.</returns>
+        public bool EstDeverrouille(ProfessionEnum profession)
+        {
+            LotBatiments prerequis;
+            try
+            {
+                prerequis = ProfessionDict[profession].Prerequis;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La profession {profession} n'est pas dans le dictionnaire.");
+                return false;
+            }
+
+            return GestionnaireBatiments.Instance.PrerequisEstRespecte(prerequis);
         }
     }
 }

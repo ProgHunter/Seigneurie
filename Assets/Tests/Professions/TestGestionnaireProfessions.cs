@@ -85,5 +85,12 @@ namespace Test
             // 0, puisque le total attribué aux professions ne peut cumuler plus de 100%
             Assert.IsTrue(Mathf.Approximately(0f, pourcentRetour));
         }
+
+        [Test]
+        public void TestProfessionVerrouilleeAttribuerPc()
+        {
+            // TODO: Créer un test avec une profession verrouillée lors qu'elle sera ajoutée au jeu
+            Assert.IsTrue(true);
+        }
     }
 }

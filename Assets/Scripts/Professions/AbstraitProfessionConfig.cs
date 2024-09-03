@@ -1,3 +1,4 @@
+using Batiment;
 using UnityEngine;
 
 namespace Profession
@@ -14,6 +15,7 @@ namespace Profession
         ///                                  TODO : À changer de place éventuellement?
         /// </summary>
         public float ProfessionPourcent = 0f;
+        public LotBatiments Prerequis;
         #endregion membres
     }
 

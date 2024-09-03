@@ -1,3 +1,5 @@
+using Batiment;
+
 namespace Profession
 {
     public class Natalite : AbstraitProfessionConfig
@@ -8,6 +10,7 @@ namespace Profession
             Nom = "Natalité";
             Icone = null; // TODO
             Description = "Contribut à la natalité dans la Seigneurie";
+            Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

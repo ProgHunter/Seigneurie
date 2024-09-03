@@ -1,3 +1,5 @@
+using Batiment;
+
 namespace Profession
 {
     public class Fermier : AbstraitProfessionConfig
@@ -8,6 +10,7 @@ namespace Profession
             Nom = "Fermier";
             Icone = null; // TODO
             Description = "Contribut à la production de nouriture dans la Seigneurie";
+            Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

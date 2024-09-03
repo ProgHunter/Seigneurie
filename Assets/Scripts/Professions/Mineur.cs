@@ -1,3 +1,5 @@
+using Batiment;
+
 namespace Profession
 {
     public class Mineur : AbstraitProfessionConfig
@@ -8,6 +10,7 @@ namespace Profession
             Nom = "Mineur";
             Icone = null; // TODO
             Description = "Contribut à la production de minéraux dans la Seigneurie";
+            Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

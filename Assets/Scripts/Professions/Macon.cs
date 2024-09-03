@@ -1,3 +1,5 @@
+using Batiment;
+
 namespace Profession
 {
     public class Macon : AbstraitProfessionConfig
@@ -11,6 +13,7 @@ namespace Profession
             Icone = null; // TODO
             Description = "Contribut à la construction dans la Seigneurie";
             ParallelisablePourcent = 0.75f;
+            Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

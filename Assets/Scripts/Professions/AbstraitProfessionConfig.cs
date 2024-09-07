@@ -6,17 +6,27 @@ namespace Profession
     public abstract class AbstraitProfessionConfig
     {
         #region membres
-        public string Id;
-        public string Nom;
-        public Sprite Icone;
-        public string Description;
+        private string _id;
+        private string _nom;
+        private Sprite _icone;
+        private string _description;
         /// <summary>
         /// <see cref="ProfessionPourcent"/> Pourcentage de la population affecté à la profession
-        ///                                  TODO : À changer de place éventuellement?
+        ///                                  TODO : À changer de place éventuellement. 
+        ///                                  Créer un dict de config séparé d'un dict de poucents.
         /// </summary>
-        public float ProfessionPourcent = 0f;
-        public LotBatiments Prerequis;
+        private float _professionPourcent = 0f;
+        private LotBatiments _prerequis;
         #endregion membres
+
+        #region accesseurs_mutateurs
+        public string Id { get => _id; protected set => _id = value; }
+        public string Nom { get => _nom; protected set => _nom = value; }
+        public Sprite Icone { get => _icone; protected set => _icone = value; }
+        public string Description { get => _description; protected set => _description = value; }
+        public float ProfessionPourcent { get => _professionPourcent; set => _professionPourcent = value; }
+        public LotBatiments Prerequis { get => _prerequis.Clone(); protected set => _prerequis = value.Clone(); }
+        #endregion accesseurs_mutateurs
     }
 
     public enum ProfessionEnum

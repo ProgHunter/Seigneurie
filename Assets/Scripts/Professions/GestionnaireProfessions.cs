@@ -46,7 +46,7 @@ namespace Profession
         /// <returns></returns>
         public float AccederPourcent(ProfessionEnum profession)
         {
-            return _professions.AccesPourcentProfession(profession); ;
+            return _professions.AccesPourcentProfession(profession);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Profession
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <param name="pourcent">Le pourcentage</param>
-        /// <returns>Vrai si la modification respecte les lmites</returns>
+        /// <returns>Vrai si la modification respecte les limites</returns>
         public bool AttribuerPourcentValide(ProfessionEnum profession, float pourcent)
         {
             float pourcentLibre = PourcentPopLibre();
@@ -86,11 +86,11 @@ namespace Profession
             
             if (!EstDeverrouille(profession) || pourcent < 0)
             {
-                pourcent = 0;
+                pourcent = 0f;  // pcMin == 0%
                 estValide = false;
             } else if ((pourcent - AccederPourcent(profession)) > pourcentLibre)
             {
-                pourcent = PourcentPopLibre();
+                pourcent = PourcentPopLibre();  // pcMax == 100%
                 estValide = false;
             }
 
@@ -105,7 +105,7 @@ namespace Profession
         /// On ne peut attribuer un pourcentage à une profession verrouillée.
         /// </summary>
         /// <param name="pcProfessions"></param>
-        /// <returns></returns>
+        /// <returns>Vrai si les modifications respectent les limites</returns>
         public bool AttribuerPourcentValide(LotProfessions pcProfessions)
         {
             bool estValide = true;
@@ -119,33 +119,23 @@ namespace Profession
         /// <summary>
         /// Incrémente le pourcentage de 1, max 100%.
         /// </summary>
-        /// <param name="profession">La profession à incrémenter le poucentage</param>
-        /// <returns>Vrai si le pourcentage a été incrémenté</returns>
+        /// <param name="profession">La profession à incrémenter le poucentage.</param>
+        /// <returns>Vrai si le pourcentage a été incrémenté de 1%.</returns>
         public bool IncrementerPourcent(ProfessionEnum profession)
         {
-            const float pcMax = 1.0f;
             float pourcent = AccederPourcent(profession);
-            if (++pourcent > pcMax)
-                pourcent = pcMax;
-
-            AttribuerPourcent(profession, pourcent);
-            return true;
+            return AttribuerPourcentValide(profession, ++pourcent);
         }
 
         /// <summary>
         /// Décrémente le pourcentage de 1, min 0%.
         /// </summary>
-        /// <param name="profession">La profession à incrémenter le poucentage</param>
-        /// <returns>Vrai si le pourcentage a été incrémenté</returns>
+        /// <param name="profession">La profession à incrémenter le poucentage.</param>
+        /// <returns>Vrai si le pourcentage a été décrémenté de 1%.</returns>
         public bool DecrementerPourcent(ProfessionEnum profession)
         {
-            const float pcMin = 0f;
             float pourcent = AccederPourcent(profession);
-            if (--pourcent < pcMin)
-                pourcent = pcMin;
-
-            AttribuerPourcent(profession, pourcent);
-            return true;
+            return AttribuerPourcentValide(profession, --pourcent);
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace Profession
         public FermierConfig() : base()
         {
             Id = "P1_Fermier";
-            Nom = "FermierConfig";
+            Nom = "Fermier";
             Icone = null; // TODO
             Description = "Contribut à la production de nouriture dans la Seigneurie";
             Prerequis = new LotBatiments();  // Aucun prérequis

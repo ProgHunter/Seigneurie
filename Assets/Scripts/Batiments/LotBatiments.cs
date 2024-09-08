@@ -155,6 +155,7 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
+                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
                 return false;
             }
 

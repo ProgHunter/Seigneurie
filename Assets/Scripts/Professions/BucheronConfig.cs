@@ -7,7 +7,7 @@ namespace Profession
         public BucheronConfig() : base()
         {
             Id = "P2_Bucheron";
-            Nom = "BucheronConfig";
+            Nom = "Bucheron";
             Icone = null; // TODO
             Description = "Contribut à la production de bois dans la Seigneurie";
             Prerequis = new LotBatiments();  // Aucun prérequis

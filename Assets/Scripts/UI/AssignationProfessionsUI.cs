@@ -33,7 +33,7 @@ namespace UI
         public void InitProfession(ProfessionEnum value, Action pourcentageTotal)
         {
                 _profession = value;
-                _titre.text = GestionnaireProfessions.Instance.professionDict[_profession].nom;
+                _titre.text = GestionnaireProfessions.Instance.ProfessionDict[_profession].Nom;
                 _pourcentageActuel = (int)(GestionnaireProfessions.Instance.AccederPourcent(_profession) * 100);
                 _slider.SetValueWithoutNotify(_pourcentageActuel);
                 UpdatePourcentage();

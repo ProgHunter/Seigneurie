@@ -14,7 +14,7 @@ namespace UI
         public void  InitRessourceRepresentee(RessourceEnum value)
         {
                 _ressourceRepresentee = value;
-                _nom.text = InventaireRessources.Instance.ressourceConfigDict[_ressourceRepresentee].Nom;
+                _nom.text = InventaireRessources.Instance.RessourceConfigDict[_ressourceRepresentee].Nom;
         }
 
         public void UpdateValeur()

@@ -5,7 +5,8 @@ namespace Batiment
 {
     public class FermeConfig : AbstraitBatimentConfig
     {
-        public float BonusProductionPourcent;
+        private float _bonusProductionPourcent;
+
         public FermeConfig() : base()
         {
             Id = "B1_Ferme";
@@ -18,5 +19,7 @@ namespace Batiment
             BonusProductionPourcent = 0.05f;
             Prerequis = new LotBatiments();  // Aucun prérequis
         }
+
+        public float BonusProductionPourcent { get => _bonusProductionPourcent; private set => _bonusProductionPourcent = value; }
     }
 }

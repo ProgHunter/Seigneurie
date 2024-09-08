@@ -5,7 +5,8 @@ namespace Batiment
 {
     public class MineConfig : AbstraitBatimentConfig
     {
-        public float BonusProductionPourcent;
+        private float _bonusProductionPourcent;
+
         public MineConfig() : base()
         {
             Id = "B3_Mine";
@@ -18,5 +19,7 @@ namespace Batiment
             BonusProductionPourcent = 0.05f;
             Prerequis = new LotBatiments(0, 0, 0, 0, 1);  // Hotel de ville
         }
+
+        public float BonusProductionPourcent { get => _bonusProductionPourcent; private set => _bonusProductionPourcent = value; }
     }
 }

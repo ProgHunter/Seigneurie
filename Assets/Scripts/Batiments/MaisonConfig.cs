@@ -10,7 +10,7 @@ namespace Batiment
         /// <see cref="Capacite"/> Indique à quel point une maison contribue à la croissance de la population. 
         ///                        La population ne pourra jamais croître et excéder cette valeur multipliée par le nombre de maisons.
         /// </summary>
-        public int Capacite;
+        private int _capacite;
         #endregion membres
 
         public MaisonConfig() : base()
@@ -25,5 +25,7 @@ namespace Batiment
             Capacite = 10;
             Prerequis = new LotBatiments();  // Aucun prérequis
         }
+
+        public int Capacite { get => _capacite; private set => _capacite = value; }
     }
 }

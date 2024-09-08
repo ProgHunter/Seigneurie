@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Ressource;
 using UnityEngine;
+using Utils;
 
 namespace UI
 {
@@ -8,14 +9,14 @@ namespace UI
     {
         [SerializeField] private List<IndicateurRessource> _listeIndicateurRessources;
 
-        public void Setup(List<AbstractRessource> ressources)
+        public void Init()
         {
-            for (int i = 0; i < ressources.Count; i++)
+            int i = 0;
+            foreach (var ressource in EnumUtils.GetEnumValues<RessourceEnum>())
             {
-                if (_listeIndicateurRessources != null)
-                {
-                    _listeIndicateurRessources[i].Ressource = ressources[i];
-                }
+                _listeIndicateurRessources?[i].InitRessourceRepresentee(ressource);
+
+                i++;
             }
         }
 

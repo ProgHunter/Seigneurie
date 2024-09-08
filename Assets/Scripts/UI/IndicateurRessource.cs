@@ -1,6 +1,6 @@
-using Ressources;
-using TMPro;
+using Ressource;
 using UnityEngine;
+using TMPro;
 
 namespace UI
 {
@@ -9,20 +9,17 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _nom;
         [SerializeField] private TextMeshProUGUI _nombre;
 
-        private AbstractRessource _ressource;
+        private RessourceEnum _ressourceRepresentee;
 
-        public AbstractRessource Ressource
+        public void  InitRessourceRepresentee(RessourceEnum value)
         {
-            set
-            {
-                _ressource = value;
-                _nom.text = _ressource.Nom;
-            }
+                _ressourceRepresentee = value;
+                _nom.text = InventaireRessources.Instance.ressourceConfigDict[_ressourceRepresentee].Nom;
         }
 
         public void UpdateValeur()
         {
-            _nombre.text = _ressource.Quantite.ToString();
+            _nombre.text = InventaireRessources.Instance.AccesQteRessource(_ressourceRepresentee).ToString();
         }
     }
 }

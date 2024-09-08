@@ -10,17 +10,17 @@ namespace Ressource
         /// <see cref="CroissancePourcent"/> 
         /// Indice de croissance de la population. Impacte la production de population.
         /// </summary>
-        public float CroissancePourcent;
+        private float _croissancePourcent;
         /// <summary>
         /// <see cref="MortaliteFaminePourcent"/> 
         /// Indice de mortalité des membres de la population en famine. Impacte la production de population.
         /// </summary>
-        public float MortaliteFaminePourcent;
+        private float _mortaliteFaminePourcent;
         /// <summary>
         /// <see cref="FaimPourcent"/> 
         /// Indice de faim de la population. Impacte la consomation de nourriture de la population.
         /// </summary>
-        public float FaimPourcent;
+        private float _faimPourcent;
         #endregion membres
 
         public PopulationConfig() : base()
@@ -35,5 +35,11 @@ namespace Ressource
             FaimPourcent = 0.5f;
             Prerequis = new LotBatiments();  // Aucun prérequis
         }
+
+        #region accesseurs_mutateurs
+        public float CroissancePourcent { get => _croissancePourcent; private set => _croissancePourcent = value; }
+        public float MortaliteFaminePourcent { get => _mortaliteFaminePourcent; private set => _mortaliteFaminePourcent = value; }
+        public float FaimPourcent { get => _faimPourcent; private set => _faimPourcent = value; }
+        #endregion accesseurs_mutateurs
     }
 }

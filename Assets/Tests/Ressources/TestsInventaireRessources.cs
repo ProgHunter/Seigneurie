@@ -193,8 +193,8 @@ namespace Test
 
             var qtePopulationAjoutee = 2;
             var qteNourritureAjoutee = 3;
-            var qteBoisAjoutee       = 4;
-            var qteMinerauxAjoutee   = 5;
+            var qteBoisAjoutee = 4;
+            var qteMinerauxAjoutee = 5;
 
             LotRessources LotRessources = new LotRessources(new Qte(qtePopulationAjoutee),
                                                             new Qte(qteNourritureAjoutee),
@@ -202,15 +202,15 @@ namespace Test
                                                             new Qte(qteMinerauxAjoutee));
 
             var resultOK = InventaireRessources.Instance.AjouterQteRessourceAvecLimites(LotRessources, true /*limitesBloquantes*/);
-            
-            var qtePopRetour    = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourRetour   = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisRetour   = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerRetour  = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
 
-            var qtePopAttendu   = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION) + qtePopulationAjoutee;
-            var qteNourAttendu  = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.NOURRITURE) + qteNourritureAjoutee;
-            var qteBoisAttendu  = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.BOIS) + qteBoisAjoutee;
+            var qtePopRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+
+            var qtePopAttendu = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION) + qtePopulationAjoutee;
+            var qteNourAttendu = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.NOURRITURE) + qteNourritureAjoutee;
+            var qteBoisAttendu = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.BOIS) + qteBoisAjoutee;
             var qteMinerAttendu = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.MINERAUX) + qteMinerauxAjoutee;
 
             Assert.AreEqual(true, resultOK);
@@ -221,7 +221,7 @@ namespace Test
         }
 
         [Test]
-        public void TestTransactionLotRessourcesBloquantRefusé()
+        public void TestTransactionLotRessourcesBloquantRefuse()
         {
             // Réinitialise les quantitées de ressources dans l'inventaire pour le minimum de chaque
             InventaireRessources.Instance.AttribuerQteMinRessources();
@@ -253,6 +253,13 @@ namespace Test
             Assert.AreEqual(qteNourAttendu, qteNourRetour);
             Assert.AreEqual(qteBoisAttendu, qteBoisRetour);
             Assert.AreEqual(qteMinerAttendu, qteMinerRetour);
+        }
+
+        [Test]
+        public void TestTransactionLotRessourcesVerrouille()
+        {
+            // TODO: Créer un test avec une ressource verrouillée lors qu'elle sera ajoutée au jeu
+            Assert.IsTrue(true);
         }
     }
 }

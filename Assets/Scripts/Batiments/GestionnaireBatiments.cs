@@ -9,12 +9,12 @@ namespace Batiment
         #region members
         private static readonly GestionnaireBatiments _instance = new();
         private LotBatiments _batiments;
-        public Dictionary<BatimentEnum, AbstraitBatimentConfig> batimentConfigDict;
+        public Dictionary<BatimentEnum, AbstraitBatimentConfig> BatimentConfigDict;
         /// <summary>
         /// <see cref="BatimentEnum"/> Constitue le bâtiment en contruction
         /// <see cref="int"/> Effort restant pour compléter la construction
         /// </summary>
-        public Paire<BatimentEnum, long> enConstruction = null;
+        public Paire<BatimentEnum, long> EnConstruction = null;
         #endregion members
 
         private GestionnaireBatiments(long qteMaison = 1,       long qteMaxMaison = 1000, 
@@ -29,7 +29,7 @@ namespace Batiment
                                           new Qte(qteMine, qteMaxMine),
                                           new Qte(qteHotelDeVille, qteMaxHotelDeVille));
 
-            batimentConfigDict = new Dictionary<BatimentEnum, AbstraitBatimentConfig>
+            BatimentConfigDict = new Dictionary<BatimentEnum, AbstraitBatimentConfig>
             {
                 { BatimentEnum.MAISON,       new MaisonConfig()       },
                 { BatimentEnum.FERME,        new FermeConfig()        },
@@ -67,26 +67,80 @@ namespace Batiment
             _batiments.ModifierLimiteMaxBatiment(batiment, qte);
         }
 
-        public bool ConstructionEnCours()
+        public LotBatiments AccesPrerequis(BatimentEnum batiment)
         {
-            return enConstruction != null;
+            LotBatiments prerequis = null;
+
+            try
+            {
+                prerequis = BatimentConfigDict[batiment].Prerequis;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
+                return new LotBatiments();
+            }
+
+            return prerequis;
         }
 
-        public long AccesEffortConstructionTotal()
+        /// <summary>
+        /// Valide si les bâtiments mentionnés dans le lot sont construits et en quantité suffisante.
+        /// </summary>
+        /// <param name="prerequis">Le lot de bâtiments qui constitu le prérequis</param>
+        /// <returns>Vrai si on a au moins la même quantité que spécifiée dans le lot</returns>
+        public bool PrerequisEstRespecte(LotBatiments prerequis)
         {
-            if (!ConstructionEnCours())
+            return _batiments >= prerequis;
+        }
+
+        /// <summary>
+        /// Indique si le bâtiment est déverrouillé.
+        /// On valide avec le prérequis du bâtiment.
+        /// Si le bâtiment est verouillé, on ne doit pas pouvoir le construire.
+        /// </summary>
+        /// <returns>Vrai si le batiment est disponible pour être construit</returns>
+        public bool EstDeverrouille(BatimentEnum batiment)
+        {
+            return PrerequisEstRespecte(AccesPrerequis(batiment));
+        }
+
+        public bool ConstructionEstEnCours()
+        {
+            return EnConstruction != null;
+        }
+
+        public long AccesEffortConstructionTotal(BatimentEnum batiment)
+        {
+            int EffortConstructionTotal = 0;
+
+            try
+            {
+                EffortConstructionTotal = BatimentConfigDict[batiment].EffortConstruction;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
+                return 0;
+            }
+
+            return EffortConstructionTotal;
+        }
+
+        public long AccesEffortConstructionTotalEnCours()
+        {
+            if (!ConstructionEstEnCours())
                 return 0;
 
-            BatimentEnum batiment = enConstruction.Item1;
-            return batimentConfigDict[batiment].effortConstruction;
+            return AccesEffortConstructionTotal(EnConstruction.Item1);
         }
 
         public long AccesEffortConstructionRestant()
         {
-            if (!ConstructionEnCours())
+            if (!ConstructionEstEnCours())
                 return 0;
 
-            return enConstruction.Item2;
+            return EnConstruction.Item2;
         }
 
         /// <summary>
@@ -97,24 +151,24 @@ namespace Batiment
         /// <returns>Vrai si la construction peut être démarrée</returns>
         public bool DemarrerConstruction(BatimentEnum batiment)
         {
-            // Un seule construction à la fois
-            if (ConstructionEnCours())
-                return false;
-
+            // S'il y a déjà une construction en cours, ou
+            // Si le bâtiment n'est pas encore disponible, ou
             // Si on est à la limite max, on ne commance pas la nouvelle construction
-            if (_batiments.AccesQteBatiment(batiment) >= _batiments.AccesQteMaxBatiment(batiment))
+            if (ConstructionEstEnCours() ||
+                !EstDeverrouille(batiment) ||
+                (_batiments.AccesQteBatiment(batiment) >= _batiments.AccesQteMaxBatiment(batiment)))
                 return false;
 
             try
             {
-                enConstruction = new Paire<BatimentEnum, long>();
-                enConstruction.Item1 = batiment;
-                enConstruction.Item2 = batimentConfigDict[batiment].effortConstruction;
+                EnConstruction = new Paire<BatimentEnum, long>();
+                EnConstruction.Item1 = batiment;
+                EnConstruction.Item2 = BatimentConfigDict[batiment].EffortConstruction;
             }
             catch (KeyNotFoundException)
             {
                 Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
-                enConstruction = null;
+                EnConstruction = null;
                 return false;
             }
 
@@ -129,19 +183,28 @@ namespace Batiment
         public bool AvancerConstruction(long effort)
         {
             // Aucune construction en cours
-            if (enConstruction == null)
+            if (EnConstruction == null)
                 return false;
 
-            enConstruction.Item2 -= effort;
+            EnConstruction.Item2 -= effort;
 
             // S'il reste de l'effort à fournir pour la construction, elle reste en cours
-            if (enConstruction.Item2 > 0)
+            if (EnConstruction.Item2 > 0)
                 return false;
 
             // La construction est complétée
-            _batiments.AjouterUnBatiment(enConstruction.Item1);
-            enConstruction = null;
+            _batiments.AjouterUnBatiment(EnConstruction.Item1);
+            EnConstruction = null;
             return true;
+        }
+
+        /// <summary>
+        /// Annuler une construction en cours.
+        /// Le coût ne sera pas remboursé et la progression ne sera pas sauvegardé.
+        /// </summary>
+        public void AnnulerConstruction()
+        {
+            EnConstruction = null;
         }
     }
 }

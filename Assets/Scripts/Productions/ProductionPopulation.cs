@@ -10,24 +10,24 @@ namespace Production
     {
         public override long CalculerProduction()
         {
-            float professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.NATALITE].professionPourcent;
-            return (long)(CalculerCroissance() * efficacitePourcent - CalculerMortaliteFamine());
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.NATALITE);
+            return (long)(CalculerCroissance() * EfficacitePourcent - CalculerMortaliteFamine());
         }
 
         private long CalculerCroissance()
         {
-            long capaciteMax = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON) * ((MaisonConfig)GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MAISON]).capacite;
+            long capaciteMax = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON) * ((MaisonConfig)GestionnaireBatiments.Instance.BatimentConfigDict[BatimentEnum.MAISON]).Capacite;
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            long popActive = (long)(popActuelle * GestionnaireProfessions.Instance.professionDict[ProfessionEnum.NATALITE].professionPourcent);
+            long popActive = (long)(popActuelle * GestionnaireProfessions.Instance.ProfessionDict[ProfessionEnum.NATALITE].ProfessionPourcent);
 
             // Valider si nos nombres sont positifs et si la population actuelle n'est pas déjà presqu'à notre capacité ou plus grand
             if (capaciteMax < 0 || popActive <= 0 || popActive + 1 >= capaciteMax)
                 return 0;
 
-            long popMin = InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION].QteMin;
+            long popMin = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION);
             popMin = popMin < 1 ? 1 : popMin;
 
-            float croissance = ((PopulationConfig)InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION]).croissancePourcent;
+            float croissance = ((PopulationConfig)InventaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).CroissancePourcent;
             if (croissance <= 0)
                 return 0;
 
@@ -49,7 +49,7 @@ namespace Production
             ProductionNouriture productionNouriture = new ProductionNouriture();
             float manqueNourriturePourcent = productionNouriture.CalculManqueNourriturePourcent();
             long nbPop = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            float mortaliteFaminePc = ((PopulationConfig)InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION]).mortaliteFaminePourcent;
+            float mortaliteFaminePc = ((PopulationConfig)InventaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).MortaliteFaminePourcent;
 
             return (long)(nbPop * mortaliteFaminePc * manqueNourriturePourcent);
         }

@@ -1,17 +1,21 @@
 using UnityEngine;
+using Batiment;
+using Utils;
 
 namespace Ressource
 {
     public abstract class AbstraitRessourceConfig
     {
+        /// <summary>
+        /// <see cref="Prerequis"/> Indique les bâtiments prérequis pour débloquer celle-ci.
+        /// </summary>
         #region membres
         public string Id;
         public string Nom;
         public Sprite Icone;
         public string Description;
-        public int QteBase;
-        public int QteMin;
-        public int QteMax;
+        public Qte Qte;
+        public LotBatiments Prerequis;
         #endregion membres
     }
 

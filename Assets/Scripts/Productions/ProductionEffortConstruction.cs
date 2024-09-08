@@ -15,17 +15,17 @@ namespace Production
         /// <returns>E(p) soit l'effort produit par un nombre de population</returns>
         public override long CalculerProduction()
         {
-            if (!GestionnaireBatiments.Instance.ConstructionEnCours())
+            if (!GestionnaireBatiments.Instance.ConstructionEstEnCours())
                 return 0;
 
-            float professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON].professionPourcent;
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;
 
             float exposant = CalculerExposantEffortConstruction();
-            return (long)(Mathf.Pow(nbPopTravaille, exposant) * efficacitePourcent / 100);
+            return (long)(Mathf.Pow(nbPopTravaille, exposant) * EfficacitePourcent / 100);
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace Production
         /// <returns>exp soit l'exposant calculé à partir d'un indice de parallelisation pour un effort de construction</returns>
         private float CalculerExposantEffortConstruction()
         {
-            float parallelisable = ((Macon)GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MACON]).parallelisablePourcent;
-            long effotConstructionTotal = GestionnaireBatiments.Instance.AccesEffortConstructionTotal();
+            float parallelisable = ((Macon)GestionnaireProfessions.Instance.ProfessionDict[ProfessionEnum.MACON]).ParallelisablePourcent;
+            long effotConstructionTotal = GestionnaireBatiments.Instance.AccesEffortConstructionTotalEnCours();
 
             return (Mathf.Log(parallelisable) / Mathf.Log(effotConstructionTotal)) + 1;
         }

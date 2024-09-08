@@ -130,7 +130,7 @@ namespace Test
         }
 
         [Test]
-        public void TestMaconConstruction()
+        public void TestMaconConstructionMaison()
         {
             // Attribuer des maçons
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0f);
@@ -147,20 +147,24 @@ namespace Test
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
             InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
+            // Initialiser le nombre de maisons à 0
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
+
             // Démarer une construction
-            GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
+            GestionnaireBatiments.Instance.AnnulerConstruction();
+            Assert.IsTrue(GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON));
 
             // Production! Une maison devrait être construite en nbTicksMax ou moins
             var nbTicks = 0;
-            var nbTicksMax = GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MAISON].effortConstruction;
-            while (GestionnaireBatiments.Instance.ConstructionEnCours() && nbTicks < nbTicksMax)
+            var nbTicksMax = GestionnaireBatiments.Instance.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            while (GestionnaireBatiments.Instance.ConstructionEstEnCours() && nbTicks < nbTicksMax)
             {
                 GestionnaireProductions.Instance.Production();
                 nbTicks++;
             }
 
             // Construction complétée
-            Assert.IsFalse(GestionnaireBatiments.Instance.ConstructionEnCours());
+            Assert.IsFalse(GestionnaireBatiments.Instance.ConstructionEstEnCours());
         }
 
         [Test]

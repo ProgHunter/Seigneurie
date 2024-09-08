@@ -1,3 +1,4 @@
+using Batiment;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,14 @@ namespace Profession
 {
     public sealed class GestionnaireProfessions
     {
+        #region members
         private static readonly GestionnaireProfessions _instance = new();
-        public Dictionary<ProfessionEnum, AbstraitProfessionConfig> professionDict;
+        public Dictionary<ProfessionEnum, AbstraitProfessionConfig> ProfessionDict;
+        #endregion members
 
         public GestionnaireProfessions()
         {
-            professionDict = new Dictionary<ProfessionEnum, AbstraitProfessionConfig>
+            ProfessionDict = new Dictionary<ProfessionEnum, AbstraitProfessionConfig>
             {
                 { ProfessionEnum.NATALITE, new Natalite() },
                 { ProfessionEnum.FERMIER,  new Fermier()  },
@@ -40,7 +43,7 @@ namespace Profession
 
             try
             {
-                pourcent = professionDict[profession].professionPourcent;
+                pourcent = ProfessionDict[profession].ProfessionPourcent;
             }
             catch (KeyNotFoundException)
             {
@@ -60,7 +63,7 @@ namespace Profession
         {
             try
             {
-                professionDict[profession].professionPourcent = pourcent;
+                ProfessionDict[profession].ProfessionPourcent = pourcent;
             }
             catch (KeyNotFoundException)
             {
@@ -72,6 +75,7 @@ namespace Profession
         /// Attribuer un pourcentage de population à une profession
         /// La modification est ajustée si le pourcentage total de toutes les professions
         /// dépasserait 100% ensemble. Elle l'est aussi si le pourcentage est plus petit que 0.
+        /// On ne peut attribuer un pourcentage à une profession verrouillée.
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <param name="pourcent">Le pourcentage</param>
@@ -81,7 +85,7 @@ namespace Profession
             float pourcentLibre = PourcentPopLibre();
             bool estValide = true;
             
-            if (pourcent < 0)
+            if (!EstDeverrouille(profession) || pourcent < 0)
             {
                 pourcent = 0;
                 estValide = false;
@@ -104,10 +108,32 @@ namespace Profession
             float pourcentPopLibre = 1.0f;
             foreach (ProfessionEnum profession in Enum.GetValues(typeof(ProfessionEnum)))
             {
-                pourcentPopLibre -= professionDict[profession].professionPourcent;
+                pourcentPopLibre -= ProfessionDict[profession].ProfessionPourcent;
             }
 
             return pourcentPopLibre;
+        }
+
+        /// <summary>
+        /// Indique si la profession est déverrouillée.
+        /// Si le prérequis de la profession n'est pas rencontré, celle-ci est verrouillée.
+        /// </summary>
+        /// <param name="profession">La profession dont on valide le prérequis.</param>
+        /// <returns>Vrai si la profession est déverrouillée.</returns>
+        public bool EstDeverrouille(ProfessionEnum profession)
+        {
+            LotBatiments prerequis;
+            try
+            {
+                prerequis = ProfessionDict[profession].Prerequis;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La profession {profession} n'est pas dans le dictionnaire.");
+                return false;
+            }
+
+            return GestionnaireBatiments.Instance.PrerequisEstRespecte(prerequis);
         }
     }
 }

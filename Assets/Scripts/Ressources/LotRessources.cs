@@ -6,11 +6,11 @@ namespace Ressource
 {
     public class LotRessources
     {
-        public Dictionary<RessourceEnum, Qte> ressourcesDict;
+        public Dictionary<RessourceEnum, Qte> RessourcesDict;
 
         public LotRessources(Qte qtePopulation, Qte qteNourriture, Qte qteBois, Qte qteMineraux)
         {
-            ressourcesDict = new Dictionary<RessourceEnum, Qte>
+            RessourcesDict = new Dictionary<RessourceEnum, Qte>
             {
                 { RessourceEnum.POPULATION, qtePopulation },
                 { RessourceEnum.NOURRITURE, qteNourriture },
@@ -25,7 +25,7 @@ namespace Ressource
         /// </summary>
         public LotRessources(long qtePopulation = 0, long qteNourriture= 0, long qteBois = 0, long qteMineraux = 0)
         {
-            ressourcesDict = new Dictionary<RessourceEnum, Qte>
+            RessourcesDict = new Dictionary<RessourceEnum, Qte>
             {
                 { RessourceEnum.POPULATION, new Qte(qtePopulation) },
                 { RessourceEnum.NOURRITURE, new Qte(qteNourriture) },
@@ -45,7 +45,7 @@ namespace Ressource
 
             try
             {
-                qte = ressourcesDict[ressource].qte;
+                qte = RessourcesDict[ressource].qte;
             }
             catch (KeyNotFoundException)
             {
@@ -64,7 +64,7 @@ namespace Ressource
         {
             try
             {
-                ressourcesDict[ressource].qte = qte;
+                RessourcesDict[ressource].qte = qte;
             }
             catch (KeyNotFoundException)
             {
@@ -83,7 +83,7 @@ namespace Ressource
 
             try
             {
-                qteMin = ressourcesDict[ressource].qteMin;
+                qteMin = RessourcesDict[ressource].qteMin;
             }
             catch (KeyNotFoundException)
             {
@@ -104,7 +104,7 @@ namespace Ressource
 
             try
             {
-                qteMax = ressourcesDict[ressource].qteMax;
+                qteMax = RessourcesDict[ressource].qteMax;
             }
             catch (KeyNotFoundException)
             {
@@ -123,7 +123,7 @@ namespace Ressource
         {
             try
             {
-                ressourcesDict[ressource].qteMax = qteMax;
+                RessourcesDict[ressource].qteMax = qteMax;
             }
             catch (KeyNotFoundException)
             {

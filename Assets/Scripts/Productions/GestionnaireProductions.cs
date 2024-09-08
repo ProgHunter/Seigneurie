@@ -7,9 +7,11 @@ namespace Production
 {
     public sealed class GestionnaireProductions
     {
+        #region members
         private static readonly GestionnaireProductions _instance = new();
         private Dictionary<RessourceEnum, AbstraitProduction> _productionRessourceDict;
         private ProductionEffortConstruction _productionEffortConstruction;
+        #endregion members
 
         public GestionnaireProductions()
         {

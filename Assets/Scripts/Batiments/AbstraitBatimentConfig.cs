@@ -6,12 +6,16 @@ namespace Batiment
     public abstract class AbstraitBatimentConfig
     {
         #region membres
-        public string id;
-        public string nom;
-        public Sprite icone;
-        public string description;
-        public LotRessources coutConstruction;
-        public int effortConstruction;
+        /// <summary>
+        /// <see cref="Prerequis"/> Indique les bâtiments prérequis pour débloquer celui-ci.
+        /// </summary>
+        public string Id;
+        public string Nom;
+        public Sprite Icone;
+        public string Description;
+        public LotRessources CoutConstruction;
+        public int EffortConstruction;
+        public LotBatiments Prerequis;
         #endregion membres
     }
 

@@ -18,7 +18,7 @@ namespace Production
         {
             long capaciteMax = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON) * ((MaisonConfig)GestionnaireBatiments.Instance.BatimentConfigDict[BatimentEnum.MAISON]).Capacite;
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            long popActive = (long)(popActuelle * GestionnaireProfessions.Instance.ProfessionDict[ProfessionEnum.NATALITE].ProfessionPourcent);
+            long popActive = (long)(popActuelle * GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.NATALITE));
 
             // Valider si nos nombres sont positifs et si la population actuelle n'est pas déjà presqu'à notre capacité ou plus grand
             if (capaciteMax < 0 || popActive <= 0 || popActive + 1 >= capaciteMax)

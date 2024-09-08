@@ -15,7 +15,7 @@ namespace Profession
         ///                                  TODO : À changer de place éventuellement. 
         ///                                  Créer un dict de config séparé d'un dict de poucents.
         /// </summary>
-        private float _professionPourcent = 0f;
+        private float _professionPourcent;
         private LotBatiments _prerequis;
         #endregion membres
 
@@ -24,7 +24,7 @@ namespace Profession
         public string Nom { get => _nom; protected set => _nom = value; }
         public Sprite Icone { get => _icone; protected set => _icone = value; }
         public string Description { get => _description; protected set => _description = value; }
-        public float ProfessionPourcent { get => _professionPourcent; set => _professionPourcent = value; }
+        public float ProfessionPourcent { get => _professionPourcent; protected set => _professionPourcent = value; }
         public LotBatiments Prerequis { get => _prerequis.Clone(); protected set => _prerequis = value.Clone(); }
         #endregion accesseurs_mutateurs
     }

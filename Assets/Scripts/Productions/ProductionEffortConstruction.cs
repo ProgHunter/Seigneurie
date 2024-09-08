@@ -58,7 +58,7 @@ namespace Production
         /// <returns>exp soit l'exposant calculé à partir d'un indice de parallelisation pour un effort de construction</returns>
         private float CalculerExposantEffortConstruction()
         {
-            float parallelisable = ((Macon)GestionnaireProfessions.Instance.ProfessionDict[ProfessionEnum.MACON]).ParallelisablePourcent;
+            float parallelisable = ((MaconConfig)GestionnaireProfessions.Instance.ProfessionDictConfig[ProfessionEnum.MACON]).ParallelisablePourcent;
             long effotConstructionTotal = GestionnaireBatiments.Instance.AccesEffortConstructionTotalEnCours();
 
             return (Mathf.Log(parallelisable) / Mathf.Log(effotConstructionTotal)) + 1;

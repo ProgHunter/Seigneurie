@@ -2,7 +2,6 @@
 using Batiment;
 using System;
 using System.Collections.Generic;
-using Utils;
 
 namespace Ressource
 {

@@ -34,23 +34,23 @@ namespace Production
         private long ProductionFermiers()
         {
             // Calcul de l'effort des fermiers
-            float professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.FERMIER].professionPourcent;
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.FERMIER);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;
             // Calcul du bonus de production des fermes
-            float bonusFermes = ((FermeConfig)GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.FERME]).bonusProductionPourcent;
+            float bonusFermes = ((FermeConfig)GestionnaireBatiments.Instance.BatimentConfigDict[BatimentEnum.FERME]).BonusProductionPourcent;
             long nbFermes = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.FERME);
             bonusFermes = bonusFermes * nbFermes + 1;
 
-            return (long)(nbPopTravaille * efficacitePourcent * bonusFermes);
+            return (long)(nbPopTravaille * EfficacitePourcent * bonusFermes);
         }
 
         private long ConsommationPopulation()
         {
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            float indiceDeFaim = ((PopulationConfig)InventaireRessources.Instance.ressourceConfigDict[RessourceEnum.POPULATION]).faimPourcent;
+            float indiceDeFaim = ((PopulationConfig)InventaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).FaimPourcent;
 
             return (long)(popActuelle * indiceDeFaim);
         }

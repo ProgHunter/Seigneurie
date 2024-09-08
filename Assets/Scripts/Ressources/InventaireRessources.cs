@@ -1,18 +1,21 @@
-﻿using System;
+﻿using UnityEngine;
+using Batiment;
+using System;
 using System.Collections.Generic;
-using Utils;
 
 namespace Ressource
 {
     public sealed class InventaireRessources
     {
+        #region members
         private static readonly InventaireRessources _instance = new();
         private LotRessources _quantiteRessources;
-        public Dictionary<RessourceEnum, AbstraitRessourceConfig> ressourceConfigDict;
+        public Dictionary<RessourceEnum, AbstraitRessourceConfig> RessourceConfigDict;
+        #endregion members
 
         private InventaireRessources()
         {
-            ressourceConfigDict = new Dictionary<RessourceEnum, AbstraitRessourceConfig>
+            RessourceConfigDict = new Dictionary<RessourceEnum, AbstraitRessourceConfig>
             {
                 { RessourceEnum.POPULATION, new PopulationConfig() },
                 { RessourceEnum.NOURRITURE, new NourritureConfig() },
@@ -20,26 +23,10 @@ namespace Ressource
                 { RessourceEnum.MINERAUX,   new MinerauxConfig()   }
             };
 
-            long qtePopulation = ressourceConfigDict[RessourceEnum.POPULATION].QteBase;
-            long qteMinPopulation = ressourceConfigDict[RessourceEnum.POPULATION].QteMin;
-            long qteMaxPopulation = ressourceConfigDict[RessourceEnum.POPULATION].QteMax;
-
-            long qteNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].QteBase;
-            long qteMinNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].QteMin;
-            long qteMaxNourriture = ressourceConfigDict[RessourceEnum.NOURRITURE].QteMax;
-
-            long qteBois = ressourceConfigDict[RessourceEnum.BOIS].QteBase;
-            long qteMinBois = ressourceConfigDict[RessourceEnum.BOIS].QteMin;
-            long qteMaxBois = ressourceConfigDict[RessourceEnum.BOIS].QteMax;
-
-            long qteMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].QteBase;
-            long qteMinMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].QteMin;
-            long qteMaxMineraux = ressourceConfigDict[RessourceEnum.MINERAUX].QteMax;
-
-            _quantiteRessources = new LotRessources(new Qte(qtePopulation, qteMaxPopulation, qteMinPopulation),
-                                                    new Qte(qteNourriture, qteMaxNourriture, qteMinNourriture),
-                                                    new Qte(qteBois, qteMaxBois, qteMinBois),
-                                                    new Qte(qteMineraux, qteMaxMineraux, qteMinMineraux));
+            _quantiteRessources = new LotRessources(RessourceConfigDict[RessourceEnum.POPULATION].Qte,
+                                                    RessourceConfigDict[RessourceEnum.NOURRITURE].Qte,
+                                                    RessourceConfigDict[RessourceEnum.BOIS].Qte,
+                                                    RessourceConfigDict[RessourceEnum.MINERAUX].Qte);
         }
 
         public static InventaireRessources Instance
@@ -50,6 +37,7 @@ namespace Ressource
             }
         }
 
+        #region accesseurs_mutateurs
         /// <summary>
         /// Donne accès à la quantité d'une ressource de l'inventaire.
         /// </summary>
@@ -98,17 +86,15 @@ namespace Ressource
         /// <param name="ressources">Le lot de ressources à attribuer</param>
         public void AttribuerQteRessource(LotRessources ressources)
         {
-            foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
-                AttribuerQteRessource(ressource, ressources.AccesQteRessource(ressource));
+            _quantiteRessources.AttribuerQteRessource(ressources);
         }
 
         /// <summary>
         /// Attribue la valeur minimal à chaque quantité de ressource de l'inventaire.
         /// </summary>
-        public void AttribuerQteMinRessources()
+        public void AttribuerQteMinRessource()
         {
-            foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
-                AttribuerQteRessource(ressource, _quantiteRessources.AccesQteMinRessource(ressource));
+            _quantiteRessources.AttribuerQteMinRessource();
         }
 
         /// <summary>
@@ -120,11 +106,13 @@ namespace Ressource
         {
             _quantiteRessources.ModifierLimiteMaxRessource(ressource, limiteMax);
         }
+        #endregion accesseurs_mutateurs
 
         /// <summary>
         /// Permet d'additionner ou soustraire une quantité à une ressource.
         /// La valeur minimale et maximale de la ressource sera validé.
         /// 
+        /// Si la ressource est verrouiller, on ne peut pas en ajouter (sauf si on ajoute 0).
         /// Si les limites ne sont pas respectés, la valeur min (ou max) sera mise dans l'inventaire (limitesBloquantes == faux).
         /// limitesBloquantes == vrai : La transaction ne sera pas complétée dès qu'une limite est dépassée.
         /// </summary>
@@ -134,6 +122,13 @@ namespace Ressource
         /// <returns>Retourne vrai si la valeur résultant respectait les limite inférieures et suppérieures de l'inventaire</returns>
         public bool AjouterQteRessourceAvecLimites(RessourceEnum ressource, long quantite, bool limitesBloquantes = false)
         {
+            // Si la _qte à ajouter est 0, on évite les validations et on retourne dirrectement OK.
+            if (quantite == 0)
+                return true;
+
+            if (!EstDeverrouille(ressource))
+                return false;
+
             long inventaire = _quantiteRessources.AccesQteRessource(ressource);
             long resultat = inventaire + quantite;
             bool respecteLimites = ValideLimitesMinMaxAttributionRessource(ressource, ref resultat);
@@ -149,6 +144,7 @@ namespace Ressource
         /// <summary>
         /// Permet d'additionner ou soustraire une quantité à une ressource à partir d'un lot de ressources.
         /// Si limitesBloquantes, la transaction complète est annulé lorsqu'une des limites est dépassée.
+        /// Si la ressource est verrouiller, on ne peut pas en ajouter (sauf si on ajoute 0).
         /// </summary>
         /// <param name="ressources">Le lot de ressources contenant les quantités</param>
         /// <returns>Vrai si toutes les ressources ont pu être modifiées sans atteindre une limite</returns>
@@ -159,6 +155,12 @@ namespace Ressource
                 long resultat;
                 foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
                 {
+                    if (ressources.AccesQteRessource(ressource) == 0)
+                        continue;
+
+                    if (!EstDeverrouille(ressource))
+                        return false;
+
                     resultat = ressources.AccesQteRessource(ressource) + _quantiteRessources.AccesQteRessource(ressource);
                     if (!ValideLimitesMinMaxAttributionRessource(ressource, ref resultat))
                         return false;
@@ -168,6 +170,15 @@ namespace Ressource
             bool respecteLimites = true;
             foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
             {
+                if (ressources.AccesQteRessource(ressource) == 0)
+                    continue;
+
+                if (!EstDeverrouille(ressource))
+                {
+                    respecteLimites = false;
+                    continue;
+                }
+
                 respecteLimites &= AjouterQteRessourceAvecLimites(ressource, ressources.AccesQteRessource(ressource));
             }
 
@@ -176,7 +187,8 @@ namespace Ressource
 
         /// <summary>
         /// Valide si la quantité de ressources attribuée respectera les limites min et max de celle-ci.
-        /// Corrige qtAttribuee si ce n'est pas le cas
+        /// Valide aussi si la ressource est déverrouillée, sinon retourne la valeur min de la ressource.
+        /// Corrige qtAttribuee si ce n'est pas le cas.
         /// </summary>
         /// <param name="ressource">La ressource à modifier</param>
         /// <param name="qtAttribuee">Ref, la quantité à attribuer dans l'inventaire. Sera modifier pour respecter les limites.</param>
@@ -185,20 +197,51 @@ namespace Ressource
         {
             long qteMax = _quantiteRessources.AccesQteMaxRessource(ressource);
             long qteMin = _quantiteRessources.AccesQteMinRessource(ressource);
-            //long inventaire = _quantiteRessources.AccesQteRessource(ressource);
 
-            if (qtAttribuee < qteMin)
+            if (!EstDeverrouille(ressource) || qtAttribuee < qteMin)
             {
                 qtAttribuee = qteMin;
                 return false;
             }
-            if (qtAttribuee > qteMax)
+            else if (qtAttribuee > qteMax)
             {
                 qtAttribuee = qteMax;
                 return false;
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Indique si la ressource est déverrouillé.
+        /// On valide avec le prérequis de la ressource.
+        /// Si la ressource est verouillé, on ne doit pas pouvoir la voir (et la produire).
+        /// </summary>
+        /// <returns>Vrai si la ressource est disponible</returns>
+        public bool EstDeverrouille(RessourceEnum ressource)
+        {
+            LotBatiments prerequis;
+            try
+            {
+                prerequis = RessourceConfigDict[ressource].Prerequis;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La ressource {ressource} n'est pas dans le dictionnaire.");
+                return false;
+            }
+
+            return GestionnaireBatiments.Instance.PrerequisEstRespecte(prerequis);
+        }
+
+        /// <summary>
+        /// Valide si on a assez de ressources pour le coût.
+        /// </summary>
+        /// <param name="cout">Le coût à valider. Qte positives.</param>
+        /// <returns>Vrai si l'inventaire a assez de ressources pour le coût comparé.</returns>
+        public bool QteRessourcesSuffisantes(LotRessources cout)
+        {
+            return _quantiteRessources >= cout;
         }
     }
 }

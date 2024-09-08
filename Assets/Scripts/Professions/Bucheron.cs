@@ -1,13 +1,16 @@
+using Batiment;
+
 namespace Profession
 {
     public class Bucheron : AbstraitProfessionConfig
     {
         public Bucheron() : base()
         {
-            id = "P2_Bucheron";
-            nom = "Bucheron";
-            icone = null; // TODO
-            description = "Contribut à la production de bois dans la Seigneurie";
+            Id = "P2_Bucheron";
+            Nom = "Bucheron";
+            Icone = null; // TODO
+            Description = "Contribut à la production de bois dans la Seigneurie";
+            Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }
 }

@@ -6,46 +6,50 @@ namespace Batiment
 {
     public class LotBatiments
     {
-        public Dictionary<BatimentEnum, Qte> batimentsDic;
+        private Dictionary<BatimentEnum, Qte> _batimentsDict;
 
         public LotBatiments(Qte qteMaison, Qte qteFerme, Qte qteScierie, Qte qteMine, Qte qteHotelDeVille)
         {
-            batimentsDic = new Dictionary<BatimentEnum, Qte>
+            _batimentsDict = new Dictionary<BatimentEnum, Qte>
             {
-                { BatimentEnum.MAISON,       qteMaison       },
-                { BatimentEnum.FERME,        qteFerme        },
-                { BatimentEnum.SCIERIE,      qteScierie      },
-                { BatimentEnum.MINE,         qteMine         },
-                { BatimentEnum.HOTELDEVILLE, qteHotelDeVille }
+                { BatimentEnum.MAISON,       qteMaison.Clone()       },
+                { BatimentEnum.FERME,        qteFerme.Clone()        },
+                { BatimentEnum.SCIERIE,      qteScierie.Clone()      },
+                { BatimentEnum.MINE,         qteMine.Clone()         },
+                { BatimentEnum.HOTELDEVILLE, qteHotelDeVille.Clone() }
             };
         }
 
         /// <summary>
-        /// Ajoute un bâtiment du type voulu au lot
-        /// Valide la quantité maximale.
+        /// Constructeur pour un lot de bâtiments qui exprime seulement une quantité.
+        /// Pas de min ni de max spécifié.
         /// </summary>
-        /// <param name="batiment">Le batiment que l'on veut un de plus</param>
-        /// <returns>Vrai si le nombre a été incrémenté</returns>
-        public bool AjouterUnBatiment(BatimentEnum batiment)
+        public LotBatiments(long qteMaison = 0, long qteFerme = 0, long qteScierie = 0, long qteMine = 0, long qteHotelDeVille = 0)
         {
-            long qte;
-
-            try
+            _batimentsDict = new Dictionary<BatimentEnum, Qte>
             {
-                qte = batimentsDic[batiment].qte;
-            }
-            catch (KeyNotFoundException)
-            {
-                return false;
-            }
-
-            if (++qte > batimentsDic[batiment].qteMax)
-                return false;
-
-            batimentsDic[batiment].qte = qte;
-            return true;
+                { BatimentEnum.MAISON,       new Qte(qteMaison)       },
+                { BatimentEnum.FERME,        new Qte(qteFerme)        },
+                { BatimentEnum.SCIERIE,      new Qte(qteScierie)      },
+                { BatimentEnum.MINE,         new Qte(qteMine)         },
+                { BatimentEnum.HOTELDEVILLE, new Qte(qteHotelDeVille) }
+            };
         }
 
+        /// <summary>
+        /// Crée un clone profond du lot de bâtiments
+        /// </summary>
+        /// <returns>Nouvel objet LotBatiments avec les mêmes valeurs</returns>
+        public LotBatiments Clone()
+        {
+            return new LotBatiments(_batimentsDict[BatimentEnum.MAISON].Clone(),
+                                    _batimentsDict[BatimentEnum.FERME].Clone(),
+                                    _batimentsDict[BatimentEnum.SCIERIE].Clone(),
+                                    _batimentsDict[BatimentEnum.MINE].Clone(),
+                                    _batimentsDict[BatimentEnum.HOTELDEVILLE].Clone());
+        }
+
+        #region accesseurs_mutateurs
         /// <summary>
         /// Donne accès à la quantité d'un type de bâtiment.
         /// </summary>
@@ -57,7 +61,7 @@ namespace Batiment
 
             try
             {
-                quantite = batimentsDic[batiment].qte;
+                quantite = _batimentsDict[batiment].qte;
             }
             catch (KeyNotFoundException)
             {
@@ -78,12 +82,21 @@ namespace Batiment
         {
             try
             {
-                batimentsDic[batiment].qte = qte;
+                _batimentsDict[batiment].qte = qte;
             }
             catch (KeyNotFoundException)
             {
                 Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
             }
+        }
+
+        /// <summary>
+        /// Attribue la valeur minimale (qteMin) aux _qte des bâtiments du lot.
+        /// </summary>
+        public void AttribuerQteMinBatiment()
+        {
+            foreach (BatimentEnum batiment in _batimentsDict.Keys)
+                _batimentsDict[batiment].qte = _batimentsDict[batiment].qteMin;
         }
 
         /// <summary>
@@ -97,7 +110,7 @@ namespace Batiment
 
             try
             {
-                qteMax = batimentsDic[batiment].qteMax;
+                qteMax = _batimentsDict[batiment].qteMax;
             }
             catch (KeyNotFoundException)
             {
@@ -116,12 +129,83 @@ namespace Batiment
         {
             try
             {
-                batimentsDic[batiment].qteMax = qteMax;
+                _batimentsDict[batiment].qteMax = qteMax;
             }
             catch (KeyNotFoundException)
             {
                 Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
             }
         }
+        #endregion accesseurs_mutateurs
+
+        #region operateurs
+        /// <summary>
+        /// Ajoute un bâtiment du type voulu au lot
+        /// Valide la quantité maximale.
+        /// </summary>
+        /// <param name="batiment">Le batiment que l'on veut un de plus</param>
+        /// <returns>Vrai si le nombre a été incrémenté</returns>
+        public bool AjouterUnBatiment(BatimentEnum batiment)
+        {
+            long qte;
+
+            try
+            {
+                qte = _batimentsDict[batiment].qte;
+            }
+            catch (KeyNotFoundException)
+            {
+                return false;
+            }
+
+            if (++qte > _batimentsDict[batiment].qteMax)
+                return false;
+
+            _batimentsDict[batiment].qte = qte;
+            return true;
+        }
+
+        /// <summary>
+        /// Compare si le premier lot de batiments est plus petit ou égale au deuxième.
+        /// On vient comparer la quantité pour chaque type de batiment.
+        /// </summary>
+        /// <param name="lot1">Premier lot de batiments</param>
+        /// <param name="lot2">Deuxième lot de batiments</param>
+        /// <returns>Vrai si la quantité de chaque type de batiment est plus petit ou égale</returns>
+        public static bool operator <=(LotBatiments lot1, LotBatiments lot2)
+        {
+            foreach ((BatimentEnum batiment, Qte qteBatiment) in lot1._batimentsDict)
+            {
+                var qteBatimentLot1 = qteBatiment.qte;
+                var qteBatimentLot2 = lot2._batimentsDict[batiment].qte;
+
+                if (qteBatimentLot1 > qteBatimentLot2)
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Compare si le premier lot de batiments est plus grand ou égale au deuxième.
+        /// On vient comparer la quantité pour chaque type de batiment.
+        /// </summary>
+        /// <param name="lot1">Premier lot de batiments</param>
+        /// <param name="lot2">Deuxième lot de batiments</param>
+        /// <returns>Vrai si la quantité de chaque type de batiment est plus grand ou égale</returns>
+        public static bool operator >=(LotBatiments lot1, LotBatiments lot2)
+        {
+            foreach ((BatimentEnum batiment, Qte qteBatiment) in lot1._batimentsDict)
+            {
+                var qteBatimentLot1 = qteBatiment.qte;
+                var qteBatimentLot2 = lot2._batimentsDict[batiment].qte;
+
+                if (qteBatimentLot1 < qteBatimentLot2)
+                    return false;
+            }
+
+            return true;
+        }
+        #endregion operateurs
     }
 }

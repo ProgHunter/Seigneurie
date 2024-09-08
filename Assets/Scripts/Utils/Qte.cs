@@ -12,5 +12,14 @@ namespace Utils
             this.qteMax = qteMax;
             this.qteMin = qteMin;
         }
+
+        /// <summary>
+        /// Crée un clone profond de la Qte
+        /// </summary>
+        /// <returns>Nouvel objet Qte avec les mêmes valeurs</returns>
+        public Qte Clone()
+        {
+            return new Qte(qte, qteMax, qteMin);
+        }
     }
 }

@@ -13,17 +13,17 @@ namespace Production
         public override long CalculerProduction()
         {
             // Calcul de l'effort des mineurs
-            float professionPourcent = GestionnaireProfessions.Instance.professionDict[ProfessionEnum.MINEUR].professionPourcent;
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MINEUR);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;
             // Calcul du bonus de production des mines
-            float bonusMines = ((MineConfig)GestionnaireBatiments.Instance.batimentConfigDict[BatimentEnum.MINE]).bonusProductionPourcent;
+            float bonusMines = ((MineConfig)GestionnaireBatiments.Instance.BatimentConfigDict[BatimentEnum.MINE]).BonusProductionPourcent;
             long nbMines = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MINE);
             bonusMines = bonusMines * nbMines + 1;
 
-            return (long)(nbPopTravaille * efficacitePourcent * bonusMines);
+            return (long)(nbPopTravaille * EfficacitePourcent * bonusMines);
         }
     }
 }

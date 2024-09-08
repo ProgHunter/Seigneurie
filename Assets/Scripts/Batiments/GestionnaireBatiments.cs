@@ -1,3 +1,4 @@
+using Ressource;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -12,23 +13,13 @@ namespace Batiment
         public Dictionary<BatimentEnum, AbstraitBatimentConfig> BatimentConfigDict;
         /// <summary>
         /// <see cref="BatimentEnum"/> Constitue le bâtiment en contruction
-        /// <see cref="int"/> Effort restant pour compléter la construction
+        /// <see cref="long"/> Effort restant pour compléter la construction
         /// </summary>
         public Paire<BatimentEnum, long> EnConstruction = null;
         #endregion members
 
-        private GestionnaireBatiments(long qteMaison = 1,       long qteMaxMaison = 1000, 
-                                      long qteFerme = 0,        long qteMaxFerme = 1000, 
-                                      long qteScierie = 0,      long qteMaxScierie = 100, 
-                                      long qteMine = 0,         long qteMaxMine = 100,
-                                      long qteHotelDeVille = 0, long qteMaxHotelDeVille = 1)
+        private GestionnaireBatiments()
         {
-            _batiments = new LotBatiments(new Qte(qteMaison, qteMaxMaison),
-                                          new Qte(qteFerme, qteMaxFerme),
-                                          new Qte(qteScierie, qteMaxScierie),
-                                          new Qte(qteMine, qteMaxMine),
-                                          new Qte(qteHotelDeVille, qteMaxHotelDeVille));
-
             BatimentConfigDict = new Dictionary<BatimentEnum, AbstraitBatimentConfig>
             {
                 { BatimentEnum.MAISON,       new MaisonConfig()       },
@@ -37,6 +28,12 @@ namespace Batiment
                 { BatimentEnum.MINE,         new MineConfig()         },
                 { BatimentEnum.HOTELDEVILLE, new HotelDeVilleConfig() }
             };
+
+            _batiments = new LotBatiments(BatimentConfigDict[BatimentEnum.MAISON].Qte,
+                                          BatimentConfigDict[BatimentEnum.FERME].Qte,
+                                          BatimentConfigDict[BatimentEnum.SCIERIE].Qte,
+                                          BatimentConfigDict[BatimentEnum.MINE].Qte,
+                                          BatimentConfigDict[BatimentEnum.HOTELDEVILLE].Qte);
         }
 
         public static GestionnaireBatiments Instance
@@ -47,6 +44,7 @@ namespace Batiment
             }
         }
 
+        #region accesseurs_mutateurs
         public long AccesQteBatiment(BatimentEnum batiment)
         {
             return _batiments.AccesQteBatiment(batiment);
@@ -83,6 +81,7 @@ namespace Batiment
 
             return prerequis;
         }
+        #endregion accesseurs_mutateurs
 
         /// <summary>
         /// Valide si les bâtiments mentionnés dans le lot sont construits et en quantité suffisante.
@@ -103,6 +102,39 @@ namespace Batiment
         public bool EstDeverrouille(BatimentEnum batiment)
         {
             return PrerequisEstRespecte(AccesPrerequis(batiment));
+        }
+
+        /// <summary>
+        /// Accès au coût de contruction du bâtiment
+        /// </summary>
+        /// <param name="batiment">Le bâtiment dont on veut avoir le coût.</param>
+        /// <returns>Le lot de ressource avec les quantitées correspondant au coût du bâtiment</returns>
+        public LotRessources AccesCoutBatiment(BatimentEnum batiment)
+        {
+            LotRessources Cout;
+
+            try
+            {
+                Cout = BatimentConfigDict[batiment].CoutConstruction;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
+                return null;
+            }
+
+            return Cout;
+        }
+
+        /// <summary>
+        /// Valide si les ressources sont disponibles pour le coût de construction du bâtiment.
+        /// </summary>
+        /// <param name="batiment">Le batiment à valider le coût</param>
+        /// <returns>Vrai si les ressources sont disponibles</returns>
+        public bool CoutConstructionEstDisponible(BatimentEnum batiment)
+        {
+            LotRessources coutConstruction = AccesCoutBatiment(batiment);
+            return InventaireRessources.Instance.QteRessourcesSuffisantes(coutConstruction);
         }
 
         public bool ConstructionEstEnCours()
@@ -159,19 +191,25 @@ namespace Batiment
                 (_batiments.AccesQteBatiment(batiment) >= _batiments.AccesQteMaxBatiment(batiment)))
                 return false;
 
+            // On essaie d'effectuer la transaction avec l'inventaire.
+            // Si le coût est trop élevé pour le nombre de ressources dans l'inventaire, 
+            // les ressources ne sont pas retirées et la construction n'est pas démarrée.
+            if (!InventaireRessources.Instance.AjouterQteRessourceAvecLimites(-AccesCoutBatiment(batiment), true))
+                return false;
+
+            Paire<BatimentEnum, long> Chantier = new Paire<BatimentEnum, long>();
             try
             {
-                EnConstruction = new Paire<BatimentEnum, long>();
-                EnConstruction.Item1 = batiment;
-                EnConstruction.Item2 = BatimentConfigDict[batiment].EffortConstruction;
+                Chantier.Item1 = batiment;
+                Chantier.Item2 = BatimentConfigDict[batiment].EffortConstruction;
             }
             catch (KeyNotFoundException)
             {
                 Debug.LogError($"Le bâtiment {batiment} n'est pas dans le dictionnaire.");
-                EnConstruction = null;
                 return false;
             }
 
+            EnConstruction = Chantier;
             return true;
         }
 

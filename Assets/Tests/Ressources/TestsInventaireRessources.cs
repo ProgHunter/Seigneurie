@@ -189,7 +189,7 @@ namespace Test
         public void TestTransactionLotRessourcesBloquantAcceptee()
         {
             // Réinitialise les quantitées de ressources dans l'inventaire pour le minimum de chaque
-            InventaireRessources.Instance.AttribuerQteMinRessources();
+            InventaireRessources.Instance.AttribuerQteMinRessource();
 
             var qtePopulationAjoutee = 2;
             var qteNourritureAjoutee = 3;
@@ -224,7 +224,7 @@ namespace Test
         public void TestTransactionLotRessourcesBloquantRefuse()
         {
             // Réinitialise les quantitées de ressources dans l'inventaire pour le minimum de chaque
-            InventaireRessources.Instance.AttribuerQteMinRessources();
+            InventaireRessources.Instance.AttribuerQteMinRessource();
 
             var qtePopulationAjoutee = 2;
             var qteNourritureAjoutee = 3;

@@ -4,7 +4,7 @@ namespace Profession
 {
     public class Macon : AbstraitProfessionConfig
     {
-        public float ParallelisablePourcent;
+        private float _parallelisablePourcent;
 
         public Macon() : base()
         {
@@ -15,5 +15,7 @@ namespace Profession
             ParallelisablePourcent = 0.75f;
             Prerequis = new LotBatiments();  // Aucun prérequis
         }
+
+        public float ParallelisablePourcent { get => _parallelisablePourcent; private set => _parallelisablePourcent = value; }
     }
 }

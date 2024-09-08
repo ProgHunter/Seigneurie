@@ -37,6 +37,7 @@ namespace Ressource
             }
         }
 
+        #region accesseurs_mutateurs
         /// <summary>
         /// Donne accès à la quantité d'une ressource de l'inventaire.
         /// </summary>
@@ -85,17 +86,15 @@ namespace Ressource
         /// <param name="ressources">Le lot de ressources à attribuer</param>
         public void AttribuerQteRessource(LotRessources ressources)
         {
-            foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
-                AttribuerQteRessource(ressource, ressources.AccesQteRessource(ressource));
+            _quantiteRessources.AttribuerQteRessource(ressources);
         }
 
         /// <summary>
         /// Attribue la valeur minimal à chaque quantité de ressource de l'inventaire.
         /// </summary>
-        public void AttribuerQteMinRessources()
+        public void AttribuerQteMinRessource()
         {
-            foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
-                AttribuerQteRessource(ressource, _quantiteRessources.AccesQteMinRessource(ressource));
+            _quantiteRessources.AttribuerQteMinRessource();
         }
 
         /// <summary>
@@ -107,6 +106,7 @@ namespace Ressource
         {
             _quantiteRessources.ModifierLimiteMaxRessource(ressource, limiteMax);
         }
+        #endregion accesseurs_mutateurs
 
         /// <summary>
         /// Permet d'additionner ou soustraire une quantité à une ressource.
@@ -122,6 +122,7 @@ namespace Ressource
         /// <returns>Retourne vrai si la valeur résultant respectait les limite inférieures et suppérieures de l'inventaire</returns>
         public bool AjouterQteRessourceAvecLimites(RessourceEnum ressource, long quantite, bool limitesBloquantes = false)
         {
+            // Si la _qte à ajouter est 0, on évite les validations et on retourne dirrectement OK.
             if (quantite == 0)
                 return true;
 
@@ -231,6 +232,16 @@ namespace Ressource
             }
 
             return GestionnaireBatiments.Instance.PrerequisEstRespecte(prerequis);
+        }
+
+        /// <summary>
+        /// Valide si on a assez de ressources pour le coût.
+        /// </summary>
+        /// <param name="cout">Le coût à valider. Qte positives.</param>
+        /// <returns>Vrai si l'inventaire a assez de ressources pour le coût comparé.</returns>
+        public bool QteRessourcesSuffisantes(LotRessources cout)
+        {
+            return _quantiteRessources >= cout;
         }
     }
 }

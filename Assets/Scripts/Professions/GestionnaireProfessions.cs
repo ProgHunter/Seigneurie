@@ -10,6 +10,10 @@ namespace Profession
         private static readonly GestionnaireProfessions _instance = new();
         private LotProfessions _professions;
         public Dictionary<ProfessionEnum, AbstraitProfessionConfig> ProfessionDictConfig;
+
+        private const float _pcMax = 1f;
+        private const float _pcMin = 0f;
+        private const float _pcPrecision = 0.001f;
         #endregion members
 
         public GestionnaireProfessions()
@@ -84,13 +88,13 @@ namespace Profession
             float pourcentLibre = PourcentPopLibre();
             bool estValide = true;
             
-            if (!EstDeverrouille(profession) || pourcent < 0)
+            if (!EstDeverrouille(profession) || pourcent < (_pcMin - _pcPrecision))
             {
-                pourcent = 0f;  // pcMin == 0%
+                pourcent = _pcMin;
                 estValide = false;
-            } else if ((pourcent - AccederPourcent(profession)) > pourcentLibre)
+            } else if ((pourcent - AccederPourcent(profession)) > (pourcentLibre + _pcPrecision))
             {
-                pourcent = PourcentPopLibre();  // pcMax == 100%
+                pourcent = PourcentPopLibre();
                 estValide = false;
             }
 
@@ -150,9 +154,7 @@ namespace Profession
                 pourcentPopLibre -= _professions.AccesPourcentProfession(profession);
             }
 
-            const float pcMax = 1.001f;
-            const float pcMin = -0.009f;
-            if (pourcentPopLibre > pcMax || pourcentPopLibre < pcMin)
+            if (pourcentPopLibre > (_pcMax + _pcPrecision) || pourcentPopLibre < (_pcMin - _pcPrecision))
                 Debug.LogError($"Le pourcentage de population libre est {pourcentPopLibre:0.000}, alors qu'il devrait être dans [0,1].");
 
             return pourcentPopLibre;

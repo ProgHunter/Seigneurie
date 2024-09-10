@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,6 +47,7 @@ namespace Profession
 
         /// <summary>
         /// Attribue un pourcentage à une profession.
+        /// Arondi à la 2e décimale.
         /// Aucune validation.
         /// </summary>
         /// <param name="profession">La profession</param>
@@ -54,7 +56,7 @@ namespace Profession
         {
             try
             {
-                _professionsDict[profession] = pcProfession;
+                _professionsDict[profession] = (float)Math.Round(pcProfession, 2);
             }
             catch (KeyNotFoundException)
             {
@@ -64,13 +66,14 @@ namespace Profession
 
         /// <summary>
         /// Attribue le pourcentage de chaque profession du lot à celui-ci.
+        /// Arondi à la 2e décimale.
         /// Aucune validation.
         /// </summary>
         /// <param name="pcProfessions">Le lot de professions avec les pourcentages</param>
         public void AttribuerPourcentProfession(LotProfessions pcProfessions)
         {
             foreach (ProfessionEnum profession in _professionsDict.Keys)
-                _professionsDict[profession] = pcProfessions._professionsDict[profession];
+                _professionsDict[profession] = (float)Math.Round(pcProfessions._professionsDict[profession]);
         }
     }
 }

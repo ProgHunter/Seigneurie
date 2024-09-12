@@ -1401,7 +1401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1429,7 +1429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1590,7 +1590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1618,7 +1618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1779,7 +1779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1807,7 +1807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1968,7 +1968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1996,7 +1996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2157,7 +2157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750508623169, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2185,7 +2185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdatePourcentage
+      value: UpdatePourcentageRestant
       objectReference: {fileID: 0}
     - target: {fileID: 7803868750609550974, guid: e9d03f7103a18204ea4983e8467701a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

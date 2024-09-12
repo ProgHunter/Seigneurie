@@ -11,7 +11,6 @@ namespace Production
     {
         [SerializeField] private MainUI _ui;
         // Tick � chaque 2 secondes
-        // Tick � chaque 2 secondes
         public float NbSecEntreTicks = 2f;
 
         // Appel� avant la premi�re mise � jour de l'image

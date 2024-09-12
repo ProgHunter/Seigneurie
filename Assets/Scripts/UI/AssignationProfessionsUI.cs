@@ -18,6 +18,7 @@ namespace UI
         [SerializeField] private Slider _slider;
         private Action _updatePourcentageTotal;
         private int _pourcentageActuel;
+        private const int _pcMax = 100;
 
         public int GetPourcentageActuel()
         {
@@ -30,9 +31,9 @@ namespace UI
             _slider.onValueChanged.AddListener(OnSliderValueChanged);
         }
 
-        public void InitProfession(ProfessionEnum value, Action pourcentageTotal)
+        public void InitProfession(ProfessionEnum profession, Action pourcentageTotal)
         {
-                _profession = value;
+                _profession = profession;
                 _titre.text = GestionnaireProfessions.Instance.ProfessionDict[_profession].Nom;
                 _pourcentageActuel = (int)(GestionnaireProfessions.Instance.AccederPourcent(_profession) * 100);
                 _slider.SetValueWithoutNotify(_pourcentageActuel);
@@ -48,7 +49,7 @@ namespace UI
 
         private void ClicBoutonMoins()
         {
-            if (_pourcentageActuel < 1)
+            if (_pourcentageActuel <= 0)
                 return;
             
             _pourcentageActuel--;
@@ -62,7 +63,7 @@ namespace UI
         {
             /*if (GestionnaireProfessions.Instance.PourcentPopLibre() < 1)
                 return;*/
-            if (_pourcentageActuel > 99)
+            if (_pourcentageActuel >= _pcMax)
             {
                 return;
             }

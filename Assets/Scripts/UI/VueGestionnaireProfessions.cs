@@ -25,14 +25,14 @@ namespace UI
             {
                 if (_assignationsProfessions != null)
                 {
-                    _assignationsProfessions[i]?.InitProfession(profession, UpdatePourcentage);
+                    _assignationsProfessions[i]?.InitProfession(profession, UpdatePourcentageRestant);
                 }
 
                 i++;
             }
         }
 
-        public void UpdatePourcentage()
+        public void UpdatePourcentageRestant()
         {
             int total = 0;
             
@@ -61,7 +61,7 @@ namespace UI
                 GestionnaireProfessions.Instance.AttribuerPourcent(profession.GetProfession(), profession.GetPourcentageActuel());
             }
             
-            UpdatePourcentage();
+            UpdatePourcentageRestant();
         }
     }
 }

@@ -2,11 +2,11 @@ using Batiment;
 
 namespace Profession
 {
-    public class Macon : AbstraitProfessionConfig
+    public class MaconConfig : AbstraitProfessionConfig
     {
-        private float _parallelisablePourcent;
+        public float ParallelisablePourcent;
 
-        public Macon() : base()
+        public MaconConfig() : base()
         {
             Id = "P4_Macon";
             Nom = "Maçon";
@@ -14,8 +14,7 @@ namespace Profession
             Description = "Contribut à la construction dans la Seigneurie";
             ParallelisablePourcent = 0.75f;
             Prerequis = new LotBatiments();  // Aucun prérequis
+            ProfessionPourcent = 0.20f;
         }
-
-        public float ParallelisablePourcent { get => _parallelisablePourcent; private set => _parallelisablePourcent = value; }
     }
 }

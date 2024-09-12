@@ -189,6 +189,7 @@ namespace Ressource
         /// Valide si la quantité de ressources attribuée respectera les limites min et max de celle-ci.
         /// Valide aussi si la ressource est déverrouillée, sinon retourne la valeur min de la ressource.
         /// Corrige qtAttribuee si ce n'est pas le cas.
+        /// TODO : À déplacer dans LotRessource, puisque c'est sa responsabilité de gérer min et max.
         /// </summary>
         /// <param name="ressource">La ressource à modifier</param>
         /// <param name="qtAttribuee">Ref, la quantité à attribuer dans l'inventaire. Sera modifier pour respecter les limites.</param>

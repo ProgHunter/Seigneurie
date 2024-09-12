@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RessourcesUI : MonoBehaviour
+namespace UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class RessourcesUI : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private BarreDeResource _barreDeResource;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Init()
+        {
+            _barreDeResource.Init();
+        }
+        public void UpdateBarre()
+        {
+            _barreDeResource.UpdateRessources();
+        }
     }
 }

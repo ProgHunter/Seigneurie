@@ -101,7 +101,7 @@ namespace Test
             InventaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteMin + 1);
 
             var qteAjoutee = -300;
-            // La transaction n'est pas complétée puisque le résultat serait sous la limite min
+            // La transaction n'est pas complÃ©tÃ©e puisque le rÃ©sultat serait sous la limite min
             var resultOK = InventaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee, true /*limitesBloquantes*/);
             var qteRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
 
@@ -177,7 +177,7 @@ namespace Test
             InventaireRessources.Instance.AttribuerQteRessource(RessourceEnum.MINERAUX, qteAttribuee);
 
             var qteMax = InventaireRessources.Instance.AccesQteMaxRessource(RessourceEnum.MINERAUX);
-            // La transaction n'est pas complétée puisque le résultat serait au dessus de la limite max
+            // La transaction n'est pas complÃ©tÃ©e puisque le rÃ©sultat serait au dessus de la limite max
             var resultOK = InventaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.MINERAUX, qteMax, true /*limitesBloquantes*/);
             var qteRetour = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
 
@@ -188,7 +188,7 @@ namespace Test
         [Test]
         public void TestTransactionLotRessourcesBloquantAcceptee()
         {
-            // Réinitialise les quantitées de ressources dans l'inventaire pour le minimum de chaque
+            // RÃ©initialise les quantitÃ©es de ressources dans l'inventaire pour le minimum de chaque
             InventaireRessources.Instance.AttribuerQteMinRessource();
 
             var qtePopulationAjoutee = 2;
@@ -221,9 +221,9 @@ namespace Test
         }
 
         [Test]
-        public void TestTransactionLotRessourcesBloquantRefuse()
+        public void TestTransactionLotRessourcesBloquantRefusÃ©()
         {
-            // Réinitialise les quantitées de ressources dans l'inventaire pour le minimum de chaque
+            // RÃ©initialise les quantitÃ©es de ressources dans l'inventaire pour le minimum de chaque
             InventaireRessources.Instance.AttribuerQteMinRessource();
 
             var qtePopulationAjoutee = 2;
@@ -258,7 +258,7 @@ namespace Test
         [Test]
         public void TestTransactionLotRessourcesVerrouille()
         {
-            // TODO: Créer un test avec une ressource verrouillée lors qu'elle sera ajoutée au jeu
+            // TODO: Crï¿½er un test avec une ressource verrouillï¿½e lors qu'elle sera ajoutï¿½e au jeu
             Assert.IsTrue(true);
         }
     }

@@ -4,8 +4,8 @@ namespace Production
     {
         /// <summary>
         /// <see cref="EfficacitePourcent"/> 
-        /// Efficacité de la production.
-        /// Sert purement de configuration pour balancer la production dans le jeu. Set à 1 par défaut.
+        /// EfficacitÃ© de la production.
+        /// Sert purement de configuration pour balancer la production dans le jeu. Set Ã  1 par dÃ©faut.
         /// </summary>
         private float _efficacitePourcent = 1.0f;
 

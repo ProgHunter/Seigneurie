@@ -19,6 +19,7 @@ namespace UI
         private Action _updatePourcentageTotal;
         private int _pourcentageActuel;
         private const int _pcMax = 100;
+        private const int _pcMin = 0;
 
         public int GetPourcentageActuel()
         {
@@ -49,7 +50,7 @@ namespace UI
 
         private void ClicBoutonMoins()
         {
-            if (_pourcentageActuel <= 0)
+            if (_pourcentageActuel <= _pcMin)
                 return;
             
             _pourcentageActuel--;

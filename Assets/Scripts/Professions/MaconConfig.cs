@@ -1,4 +1,5 @@
 using Batiment;
+using Utils;
 
 namespace Profession
 {
@@ -14,7 +15,7 @@ namespace Profession
             Description = "Contribut à la construction dans la Seigneurie";
             ParallelisablePourcent = 0.75f;
             Prerequis = new LotBatiments();  // Aucun prérequis
-            ProfessionPourcent = 0.20f;
+            ProfessionPourcent = new Qte(20 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
         }
     }
 }

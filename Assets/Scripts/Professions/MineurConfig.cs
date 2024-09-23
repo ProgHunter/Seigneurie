@@ -1,4 +1,5 @@
 using Batiment;
+using Utils;
 
 namespace Profession
 {
@@ -11,7 +12,7 @@ namespace Profession
             Icone = null; // TODO
             Description = "Contribut à la production de minéraux dans la Seigneurie";
             Prerequis = new LotBatiments();  // Aucun prérequis
-            ProfessionPourcent = 0f;
+            ProfessionPourcent = new Qte(0 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
         }
     }
 }

@@ -58,6 +58,7 @@ namespace UI
             }
             foreach (var profession in _assignationsProfessions)
             {
+                // TODO: Créer un LotProfessions, puis appeler AttribuerPourcentValide(LotProfessions)
                 GestionnaireProfessions.Instance.AttribuerPourcent(profession.GetProfession(), profession.GetPourcentageActuel());
             }
             

@@ -6,6 +6,12 @@ namespace Test
 {
     public class TestInventaireRessources
     {
+        [SetUp]
+        public void SetUp()
+        {
+            InventaireRessources.Instance.Reinitialiser();
+        }
+
         [Test]
         public void TestAttribuerEtAccesQtePopulation()
         {

@@ -13,7 +13,7 @@ namespace Production
         public override long CalculerProduction()
         {
             // Calcul de l'effort des bucherons
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.BUCHERON);
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.BUCHERON);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)

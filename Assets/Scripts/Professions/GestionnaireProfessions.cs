@@ -11,8 +11,8 @@ namespace Profession
         private LotProfessions _professions;
         public Dictionary<ProfessionEnum, AbstraitProfessionConfig> ProfessionDictConfig;
 
-        private const long _pcMax = 100;
-        private const long _pcMin = 0;
+        private const long _pcTotalMax = 100;
+        private const long _pcTotalMin = 0;
         #endregion members
 
         public GestionnaireProfessions()
@@ -95,11 +95,12 @@ namespace Profession
         public bool AttribuerPourcentValide(ProfessionEnum profession, long pourcent)
         {
             long pourcentLibre = PourcentPopLibre();
+            long pcMin = _professions.AccesPourcentMin(profession);
             bool estValide = true;
             
-            if (!EstDeverrouille(profession) || pourcent < _pcMin)
+            if (!EstDeverrouille(profession) || pourcent < pcMin)
             {
-                pourcent = _pcMin;
+                pourcent = pcMin;
                 estValide = false;
             } else if ((pourcent - AccederPourcent(profession)) > pourcentLibre)
             {
@@ -122,6 +123,9 @@ namespace Profession
         public bool AttribuerPourcentValide(LotProfessions pcProfessions)
         {
             bool estValide = true;
+            // Libérer la population avant de la réassigner
+            _professions.AttribuerPourcentMin();
+
             foreach (ProfessionEnum profession in ProfessionDictConfig.Keys)
                 estValide &= AttribuerPourcentValide(profession, pcProfessions.AccesPourcentProfession(profession));
 
@@ -161,7 +165,7 @@ namespace Profession
             foreach (ProfessionEnum profession in ProfessionDictConfig.Keys)
                 pourcentPopLibre -= _professions.AccesPourcentProfession(profession);
 
-            if (pourcentPopLibre > _pcMax || pourcentPopLibre < _pcMin)
+            if (pourcentPopLibre > _pcTotalMax || pourcentPopLibre < _pcTotalMin)
                 Debug.LogError($"Le pourcentage de population libre est {pourcentPopLibre}, alors qu'il devrait être dans [0,100].");
 
             return pourcentPopLibre;

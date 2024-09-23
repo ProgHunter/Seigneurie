@@ -214,7 +214,5 @@ namespace Test
             retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
             Assert.IsTrue(retour);
         }
-
-        // TODO: Rajouter une fonction aux gestionnaires/inventaire pour réinitialiser les valeurs à partir des configs et les utiliser à la fin d'une suite de tests.
     }
 }

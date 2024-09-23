@@ -109,5 +109,43 @@ namespace Profession
             foreach (ProfessionEnum profession in _professionsDict.Keys)
                 _professionsDict[profession].qte = pcProfessions._professionsDict[profession].qte;
         }
+
+        public long AccesPourcentMin(ProfessionEnum profession)
+        {
+            long pcMin = 0;
+
+            try
+            {
+                pcMin = _professionsDict[profession].qteMin;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La profession {profession} n'est pas dans le dictionnaire.");
+            }
+
+            return pcMin;
+        }
+
+        public void AttribuerPourcentMin()
+        {
+            foreach (ProfessionEnum profession in _professionsDict.Keys)
+                _professionsDict[profession].qte = _professionsDict[profession].qteMin;
+        }
+
+        public long AccesPourcentMax(ProfessionEnum profession)
+        {
+            long pcMax = 0;
+
+            try
+            {
+                pcMax = _professionsDict[profession].qteMax;
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogError($"La profession {profession} n'est pas dans le dictionnaire.");
+            }
+
+            return pcMax;
+        }
     }
 }

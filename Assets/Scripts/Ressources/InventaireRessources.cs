@@ -244,5 +244,16 @@ namespace Ressource
         {
             return _quantiteRessources >= cout;
         }
+
+        /// <summary>
+        /// Rétablie les valeurs (Qte) de la config pour les ressources.
+        /// </summary>
+        public void Reinitialiser()
+        {
+            _quantiteRessources = new LotRessources(RessourceConfigDict[RessourceEnum.POPULATION].Qte,
+                                                    RessourceConfigDict[RessourceEnum.NOURRITURE].Qte,
+                                                    RessourceConfigDict[RessourceEnum.BOIS].Qte,
+                                                    RessourceConfigDict[RessourceEnum.MINERAUX].Qte);
+        }
     }
 }

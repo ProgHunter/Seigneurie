@@ -13,7 +13,7 @@ namespace Production
         public override long CalculerProduction()
         {
             // Calcul de l'effort des mineurs
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MINEUR);
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.MINEUR);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)

@@ -18,7 +18,7 @@ namespace Production
             if (!GestionnaireBatiments.Instance.ConstructionEstEnCours())
                 return 0;
 
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.MACON);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)

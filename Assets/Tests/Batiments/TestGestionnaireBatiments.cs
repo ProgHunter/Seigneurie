@@ -6,6 +6,13 @@ namespace Test
 {
     public class TestGestionnaireBatiments
     {
+        [SetUp]
+        public void SetUp()
+        {
+            GestionnaireBatiments.Instance.Reinitialiser();
+            InventaireRessources.Instance.Reinitialiser();
+        }
+
         [Test]
         public void TestAttribuerEtAccesQteMaison()
         {

@@ -244,5 +244,20 @@ namespace Batiment
         {
             EnConstruction = null;
         }
+
+        /// <summary>
+        /// Rétablie les valeurs (Qte) de la config pour les bâtiments.
+        /// Annule la construction en cours.
+        /// </summary>
+        public void Reinitialiser()
+        {
+            _batiments = new LotBatiments(BatimentConfigDict[BatimentEnum.MAISON].Qte,
+                                          BatimentConfigDict[BatimentEnum.FERME].Qte,
+                                          BatimentConfigDict[BatimentEnum.SCIERIE].Qte,
+                                          BatimentConfigDict[BatimentEnum.MINE].Qte,
+                                          BatimentConfigDict[BatimentEnum.HOTELDEVILLE].Qte);
+
+            AnnulerConstruction();
+        }
     }
 }

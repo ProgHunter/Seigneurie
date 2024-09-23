@@ -36,7 +36,7 @@ namespace UI
         {
                 _profession = profession;
                 _titre.text = GestionnaireProfessions.Instance.ProfessionDictConfig[_profession].Nom;
-                _pourcentageActuel = (int)(GestionnaireProfessions.Instance.AccederPourcent(_profession) * 100);
+                _pourcentageActuel = (int)GestionnaireProfessions.Instance.AccederPourcent(_profession);
                 _slider.SetValueWithoutNotify(_pourcentageActuel);
                 UpdatePourcentage();
                 Debug.Log($"Pourcentage pour {_profession}: {_pourcentageActuel}");

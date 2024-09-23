@@ -34,7 +34,7 @@ namespace Production
         private long ProductionFermiers()
         {
             // Calcul de l'effort des fermiers
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.FERMIER);
+            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.FERMIER);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)

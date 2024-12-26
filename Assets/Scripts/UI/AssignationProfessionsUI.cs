@@ -39,7 +39,7 @@ namespace UI
                 _pourcentageActuel = (int)GestionnaireProfessions.Instance.AccederPourcent(_profession);
                 _slider.SetValueWithoutNotify(_pourcentageActuel);
                 UpdatePourcentage();
-                Debug.Log($"Pourcentage pour {_profession}: {_pourcentageActuel}");
+                //Debug.Log($"Pourcentage pour {_profession}: {_pourcentageActuel}");
                 _updatePourcentageTotal = pourcentageTotal;
         }
 
@@ -57,7 +57,7 @@ namespace UI
             UpdatePourcentage();
             _updatePourcentageTotal.Invoke();
             _slider.value = _pourcentageActuel;
-            Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
+            //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
         
         private void ClicBoutonPlus()
@@ -72,7 +72,7 @@ namespace UI
             UpdatePourcentage();
             _updatePourcentageTotal.Invoke();
             _slider.value = _pourcentageActuel;
-            Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
+            //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
 
         private void OnSliderValueChanged(float value)
@@ -96,7 +96,7 @@ namespace UI
             _pourcentageActuel = (int)value;
             UpdatePourcentage();
             _updatePourcentageTotal.Invoke();
-            Debug.Log("Slider "+ value);
+            //Debug.Log("Slider "+ value);
         }
 
         private void UpdatePourcentage()

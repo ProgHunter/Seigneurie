@@ -42,8 +42,10 @@ namespace Profession
         }
 
         #region accesseurs_mutateurs
+        public LotProfessions Professions => _professions;
+        
         /// <summary>
-        /// Retourne le pourcentage attribué à la profession
+        /// Retourne le pourcentage attribuï¿½ ï¿½ la profession
         /// </summary>
         /// <param name="profession"></param>
         /// <returns></returns>
@@ -53,7 +55,7 @@ namespace Profession
         }
 
         /// <summary>
-        /// Retourne le pourcentage attribué à la profession
+        /// Retourne le pourcentage attribuï¿½ ï¿½ la profession
         /// </summary>
         /// <param name="profession"></param>
         /// <returns></returns>
@@ -63,18 +65,18 @@ namespace Profession
         }
 
         /// <summary>
-        /// Attribut un pourcentage à la profession.
+        /// Attribut un pourcentage ï¿½ la profession.
         /// Aucune validation!
         /// </summary>
         /// <param name="profession">La profession que l'ont veut attribuer un pourcentage</param>
-        /// <param name="pourcent">Le pourcentage à attribuer</param>
+        /// <param name="pourcent">Le pourcentage ï¿½ attribuer</param>
         public void AttribuerPourcent(ProfessionEnum profession, long pourcent)
         {
             _professions.AttribuerPourcentProfession(profession, pourcent);
         }
 
         /// <summary>
-        /// Attribue le pourcentage de chaque profession du lot à celui-ci.
+        /// Attribue le pourcentage de chaque profession du lot ï¿½ celui-ci.
         /// Aucune validation.
         /// </summary>
         /// <param name="pcProfessions">Le lot de professions avec les pourcentages</param>
@@ -84,10 +86,10 @@ namespace Profession
         }
 
         /// <summary>
-        /// Attribuer un pourcentage de population à une profession.
-        /// La modification est ajustée si le pourcentage total de toutes les professions
-        /// dépasserait 100% ensemble. Elle l'est aussi si le pourcentage est plus petit que 0.
-        /// On ne peut attribuer un pourcentage à une profession verrouillée.
+        /// Attribuer un pourcentage de population ï¿½ une profession.
+        /// La modification est ajustï¿½e si le pourcentage total de toutes les professions
+        /// dï¿½passerait 100% ensemble. Elle l'est aussi si le pourcentage est plus petit que 0.
+        /// On ne peut attribuer un pourcentage ï¿½ une profession verrouillï¿½e.
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <param name="pourcent">Le pourcentage [0,100]</param>
@@ -113,17 +115,17 @@ namespace Profession
         }
 
         /// <summary>
-        /// Attribuer le pourcentage de population décrit par le lot pour les professions.
-        /// La modification est ajustée si le pourcentage total de toutes les professions
-        /// dépasserait 100% ensemble. Elle l'est aussi si le pourcentage est plus petit que 0.
-        /// On ne peut attribuer un pourcentage à une profession verrouillée.
+        /// Attribuer le pourcentage de population dï¿½crit par le lot pour les professions.
+        /// La modification est ajustï¿½e si le pourcentage total de toutes les professions
+        /// dï¿½passerait 100% ensemble. Elle l'est aussi si le pourcentage est plus petit que 0.
+        /// On ne peut attribuer un pourcentage ï¿½ une profession verrouillï¿½e.
         /// </summary>
         /// <param name="pcProfessions"></param>
         /// <returns>Vrai si les modifications respectent les limites</returns>
         public bool AttribuerPourcentValide(LotProfessions pcProfessions)
         {
             bool estValide = true;
-            // Libérer la population avant de la réassigner
+            // Libï¿½rer la population avant de la rï¿½assigner
             _professions.AttribuerPourcentMin();
 
             foreach (ProfessionEnum profession in ProfessionDictConfig.Keys)
@@ -134,10 +136,10 @@ namespace Profession
         #endregion accesseurs_mutateurs
 
         /// <summary>
-        /// Incrémente le pourcentage de 1, max 100%.
+        /// Incrï¿½mente le pourcentage de 1, max 100%.
         /// </summary>
-        /// <param name="profession">La profession à incrémenter le poucentage.</param>
-        /// <returns>Vrai si le pourcentage a été incrémenté de 1%.</returns>
+        /// <param name="profession">La profession ï¿½ incrï¿½menter le poucentage.</param>
+        /// <returns>Vrai si le pourcentage a ï¿½tï¿½ incrï¿½mentï¿½ de 1%.</returns>
         public bool IncrementerPourcent(ProfessionEnum profession)
         {
             long pourcent = AccederPourcent(profession);
@@ -145,10 +147,10 @@ namespace Profession
         }
 
         /// <summary>
-        /// Décrémente le pourcentage de 1, min 0%.
+        /// Dï¿½crï¿½mente le pourcentage de 1, min 0%.
         /// </summary>
-        /// <param name="profession">La profession à incrémenter le poucentage.</param>
-        /// <returns>Vrai si le pourcentage a été décrémenté de 1%.</returns>
+        /// <param name="profession">La profession ï¿½ incrï¿½menter le poucentage.</param>
+        /// <returns>Vrai si le pourcentage a ï¿½tï¿½ dï¿½crï¿½mentï¿½ de 1%.</returns>
         public bool DecrementerPourcent(ProfessionEnum profession)
         {
             long pourcent = AccederPourcent(profession);
@@ -166,17 +168,17 @@ namespace Profession
                 pourcentPopLibre -= _professions.AccesPourcentProfession(profession);
 
             if (pourcentPopLibre > _pcTotalMax || pourcentPopLibre < _pcTotalMin)
-                Debug.LogError($"Le pourcentage de population libre est {pourcentPopLibre}, alors qu'il devrait être dans [0,100].");
+                Debug.LogError($"Le pourcentage de population libre est {pourcentPopLibre}, alors qu'il devrait ï¿½tre dans [0,100].");
 
             return pourcentPopLibre;
         }
 
         /// <summary>
-        /// Indique si la profession est déverrouillée.
-        /// Si le prérequis de la profession n'est pas rencontré, celle-ci est verrouillée.
+        /// Indique si la profession est dï¿½verrouillï¿½e.
+        /// Si le prï¿½requis de la profession n'est pas rencontrï¿½, celle-ci est verrouillï¿½e.
         /// </summary>
-        /// <param name="profession">La profession dont on valide le prérequis.</param>
-        /// <returns>Vrai si la profession est déverrouillée.</returns>
+        /// <param name="profession">La profession dont on valide le prï¿½requis.</param>
+        /// <returns>Vrai si la profession est dï¿½verrouillï¿½e.</returns>
         public bool EstDeverrouille(ProfessionEnum profession)
         {
             LotBatiments prerequis;
@@ -194,7 +196,7 @@ namespace Profession
         }
 
         /// <summary>
-        /// Rétablie les valeurs (Qte) de la config pour les professions.
+        /// Rï¿½tablie les valeurs (Qte) de la config pour les professions.
         /// </summary>
         public void Reinitialiser()
         {

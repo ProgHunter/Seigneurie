@@ -1,26 +1,28 @@
+using System;
 using Batiment;
+using Production;
+using Profession;
 using Ressource;
 using Utils;
-using Profession;
-using System;
 
-namespace Production
+namespace Productions
 {
     public class ProductionPopulation : AbstraitProduction
     {
-        public override long CalculerProduction()
+        public override long CalculerProduction(LotProfessions professions)
         {
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.NATALITE);
-            return (long)(CalculerCroissance() * EfficacitePourcent - CalculerMortaliteFamine());
+            float professionPourcent = professions.AccesPourcentProfessionFraction(ProfessionEnum.NATALITE);
+            float pourcentFermiers = professions.AccesPourcentProfessionFraction(ProfessionEnum.FERMIER);
+            return (long)(CalculerCroissance(professionPourcent) * EfficacitePourcent - CalculerMortaliteFamine(pourcentFermiers));
         }
 
-        private long CalculerCroissance()
+        private long CalculerCroissance(float professionPourcent)
         {
             long capaciteMax = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON) * ((MaisonConfig)GestionnaireBatiments.Instance.BatimentConfigDict[BatimentEnum.MAISON]).Capacite;
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            long popActive = (long)(popActuelle * GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.NATALITE));
+            long popActive = (long)(popActuelle * professionPourcent);
 
-            // Valider si nos nombres sont positifs et si la population actuelle n'est pas dÈj‡ presqu'‡ notre capacitÈ ou plus grand
+            // Valider si nos nombres sont positifs et si la population actuelle n'est pas d√©j√† presqu'√† notre capacit√© ou plus grand
             if (capaciteMax < 0 || popActive <= 0 || popActive + 1 >= capaciteMax)
                 return 0;
 
@@ -31,7 +33,7 @@ namespace Production
             if (croissance <= 0)
                 return 0;
 
-            // Calculer le "tick prÈsent" selont la formule avec capaciteMax qui a peut-Ítre changÈ (possiblement non entier).
+            // Calculer le "tick pr√©sent" selont la formule avec capaciteMax qui a peut-√™tre chang√© (possiblement non entier).
             double tick = MathUtils.FonctionLogistiqueTickIsole(popActive, popMin, capaciteMax, croissance);
 
             long nbPopCroissance = (long)Math.Ceiling(MathUtils.FonctionLogistique(tick + 1, popMin, capaciteMax, croissance)) - popActive;
@@ -40,14 +42,16 @@ namespace Production
         }
 
         /// <summary>
-        /// Calcul la quantitÈ de population qui meurt de famine.
-        /// Formule: Pop qui meurt = pop actuelle * pourcent manque nourriture * taux de mortalitÈ en cas de famine
+        /// Calcul la quantit√© de population qui meurt de famine.
+        /// Formule: Pop qui meurt = pop actuelle * pourcent manque nourriture * taux de mortalit√© en cas de famine
         /// </summary>
+        /// <param name="pourcentFermiers">Pourcentage de la population attribu√© √† la profession de
+        /// fermier pour calculer la production de nouriture.</param>
         /// <returns>Nombre de population qui meurt.</returns>
-        private long CalculerMortaliteFamine()
+        private long CalculerMortaliteFamine(float pourcentFermiers)
         {
             ProductionNouriture productionNouriture = new ProductionNouriture();
-            float manqueNourriturePourcent = productionNouriture.CalculManqueNourriturePourcent();
+            float manqueNourriturePourcent = productionNouriture.CalculManqueNourriturePourcent(pourcentFermiers);
             long nbPop = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             float mortaliteFaminePc = ((PopulationConfig)InventaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).MortaliteFaminePourcent;
 

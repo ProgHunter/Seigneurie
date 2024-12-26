@@ -9,8 +9,9 @@ namespace Production
         /// <summary>
         /// Production des mineurs avec le bonus des mines.
         /// </summary>
-        /// <returns>Production de minéraux</returns>
-        public override long CalculerProduction()
+        /// <param name="professions">Lot de professions Ã  partir duquel on calcule la production.</param>
+        /// <returns>Production de minï¿½raux</returns>
+        public override long CalculerProduction(LotProfessions professions)
         {
             // Calcul de l'effort des mineurs
             float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.MINEUR);

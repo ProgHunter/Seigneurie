@@ -7,7 +7,7 @@ namespace Ressource
     public abstract class AbstraitRessourceConfig
     {
         /// <summary>
-        /// <see cref="Prerequis"/> Indique les b‚timents prÈrequis pour dÈbloquer celle-ci.
+        /// <see cref="Prerequis"/> Indique les b√¢timents pr√©requis pour d√©bloquer celle-ci.
         /// </summary>
         #region membres
         private string _id;

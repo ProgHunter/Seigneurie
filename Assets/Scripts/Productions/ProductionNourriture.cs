@@ -8,35 +8,37 @@ namespace Production
     {
         /// <summary>
         /// Production des fermiers avec le bonus des fermes moins la consommation de la population.
-        /// Peut être néguative si la consommation de la population dépasse la production.
+        /// Peut Ãªtre nÃ©guative si la consommation de la population dÃ©passe la production.
         /// </summary>
+        /// <param name="professions">Lot de professions Ã  partir duquel on calcule la production.</param>
         /// <returns>Production net de nouriture</returns>
-        public override long CalculerProduction()
+        public override long CalculerProduction(LotProfessions professions)
         {
-            return ProductionFermiers() - ConsommationPopulation();
+            float pourcenFermiers = professions.AccesPourcentProfessionFraction(ProfessionEnum.FERMIER);
+            return ProductionFermiers(pourcenFermiers) - ConsommationPopulation();
         }
 
         /// <summary>
-        /// Calcul le pourcentage de la consommation qui ne peut être satisfait par la nourriture disponible.
+        /// Calcul le pourcentage de la consommation qui ne peut Ãªtre satisfait par la nourriture disponible.
         /// Ex: On a 1000 de nourriture, on produit 500, et on consomme 2000 => Il manque 25 pourcent de la consommation.
         /// </summary>
+        /// <param name="pourcentFermiers"></param>
         /// <returns>Le pourcentage de la consommation non couvert.</returns>
-        public float CalculManqueNourriturePourcent()
+        public float CalculManqueNourriturePourcent(float pourcentFermiers)
         {
             long consommation = ConsommationPopulation();
-            long nourritureDisponible = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE) + ProductionFermiers() - consommation;
+            long nourritureDisponible = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE) + ProductionFermiers(pourcentFermiers) - consommation;
 
             long nourritureManquante = nourritureDisponible >= 0 ? 0 : -nourritureDisponible;
 
             return nourritureManquante / consommation;
         }
 
-        private long ProductionFermiers()
+        private long ProductionFermiers(float pourcentFermiers)
         {
             // Calcul de l'effort des fermiers
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.FERMIER);
             long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            long nbPopTravaille = (long)(popActuelle * professionPourcent);
+            long nbPopTravaille = (long)(popActuelle * pourcentFermiers);
             if (nbPopTravaille <= 0)
                 return 0;
             // Calcul du bonus de production des fermes

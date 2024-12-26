@@ -1,3 +1,4 @@
+using UI.Batiments;
 using UnityEngine;
 
 namespace UI
@@ -10,17 +11,21 @@ namespace UI
         [SerializeField] private RessourcesUI _ressources;
         [SerializeField] private VueGestionnaireProfessions _vueGestionnaireProfessions;
         [SerializeField] private VueGestionnaireProductions _vueGestionnaireProductions;
+        [SerializeField] private VueGestionnaireBatiments _vueGestionnaireBatiments;
 
         public void Init()
         {
             _ressources.Init();
             _vueGestionnaireProfessions.Init();
             _vueGestionnaireProductions.Init();
+            _vueGestionnaireBatiments.Init();
         }
         
         public void UpdateAll()
         {
             _ressources.UpdateBarre();
+            _vueGestionnaireBatiments.UpdateVues();
+            _vueGestionnaireProductions.UpdateVues();
         }
     }
 }

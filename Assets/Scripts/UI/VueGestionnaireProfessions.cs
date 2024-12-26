@@ -30,6 +30,8 @@ namespace UI
 
                 i++;
             }
+
+            UpdatePourcentageRestant();
         }
 
         public void UpdatePourcentageRestant()
@@ -49,6 +51,7 @@ namespace UI
             
             foreach (var profession in _assignationsProfessions)
             {
+                
                 total += profession.GetPourcentageActuel();
             }
 
@@ -56,6 +59,9 @@ namespace UI
             {
                 Debug.LogError("Total des professions assignées incorrectes");
             }
+
+            //LotProfessions lotProfessions = new LotProfessions()
+            //GestionnaireProfessions.Instance.AttribuerPourcentValide();
             foreach (var profession in _assignationsProfessions)
             {
                 // TODO: Créer un LotProfessions, puis appeler AttribuerPourcentValide(LotProfessions)

@@ -24,5 +24,13 @@ namespace UI
                 i++;
             }
         }
+
+        public void UpdateVues()
+        {
+            foreach (var productionRessource in _listeProductions)
+            {
+                productionRessource.UpdateValeur();
+            }
+        }
     }
 }

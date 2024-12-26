@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 using Utils;
 
@@ -44,6 +47,23 @@ namespace Ressource
                                      _ressourcesDict[RessourceEnum.NOURRITURE].Clone(),
                                      _ressourcesDict[RessourceEnum.BOIS].Clone(),
                                      _ressourcesDict[RessourceEnum.MINERAUX].Clone());
+        }
+
+        public override string ToString()
+        {
+            //TODO redo with better names
+            List<string> listeRessources = new();
+            foreach ((RessourceEnum ressource, Qte quantité) in _ressourcesDict)
+            {
+                if (quantité.qte > 0)
+                {
+                    string texte = $"{quantité.qte} {ressource}";
+                    listeRessources.Add(texte);
+                }
+            }
+
+            var s = String.Join("\n", listeRessources.ToArray());
+            return s;
         }
 
         #region accesseurs_mutateurs

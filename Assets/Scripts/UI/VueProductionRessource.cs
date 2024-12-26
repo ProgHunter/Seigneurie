@@ -1,3 +1,4 @@
+using Production;
 using Ressource;
 using TMPro;
 using UnityEngine;
@@ -18,7 +19,8 @@ namespace UI
         }
         public void UpdateValeur()
         {
-            //_production.text = GestionnaireProductions.Instance.;
+            var production = GestionnaireProductions.Instance.EvaluerProduction(_ressourceRepresentee);
+            _production.text = production + "/tick";
         }
     }
 }

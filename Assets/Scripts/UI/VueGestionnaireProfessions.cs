@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Profession;
 using TMPro;
@@ -13,36 +14,57 @@ namespace UI
         [SerializeField] private List<AssignationProfessionsUI> _assignationsProfessions;
         [SerializeField] private Button _boutonSoumettre;
 
+        private Action<bool, bool> _professionsSontModifiées;
+
         public void Awake()
         {
             _boutonSoumettre.onClick.AddListener(SoumettreChangement);
         }
 
-        public void Init()
+        public void Init( Action<bool,bool> professionsSontModifiées)
         {
             int i = 0;
             foreach (var profession in EnumUtils.GetEnumValues<ProfessionEnum>())
             {
                 if (_assignationsProfessions != null)
                 {
-                    _assignationsProfessions[i]?.InitProfession(profession, UpdatePourcentageRestant);
+                    _assignationsProfessions[i]?.InitProfession(profession, UnPourcentageEstModifie);
                 }
 
                 i++;
             }
 
-            UpdatePourcentageRestant();
+            _professionsSontModifiées = professionsSontModifiées;
         }
 
-        public void UpdatePourcentageRestant()
+        public LotProfessions AccesLotProfessionUtilisateur()
+        {
+            LotProfessions professions = new LotProfessions();
+            int i = 0;
+            foreach(var profession in EnumUtils.GetEnumValues<ProfessionEnum>())
+            {
+                professions.AttribuerPourcentProfession(profession, (long)_assignationsProfessions[i]?.AccesPourcentageActuel());
+                i++;
+            }
+            return professions;
+        }
+
+        /// <summary>
+        /// (Action) Appelé lorsqu'un pourcentage de la liste de profession a changé de valeur.
+        /// Le pourcentage de population libre est mis à jour.
+        /// La production anticipé est mise à jour.
+        /// </summary>
+        public void UnPourcentageEstModifie()
         {
             int total = 0;
             
             foreach (var profession in _assignationsProfessions)
             {
-                total += profession.GetPourcentageActuel();
+                total += profession.AccesPourcentageActuel();
             }
             _pourcentageRestant.text = 100-total + "%";
+
+            _professionsSontModifiées?.Invoke(false, true);
         }
 
         private void SoumettreChangement()
@@ -52,7 +74,7 @@ namespace UI
             foreach (var profession in _assignationsProfessions)
             {
                 
-                total += profession.GetPourcentageActuel();
+                total += profession.AccesPourcentageActuel();
             }
 
             if (total > 100)
@@ -65,10 +87,10 @@ namespace UI
             foreach (var profession in _assignationsProfessions)
             {
                 // TODO: Créer un LotProfessions, puis appeler AttribuerPourcentValide(LotProfessions)
-                GestionnaireProfessions.Instance.AttribuerPourcent(profession.GetProfession(), profession.GetPourcentageActuel());
+                GestionnaireProfessions.Instance.AttribuerPourcent(profession.GetProfession(), profession.AccesPourcentageActuel());
             }
-            
-            UpdatePourcentageRestant();
+
+            _professionsSontModifiées?.Invoke(true, false);
         }
     }
 }

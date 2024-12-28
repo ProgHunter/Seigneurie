@@ -1,4 +1,5 @@
 using Production;
+using Profession;
 using Ressource;
 using TMPro;
 using UnityEngine;
@@ -8,8 +9,9 @@ namespace UI
     public class VueProductionRessource : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _nom;
-        [SerializeField] private TextMeshProUGUI _production;
-        
+        [SerializeField] private TextMeshProUGUI _productionActuelle;
+        [SerializeField] private TextMeshProUGUI _productionAnticipee;
+
         private RessourceEnum _ressourceRepresentee;
 
         public void InitRessourceRepresentee(RessourceEnum value)
@@ -17,10 +19,17 @@ namespace UI
             _ressourceRepresentee = value;
             _nom.text = InventaireRessources.Instance.RessourceConfigDict[_ressourceRepresentee].Nom;
         }
-        public void UpdateValeur()
+
+        public void ModifierValeurProductionActuelle()
         {
             var production = GestionnaireProductions.Instance.EvaluerProduction(_ressourceRepresentee);
-            _production.text = production + "/tick";
+            _productionActuelle.text = production + "/tick";
+        }
+
+        public void ModifierValeurProductionAnticipee(LotProfessions professions = null)
+        {
+            var production = GestionnaireProductions.Instance.EvaluerProduction(_ressourceRepresentee, professions);
+            _productionAnticipee.text = production + "/tick";
         }
     }
 }

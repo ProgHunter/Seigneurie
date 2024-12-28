@@ -77,9 +77,13 @@ namespace Production
         /// Evalue le nombre de ticks restants à une construction selon le pourcent de maçons qui seront attribués.
         /// </summary>
         /// <param name="pourcentMacon">Le pourcentage de la population qui travaillera sur la profession de maçon. [0, 100]</param>
-        /// <returns>Le nombre de ticks estimés avant la complétion du batiment en cours.</returns>
+        /// <returns>Le nombre de ticks estimés avant la complétion du bâtiment en cours.
+        /// -1 si le pourcentage n'est pas entre 0 et 100 inclusivement.</returns>
         public long NbTicksRestantsConstruction(long pourcentMacon)
         {
+            if (pourcentMacon < 0 || pourcentMacon > 100)
+                return -1;
+
             return _productionEffortConstruction.EstimeNombreTicksRestants(pourcentMacon);
         }
     }

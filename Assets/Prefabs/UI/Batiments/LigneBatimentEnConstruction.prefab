@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nom batiment
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
+  m_sharedMaterial: {fileID: 6378619644797138778, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -279,8 +279,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Compl\xE9tion"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
+  m_sharedMaterial: {fileID: 6378619644797138778, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -536,6 +536,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4660883246641217764, guid: 9128b610b9289d84b9b037c6e77803a3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6378619644797138778, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9128b610b9289d84b9b037c6e77803a3, type: 3}
 --- !u!224 &2812503375729801173 stripped

@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bois
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
+  m_sharedMaterial: {fileID: 6378619644797138778, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -203,8 +203,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100/jour
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
+  m_sharedMaterial: {fileID: 6378619644797138778, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -338,8 +338,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100/jour
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
+  m_sharedMaterial: {fileID: 6378619644797138778, guid: fa3a9466f9ee5bc44a0f65d40e752e22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+  m_Color: {r: 0.9056604, g: 0.8372798, b: 0.46564615, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -498,4 +498,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nom: {fileID: 7260329864811102189}
-  _production: {fileID: 7260329865443921866}
+  _productionActuelle: {fileID: 7260329865443921866}
+  _productionAnticipee: {fileID: 7260329865390441220}

@@ -19,6 +19,7 @@ namespace UI.Batiments
                     continue;
                 VueBatimentDisponible vue = Instantiate(_vueInstancier, _content);
                 var config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
+                //TODO afficher le nom des ressources pas en majuscules
                 vue.Init(batiment,config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, config.EffortConstruction.ToString());
                 _dictBatimentsDisponibles.Add(batiment,vue);
             }

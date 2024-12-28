@@ -25,7 +25,7 @@ namespace Profession
             };
         }
 
-        public LotProfessions(long pcNatalite, long pcFermier, long pcBucheron, long pcMineur, long pcMacon)
+        public LotProfessions(long pcNatalite = 0, long pcFermier = 0, long pcBucheron = 0, long pcMineur = 0, long pcMacon = 0)
         {
             _professionsDict = new Dictionary<ProfessionEnum, Qte>
             {

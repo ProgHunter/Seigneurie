@@ -16,12 +16,13 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _pourcentage;
 
         [SerializeField] private Slider _slider;
-        private Action _updatePourcentageTotal;
+        private Action _pourcentageEstModifie;
+
         private int _pourcentageActuel;
         private const int _pcMax = 100;
         private const int _pcMin = 0;
 
-        public int GetPourcentageActuel()
+        public int AccesPourcentageActuel()
         {
             return _pourcentageActuel;
         }
@@ -32,15 +33,16 @@ namespace UI
             _slider.onValueChanged.AddListener(OnSliderValueChanged);
         }
 
-        public void InitProfession(ProfessionEnum profession, Action pourcentageTotal)
+        public void InitProfession(ProfessionEnum profession, Action professionEstModifie)
         {
                 _profession = profession;
                 _titre.text = GestionnaireProfessions.Instance.ProfessionDictConfig[_profession].Nom;
                 _pourcentageActuel = (int)GestionnaireProfessions.Instance.AccederPourcent(_profession);
                 _slider.SetValueWithoutNotify(_pourcentageActuel);
-                UpdatePourcentage();
+                
                 //Debug.Log($"Pourcentage pour {_profession}: {_pourcentageActuel}");
-                _updatePourcentageTotal = pourcentageTotal;
+                _pourcentageEstModifie = professionEstModifie;
+                UpdatePourcentage();
         }
 
         public ProfessionEnum GetProfession()
@@ -55,7 +57,6 @@ namespace UI
             
             _pourcentageActuel--;
             UpdatePourcentage();
-            _updatePourcentageTotal.Invoke();
             _slider.value = _pourcentageActuel;
             //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
@@ -70,7 +71,6 @@ namespace UI
             }
             _pourcentageActuel++;
             UpdatePourcentage();
-            _updatePourcentageTotal.Invoke();
             _slider.value = _pourcentageActuel;
             //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
@@ -95,13 +95,17 @@ namespace UI
             
             _pourcentageActuel = (int)value;
             UpdatePourcentage();
-            _updatePourcentageTotal.Invoke();
             //Debug.Log("Slider "+ value);
         }
 
+        /// <summary>
+        /// Met à jour le texte de pourcentage, ainsi que toutes les autres vues qui sont concernées.
+        /// </summary>
         private void UpdatePourcentage()
         {
             _pourcentage.text = _pourcentageActuel + "%";
+
+            _pourcentageEstModifie?.Invoke();
         }
     }
 }

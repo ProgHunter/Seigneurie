@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using Batiment;
 using Production;
 using Profession;
 using UnityEngine;
-using Utils;
 
 namespace UI.Batiments
 {
@@ -13,7 +11,6 @@ namespace UI.Batiments
         [SerializeField] private VueBatimentEnCours _vueInstancier;
         [SerializeField] private GameObject _msgAucunEnCours;
         private VueBatimentEnCours _vueBatiment;
-        private readonly Dictionary<BatimentEnum, VueBatimentEnCours> _dictBatimentsConstruits = new();
         public void InitListe()
         {
             UpdateListe();
@@ -47,7 +44,7 @@ namespace UI.Batiments
                 {
                     Destroy(_vueBatiment.gameObject);
                     _vueBatiment = null;
-                    Debug.Log("Batiment terminé de construire");
+                    Debug.Log("Bâtiment terminé de construire");
                 }
             }
             

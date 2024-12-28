@@ -8,7 +8,6 @@ namespace UI.Batiments
     public class VueListeBatimentsTerminés : MonoBehaviour
     {
         [SerializeField] private Transform _content;
-        //private readonly List<VueBatimentConstruits> _listeBatimentsConstruits = new();
         private readonly Dictionary<BatimentEnum, VueBatimentTerminé> _dictBatimentsConstruits = new();
         [SerializeField] private VueBatimentTerminé _vueInstancier;
         public void InitListe()
@@ -17,9 +16,7 @@ namespace UI.Batiments
             {
                 long qte = GestionnaireBatiments.Instance.AccesQteBatiment(batiment);
                 if (qte == 0)
-                {
                     continue;
-                }
 
                 VueBatimentTerminé vue = Instantiate(_vueInstancier, _content);
                 var config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];

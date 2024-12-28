@@ -99,10 +99,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8396226, g: 0.08317016, b: 0.08317016, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
-    m_PressedColor: {r: 0.6698113, g: 0.06634923, b: 0.06634923, a: 1}
-    m_SelectedColor: {r: 0.8078432, g: 0.078431375, b: 0.078431375, a: 1}
+    m_NormalColor: {r: 0.8396226, g: 0.30495724, b: 0.30495724, a: 1}
+    m_HighlightedColor: {r: 0.9811321, g: 0.29156283, b: 0.29156283, a: 1}
+    m_PressedColor: {r: 0.6792453, g: 0.23389105, b: 0.23389105, a: 1}
+    m_SelectedColor: {r: 0.8113208, g: 0.2793699, b: 0.2793699, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -215,8 +215,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.8
-  m_fontSizeBase: 15.8
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

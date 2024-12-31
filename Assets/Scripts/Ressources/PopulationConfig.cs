@@ -29,9 +29,9 @@ namespace Ressource
             Nom = "Population";
             Icone = null;  // TODO
             Description = "";
-            Qte = new Qte(100 /*Qte de base*/, 1_000_000 /*Max*/, 2 /*Min*/);
+            Qte = new Qte(50 /*Qte de base*/, 1_000_000 /*Max*/, 2 /*Min*/);
             CroissancePourcent = 0.05f;
-            MortaliteFaminePourcent = 0.05f;
+            MortaliteFaminePourcent = 0.25f;
             FaimPourcent = 0.5f;
             Prerequis = new LotBatiments();  // Aucun prérequis
         }

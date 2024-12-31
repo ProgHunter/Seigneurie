@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using Utils;
 
@@ -57,7 +55,7 @@ namespace Ressource
             {
                 if (quantité.qte > 0)
                 {
-                    string texte = $"{quantité.qte} {ressource}";
+                    string texte = $"{quantité.qte} {InventaireRessources.Instance.RessourceConfigDict[ressource].Nom}";
                     listeRessources.Add(texte);
                 }
             }

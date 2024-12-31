@@ -17,6 +17,9 @@ namespace UI.Batiments
 
         public void UpdateVues()
         {
+            if (!gameObject.activeInHierarchy)
+                return;
+
             _batimentsEnCours.UpdateListe();
             _batimentsTerminés.UpdateListe();
             _batimentsDisponibles.UpdateListe();

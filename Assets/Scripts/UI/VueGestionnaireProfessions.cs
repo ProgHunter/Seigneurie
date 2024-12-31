@@ -13,6 +13,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _pourcentageRestant;
         [SerializeField] private List<AssignationProfessionsUI> _assignationsProfessions;
         [SerializeField] private Button _boutonSoumettre;
+        //private readonly Dictionary<ProfessionEnum, AssignationProfessionsUI> _dictProfession = new();
 
         private Action<bool, bool> _professionsSontModifiées;
 
@@ -27,9 +28,7 @@ namespace UI
             foreach (var profession in EnumUtils.GetEnumValues<ProfessionEnum>())
             {
                 if (_assignationsProfessions != null)
-                {
                     _assignationsProfessions[i]?.InitProfession(profession, UnPourcentageEstModifie);
-                }
 
                 i++;
             }
@@ -80,15 +79,12 @@ namespace UI
             if (total > 100)
             {
                 Debug.LogError("Total des professions assignées incorrectes");
+                // TODO: Ajouter un retour utilisateur
+                return;
             }
 
-            //LotProfessions lotProfessions = new LotProfessions()
-            //GestionnaireProfessions.Instance.AttribuerPourcentValide();
-            foreach (var profession in _assignationsProfessions)
-            {
-                // TODO: Créer un LotProfessions, puis appeler AttribuerPourcentValide(LotProfessions)
-                GestionnaireProfessions.Instance.AttribuerPourcent(profession.GetProfession(), profession.AccesPourcentageActuel());
-            }
+            LotProfessions lotProfessions = AccesLotProfessionUtilisateur();
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessions);
 
             _professionsSontModifiées?.Invoke(true, false);
         }

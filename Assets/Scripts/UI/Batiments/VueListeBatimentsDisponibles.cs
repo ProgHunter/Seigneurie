@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Batiment;
+using Production;
 using UnityEngine;
 using Utils;
 
@@ -7,38 +8,62 @@ namespace UI.Batiments
 {
     public class VueListeBatimentsDisponibles : MonoBehaviour
     {
-        [SerializeField] private Transform _content;
-        private readonly Dictionary<BatimentEnum, VueBatimentDisponible> _dictBatimentsDisponibles = new();
+        [SerializeField] private Transform _parent;
         [SerializeField] private VueBatimentDisponible _vueInstancier;
+        private readonly Dictionary<BatimentEnum, VueBatimentDisponible> _dictBatimentsDisponibles = new();
     
         public void InitListe()
         {
-            foreach (var batiment in EnumUtils.GetEnumValues<BatimentEnum>())
+            var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            foreach (var batiment in batiments)
             {
-                if(!GestionnaireBatiments.Instance.EstDeverrouille(batiment))
+                if (!gestionnaireBatiments.EstDeverrouille(batiment) ||
+                    gestionnaireBatiments.AccesQteBatiment(batiment) >= gestionnaireBatiments.BatimentConfigDict[batiment].Qte.qteMax)
                     continue;
-                VueBatimentDisponible vue = Instantiate(_vueInstancier, _content);
-                var config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
-                //TODO afficher le nom des ressources pas en majuscules
-                vue.Init(batiment,config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, config.EffortConstruction.ToString());
-                _dictBatimentsDisponibles.Add(batiment,vue);
+
+                AjouterVueBatiment(batiment);
             }
         }
         
         public void UpdateListe()
         {
-            foreach (var batiment in EnumUtils.GetEnumValues<BatimentEnum>())
+            if (!gameObject.activeInHierarchy)
+                return;
+
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
+            foreach (var batiment in batiments)
             {
-                if (_dictBatimentsDisponibles.ContainsKey(batiment) || !GestionnaireBatiments.Instance.EstDeverrouille(batiment))
+                // Le bâtiment ne doit pas être affiché dans la liste
+                if (!gestionnaireBatiments.EstDeverrouille(batiment) ||
+                    gestionnaireBatiments.AccesQteBatiment(batiment) >= gestionnaireBatiments.BatimentConfigDict[batiment].Qte.qteMax)
                 {
+                    // Rien à faire si déjà pas là
+                    if (!_dictBatimentsDisponibles.ContainsKey(batiment))
+                        continue;
+                    // S'il est dans la liste, il faut le supprimer
+                    _dictBatimentsDisponibles[batiment].Dispose();
+                    _dictBatimentsDisponibles.Remove(batiment);
                     continue;
                 }
-                    
-                VueBatimentDisponible vue = Instantiate(_vueInstancier, _content);
-                AbstraitBatimentConfig config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
-                vue.Init(batiment,config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, config.EffortConstruction.ToString());
-                _dictBatimentsDisponibles.Add(batiment,vue);
+                // Le batiment doit être affiché dans la liste
+                // Ajouter le bâtiment dans la liste
+                if (!_dictBatimentsDisponibles.ContainsKey(batiment))
+                    AjouterVueBatiment(batiment);
+
+                _dictBatimentsDisponibles[batiment].UpdateCoutConstruction();
             }
+        }
+
+        private void AjouterVueBatiment(BatimentEnum batiment)
+        {
+            VueBatimentDisponible vue = Instantiate(_vueInstancier, _parent);
+            AbstraitBatimentConfig config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
+            var nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, batiment);
+
+            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, nbTicksConstruction.ToString());
+            _dictBatimentsDisponibles.Add(batiment, vue);
         }
     }
 }

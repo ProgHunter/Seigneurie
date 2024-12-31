@@ -23,7 +23,7 @@ namespace Production
         /// Ex: On a 1000 de nourriture, on produit 500, et on consomme 2000 => Il manque 25 pourcent de la consommation.
         /// </summary>
         /// <param name="pourcentFermiers"></param>
-        /// <returns>Le pourcentage de la consommation non couvert.</returns>
+        /// <returns>Le pourcentage de la consommation non couvert. [0,1]</returns>
         public float CalculManqueNourriturePourcent(float pourcentFermiers)
         {
             long consommation = ConsommationPopulation();
@@ -31,7 +31,7 @@ namespace Production
 
             long nourritureManquante = nourritureDisponible >= 0 ? 0 : -nourritureDisponible;
 
-            return nourritureManquante / consommation;
+            return (float)nourritureManquante / consommation;
         }
 
         private long ProductionFermiers(float pourcentFermiers)

@@ -18,18 +18,18 @@ namespace Seigneurie
                 InitalizeDeltaTemps();
             }
 
-            public Action doitTicker;
+            public Action SignalTick;
             private float _tempsDuProchainTick;
             private float _deltaTempsAvantLeProchainTick;
             public void Tick()
             {
-                if (doitTicker == null)
+                if (SignalTick == null)
                     return;
 
                 if (Time.time < _tempsDuProchainTick)
                     return;
                     
-                doitTicker();
+                SignalTick();
                 _tempsDuProchainTick += _deltaTempsAvantLeProchainTick;
             }
 
@@ -49,30 +49,11 @@ namespace Seigneurie
         // Innitialise des valeurs pour les ressources, batiments et professions
         private void Start()
         {
-            // Mettre toutes les productions de ressources � 25%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            AttribuerDesValeursDeDepart();
 
-            // Cr�ation de b�timents
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 100);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, 10);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, 10);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MINE, 10);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, 1);
-
-            // Attribuer des ressources de base
-            int qtePopBase = 100;
-            int qteNourritureBase = 100;
-            int qteBoisBase = 100;
-            int qteMinerauxBase = 100;
-            LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
             _ui.Init();
             _tickeur = new Tickeur(NbSecEntreTicks);
-            _tickeur.doitTicker += AuTick;
+            _tickeur.SignalTick += SignalerTick;
         }
 
         public void Update()
@@ -80,10 +61,39 @@ namespace Seigneurie
             _tickeur?.Tick();
         }
 
-        private void AuTick()
+        private void SignalerTick()
         {
             GestionnaireProductions.Instance.Production();
             _ui.UpdateAll();
+        }
+
+        /// <summary>
+        /// Méthode pour attribuer des valeurs autre que le config au début du jeux.
+        /// Pour tester seulement !
+        /// </summary>
+        private void AttribuerDesValeursDeDepart()
+        {
+            // Mettre toutes les productions de ressources � 25%
+            //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
+            //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
+            //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
+            //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
+            //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+
+            // Cr�ation de b�timents
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 10);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, 1);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, 0);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MINE, 0);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, 0);
+
+            // Attribuer des ressources de base
+            int qtePopBase = 1_000;
+            int qteNourritureBase = 100;
+            int qteBoisBase = 3_000;
+            int qteMinerauxBase = 1_000;
+            LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
+            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
         }
     }
 }

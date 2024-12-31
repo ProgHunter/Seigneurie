@@ -23,7 +23,7 @@ namespace Productions
             long popActive = (long)(popActuelle * professionPourcent);
 
             // Valider si nos nombres sont positifs et si la population actuelle n'est pas déjà presqu'à notre capacité ou plus grand
-            if (capaciteMax < 0 || popActive <= 0 || popActive + 1 >= capaciteMax)
+            if (capaciteMax < 0 || popActive <= 0 || popActuelle >= capaciteMax)
                 return 0;
 
             long popMin = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION);

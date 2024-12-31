@@ -7,39 +7,60 @@ namespace UI.Batiments
 {
     public class VueListeBatimentsTerminés : MonoBehaviour
     {
-        [SerializeField] private Transform _content;
-        private readonly Dictionary<BatimentEnum, VueBatimentTerminé> _dictBatimentsConstruits = new();
+        [SerializeField] private Transform _parent;
         [SerializeField] private VueBatimentTerminé _vueInstancier;
+        private readonly Dictionary<BatimentEnum, VueBatimentTerminé> _dictBatimentsConstruits = new();
+
         public void InitListe()
         {
-            foreach (var batiment in EnumUtils.GetEnumValues<BatimentEnum>())
+            var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
+            foreach (var batiment in batiments)
             {
                 long qte = GestionnaireBatiments.Instance.AccesQteBatiment(batiment);
-                if (qte == 0)
+                if (qte <= 0)
                     continue;
 
-                VueBatimentTerminé vue = Instantiate(_vueInstancier, _content);
-                var config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
-                vue.Init(config.Icone, config.Nom, qte);
-                _dictBatimentsConstruits.Add(batiment,vue);
+                AjouterVueBatiment(batiment, qte);
             }
         }
         public void UpdateListe()
         {
-            foreach (var batiment in EnumUtils.GetEnumValues<BatimentEnum>())
+            if (!gameObject.activeInHierarchy)
+                return;
+
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
+            foreach (var batiment in batiments)
             {
-                long qte = GestionnaireBatiments.Instance.AccesQteBatiment(batiment);
-                if (_dictBatimentsConstruits.ContainsKey(batiment))
+                long qte = gestionnaireBatiments.AccesQteBatiment(batiment);
+                // Le bâtiment ne doit pas être affiché dans la liste
+                if (qte <= 0)
                 {
-                    _dictBatimentsConstruits[batiment].UpdateQte(qte);
+                    // Rien à faire si déjà pas là
+                    if (!_dictBatimentsConstruits.ContainsKey(batiment))
+                        continue;
+                    // S'il est dans la liste, il faut le supprimer
+                    _dictBatimentsConstruits[batiment].Dispose();
+                    _dictBatimentsConstruits.Remove(batiment);
                     continue;
                 }
+
+                // Le batiment doit être affiché dans la liste
+                // Ajouter le bâtiment dans la liste
+                if (!_dictBatimentsConstruits.ContainsKey(batiment))
+                    AjouterVueBatiment(batiment, qte);
                 
-                VueBatimentTerminé vue = Instantiate(_vueInstancier, _content);
-                var config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
-                vue.Init(config.Icone, config.Nom, qte);
-                _dictBatimentsConstruits.Add(batiment,vue);
+                _dictBatimentsConstruits[batiment].UpdateQte(qte);
             }
+        }
+
+        private void AjouterVueBatiment(BatimentEnum batiment, long qte)
+        {
+            VueBatimentTerminé vue = Instantiate(_vueInstancier, _parent);
+            var config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
+
+            vue.Init(config.Icone, config.Nom, qte);
+            _dictBatimentsConstruits.Add(batiment, vue);
         }
     }
 }

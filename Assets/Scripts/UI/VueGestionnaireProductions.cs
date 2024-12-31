@@ -8,8 +8,10 @@ namespace UI
 {
     public class VueGestionnaireProductions : MonoBehaviour
     {
+        [SerializeField] private Transform _parent;
+        [SerializeField] private VueProductionRessource _vueInstancier;
         private VueGestionnaireProfessions _vueGestionnaireProfessions;
-        [SerializeField] private List<VueProductionRessource> _listeProductions;
+        private readonly Dictionary<RessourceEnum, VueProductionRessource> _dictRessources = new();
 
         public void Init(VueGestionnaireProfessions vueGestionnaireProfessions)
         {
@@ -17,16 +19,14 @@ namespace UI
                 Debug.LogError("vueGestionnaireProfessions est null à la création de VueGestionnaireProductions.");
 
             _vueGestionnaireProfessions = vueGestionnaireProfessions;
-            
-            int i = 0;
-            foreach (var ressource in EnumUtils.GetEnumValues<RessourceEnum>())
-            {
-                if (_listeProductions != null)
-                {
-                    _listeProductions[i]?.InitRessourceRepresentee(ressource);
-                }
 
-                i++;
+            var ressources = EnumUtils.GetEnumValues<RessourceEnum>();
+            foreach (var ressource in ressources)
+            {
+                if (!InventaireRessources.Instance.EstDeverrouille(ressource))
+                    continue;
+
+                AjouterVueProduction(ressource);
             }
         }
 
@@ -37,18 +37,37 @@ namespace UI
         /// <param name="productionAnticipée">Mettre à jour la vue de la production anticipée</param>
         public void MiseAJourAffichageValeursProduction(bool productionActuelle, bool productionAnticipée)
         {
+            if (!gameObject.activeInHierarchy)
+                return;
+
             LotProfessions professions = null;
             if (productionAnticipée)
                 professions = _vueGestionnaireProfessions?.AccesLotProfessionUtilisateur();
 
-            foreach (var productionRessource in _listeProductions)
+            var ressources = EnumUtils.GetEnumValues<RessourceEnum>();
+            foreach (var ressource in ressources)
             {
-                if(productionAnticipée)
-                    productionRessource.ModifierValeurProductionAnticipee(professions);
+                if (!InventaireRessources.Instance.EstDeverrouille(ressource))
+                    continue;
 
-                if(productionActuelle)
-                    productionRessource.ModifierValeurProductionActuelle();
+                if (!_dictRessources.ContainsKey(ressource))
+                    AjouterVueProduction(ressource);
+
+                if (productionAnticipée)
+                    _dictRessources[ressource].ModifierValeurProductionAnticipee(professions);
+
+                if (productionActuelle)
+                    _dictRessources[ressource].ModifierValeurProductionActuelle();
             }
+        }
+
+        private void AjouterVueProduction(RessourceEnum ressource)
+        {
+            VueProductionRessource vue = Instantiate(_vueInstancier, _parent);
+            var config = InventaireRessources.Instance.RessourceConfigDict[ressource];
+
+            vue.InitRessourceRepresentee(ressource);
+            _dictRessources.Add(ressource, vue);
         }
     }
 }

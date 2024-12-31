@@ -1,10 +1,11 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Batiments
 {
-    public class VueBatimentTerminé : MonoBehaviour
+    public class VueBatimentTerminé : MonoBehaviour, IDisposable
     {
         [SerializeField] private Image _icone;
         [SerializeField] private TextMeshProUGUI _nomBatiment;
@@ -20,6 +21,11 @@ namespace UI.Batiments
         public void UpdateQte(long quantiteConstruite)
         {
             _quantiteConstruite.text = quantiteConstruite.ToString();
+        }
+
+        public void Dispose()
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -1,11 +1,13 @@
 using Batiment;
+using Production;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Batiments
 {
-    public class VueBatimentDisponible : MonoBehaviour
+    public class VueBatimentDisponible : MonoBehaviour, IDisposable
     {
         [SerializeField] private Image _icone;
         [SerializeField] private TextMeshProUGUI _nomBatiment;
@@ -24,12 +26,12 @@ namespace UI.Batiments
             _nomBatiment.text = nomBatiment;
             _coutRessources.text = coutRessources;
             _description.text = description;
-            SetCoutTemps(coutTemps);
+            MetAJourCoutTicks(coutTemps);
             //TODO Initialiser le bouton
             _btnDebutConstruction.onClick.AddListener(DémarrerConstruction);
         }
         
-        private void SetCoutTemps(string texte)
+        private void MetAJourCoutTicks(string texte)
         {
             _coutTemps.text = texte + " ticks";
         }
@@ -43,8 +45,20 @@ namespace UI.Batiments
             else
             {
                 Debug.LogError("Ne peut pas construire");
+                //TODO: Afficher à l'utilisateur que la construction n'a pas pu être démarré.
+                // ou simplement griser le bouton "Construire".
             }
-            //Montrer une erreur si ça n'a pas marché
+        }
+
+        public void Dispose()
+        {
+            Destroy(gameObject);
+        }
+
+        public void UpdateCoutConstruction()
+        {
+            var nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, _batimentEnum);
+            MetAJourCoutTicks(nbTicksConstruction.ToString());
         }
     }
 }

@@ -26,6 +26,7 @@ namespace UI.Batiments
                 var batiment = GestionnaireBatiments.Instance.EnConstruction;
                 long pourcentMacon = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
                 long nbTicks = GestionnaireProductions.Instance.NbTicksRestantsConstruction(pourcentMacon);
+                // TODO: Afficher à l'utilisateur que la contruction n'est pas en progression lorsque nbTicks == -1.
                 if (_vueBatiment == null)
                 {
                     _vueBatiment = Instantiate(_vueInstancier, _content);
@@ -33,16 +34,13 @@ namespace UI.Batiments
                     _vueBatiment.Init(null, nom, nbTicks.ToString());
                 }
                 else
-                {
                     _vueBatiment.UpdateValeurs(nbTicks.ToString()); 
-                }
-
             }
             else
             {
                 if (_vueBatiment != null)
                 {
-                    Destroy(_vueBatiment.gameObject);
+                    _vueBatiment.Dispose();
                     _vueBatiment = null;
                     Debug.Log("Bâtiment terminé de construire");
                 }

@@ -10,10 +10,11 @@ namespace UI
 {
     public class VueGestionnaireProfessions : MonoBehaviour
     {
+        [SerializeField] private Transform _parent;
+        [SerializeField] private AssignationProfessionsUI _vueInstancier;
         [SerializeField] private TextMeshProUGUI _pourcentageRestant;
-        [SerializeField] private List<AssignationProfessionsUI> _assignationsProfessions;
         [SerializeField] private Button _boutonSoumettre;
-        //private readonly Dictionary<ProfessionEnum, AssignationProfessionsUI> _dictProfession = new();
+        private readonly Dictionary<ProfessionEnum, AssignationProfessionsUI> _dictProfession = new();
 
         private Action<bool, bool> _professionsSontModifiées;
 
@@ -22,15 +23,15 @@ namespace UI
             _boutonSoumettre.onClick.AddListener(SoumettreChangement);
         }
 
-        public void Init( Action<bool,bool> professionsSontModifiées)
+        public void Init(Action<bool,bool> professionsSontModifiées)
         {
-            int i = 0;
-            foreach (var profession in EnumUtils.GetEnumValues<ProfessionEnum>())
+            var professions = EnumUtils.GetEnumValues<ProfessionEnum>();
+            foreach (var profession in professions)
             {
-                if (_assignationsProfessions != null)
-                    _assignationsProfessions[i]?.InitProfession(profession, UnPourcentageEstModifie);
+                if (!GestionnaireProfessions.Instance.EstDeverrouille(profession))
+                    continue;
 
-                i++;
+                AjouterVueProfession(profession);
             }
 
             _professionsSontModifiées = professionsSontModifiées;
@@ -38,14 +39,17 @@ namespace UI
 
         public LotProfessions AccesLotProfessionUtilisateur()
         {
-            LotProfessions professions = new LotProfessions();
-            int i = 0;
-            foreach(var profession in EnumUtils.GetEnumValues<ProfessionEnum>())
+            LotProfessions lotProfessions = new LotProfessions();
+            var professions = EnumUtils.GetEnumValues<ProfessionEnum>();
+            foreach (var profession in professions)
             {
-                professions.AttribuerPourcentProfession(profession, (long)_assignationsProfessions[i]?.AccesPourcentageActuel());
-                i++;
+                var pourcentActuelle = 0;
+                if (_dictProfession.ContainsKey(profession))
+                    pourcentActuelle = _dictProfession[profession].AccesPourcentageActuel();
+
+                lotProfessions.AttribuerPourcentProfession(profession, pourcentActuelle);
             }
-            return professions;
+            return lotProfessions;
         }
 
         /// <summary>
@@ -56,29 +60,53 @@ namespace UI
         public void UnPourcentageEstModifie()
         {
             int total = 0;
-            
-            foreach (var profession in _assignationsProfessions)
-            {
-                total += profession.AccesPourcentageActuel();
-            }
-            _pourcentageRestant.text = 100-total + "%";
+            foreach ((var profession, var vueProfession) in _dictProfession)
+                total += vueProfession.AccesPourcentageActuel();
+
+            AttribuerTextePourcentageRestant(total);
 
             _professionsSontModifiées?.Invoke(false, true);
+        }
+
+        public void MiseAJourListeProfessions()
+        {
+            if (!gameObject.activeInHierarchy)
+                return;
+
+            var gestionnaireProfessions = GestionnaireProfessions.Instance;
+            var professions = EnumUtils.GetEnumValues<ProfessionEnum>();
+            foreach (var profession in professions)
+            {
+                if (!gestionnaireProfessions.EstDeverrouille(profession))
+                {
+                    if (_dictProfession.ContainsKey(profession))
+                    {
+                        _dictProfession[profession].Dispose();
+                        _dictProfession.Remove(profession);
+                    }
+
+                    continue;
+                }
+
+                if (!_dictProfession.ContainsKey(profession))
+                    AjouterVueProfession(profession);
+            }
+        }
+
+        private void AttribuerTextePourcentageRestant(int total)
+        {
+            _pourcentageRestant.text = 100 - total + "%";
         }
 
         private void SoumettreChangement()
         {
             int total = 0;
-            
-            foreach (var profession in _assignationsProfessions)
-            {
-                
-                total += profession.AccesPourcentageActuel();
-            }
+            foreach ((var profession, var vueProfession) in _dictProfession)
+                total += vueProfession.AccesPourcentageActuel();
 
             if (total > 100)
             {
-                Debug.LogError("Total des professions assignées incorrectes");
+                Debug.LogError("Total des lotProfessions assignées incorrectes");
                 // TODO: Ajouter un retour utilisateur
                 return;
             }
@@ -87,6 +115,15 @@ namespace UI
             GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessions);
 
             _professionsSontModifiées?.Invoke(true, false);
+        }
+
+        private void AjouterVueProfession(ProfessionEnum profession)
+        {
+            AssignationProfessionsUI vue = Instantiate(_vueInstancier, _parent);
+            var config = GestionnaireProfessions.Instance.ProfessionDictConfig[profession];
+
+            vue.InitProfession(profession, UnPourcentageEstModifie); ;
+            _dictProfession.Add(profession, vue);
         }
     }
 }

@@ -1,12 +1,13 @@
 using Production;
 using Profession;
 using Ressource;
+using System;
 using TMPro;
 using UnityEngine;
 
 namespace UI
 {
-    public class VueProductionRessource : MonoBehaviour
+    public class VueProductionRessource : MonoBehaviour, IDisposable
     {
         [SerializeField] private TextMeshProUGUI _nom;
         [SerializeField] private TextMeshProUGUI _productionActuelle;
@@ -30,6 +31,11 @@ namespace UI
         {
             var production = GestionnaireProductions.Instance.EvaluerProduction(_ressourceRepresentee, professions);
             _productionAnticipee.text = production + "/tick";
+        }
+
+        public void Dispose()
+        {
+            Destroy(gameObject);
         }
     }
 }

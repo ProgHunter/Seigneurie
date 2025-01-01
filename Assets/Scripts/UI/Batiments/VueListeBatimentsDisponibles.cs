@@ -39,12 +39,13 @@ namespace UI.Batiments
                 if (!gestionnaireBatiments.EstDeverrouille(batiment) ||
                     gestionnaireBatiments.AccesQteBatiment(batiment) >= gestionnaireBatiments.BatimentConfigDict[batiment].Qte.qteMax)
                 {
-                    // Rien à faire si déjà pas là
-                    if (!_dictBatimentsDisponibles.ContainsKey(batiment))
-                        continue;
                     // S'il est dans la liste, il faut le supprimer
-                    _dictBatimentsDisponibles[batiment].Dispose();
-                    _dictBatimentsDisponibles.Remove(batiment);
+                    if (_dictBatimentsDisponibles.ContainsKey(batiment))
+                    {
+                        _dictBatimentsDisponibles[batiment].Dispose();
+                        _dictBatimentsDisponibles.Remove(batiment);
+                    }
+                    
                     continue;
                 }
                 // Le batiment doit être affiché dans la liste

@@ -31,11 +31,12 @@ namespace UI
         }
 
         /// <summary>
-        /// Permet de mettre à jour les valeurs de production actuelle et/ou anticipée.
+        /// Permet de mettre à jour la liste des productions affichées.
+        /// Met aussi à jour les valeurs de production actuelle et/ou anticipée.
         /// </summary>
         /// <param name="productionActuelle">Mettre à jour la vue de la production actuelle</param>
         /// <param name="productionAnticipée">Mettre à jour la vue de la production anticipée</param>
-        public void MiseAJourAffichageValeursProduction(bool productionActuelle, bool productionAnticipée)
+        public void MiseAJourListeProductions(bool productionActuelle, bool productionAnticipée)
         {
             if (!gameObject.activeInHierarchy)
                 return;
@@ -44,11 +45,20 @@ namespace UI
             if (productionAnticipée)
                 professions = _vueGestionnaireProfessions?.AccesLotProfessionUtilisateur();
 
-            var ressources = EnumUtils.GetEnumValues<RessourceEnum>();
-            foreach (var ressource in ressources)
+            var inventaireRessources = InventaireRessources.Instance;
+            var ressourceEnum = EnumUtils.GetEnumValues<RessourceEnum>();
+            foreach (var ressource in ressourceEnum)
             {
-                if (!InventaireRessources.Instance.EstDeverrouille(ressource))
+                if (!inventaireRessources.EstDeverrouille(ressource))
+                {
+                    if (_dictRessources.ContainsKey(ressource))
+                    {
+                        _dictRessources[ressource].Dispose();
+                        _dictRessources.Remove(ressource);
+                    }
+
                     continue;
+                }
 
                 if (!_dictRessources.ContainsKey(ressource))
                     AjouterVueProduction(ressource);

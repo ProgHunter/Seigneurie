@@ -16,15 +16,66 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 43
-    width: 1920
-    height: 997
+    width: 2560
+    height: 1349
   m_ShowMode: 4
-  m_Title: Project
-  m_RootView: {fileID: 2}
+  m_Title: Game
+  m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: TestRunnerWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 866
+    width: 613
+    height: 433
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 14}
+  m_Panes:
+  - {fileID: 14}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &3
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 13}
+  - {fileID: 2}
+  m_Position:
+    serializedVersion: 2
+    x: 1947
+    y: 0
+    width: 613
+    height: 1299
+  m_MinSize: {x: 100, y: 200}
+  m_MaxSize: {x: 8096, y: 16192}
+  vertical: 1
+  controlID: 44
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,22 +88,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 3}
   - {fileID: 5}
-  - {fileID: 4}
+  - {fileID: 7}
+  - {fileID: 6}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
-    height: 997
+    width: 2560
+    height: 1349
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &3
+--- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,12 +120,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 2560
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
---- !u!114 &4
+--- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,61 +141,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 977
-    width: 1920
+    y: 1329
+    width: 2560
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &5
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 6}
-  - {fileID: 11}
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 30
-    width: 1920
-    height: 947
-  m_MinSize: {x: 300, y: 200}
-  m_MaxSize: {x: 24288, y: 16192}
-  vertical: 0
-  controlID: 19
---- !u!114 &6
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 7}
-  - {fileID: 10}
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1460
-    height: 947
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 16192, y: 16192}
-  vertical: 1
-  controlID: 97
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -159,18 +160,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 8}
+  - {fileID: 3}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 30
+    width: 2560
+    height: 1299
+  m_MinSize: {x: 300, y: 200}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 120
+--- !u!114 &8
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
   - {fileID: 9}
+  - {fileID: 12}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1460
-    height: 720
+    width: 1947
+    height: 1299
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 121
+--- !u!114 &9
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 10}
+  - {fileID: 11}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1947
+    height: 988
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 98
---- !u!114 &8
+  controlID: 122
+--- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,16 +238,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 358
-    height: 720
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 13}
+    width: 477
+    height: 988
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 16}
   m_Panes:
-  - {fileID: 13}
+  - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &9
+--- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,19 +262,19 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 358
+    x: 477
     y: 0
-    width: 1102
-    height: 720
+    width: 1470
+    height: 988
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 14}
-  - {fileID: 12}
+  - {fileID: 17}
+  - {fileID: 15}
   m_Selected: 0
   m_LastSelected: 1
---- !u!114 &10
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,18 +290,18 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 720
-    width: 1460
-    height: 227
+    y: 988
+    width: 1947
+    height: 311
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 15}
+  m_ActualView: {fileID: 18}
   m_Panes:
-  - {fileID: 15}
-  - {fileID: 16}
+  - {fileID: 18}
+  - {fileID: 19}
   m_Selected: 0
   m_LastSelected: 1
---- !u!114 &11
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,18 +316,1093 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1460
+    x: 0
     y: 0
-    width: 460
-    height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 17}
+    width: 613
+    height: 866
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 20}
   m_Panes:
-  - {fileID: 17}
+  - {fileID: 20}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &12
+--- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13401, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Test Runner
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1947
+    y: 939
+    width: 612
+    height: 412
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_Spl:
+    ID: 134
+    splitterInitialOffset: 0
+    currentActiveSplitter: -1
+    realSizes:
+    - 256
+    - 86
+    relativeSizes:
+    - 0.75
+    - 0.25
+    minSizes:
+    - 32
+    - 32
+    maxSizes:
+    - 0
+    - 0
+    lastTotalSize: 342
+    splitSize: 6
+    xOffset: 0
+    m_Version: 1
+    oldRealSizes: 
+    oldMinSizes: 
+    oldMaxSizes: 
+    oldSplitSize: 0
+  m_TestTypeToolbarIndex: 1
+  m_PlayModeTestListGUI:
+    m_Window: {fileID: 14}
+    m_NewResultList:
+    - id: 1056
+      uniqueId: '[Seigneurie][suite]'
+      name: Seigneurie
+      fullName: Seigneurie
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    m_ResultText: 
+    m_ResultStacktrace: 
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: f4c11c5affffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized
+    m_SelectedOption: 0
+  m_EditModeTestListGUI:
+    m_Window: {fileID: 14}
+    m_NewResultList:
+    - id: 1000
+      uniqueId: '[Seigneurie][suite]'
+      name: Seigneurie
+      fullName: Seigneurie
+      resultStatus: 2
+      duration: 0.1374097
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    - id: 1050
+      uniqueId: '[Tests.dll][suite]'
+      name: Tests.dll
+      fullName: C:/Users/Pierre-Yves/Git/Seigneurie/Library/ScriptAssemblies/Tests.dll
+      resultStatus: 2
+      duration: 0.0771283
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[Seigneurie][suite]'
+    - id: 1051
+      uniqueId: Tests.dll/[Tests][Test][suite]
+      name: Test
+      fullName: Test
+      resultStatus: 2
+      duration: 0.0740503
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1050
+      parentUniqueId: '[Tests.dll][suite]'
+    - id: 1001
+      uniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+      name: TestGestionnaireBatiments
+      fullName: Test.TestGestionnaireBatiments
+      resultStatus: 1
+      duration: 0.0298943
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1051
+      parentUniqueId: Tests.dll/[Tests][Test][suite]
+    - id: 1003
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteFerme]
+      name: TestAttribuerEtAccesQteFerme
+      fullName: Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteFerme
+      resultStatus: 1
+      duration: 0.0155959
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1006
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteHotelDeVille]
+      name: TestAttribuerEtAccesQteHotelDeVille
+      fullName: Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteHotelDeVille
+      resultStatus: 1
+      duration: 0.0001586
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1002
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteMaison]
+      name: TestAttribuerEtAccesQteMaison
+      fullName: Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteMaison
+      resultStatus: 1
+      duration: 0.0001549
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1007
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteMaxMaison]
+      name: TestAttribuerEtAccesQteMaxMaison
+      fullName: Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteMaxMaison
+      resultStatus: 1
+      duration: 0.0002521
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1005
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteMine]
+      name: TestAttribuerEtAccesQteMine
+      fullName: Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteMine
+      resultStatus: 1
+      duration: 0.0001405
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1004
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteScierie]
+      name: TestAttribuerEtAccesQteScierie
+      fullName: Test.TestGestionnaireBatiments.TestAttribuerEtAccesQteScierie
+      resultStatus: 1
+      duration: 0.000133
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1008
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestConstruction3Maisons2Max]
+      name: TestConstruction3Maisons2Max
+      fullName: Test.TestGestionnaireBatiments.TestConstruction3Maisons2Max
+      resultStatus: 1
+      duration: 0.0023251
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1010
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestConstructionBatimentVerrouille]
+      name: TestConstructionBatimentVerrouille
+      fullName: Test.TestGestionnaireBatiments.TestConstructionBatimentVerrouille
+      resultStatus: 1
+      duration: 0.000242
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1009
+      uniqueId: Tests.dll/Test/TestGestionnaireBatiments/[Tests][Test.TestGestionnaireBatiments.TestConstructionMaisonsAvecEtSansRessources]
+      name: TestConstructionMaisonsAvecEtSansRessources
+      fullName: Test.TestGestionnaireBatiments.TestConstructionMaisonsAvecEtSansRessources
+      resultStatus: 1
+      duration: 0.0002475
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireBatiments][suite]
+    - id: 1011
+      uniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProductions][suite]
+      name: TestGestionnaireProductions
+      fullName: Test.TestGestionnaireProductions
+      resultStatus: 1
+      duration: 0.0172473
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1051
+      parentUniqueId: Tests.dll/[Tests][Test][suite]
+    - id: 1016
+      uniqueId: Tests.dll/Test/TestGestionnaireProductions/[Tests][Test.TestGestionnaireProductions.TestFamine]
+      name: TestFamine
+      fullName: Test.TestGestionnaireProductions.TestFamine
+      resultStatus: 1
+      duration: 0.0073681
+      messages: 
+      output: 'Production de -2500 pour la ressource POPULATION.
+
+        Production
+        de -5000 pour la ressource NOURRITURE.
+
+        Production de 0 pour la ressource
+        BOIS.
+
+        Production de 0 pour la ressource MINERAUX.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1011
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProductions][suite]
+    - id: 1015
+      uniqueId: Tests.dll/Test/TestGestionnaireProductions/[Tests][Test.TestGestionnaireProductions.TestMaconConstructionMaison]
+      name: TestMaconConstructionMaison
+      fullName: Test.TestGestionnaireProductions.TestMaconConstructionMaison
+      resultStatus: 1
+      duration: 0.0013632
+      messages: 
+      output: 'Production de 0 pour la ressource POPULATION.
+
+        Production
+        de 0 pour la ressource NOURRITURE.
+
+        Production de 0 pour la ressource
+        BOIS.
+
+        Production de 0 pour la ressource MINERAUX.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1011
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProductions][suite]
+    - id: 1012
+      uniqueId: Tests.dll/Test/TestGestionnaireProductions/[Tests][Test.TestGestionnaireProductions.TestProfessions0Pourcent]
+      name: TestProfessions0Pourcent
+      fullName: Test.TestGestionnaireProductions.TestProfessions0Pourcent
+      resultStatus: 1
+      duration: 0.0012383
+      messages: 
+      output: 'Production de 0 pour la ressource POPULATION.
+
+        Production
+        de -500 pour la ressource NOURRITURE.
+
+        Production de 0 pour la ressource
+        BOIS.
+
+        Production de 0 pour la ressource MINERAUX.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1011
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProductions][suite]
+    - id: 1013
+      uniqueId: Tests.dll/Test/TestGestionnaireProductions/[Tests][Test.TestGestionnaireProductions.TestProfessions25Pourcent0Batiments]
+      name: TestProfessions25Pourcent0Batiments
+      fullName: Test.TestGestionnaireProductions.TestProfessions25Pourcent0Batiments
+      resultStatus: 1
+      duration: 0.0012826
+      messages: 
+      output: 'Production de 0 pour la ressource POPULATION.
+
+        Production
+        de -250 pour la ressource NOURRITURE.
+
+        Production de 250 pour la
+        ressource BOIS.
+
+        Production de 50 pour la ressource MINERAUX.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1011
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProductions][suite]
+    - id: 1014
+      uniqueId: Tests.dll/Test/TestGestionnaireProductions/[Tests][Test.TestGestionnaireProductions.TestProfessions25PourcentAvecBatiments]
+      name: TestProfessions25PourcentAvecBatiments
+      fullName: Test.TestGestionnaireProductions.TestProfessions25PourcentAvecBatiments
+      resultStatus: 1
+      duration: 0.0014903
+      messages: 
+      output: 'Production de 13 pour la ressource POPULATION.
+
+        Production
+        de 1000 pour la ressource NOURRITURE.
+
+        Production de 1500 pour la
+        ressource BOIS.
+
+        Production de 300 pour la ressource MINERAUX.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1011
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProductions][suite]
+    - id: 1017
+      uniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProfessions][suite]
+      name: TestGestionnaireProfessions
+      fullName: Test.TestGestionnaireProfessions
+      resultStatus: 1
+      duration: 0.0062991
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1051
+      parentUniqueId: Tests.dll/[Tests][Test][suite]
+    - id: 1020
+      uniqueId: Tests.dll/Test/TestGestionnaireProfessions/[Tests][Test.TestGestionnaireProfessions.TestProfession110pc]
+      name: TestProfession110pc
+      fullName: Test.TestGestionnaireProfessions.TestProfession110pc
+      resultStatus: 1
+      duration: 0.0004328
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1017
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProfessions][suite]
+    - id: 1018
+      uniqueId: Tests.dll/Test/TestGestionnaireProfessions/[Tests][Test.TestGestionnaireProfessions.TestProfession50pc]
+      name: TestProfession50pc
+      fullName: Test.TestGestionnaireProfessions.TestProfession50pc
+      resultStatus: 1
+      duration: 0.0002396
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1017
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProfessions][suite]
+    - id: 1019
+      uniqueId: Tests.dll/Test/TestGestionnaireProfessions/[Tests][Test.TestGestionnaireProfessions.TestProfessionMoins10pc]
+      name: TestProfessionMoins10pc
+      fullName: Test.TestGestionnaireProfessions.TestProfessionMoins10pc
+      resultStatus: 1
+      duration: 0.0002104
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1017
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProfessions][suite]
+    - id: 1022
+      uniqueId: Tests.dll/Test/TestGestionnaireProfessions/[Tests][Test.TestGestionnaireProfessions.TestProfessionReste0pcTotal]
+      name: TestProfessionReste0pcTotal
+      fullName: Test.TestGestionnaireProfessions.TestProfessionReste0pcTotal
+      resultStatus: 1
+      duration: 0.0002148
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1017
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProfessions][suite]
+    - id: 1021
+      uniqueId: Tests.dll/Test/TestGestionnaireProfessions/[Tests][Test.TestGestionnaireProfessions.TestProfessionReste20pcTotal]
+      name: TestProfessionReste20pcTotal
+      fullName: Test.TestGestionnaireProfessions.TestProfessionReste20pcTotal
+      resultStatus: 1
+      duration: 0.0001858
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1017
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProfessions][suite]
+    - id: 1023
+      uniqueId: Tests.dll/Test/TestGestionnaireProfessions/[Tests][Test.TestGestionnaireProfessions.TestProfessionVerrouilleeAttribuerPc]
+      name: TestProfessionVerrouilleeAttribuerPc
+      fullName: Test.TestGestionnaireProfessions.TestProfessionVerrouilleeAttribuerPc
+      resultStatus: 1
+      duration: 0.0001207
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1017
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestGestionnaireProfessions][suite]
+    - id: 1024
+      uniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+      name: TestInventaireRessources
+      fullName: Test.TestInventaireRessources
+      resultStatus: 1
+      duration: 0.0098811
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1051
+      parentUniqueId: Tests.dll/[Tests][Test][suite]
+    - id: 1027
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestAttribuerEtAccesQteBois]
+      name: TestAttribuerEtAccesQteBois
+      fullName: Test.TestInventaireRessources.TestAttribuerEtAccesQteBois
+      resultStatus: 1
+      duration: 0.0002286
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1028
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestAttribuerEtAccesQteMineraux]
+      name: TestAttribuerEtAccesQteMineraux
+      fullName: Test.TestInventaireRessources.TestAttribuerEtAccesQteMineraux
+      resultStatus: 1
+      duration: 0.0001744
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1026
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestAttribuerEtAccesQteNouriture]
+      name: TestAttribuerEtAccesQteNouriture
+      fullName: Test.TestInventaireRessources.TestAttribuerEtAccesQteNouriture
+      resultStatus: 1
+      duration: 0.0001327
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1025
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestAttribuerEtAccesQtePopulation]
+      name: TestAttribuerEtAccesQtePopulation
+      fullName: Test.TestInventaireRessources.TestAttribuerEtAccesQtePopulation
+      resultStatus: 1
+      duration: 0.0001319
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1035
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteBoisDepasseMax]
+      name: TestModifierQteBoisDepasseMax
+      fullName: Test.TestInventaireRessources.TestModifierQteBoisDepasseMax
+      resultStatus: 1
+      duration: 0.0010131
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1036
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteMinerauxDepasseMax]
+      name: TestModifierQteMinerauxDepasseMax
+      fullName: Test.TestInventaireRessources.TestModifierQteMinerauxDepasseMax
+      resultStatus: 1
+      duration: 0.0001755
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1037
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteMinerauxDepasseMaxBloquant]
+      name: TestModifierQteMinerauxDepasseMaxBloquant
+      fullName: Test.TestInventaireRessources.TestModifierQteMinerauxDepasseMaxBloquant
+      resultStatus: 1
+      duration: 0.0001637
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1029
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteNouritureAjout]
+      name: TestModifierQteNouritureAjout
+      fullName: Test.TestInventaireRessources.TestModifierQteNouritureAjout
+      resultStatus: 1
+      duration: 0.0001622
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1034
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteNouritureDepasseMax]
+      name: TestModifierQteNouritureDepasseMax
+      fullName: Test.TestInventaireRessources.TestModifierQteNouritureDepasseMax
+      resultStatus: 1
+      duration: 0.0001583
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1031
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteNouritureDepasseMin]
+      name: TestModifierQteNouritureDepasseMin
+      fullName: Test.TestInventaireRessources.TestModifierQteNouritureDepasseMin
+      resultStatus: 1
+      duration: 0.0001674
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1032
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteNouritureDepasseMinBloquant]
+      name: TestModifierQteNouritureDepasseMinBloquant
+      fullName: Test.TestInventaireRessources.TestModifierQteNouritureDepasseMinBloquant
+      resultStatus: 1
+      duration: 0.0001772
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1030
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQteNouritureSoustraction]
+      name: TestModifierQteNouritureSoustraction
+      fullName: Test.TestInventaireRessources.TestModifierQteNouritureSoustraction
+      resultStatus: 1
+      duration: 0.0001631
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1033
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestModifierQtePopulationDepasseMax]
+      name: TestModifierQtePopulationDepasseMax
+      fullName: Test.TestInventaireRessources.TestModifierQtePopulationDepasseMax
+      resultStatus: 1
+      duration: 0.0001576
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1038
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestTransactionLotRessourcesBloquantAcceptee]
+      name: TestTransactionLotRessourcesBloquantAcceptee
+      fullName: Test.TestInventaireRessources.TestTransactionLotRessourcesBloquantAcceptee
+      resultStatus: 1
+      duration: 0.0003669
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1039
+      uniqueId: "Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestTransactionLotRessourcesBloquantRefus\xE9]"
+      name: "TestTransactionLotRessourcesBloquantRefus\xE9"
+      fullName: "Test.TestInventaireRessources.TestTransactionLotRessourcesBloquantRefus\xE9"
+      resultStatus: 1
+      duration: 0.0002638
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1040
+      uniqueId: Tests.dll/Test/TestInventaireRessources/[Tests][Test.TestInventaireRessources.TestTransactionLotRessourcesVerrouille]
+      name: TestTransactionLotRessourcesVerrouille
+      fullName: Test.TestInventaireRessources.TestTransactionLotRessourcesVerrouille
+      resultStatus: 1
+      duration: 0.000105
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1024
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestInventaireRessources][suite]
+    - id: 1041
+      uniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+      name: TestUtilsMath
+      fullName: Test.TestUtilsMath
+      resultStatus: 2
+      duration: 0.0086063
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1051
+      parentUniqueId: Tests.dll/[Tests][Test][suite]
+    - id: 1042
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistique_1Tick]
+      name: TestFonctionLogistique_1Tick
+      fullName: Test.TestUtilsMath.TestFonctionLogistique_1Tick
+      resultStatus: 1
+      duration: 0.0001288
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    - id: 1043
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistique_6Ticks]
+      name: TestFonctionLogistique_6Ticks
+      fullName: Test.TestUtilsMath.TestFonctionLogistique_6Ticks
+      resultStatus: 1
+      duration: 0.0001133
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    - id: 1045
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistique_6Ticks_0pcCroissance]
+      name: TestFonctionLogistique_6Ticks_0pcCroissance
+      fullName: Test.TestUtilsMath.TestFonctionLogistique_6Ticks_0pcCroissance
+      resultStatus: 1
+      duration: 0.0001088
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    - id: 1044
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistique_6Ticks_50pcCroissance]
+      name: TestFonctionLogistique_6Ticks_50pcCroissance
+      fullName: Test.TestUtilsMath.TestFonctionLogistique_6Ticks_50pcCroissance
+      resultStatus: 1
+      duration: 0.0001076
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    - id: 1049
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistiqueEtTickIsole_52Pop]
+      name: TestFonctionLogistiqueEtTickIsole_52Pop
+      fullName: Test.TestUtilsMath.TestFonctionLogistiqueEtTickIsole_52Pop
+      resultStatus: 2
+      duration: 0.003378
+      messages: "  Expected: 52\r\n  But was:  51\r\n"
+      output: 
+      stacktrace: 'at Test.TestUtilsMath.TestFonctionLogistiqueEtTickIsole_52Pop
+        () [0x0002b] in C:\Users\Pierre-Yves\Git\Seigneurie\Assets\Tests\Utils\TestUtilsMath.cs:112
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    - id: 1048
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistiqueTickIsole_10Pop]
+      name: TestFonctionLogistiqueTickIsole_10Pop
+      fullName: Test.TestUtilsMath.TestFonctionLogistiqueTickIsole_10Pop
+      resultStatus: 1
+      duration: 0.0001169
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    - id: 1046
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistiqueTickIsole_50Pop]
+      name: TestFonctionLogistiqueTickIsole_50Pop
+      fullName: Test.TestUtilsMath.TestFonctionLogistiqueTickIsole_50Pop
+      resultStatus: 1
+      duration: 0.0001286
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    - id: 1047
+      uniqueId: Tests.dll/Test/TestUtilsMath/[Tests][Test.TestUtilsMath.TestFonctionLogistiqueTickIsole_50Pop_1pcCroissance]
+      name: TestFonctionLogistiqueTickIsole_50Pop_1pcCroissance
+      fullName: Test.TestUtilsMath.TestFonctionLogistiqueTickIsole_50Pop_1pcCroissance
+      resultStatus: 1
+      duration: 0.0001094
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1041
+      parentUniqueId: Tests.dll/Test/[Tests][Test.TestUtilsMath][suite]
+    m_ResultText: "TestFonctionLogistiqueEtTickIsole_52Pop (0,003s)\n---\nExpected:
+      52\r\n  But was:  51\n---\nat Test.TestUtilsMath.TestFonctionLogistiqueEtTickIsole_52Pop
+      () [0x0002b] in C:\\Users\\Pierre-Yves\\Git\\Seigneurie\\Assets\\Tests\\Utils\\TestUtilsMath.cs:112"
+    m_ResultStacktrace: 'at Test.TestUtilsMath.TestFonctionLogistiqueEtTickIsole_52Pop
+      () [0x0002b] in C:\Users\Pierre-Yves\Git\Seigneurie\Assets\Tests\Utils\TestUtilsMath.cs:112
+
+'
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 94adb60e
+      m_LastClickedID: 246853012
+      m_ExpandedIDs: 71ad2cd9e557abf797d13fff5d60250c693fd94404474851f4c11c5acbd4297affffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,10 +1422,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 357
+    x: 477
     y: 73
-    width: 1100
-    height: 782
+    width: 1468
+    height: 967
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -347,29 +1473,29 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1100
-      height: 761
-    m_Scale: {x: 0.5729167, y: 0.5729167}
-    m_Translation: {x: 549.99994, y: 380.5}
+      width: 1468
+      height: 946
+    m_Scale: {x: 0.76458335, y: 0.76458335}
+    m_Translation: {x: 734, y: 473}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -959.9999
-      y: -664.14545
-      width: 1919.9999
-      height: 1328.2909
+      x: -960
+      y: -618.6376
+      width: 1920
+      height: 1237.2751
     m_MinimalGUI: 1
-  m_defaultScale: 0.5729167
-  m_LastWindowPixelSize: {x: 1100, y: 782}
+  m_defaultScale: 0.76458335
+  m_LastWindowPixelSize: {x: 1468, y: 967}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
---- !u!114 &13
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,8 +1517,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 357
-    height: 699
+    width: 476
+    height: 967
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -401,9 +1527,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 02170000
-      m_LastClickedID: 0
-      m_ExpandedIDs: f0f3ffff02f4ffff14f4ffff38f4ffff0cf7ffffa0f9ffffb2f9ffffc4f9ffffd4f9ffffe4f9fffff6f9ffff22faffff44faffffccfaffffd4faffffdefaffffe8faffff24fbffff36fbffff38fbffff
+      m_SelectedIDs: 566a0000
+      m_LastClickedID: 27222
+      m_ExpandedIDs: d6e8ffffa4e9ffffaee9ffffdee9ffffa8ebffff2e6a0000406a0000566a0000626a0000686a0000746a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -419,7 +1545,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 8}
+        m_ClientGUIView: {fileID: 10}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -427,7 +1553,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &14
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -447,10 +1573,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 358
+    x: 477
     y: 73
-    width: 1100
-    height: 699
+    width: 1468
+    height: 967
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -494,7 +1620,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 1
       id: unity-search-toolbar
       index: 1
@@ -538,7 +1664,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Light Settings
       index: 0
@@ -560,7 +1686,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Cloth Constraints
       index: 2
@@ -571,7 +1697,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Cloth Collisions
       index: 3
@@ -582,7 +1708,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Navmesh Display
       index: 4
@@ -593,7 +1719,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Agent Display
       index: 5
@@ -604,7 +1730,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Obstacle Display
       index: 6
@@ -615,7 +1741,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Occlusion Culling
       index: 7
@@ -626,7 +1752,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Physics Debugger
       index: 8
@@ -637,7 +1763,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Scene Visibility
       index: 9
@@ -648,7 +1774,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Particles
       index: 10
@@ -678,7 +1804,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
-  m_OverrideSceneCullingMask: 6917529027641081856
+  m_OverrideSceneCullingMask: 4611686018427387906
   m_SceneIsLit: 1
   m_SceneLighting: 1
   m_2DMode: 1
@@ -686,9 +1812,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1231.7196, y: 692.25726, z: -1.6906408}
+    m_Target: {x: 988.3807, y: 655.70013, z: -7.272473}
     speed: 2
-    m_Value: {x: 1231.7196, y: 692.25726, z: -1.6906408}
+    m_Value: {x: 988.3807, y: 655.70013, z: -7.272473}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -739,9 +1865,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 734.6116
+    m_Target: 737.2453
     speed: 2
-    m_Value: 734.6116
+    m_Value: 737.2453
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -766,7 +1892,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &15
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -787,9 +1913,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 793
-    width: 1459
-    height: 206
+    y: 1061
+    width: 1946
+    height: 290
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -806,23 +1932,23 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/UI
+    - Assets/Prefabs/UI
     m_Globs: []
     m_OriginalText: 
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Scripts/UI
+  - Assets/Prefabs/UI
   m_LastFoldersGridSize: 96
-  m_LastProjectPath: C:\Users\Pierre-Yves\Documents\git\Seigneurie
+  m_LastProjectPath: C:\Users\Pierre-Yves\Git\Seigneurie
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 154}
-    m_SelectedIDs: e8690000
-    m_LastClickedID: 27112
-    m_ExpandedIDs: 00000000e6690000e8690000f069000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 88680000
+    m_LastClickedID: 26760
+    m_ExpandedIDs: 00000000826800008468000086680000886800008a68000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -850,7 +1976,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 165}
     m_SelectedIDs: 74140000
     m_LastClickedID: 5236
-    m_ExpandedIDs: 00000000e6690000e8690000
+    m_ExpandedIDs: 00000000826800008468000086680000886800008a680000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -877,7 +2003,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -894,7 +2020,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 3}
+      m_ClientGUIView: {fileID: 5}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -906,7 +2032,7 @@ MonoBehaviour:
     m_GridSize: 96
   m_SkipHiddenPackages: 1
   m_DirectoriesAreaWidth: 207
---- !u!114 &16
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -926,16 +2052,16 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 960
-    y: 876
-    width: 729
-    height: 123
+    x: 2560
+    y: 1061
+    width: 1946
+    height: 290
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &17
+--- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -955,10 +2081,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1460
+    x: 1947
     y: 73
-    width: 459
-    height: 926
+    width: 612
+    height: 845
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -971,7 +2097,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 162
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

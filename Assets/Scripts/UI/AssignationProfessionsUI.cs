@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class AssignationProfessionsUI : MonoBehaviour
+    public class AssignationProfessionsUI : MonoBehaviour, IDisposable
     {
         private ProfessionEnum _profession;
         [SerializeField] private Button _boutonMoins;
@@ -106,6 +106,11 @@ namespace UI
             _pourcentage.text = _pourcentageActuel + "%";
 
             _pourcentageEstModifie?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            Destroy(gameObject);
         }
     }
 }

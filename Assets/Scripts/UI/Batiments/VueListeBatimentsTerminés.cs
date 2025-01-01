@@ -36,12 +36,13 @@ namespace UI.Batiments
                 // Le bâtiment ne doit pas être affiché dans la liste
                 if (qte <= 0)
                 {
-                    // Rien à faire si déjà pas là
-                    if (!_dictBatimentsConstruits.ContainsKey(batiment))
-                        continue;
                     // S'il est dans la liste, il faut le supprimer
-                    _dictBatimentsConstruits[batiment].Dispose();
-                    _dictBatimentsConstruits.Remove(batiment);
+                    if (_dictBatimentsConstruits.ContainsKey(batiment))
+                    {
+                        _dictBatimentsConstruits[batiment].Dispose();
+                        _dictBatimentsConstruits.Remove(batiment);
+                    }
+
                     continue;
                 }
 

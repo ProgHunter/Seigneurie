@@ -16,7 +16,7 @@ namespace UI
         public void Init()
         {
             _ressources.Init();
-            _vueGestionnaireProfessions.Init(_vueGestionnaireProductions.MiseAJourAffichageValeursProduction);
+            _vueGestionnaireProfessions.Init(_vueGestionnaireProductions.MiseAJourListeProductions);
             _vueGestionnaireProductions.Init(_vueGestionnaireProfessions);
             _vueGestionnaireBatiments.Init();
         }
@@ -25,7 +25,7 @@ namespace UI
         {
             _ressources.UpdateBarre();
             _vueGestionnaireBatiments.UpdateVues();
-            _vueGestionnaireProductions.MiseAJourAffichageValeursProduction(true, true);
+            _vueGestionnaireProductions.MiseAJourListeProductions(true, true);
         }
     }
 }

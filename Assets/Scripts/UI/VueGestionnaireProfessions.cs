@@ -64,6 +64,7 @@ namespace UI
                 total += vueProfession.AccesPourcentageActuel();
 
             AttribuerTextePourcentageRestant(total);
+            _boutonSoumettre.interactable = total <= 100;
 
             _professionsSontModifiées?.Invoke(false, true);
         }

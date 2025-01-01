@@ -16,7 +16,7 @@ namespace UI
         public void Init(VueGestionnaireProfessions vueGestionnaireProfessions)
         {
             if (vueGestionnaireProfessions == null)
-                Debug.LogError("vueGestionnaireProfessions est null à la création de VueGestionnaireProductions.");
+                Debug.LogError("vueGestionnaireProfessions est null ï¿½ la crï¿½ation de VueGestionnaireProductions.");
 
             _vueGestionnaireProfessions = vueGestionnaireProfessions;
 
@@ -31,18 +31,18 @@ namespace UI
         }
 
         /// <summary>
-        /// Permet de mettre à jour la liste des productions affichées.
-        /// Met aussi à jour les valeurs de production actuelle et/ou anticipée.
+        /// Permet de mettre ï¿½ jour la liste des productions affichï¿½es.
+        /// Met aussi ï¿½ jour les valeurs de production actuelle et/ou anticipï¿½e.
         /// </summary>
-        /// <param name="productionActuelle">Mettre à jour la vue de la production actuelle</param>
-        /// <param name="productionAnticipée">Mettre à jour la vue de la production anticipée</param>
-        public void MiseAJourListeProductions(bool productionActuelle, bool productionAnticipée)
+        /// <param name="productionActuelle">Mettre ï¿½ jour la vue de la production actuelle</param>
+        /// <param name="productionAnticipÃ©e">Mettre ï¿½ jour la vue de la production anticipï¿½e</param>
+        public void MiseAJourListeProductions(bool productionActuelle, bool productionAnticipÃ©e)
         {
             if (!gameObject.activeInHierarchy)
                 return;
 
             LotProfessions professions = null;
-            if (productionAnticipée)
+            if (productionAnticipÃ©e)
                 professions = _vueGestionnaireProfessions?.AccesLotProfessionUtilisateur();
 
             var inventaireRessources = InventaireRessources.Instance;
@@ -63,7 +63,7 @@ namespace UI
                 if (!_dictRessources.ContainsKey(ressource))
                     AjouterVueProduction(ressource);
 
-                if (productionAnticipée)
+                if (productionAnticipÃ©e)
                     _dictRessources[ressource].ModifierValeurProductionAnticipee(professions);
 
                 if (productionActuelle)
@@ -74,7 +74,6 @@ namespace UI
         private void AjouterVueProduction(RessourceEnum ressource)
         {
             VueProductionRessource vue = Instantiate(_vueInstancier, _parent);
-            var config = InventaireRessources.Instance.RessourceConfigDict[ressource];
 
             vue.InitRessourceRepresentee(ressource);
             _dictRessources.Add(ressource, vue);

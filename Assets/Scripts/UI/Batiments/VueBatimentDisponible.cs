@@ -19,21 +19,22 @@ namespace UI.Batiments
         private BatimentEnum _batimentEnum;
 
         public void Init(BatimentEnum batimentEnum, Sprite icone, string nomBatiment, string coutRessources,
-            string description, string coutTemps)
+            string description, long coutTemps)
         {
             _batimentEnum = batimentEnum;
+            //TODO icone
             //_icone.sprite = icone;
             _nomBatiment.text = nomBatiment;
             _coutRessources.text = coutRessources;
             _description.text = description;
-            MetAJourCoutTicks(coutTemps);
-            //TODO Initialiser le bouton
+            UpdateVue();
             _btnDebutConstruction.onClick.AddListener(DémarrerConstruction);
         }
         
-        private void MetAJourCoutTicks(string texte)
+        private void MetAJourCoutTicks(long nb)
         {
-            _coutTemps.text = texte + " ticks";
+            string texte = nb == -1 ? "Indéterminé" : nb + " ticks";
+            _coutTemps.text = texte;
         }
 
         private void DémarrerConstruction()
@@ -55,10 +56,13 @@ namespace UI.Batiments
             Destroy(gameObject);
         }
 
-        public void UpdateCoutConstruction()
+        public void UpdateVue()
         {
             var nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, _batimentEnum);
-            MetAJourCoutTicks(nbTicksConstruction.ToString());
+            MetAJourCoutTicks(nbTicksConstruction);
+
+            _btnDebutConstruction.interactable =
+                GestionnaireBatiments.Instance.CoutConstructionEstDisponible(_batimentEnum);
         }
     }
 }

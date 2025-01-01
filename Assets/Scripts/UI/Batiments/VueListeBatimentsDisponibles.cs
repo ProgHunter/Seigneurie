@@ -35,7 +35,7 @@ namespace UI.Batiments
             var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
             foreach (var batiment in batiments)
             {
-                // Le bâtiment ne doit pas être affiché dans la liste
+                // Le bÃ¢timent ne doit pas Ãªtre affichÃ© dans la liste
                 if (!gestionnaireBatiments.EstDeverrouille(batiment) ||
                     gestionnaireBatiments.AccesQteBatiment(batiment) >= gestionnaireBatiments.BatimentConfigDict[batiment].Qte.qteMax)
                 {
@@ -48,12 +48,12 @@ namespace UI.Batiments
                     
                     continue;
                 }
-                // Le batiment doit être affiché dans la liste
-                // Ajouter le bâtiment dans la liste
+                // Le batiment doit Ãªtre affichÃ© dans la liste
+                // Ajouter le bÃ¢timent dans la liste
                 if (!_dictBatimentsDisponibles.ContainsKey(batiment))
                     AjouterVueBatiment(batiment);
 
-                _dictBatimentsDisponibles[batiment].UpdateCoutConstruction();
+                _dictBatimentsDisponibles[batiment].UpdateVue();
             }
         }
 
@@ -63,7 +63,7 @@ namespace UI.Batiments
             AbstraitBatimentConfig config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
             var nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, batiment);
 
-            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, nbTicksConstruction.ToString());
+            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, nbTicksConstruction);
             _dictBatimentsDisponibles.Add(batiment, vue);
         }
     }

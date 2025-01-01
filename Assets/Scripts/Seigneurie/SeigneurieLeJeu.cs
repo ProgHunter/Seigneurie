@@ -90,7 +90,7 @@ namespace Seigneurie
             // Attribuer des ressources de base
             int qtePopBase = 1_000;
             int qteNourritureBase = 100;
-            int qteBoisBase = 3_000;
+            int qteBoisBase = 1_000;
             int qteMinerauxBase = 1_000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
             InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);

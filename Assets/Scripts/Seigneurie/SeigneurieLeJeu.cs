@@ -1,7 +1,6 @@
 using System;
 using Batiment;
 using Production;
-using Profession;
 using Ressource;
 using UI;
 using UnityEngine;
@@ -20,7 +19,7 @@ namespace Seigneurie
 
             public Action SignalTick;
             private float _tempsDuProchainTick;
-            private float _deltaTempsAvantLeProchainTick;
+            private readonly float _deltaTempsAvantLeProchainTick;
             public void Tick()
             {
                 if (SignalTick == null)
@@ -43,7 +42,7 @@ namespace Seigneurie
 
         private Tickeur _tickeur;
         // Tick � chaque 2 secondes
-        public float NbSecEntreTicks= 2f;
+        public float NbSecEntreTicks = 2f;
 
         // Appel� avant la premi�re mise � jour de l'image
         // Innitialise des valeurs pour les ressources, batiments et professions

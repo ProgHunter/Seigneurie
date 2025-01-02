@@ -33,7 +33,7 @@ namespace UI.Batiments
         
         private void MetAJourCoutTicks(long nb)
         {
-            string texte = nb == -1 ? "Indéterminé" : nb + " ticks";
+            string texte = nb == -1 ? "Aucun maçon" : nb + " ticks";
             _coutTemps.text = texte;
         }
 

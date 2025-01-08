@@ -6,6 +6,9 @@ using Utils;
 
 namespace UI
 {
+    /// <summary>
+    /// Affiche la liste des ressources produites ainsi que leurs quantités produites actuelles et anticipée selon l'état de l'assignation des professions
+    /// </summary>
     public class VueGestionnaireProductions : MonoBehaviour
     {
         [SerializeField] private Transform _parent;
@@ -43,10 +46,11 @@ namespace UI
 
             LotProfessions professions = null;
             if (productionAnticipée)
-                professions = _vueGestionnaireProfessions?.AccesLotProfessionUtilisateur();
+                professions = _vueGestionnaireProfessions.AccesLotProfessionUtilisateur();
 
             var inventaireRessources = InventaireRessources.Instance;
             var ressourceEnum = EnumUtils.GetEnumValues<RessourceEnum>();
+            //TODO simplifier cette boucle en terme de complexité
             foreach (var ressource in ressourceEnum)
             {
                 if (!inventaireRessources.EstDeverrouille(ressource))

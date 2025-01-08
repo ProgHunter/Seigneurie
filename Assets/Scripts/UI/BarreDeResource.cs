@@ -5,6 +5,9 @@ using Utils;
 
 namespace UI
 {
+    /// <summary>
+    /// Liste des ressources du joueur
+    /// </summary>
     public class BarreDeResource : MonoBehaviour
     {
         [SerializeField] private Transform _parent;

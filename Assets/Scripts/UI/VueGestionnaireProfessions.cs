@@ -8,6 +8,9 @@ using Utils;
 
 namespace UI
 {
+    /// <summary>
+    /// Gestion des assignations à chaque profession
+    /// </summary>
     public class VueGestionnaireProfessions : MonoBehaviour
     {
         [SerializeField] private Transform _parent;
@@ -57,7 +60,7 @@ namespace UI
         /// Le pourcentage de population libre est mis à jour.
         /// La production anticipé est mise à jour.
         /// </summary>
-        public void UnPourcentageEstModifie()
+        private void UnPourcentageEstModifie()
         {
             int total = 0;
             foreach ((var profession, var vueProfession) in _dictProfession)
@@ -121,10 +124,8 @@ namespace UI
         private void AjouterVueProfession(ProfessionEnum profession)
         {
             AssignationProfessionsUI vue = Instantiate(_vueInstancier, _parent);
-            var config = GestionnaireProfessions.Instance.ProfessionDictConfig[profession];
-
-            vue.InitProfession(profession, UnPourcentageEstModifie); ;
             _dictProfession.Add(profession, vue);
+            vue.InitProfession(profession, UnPourcentageEstModifie);
         }
     }
 }

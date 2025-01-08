@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace UI.Batiments
 {
+    /// <summary>
+    /// Vue d'un seul bâtiment en cours sous forme de liste
+    /// </summary>
     public class VueListeBatimentsEnCours : MonoBehaviour
     {
         [SerializeField] private Transform _content;
@@ -26,7 +29,7 @@ namespace UI.Batiments
                 var batiment = GestionnaireBatiments.Instance.EnConstruction;
                 long pourcentMacon = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
                 long nbTicks = GestionnaireProductions.Instance.NbTicksRestantsConstruction(pourcentMacon);
-                // TODO: Afficher à l'utilisateur que la contruction n'est pas en progression lorsque nbTicks == -1.
+                
                 if (_vueBatiment == null)
                 {
                     _vueBatiment = Instantiate(_vueInstancier, _content);
@@ -34,7 +37,9 @@ namespace UI.Batiments
                     _vueBatiment.Init(null, nom, nbTicks.ToString());
                 }
                 else
-                    _vueBatiment.UpdateValeurs(nbTicks.ToString()); 
+                {
+                    _vueBatiment.UpdateValeurs(nbTicks.ToString());
+                }
             }
             else
             {
@@ -42,7 +47,7 @@ namespace UI.Batiments
                 {
                     _vueBatiment.Dispose();
                     _vueBatiment = null;
-                    Debug.Log("Bâtiment terminé de construire");
+                    //Debug.Log("Bâtiment terminé de construire");
                 }
             }
             

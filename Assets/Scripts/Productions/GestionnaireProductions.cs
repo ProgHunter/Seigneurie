@@ -49,7 +49,7 @@ namespace Production
             foreach (KeyValuePair<RessourceEnum, AbstraitProduction> ressource in _productionRessourceDict)
             {
                 long production = ressource.Value.CalculerProduction(professions);
-                Debug.Log($"Production de {production} pour la ressource {ressource.Key}.");
+                //Debug.Log($"Production de {production} pour la ressource {ressource.Key}.");
                 ressourcesProduites.AttribuerQteRessource(ressource.Key, production);
             }
             InventaireRessources.Instance.AjouterQteRessourceAvecLimites(ressourcesProduites);

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    /// <summary>
+    /// GÃ¨re les pourcentages de population assignÃ©s Ã  chaque profession
+    /// </summary>
     public class AssignationProfessionsUI : MonoBehaviour, IDisposable
     {
         private ProfessionEnum _profession;
@@ -45,19 +48,15 @@ namespace UI
                 UpdatePourcentage();
         }
 
-        public ProfessionEnum GetProfession()
-        {
-            return _profession;
-        }
-
         private void ClicBoutonMoins()
         {
             if (_pourcentageActuel <= _pcMin)
                 return;
             
             _pourcentageActuel--;
-            UpdatePourcentage();
+            
             _slider.value = _pourcentageActuel;
+            UpdatePourcentage();
             //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
         
@@ -99,13 +98,14 @@ namespace UI
         }
 
         /// <summary>
-        /// Met à jour le texte de pourcentage, ainsi que toutes les autres vues qui sont concernées.
+        /// Met ï¿½ jour le texte de pourcentage, ainsi que toutes les autres vues qui sont concernï¿½es.
         /// </summary>
         private void UpdatePourcentage()
         {
             _pourcentage.text = _pourcentageActuel + "%";
 
             _pourcentageEstModifie?.Invoke();
+            //Debug.Log($"Pourcentage actuel: {_pourcentageActuel}");
         }
 
         public void Dispose()

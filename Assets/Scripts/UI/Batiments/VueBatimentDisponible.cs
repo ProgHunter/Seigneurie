@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace UI.Batiments
 {
+    /// <summary>
+    /// Ligne de la description d'un bâtiment qui est disponible à la construction 
+    /// </summary>
     public class VueBatimentDisponible : MonoBehaviour, IDisposable
     {
         [SerializeField] private Image _icone;
@@ -17,9 +20,13 @@ namespace UI.Batiments
         [SerializeField] private Button _btnDebutConstruction;
 
         private BatimentEnum _batimentEnum;
+        private const string _aucunMaçon = "Aucun maçon";
+        private const string _ticksString = " ticks";
+        private const string _msgConstructionCommencé = "Construction de ";
+        private const string _msgErreurConstruction = "Ne peut pas construire. Le bouton ne devrait pas être clickable";
 
         public void Init(BatimentEnum batimentEnum, Sprite icone, string nomBatiment, string coutRessources,
-            string description, long coutTemps)
+            string description)
         {
             _batimentEnum = batimentEnum;
             //TODO icone
@@ -33,7 +40,7 @@ namespace UI.Batiments
         
         private void MetAJourCoutTicks(long nb)
         {
-            string texte = nb == -1 ? "Aucun maçon" : nb + " ticks";
+            string texte = nb == -1 ? _aucunMaçon : nb + _ticksString;
             _coutTemps.text = texte;
         }
 
@@ -41,13 +48,11 @@ namespace UI.Batiments
         {
             if (GestionnaireBatiments.Instance.DemarrerConstruction(_batimentEnum))
             {
-                Debug.Log("Construction de " + _nomBatiment);
+                Debug.Log(_msgConstructionCommencé + _nomBatiment);
             }
             else
             {
-                Debug.LogError("Ne peut pas construire");
-                //TODO: Afficher à l'utilisateur que la construction n'a pas pu être démarré.
-                // ou simplement griser le bouton "Construire".
+                Debug.LogError(_msgErreurConstruction);
             }
         }
 
@@ -58,7 +63,7 @@ namespace UI.Batiments
 
         public void UpdateVue()
         {
-            var nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, _batimentEnum);
+            long nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, _batimentEnum);
             MetAJourCoutTicks(nbTicksConstruction);
 
             _btnDebutConstruction.interactable =

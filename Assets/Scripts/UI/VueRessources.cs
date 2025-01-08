@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace UI
 {
-    public class RessourcesUI : MonoBehaviour
+    /// <summary>
+    /// Vue de toutes les ressources
+    /// </summary>
+    public class VueRessources : MonoBehaviour
     {
         [SerializeField] private BarreDeResource _barreDeResource;
 

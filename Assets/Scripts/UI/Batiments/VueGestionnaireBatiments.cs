@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace UI.Batiments
 {
+    /// <summary>
+    /// Gestionnaire des vues portants sur les bâtiments
+    /// </summary>
     public class VueGestionnaireBatiments : MonoBehaviour
     {
         [SerializeField] private VueListeBatimentsDisponibles _batimentsDisponibles;

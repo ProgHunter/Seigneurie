@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0720e1187a1c4e1886cd6d7da0b3d8c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ressources: {fileID: 2386754729187020338}
+  _vueRessources: {fileID: 2386754729187020338}
   _vueGestionnaireProfessions: {fileID: 2361667830459103756}
   _vueGestionnaireProductions: {fileID: 8626794171284216672}
   _vueGestionnaireBatiments: {fileID: 2307491946077771369}

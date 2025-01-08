@@ -3,30 +3,37 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VueBatimentEnCours : MonoBehaviour, IDisposable
+namespace UI.Batiments
 {
-    [SerializeField] private Image _icone;
-    [SerializeField] private TextMeshProUGUI _nom;
-    [SerializeField] private TextMeshProUGUI _completion;
-
-    public void Init(Sprite icone, string nom, string completion)
+    /// <summary>
+    /// Ligne d'un bâtiment qui est en cours de construction qui affiche combien de ticks restes avant la fin de la construction
+    /// </summary>
+    public class VueBatimentEnCours : MonoBehaviour, IDisposable
     {
-        _nom.text = nom;
-        ModifierValeurCompletion(completion);
-    }
+        [SerializeField] private Image _icone;
+        [SerializeField] private TextMeshProUGUI _nom;
+        [SerializeField] private TextMeshProUGUI _completion;
 
-    public void UpdateValeurs(string completion)
-    {
-        ModifierValeurCompletion(completion);
-    }
+        public void Init(Sprite icone, string nom, string completion)
+        {
+            //TODO icone
+            _nom.text = nom;
+            ModifierValeurCompletion(completion);
+        }
 
-    private void ModifierValeurCompletion(string completion)
-    {
-        _completion.text = completion + " ticks";
-    }
+        public void UpdateValeurs(string completion)
+        {
+            ModifierValeurCompletion(completion);
+        }
 
-    public void Dispose()
-    {
-        Destroy(gameObject);
+        private void ModifierValeurCompletion(string completion)
+        {
+            _completion.text = completion + " ticks";
+        }
+
+        public void Dispose()
+        {
+            Destroy(gameObject);
+        }
     }
 }

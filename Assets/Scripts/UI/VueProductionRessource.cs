@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace UI
 {
+    /// <summary>
+    /// Ligne de la production actuelle et anticipée d'une ressource
+    /// </summary>
     public class VueProductionRessource : MonoBehaviour, IDisposable
     {
         [SerializeField] private TextMeshProUGUI _nom;

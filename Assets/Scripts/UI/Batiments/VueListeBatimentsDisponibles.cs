@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using Batiment;
-using Production;
 using UnityEngine;
 using Utils;
 
 namespace UI.Batiments
 {
+    /// <summary>
+    /// Liste des bâtiments disponibles à la construction
+    /// </summary>
     public class VueListeBatimentsDisponibles : MonoBehaviour
     {
         [SerializeField] private Transform _parent;
@@ -61,9 +63,8 @@ namespace UI.Batiments
         {
             VueBatimentDisponible vue = Instantiate(_vueInstancier, _parent);
             AbstraitBatimentConfig config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
-            var nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, batiment);
 
-            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, nbTicksConstruction);
+            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description);
             _dictBatimentsDisponibles.Add(batiment, vue);
         }
     }

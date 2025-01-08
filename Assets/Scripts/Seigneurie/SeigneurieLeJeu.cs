@@ -7,8 +7,14 @@ using UnityEngine;
 
 namespace Seigneurie
 {
+    /// <summary>
+    /// Classe principale qui gère le tick de tous les managers et du UI
+    /// </summary>
     public class SeigneurieLeJeu : MonoBehaviour
     {
+        /// <summary>
+        /// Classe interne qui gère les ticks de temps et envoie un signal au moment du tick
+        /// </summary>
         private class Tickeur
         {
             public Tickeur(float delta)
@@ -17,18 +23,18 @@ namespace Seigneurie
                 InitalizeDeltaTemps();
             }
 
-            public Action SignalTick;
+            public Action signalTick;
             private float _tempsDuProchainTick;
             private readonly float _deltaTempsAvantLeProchainTick;
             public void Tick()
             {
-                if (SignalTick == null)
+                if (signalTick == null)
                     return;
 
                 if (Time.time < _tempsDuProchainTick)
                     return;
                     
-                SignalTick();
+                signalTick();
                 _tempsDuProchainTick += _deltaTempsAvantLeProchainTick;
             }
 
@@ -48,19 +54,21 @@ namespace Seigneurie
         // Innitialise des valeurs pour les ressources, batiments et professions
         private void Start()
         {
-            AttribuerDesValeursDeDepart();
+            //AttribuerDesValeursDeDepart();
 
             _ui.Init();
             _tickeur = new Tickeur(NbSecEntreTicks);
-            _tickeur.SignalTick += SignalerTick;
+            _tickeur.signalTick += EffectuerLeTick;
         }
 
         public void Update()
         {
             _tickeur?.Tick();
         }
-
-        private void SignalerTick()
+        /// <summary>
+        /// Effectue toutes les actions qui doivent se produirent au tick
+        /// </summary>
+        private void EffectuerLeTick()
         {
             GestionnaireProductions.Instance.Production();
             _ui.UpdateAll();

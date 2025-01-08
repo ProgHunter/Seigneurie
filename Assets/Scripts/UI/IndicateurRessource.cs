@@ -4,6 +4,9 @@ using TMPro;
 
 namespace UI
 {
+    /// <summary>
+    /// Indique le nom et la quantité d'une ressource
+    /// </summary>
     public class IndicateurRessource : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _nom;

@@ -5,6 +5,9 @@ using Utils;
 
 namespace UI.Batiments
 {
+    /// <summary>
+    /// Liste des bâtiments déjà construits
+    /// </summary>
     public class VueListeBatimentsTerminés : MonoBehaviour
     {
         [SerializeField] private Transform _parent;

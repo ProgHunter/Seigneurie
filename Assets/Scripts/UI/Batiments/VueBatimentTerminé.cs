@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace UI.Batiments
 {
+    /// <summary>
+    /// Vue qui affiche le nombre de bâtiments de ce type qui sont déjà construits
+    /// </summary>
     public class VueBatimentTerminé : MonoBehaviour, IDisposable
     {
         [SerializeField] private Image _icone;
@@ -13,6 +16,7 @@ namespace UI.Batiments
 
         public void Init(Sprite icone, string nom, long quantiteConstruite)
         {
+            //TODO icone
             //_icone.sprite = icone;
             _nomBatiment.text = nom;
             _quantiteConstruite.text = quantiteConstruite.ToString();

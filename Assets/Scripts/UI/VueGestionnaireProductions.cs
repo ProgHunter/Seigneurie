@@ -50,29 +50,47 @@ namespace UI
 
             var inventaireRessources = InventaireRessources.Instance;
             var ressourceEnum = EnumUtils.GetEnumValues<RessourceEnum>();
-            //TODO simplifier cette boucle en terme de complexité
+            
             foreach (var ressource in ressourceEnum)
             {
-                if (!inventaireRessources.EstDeverrouille(ressource))
-                {
-                    if (_dictRessources.ContainsKey(ressource))
-                    {
-                        _dictRessources[ressource].Dispose();
-                        _dictRessources.Remove(ressource);
-                    }
+                //On continue si c'est une ressource verrouillée
+                if (UpdateListeRessourcesVisibles(inventaireRessources, ressource)) continue;
 
-                    continue;
+                UpdateValeursProductions(productionActuelle, productionAnticipée, ressource, professions);
+            }
+        }
+        /// <summary>
+        /// Retourne vrai si cette ressource est verrouillée
+        /// </summary>
+        /// <param name="inventaireRessources"></param>
+        /// <param name="ressource"></param>
+        /// <returns></returns>
+        private bool UpdateListeRessourcesVisibles(InventaireRessources inventaireRessources, RessourceEnum ressource)
+        {
+            if (!inventaireRessources.EstDeverrouille(ressource))
+            {
+                if (_dictRessources.ContainsKey(ressource))
+                {
+                    _dictRessources[ressource].Dispose();
+                    _dictRessources.Remove(ressource);
                 }
 
-                if (!_dictRessources.ContainsKey(ressource))
-                    AjouterVueProduction(ressource);
-
-                if (productionAnticipée)
-                    _dictRessources[ressource].ModifierValeurProductionAnticipee(professions);
-
-                if (productionActuelle)
-                    _dictRessources[ressource].ModifierValeurProductionActuelle();
+                return true;
             }
+
+            if (!_dictRessources.ContainsKey(ressource))
+                AjouterVueProduction(ressource);
+            return false;
+        }
+
+        private void UpdateValeursProductions(bool productionActuelle, bool productionAnticipée, RessourceEnum ressource,
+            LotProfessions professions)
+        {
+            if (productionAnticipée)
+                _dictRessources[ressource].ModifierValeurProductionAnticipee(professions);
+
+            if (productionActuelle)
+                _dictRessources[ressource].ModifierValeurProductionActuelle();
         }
 
         private void AjouterVueProduction(RessourceEnum ressource)

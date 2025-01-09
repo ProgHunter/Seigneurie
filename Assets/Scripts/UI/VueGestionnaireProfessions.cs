@@ -14,10 +14,10 @@ namespace UI
     public class VueGestionnaireProfessions : MonoBehaviour
     {
         [SerializeField] private Transform _parent;
-        [SerializeField] private AssignationProfessionsUI _vueInstancier;
+        [SerializeField] private VueAssignationProfessions _vueInstancier;
         [SerializeField] private TextMeshProUGUI _pourcentageRestant;
         [SerializeField] private Button _boutonSoumettre;
-        private readonly Dictionary<ProfessionEnum, AssignationProfessionsUI> _dictProfession = new();
+        private readonly Dictionary<ProfessionEnum, VueAssignationProfessions> _dictProfession = new();
 
         private Action<bool, bool> _professionsSontModifiées;
 
@@ -123,7 +123,7 @@ namespace UI
 
         private void AjouterVueProfession(ProfessionEnum profession)
         {
-            AssignationProfessionsUI vue = Instantiate(_vueInstancier, _parent);
+            VueAssignationProfessions vue = Instantiate(_vueInstancier, _parent);
             _dictProfession.Add(profession, vue);
             vue.InitProfession(profession, UnPourcentageEstModifie);
         }

@@ -34,7 +34,7 @@ namespace UI.Batiments
             _nomBatiment.text = nomBatiment;
             _coutRessources.text = coutRessources;
             _description.text = description;
-            UpdateVue();
+            UpdateValeurs();
             _btnDebutConstruction.onClick.AddListener(DémarrerConstruction);
         }
         
@@ -61,7 +61,7 @@ namespace UI.Batiments
             Destroy(gameObject);
         }
 
-        public void UpdateVue()
+        public void UpdateValeurs()
         {
             long nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, _batimentEnum);
             MetAJourCoutTicks(nbTicksConstruction);

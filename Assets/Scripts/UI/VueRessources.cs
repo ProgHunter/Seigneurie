@@ -15,7 +15,7 @@ namespace UI
         }
         public void UpdateBarre()
         {
-            _barreDeResource.UpdateRessources();
+            _barreDeResource.UpdateListeDeRessources();
         }
     }
 }

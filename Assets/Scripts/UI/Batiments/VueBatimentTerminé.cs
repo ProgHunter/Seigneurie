@@ -22,7 +22,7 @@ namespace UI.Batiments
             _quantiteConstruite.text = quantiteConstruite.ToString();
         }
 
-        public void UpdateQte(long quantiteConstruite)
+        public void UpdateValeurs(long quantiteConstruite)
         {
             _quantiteConstruite.text = quantiteConstruite.ToString();
         }

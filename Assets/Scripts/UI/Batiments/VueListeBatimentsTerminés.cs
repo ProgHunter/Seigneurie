@@ -54,7 +54,7 @@ namespace UI.Batiments
                 if (!_dictBatimentsConstruits.ContainsKey(batiment))
                     AjouterVueBatiment(batiment, qte);
                 
-                _dictBatimentsConstruits[batiment].UpdateQte(qte);
+                _dictBatimentsConstruits[batiment].UpdateValeurs(qte);
             }
         }
 

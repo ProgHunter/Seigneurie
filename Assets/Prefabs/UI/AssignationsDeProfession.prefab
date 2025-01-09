@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 7803868750677368904}
   - component: {fileID: 7803868750677368910}
   - component: {fileID: 7803868750677368911}
-  - component: {fileID: 7803868750677368909}
+  - component: {fileID: 4173749523016891671}
   m_Layer: 5
   m_Name: AssignationsDeProfession
   m_TagString: Untagged
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7803868750677368909
+--- !u!114 &4173749523016891671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

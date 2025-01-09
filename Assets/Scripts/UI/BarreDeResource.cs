@@ -26,7 +26,7 @@ namespace UI
             }
         }
 
-        public void UpdateRessources()
+        public void UpdateListeDeRessources()
         {
             if (!gameObject.activeInHierarchy)
                 return;

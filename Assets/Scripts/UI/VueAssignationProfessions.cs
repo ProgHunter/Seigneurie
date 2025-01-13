@@ -29,6 +29,7 @@ namespace UI
         {
             return _pourcentageActuel;
         }
+
         public void Awake()
         {
             _boutonMoins.onClick.AddListener(ClicBoutonMoins);
@@ -45,7 +46,7 @@ namespace UI
                 
                 //Debug.Log($"Pourcentage pour {_profession}: {_pourcentageActuel}");
                 _pourcentageEstModifie = professionEstModifie;
-                UpdatePourcentage();
+                MetAJourPourcentage();
         }
 
         private void ClicBoutonMoins()
@@ -56,7 +57,7 @@ namespace UI
             _pourcentageActuel--;
             
             _slider.value = _pourcentageActuel;
-            UpdatePourcentage();
+            MetAJourPourcentage();
             //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
         
@@ -69,7 +70,7 @@ namespace UI
                 return;
             }
             _pourcentageActuel++;
-            UpdatePourcentage();
+            MetAJourPourcentage();
             _slider.value = _pourcentageActuel;
             //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
@@ -93,14 +94,14 @@ namespace UI
             }*/
             
             _pourcentageActuel = (int)value;
-            UpdatePourcentage();
+            MetAJourPourcentage();
             //Debug.Log("Slider "+ value);
         }
 
         /// <summary>
         /// Met � jour le texte de pourcentage, ainsi que toutes les autres vues qui sont concern�es.
         /// </summary>
-        private void UpdatePourcentage()
+        private void MetAJourPourcentage()
         {
             _pourcentage.text = _pourcentageActuel + "%";
 

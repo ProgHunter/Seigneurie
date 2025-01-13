@@ -23,14 +23,7 @@ namespace UI
 
             _vueGestionnaireProfessions = vueGestionnaireProfessions;
 
-            var ressources = EnumUtils.GetEnumValues<RessourceEnum>();
-            foreach (var ressource in ressources)
-            {
-                if (!InventaireRessources.Instance.EstDeverrouille(ressource))
-                    continue;
-
-                AjouterVueProduction(ressource);
-            }
+            MiseAJourListeProductions();
         }
 
         /// <summary>
@@ -39,7 +32,7 @@ namespace UI
         /// </summary>
         /// <param name="productionActuelle">Mettre � jour la vue de la production actuelle</param>
         /// <param name="productionAnticipée">Mettre � jour la vue de la production anticip�e</param>
-        public void MiseAJourListeProductions(bool productionActuelle, bool productionAnticipée)
+        public void MiseAJourListeProductions(bool productionActuelle = true, bool productionAnticipée = true)
         {
             if (!gameObject.activeInHierarchy)
                 return;
@@ -54,18 +47,19 @@ namespace UI
             foreach (var ressource in ressourceEnum)
             {
                 //On continue si c'est une ressource verrouillée
-                if (UpdateListeRessourcesVisibles(inventaireRessources, ressource)) continue;
+                if (MetAJourListeRessourcesVisibles(inventaireRessources, ressource)) continue;
 
-                UpdateValeursProductions(productionActuelle, productionAnticipée, ressource, professions);
+                MetAJourValeursProductions(productionActuelle, productionAnticipée, ressource, professions);
             }
         }
+
         /// <summary>
         /// Retourne vrai si cette ressource est verrouillée
         /// </summary>
         /// <param name="inventaireRessources"></param>
         /// <param name="ressource"></param>
         /// <returns></returns>
-        private bool UpdateListeRessourcesVisibles(InventaireRessources inventaireRessources, RessourceEnum ressource)
+        private bool MetAJourListeRessourcesVisibles(InventaireRessources inventaireRessources, RessourceEnum ressource)
         {
             if (!inventaireRessources.EstDeverrouille(ressource))
             {
@@ -80,10 +74,11 @@ namespace UI
 
             if (!_dictRessources.ContainsKey(ressource))
                 AjouterVueProduction(ressource);
+
             return false;
         }
 
-        private void UpdateValeursProductions(bool productionActuelle, bool productionAnticipée, RessourceEnum ressource,
+        private void MetAJourValeursProductions(bool productionActuelle, bool productionAnticipée, RessourceEnum ressource,
             LotProfessions professions)
         {
             if (productionAnticipée)

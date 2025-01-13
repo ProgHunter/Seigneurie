@@ -49,7 +49,6 @@ namespace Ressource
 
         public override string ToString()
         {
-            //TODO redo with better names
             List<string> listeRessources = new();
             foreach ((RessourceEnum ressource, Qte quantité) in _ressourcesDict)
             {
@@ -60,8 +59,8 @@ namespace Ressource
                 }
             }
 
-            var s = String.Join("\n", listeRessources.ToArray());
-            return s;
+            var listeRessourcesString = String.Join("\n", listeRessources.ToArray());
+            return listeRessourcesString;
         }
 
         #region accesseurs_mutateurs

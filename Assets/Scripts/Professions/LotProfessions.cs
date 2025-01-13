@@ -1,3 +1,4 @@
+using Ressource;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -145,6 +146,21 @@ namespace Profession
             }
 
             return pcMax;
+        }
+
+        /// <summary>
+        /// Les pourcentages des professions sont égaux.
+        /// </summary>
+        /// <param name="lot2">Le deuxième lot à commparer.</param>
+        /// <returns>Vrai si tous les pourcentages des professions sont égaux.</returns>
+        public bool EstEgale(LotProfessions lot2)
+        {
+            var professions = EnumUtils.GetEnumValues<ProfessionEnum>();
+            foreach (var profession in professions)
+                if (AccesPourcentProfession(profession) != lot2.AccesPourcentProfession(profession))
+                    return false;
+
+            return true;
         }
     }
 }

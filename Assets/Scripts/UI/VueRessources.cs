@@ -13,9 +13,9 @@ namespace UI
         {
             _barreDeResource.Init();
         }
-        public void UpdateBarre()
+        public void MetAJourListeDeRessources()
         {
-            _barreDeResource.UpdateListeDeRessources();
+            _barreDeResource.MetAJourListeDeRessources();
         }
     }
 }

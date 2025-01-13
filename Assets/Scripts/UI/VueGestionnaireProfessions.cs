@@ -28,14 +28,7 @@ namespace UI
 
         public void Init(Action<bool,bool> professionsSontModifiées)
         {
-            var professions = EnumUtils.GetEnumValues<ProfessionEnum>();
-            foreach (var profession in professions)
-            {
-                if (!GestionnaireProfessions.Instance.EstDeverrouille(profession))
-                    continue;
-
-                AjouterVueProfession(profession);
-            }
+            MiseAJourListeProfessions();
 
             _professionsSontModifiées = professionsSontModifiées;
         }
@@ -117,6 +110,12 @@ namespace UI
 
             LotProfessions lotProfessions = AccesLotProfessionUtilisateur();
             GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessions);
+            // Valider si le gestionnaire est en phase avec le UI
+            if (!lotProfessions.EstEgale(GestionnaireProfessions.Instance.Professions))
+            {
+                Debug.LogError("Le pourcentage des professions du UI sont désynchronisé du gestionnaire.");
+                //TODO: Idéalement corriger les sliders et valeurs du UI pour celle du gestionnaire.
+            }
 
             _professionsSontModifiées?.Invoke(true, false);
         }

@@ -24,10 +24,5 @@ namespace UI
         {
             _nombre.text = InventaireRessources.Instance.AccesQteRessource(_ressourceRepresentee).ToString();
         }
-
-        public RessourceEnum AccesRessourceEnum()
-        {
-            return _ressourceRepresentee;
-        }
     }
 }

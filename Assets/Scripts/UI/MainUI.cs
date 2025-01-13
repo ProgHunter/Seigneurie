@@ -21,10 +21,10 @@ namespace UI
             _vueGestionnaireBatiments.Init();
         }
         
-        public void UpdateAll()
+        public void MetAJourLesVues()
         {
-            _vueRessources.UpdateBarre();
-            _vueGestionnaireBatiments.UpdateVues();
+            _vueRessources.MetAJourListeDeRessources();
+            _vueGestionnaireBatiments.MetAJourVues();
             _vueGestionnaireProductions.MiseAJourListeProductions(true, true);
         }
     }

@@ -16,17 +16,10 @@ namespace UI.Batiments
 
         public void InitListe()
         {
-            var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
-            foreach (var batiment in batiments)
-            {
-                long qte = GestionnaireBatiments.Instance.AccesQteBatiment(batiment);
-                if (qte <= 0)
-                    continue;
-
-                AjouterVueBatiment(batiment, qte);
-            }
+            MetAJourListe();
         }
-        public void UpdateListe()
+
+        public void MetAJourListe()
         {
             if (!gameObject.activeInHierarchy)
                 return;

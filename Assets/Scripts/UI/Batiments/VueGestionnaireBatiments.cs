@@ -18,14 +18,14 @@ namespace UI.Batiments
             _batimentsEnCours.InitListe();
         }
 
-        public void UpdateVues()
+        public void MetAJourVues()
         {
             if (!gameObject.activeInHierarchy)
                 return;
 
-            _batimentsEnCours.UpdateListe();
-            _batimentsTerminés.UpdateListe();
-            _batimentsDisponibles.UpdateListe();
+            _batimentsEnCours.MetAJourListe();
+            _batimentsTerminés.MetAJourListe();
+            _batimentsDisponibles.MetAJourListe();
         }
     }
 }

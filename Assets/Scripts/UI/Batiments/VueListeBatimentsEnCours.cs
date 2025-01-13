@@ -16,24 +16,25 @@ namespace UI.Batiments
         private VueBatimentEnCours _vueBatiment;
         public void InitListe()
         {
-            UpdateListe();
+            MetAJourListe();
         }
 
-        public void UpdateListe()
+        public void MetAJourListe()
         {
             if (!gameObject.activeInHierarchy)
                 return;
-            
-            if (GestionnaireBatiments.Instance.ConstructionEstEnCours())
+
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            if (gestionnaireBatiments.ConstructionEstEnCours())
             {
-                var batiment = GestionnaireBatiments.Instance.EnConstruction;
+                var batiment = gestionnaireBatiments.EnConstruction;
                 long pourcentMacon = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
                 long nbTicks = GestionnaireProductions.Instance.NbTicksRestantsConstruction(pourcentMacon);
                 
                 if (_vueBatiment == null)
                 {
                     _vueBatiment = Instantiate(_vueInstancier, _content);
-                    string nom = GestionnaireBatiments.Instance.BatimentConfigDict[batiment.Item1].Nom;
+                    string nom = gestionnaireBatiments.BatimentConfigDict[batiment.Item1].Nom;
                     _vueBatiment.Init(null, nom, nbTicks.ToString());
                 }
                 else
@@ -51,10 +52,10 @@ namespace UI.Batiments
                 }
             }
             
-            UpdateMessageListeVide();
+            MetAJourMessageListeVide();
         }
 
-        private void UpdateMessageListeVide()
+        private void MetAJourMessageListeVide()
         {
             _msgAucunEnCours.SetActive(!GestionnaireBatiments.Instance.ConstructionEstEnCours());
         }

@@ -104,7 +104,6 @@ namespace UI
             if (total > 100)
             {
                 Debug.LogError("Total des lotProfessions assignées incorrectes");
-                // TODO: Ajouter un retour utilisateur
                 return;
             }
 

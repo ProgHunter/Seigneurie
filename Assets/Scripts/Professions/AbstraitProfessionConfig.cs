@@ -12,7 +12,7 @@ namespace Profession
         private Sprite _icone;
         private string _description;
         /// <summary>
-        /// <see cref="ProfessionPourcent"/> Pourcentage de la population affecté de base à la profession.
+        /// <see cref="ProfessionPourcent"/> Pourcentage de la population affectÃ© de base Ã  la profession.
         /// </summary>
         private Qte _professionPourcent;
         private LotBatiments _prerequis;

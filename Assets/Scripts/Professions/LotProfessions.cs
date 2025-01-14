@@ -8,7 +8,7 @@ namespace Profession
     public class LotProfessions
     {
         /// <summary>
-        /// <see cref="_professionsDict"/> Chaque profession a un pourcentage attribu� [0,100].
+        /// <see cref="_professionsDict"/> Chaque profession a un pourcentage attribué [0,100].
         ///                                Celui-ci impacte la production de ressources.
         /// </summary>
         private Dictionary<ProfessionEnum, Qte> _professionsDict;
@@ -38,9 +38,9 @@ namespace Profession
         }
 
         /// <summary>
-        /// Cr�e un clone profond du lot de professions
+        /// Crée un clone profond du lot de professions
         /// </summary>
-        /// <returns>Nouvel objet LotProfessions avec les m�mes valeurs</returns>
+        /// <returns>Nouvel objet LotProfessions avec les mêmes valeurs</returns>
         public LotProfessions Clone()
         {
             return new LotProfessions(_professionsDict[ProfessionEnum.NATALITE].Clone(),
@@ -72,7 +72,7 @@ namespace Profession
         }
 
         /// <summary>
-        /// Donne acc�s au pourcentage d'une profession en fraction [0,1].
+        /// Donne accès au pourcentage d'une profession en fraction [0,1].
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <returns>Le pourcentage [0,1]</returns>
@@ -82,11 +82,11 @@ namespace Profession
         }
 
         /// <summary>
-        /// Attribue un pourcentage � une profession.
+        /// Attribue un pourcentage à une profession.
         /// Aucune validation.
         /// </summary>
         /// <param name="profession">La profession</param>
-        /// <param name="pcProfession">Le pourcentage � attribuer [0, 100].</param>
+        /// <param name="pcProfession">Le pourcentage à attribuer [0, 100].</param>
         public void AttribuerPourcentProfession(ProfessionEnum profession, long pcProfession)
         {
             try
@@ -100,7 +100,7 @@ namespace Profession
         }
 
         /// <summary>
-        /// Attribue le pourcentage de chaque profession du lot � celui-ci.
+        /// Attribue le pourcentage de chaque profession du lot à celui-ci.
         /// Aucune validation.
         /// </summary>
         /// <param name="pcProfessions">Le lot de professions avec les pourcentages</param>

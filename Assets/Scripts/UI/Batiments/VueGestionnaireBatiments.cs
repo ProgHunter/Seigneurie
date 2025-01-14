@@ -18,7 +18,7 @@ namespace UI.Batiments
             _batimentsEnCours.InitListe();
         }
 
-        public void MetAJourVues()
+        public void MetAJourListeVuesBatiments()
         {
             if (!gameObject.activeInHierarchy)
                 return;

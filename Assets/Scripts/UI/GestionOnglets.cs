@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,20 +11,22 @@ namespace UI
     {
         [SerializeField] List<GameObject> _ongletsVues;
         private int _indexActif;
+        public Action QuandBoutonAppuyé;
         public void Awake()
         {
             _ongletsVues[_indexActif].SetActive(true);
-            UpdateLesVues();
+            MetAJourLesBoutonsOnglets();
         }
 
         //Utilisé dans Ui
         public void OngletAppuyé(int indexOnglet)
         {
             _indexActif = indexOnglet;
-            UpdateLesVues();
+            MetAJourLesBoutonsOnglets();
+            QuandBoutonAppuyé?.Invoke();
         }
 
-        private void UpdateLesVues()
+        private void MetAJourLesBoutonsOnglets()
         {
             for (int index = 0; index < _ongletsVues.Count; index++)
             {

@@ -99,7 +99,7 @@ namespace UI
         }
 
         /// <summary>
-        /// Met � jour le texte de pourcentage, ainsi que toutes les autres vues qui sont concern�es.
+        /// Met à jour le texte de pourcentage, ainsi que toutes les autres vues qui sont concernées.
         /// </summary>
         private void MetAJourPourcentage()
         {

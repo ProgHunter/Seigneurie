@@ -12,7 +12,7 @@ namespace Batiment
             Id = "B3_Mine";
             Nom = "Mine";
             Icone = null;  // TODO
-            Description = "Permet d'augmenter production de minéraux.";
+            Description = "Permet d'augmenter production de minÃ©raux.";
             Qte = new Qte(0 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
             CoutConstruction = new LotRessources(0, 0, 50, 10);
             EffortConstruction = 20;

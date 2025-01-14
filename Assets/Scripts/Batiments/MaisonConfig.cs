@@ -7,8 +7,8 @@ namespace Batiment
     {
         #region membres
         /// <summary>
-        /// <see cref="Capacite"/> Indique à quel point une maison contribue à la croissance de la population. 
-        ///                        La population ne pourra jamais croître et excéder cette valeur multipliée par le nombre de maisons.
+        /// <see cref="Capacite"/> Indique Ã  quel point une maison contribue Ã  la croissance de la population. 
+        ///                        La population ne pourra jamais croÃ®tre et excÃ©der cette valeur multipliÃ©e par le nombre de maisons.
         /// </summary>
         private int _capacite;
         #endregion membres
@@ -22,9 +22,9 @@ namespace Batiment
             CoutConstruction = new LotRessources(0, 0, 10, 5);  // TODO: Mettres les valeurs dans un fichier de config
             EffortConstruction = 5;
             Capacite = 10;
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
             Description = "Permet d'augmenter la croissance de la population. \n" +
-                          $"Une {Nom} peut héberger jusqu'à {Capacite} personnes.";
+                          $"Une {Nom} peut hÃ©berger jusqu'Ã© {Capacite} personnes.";
         }
 
         public int Capacite { get => _capacite; private set => _capacite = value; }

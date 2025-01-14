@@ -16,7 +16,7 @@ namespace Utils
         {
             if (croissance <= 0)
                 return popMin;
-            // Prévenir une division par zéro
+            // PrÃ©venir une division par zÃ©ro
             popMin = popMin < 1 ? 1 : popMin;
             capaciteMax = capaciteMax < popMin ? popMin + 1 : capaciteMax;
 
@@ -31,11 +31,11 @@ namespace Utils
         /// <param name="popMin">Po, entier positif dans l'interval [1, max long]</param>
         /// <param name="capaciteMax">K, entier positif dans l'interval [popMin+1, max long]</param>
         /// <param name="croissance">r, taux de croissance dans l'interval [0.01, 1]</param>
-        /// <returns>t(P) soit le tick correspodant à la quantité de population actuelle sur la courbe. [0, max double]</returns>
+        /// <returns>t(P) soit le tick correspodant Ã  la quantitÃ© de population actuelle sur la courbe. [0, max double]</returns>
         public static double FonctionLogistiqueTickIsole(long popActuelle, long popMin, long capaciteMax, float croissance)
         {
             popActuelle = popActuelle <= popMin ? popMin : popActuelle;
-            // Empècher la division par zéro ou le log d'un négatif
+            // EmpÃªcher la division par zÃ©ro ou le log d'un nÃ©gatif
             capaciteMax = capaciteMax <= popActuelle ? capaciteMax + 1 : capaciteMax;
             
             croissance = croissance <= 0 ? 0.01f : croissance;

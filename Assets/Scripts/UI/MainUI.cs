@@ -12,6 +12,12 @@ namespace UI
         [SerializeField] private VueGestionnaireProfessions _vueGestionnaireProfessions;
         [SerializeField] private VueGestionnaireProductions _vueGestionnaireProductions;
         [SerializeField] private VueGestionnaireBatiments _vueGestionnaireBatiments;
+        [SerializeField] private GestionOnglets _onglets;
+
+        private void Awake()
+        {
+            _onglets.QuandBoutonAppuyé += MetAJourLesVues;
+        }
 
         public void Init()
         {
@@ -24,8 +30,8 @@ namespace UI
         public void MetAJourLesVues()
         {
             _vueRessources.MetAJourListeDeRessources();
-            _vueGestionnaireBatiments.MetAJourVues();
-            _vueGestionnaireProductions.MiseAJourListeProductions(true, true);
+            _vueGestionnaireBatiments.MetAJourListeVuesBatiments();
+            _vueGestionnaireProductions.MiseAJourListeProductions();
         }
     }
 }

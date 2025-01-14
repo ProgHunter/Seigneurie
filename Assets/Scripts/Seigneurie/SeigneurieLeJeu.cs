@@ -47,10 +47,10 @@ namespace Seigneurie
         [SerializeField] private MainUI _ui;
 
         private Tickeur _tickeur;
-        // Tick � chaque 2 secondes
+        // Tick à chaque 2 secondes
         public float NbSecEntreTicks = 2f;
 
-        // Appel� avant la premi�re mise � jour de l'image
+        // Appelé avant la première mise à jour de l'image
         // Innitialise des valeurs pour les ressources, batiments et professions
         private void Start()
         {
@@ -80,14 +80,14 @@ namespace Seigneurie
         /// </summary>
         private void AttribuerDesValeursDeDepart()
         {
-            // Mettre toutes les productions de ressources � 25%
+            // Mettre toutes les productions de ressources à 25%
             //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
             //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
             //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
             //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
             //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
 
-            // Cr�ation de b�timents
+            // Création de bâtiments
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 10);
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, 1);
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, 0);

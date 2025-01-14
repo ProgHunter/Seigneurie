@@ -21,8 +21,8 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Constructeur pour un lot de ressources qui exprime seulement une quantité.
-        /// Pas de min ni de max spécifié.
+        /// Constructeur pour un lot de ressources qui exprime seulement une quantitÃ©.
+        /// Pas de min ni de max spÃ©cifiÃ©.
         /// </summary>
         public LotRessources(long qtePopulation = 0, long qteNourriture = 0, long qteBois = 0, long qteMineraux = 0)
         {
@@ -36,9 +36,9 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Crée un clone profond du lot de ressources
+        /// CrÃ©e un clone profond du lot de ressources
         /// </summary>
-        /// <returns>Nouvel objet LotRessources avec les mêmes valeurs</returns>
+        /// <returns>Nouvel objet LotRessources avec les mÃªmes valeurs</returns>
         public LotRessources Clone()
         {
             return new LotRessources(_ressourcesDict[RessourceEnum.POPULATION].Clone(),
@@ -50,11 +50,11 @@ namespace Ressource
         public override string ToString()
         {
             List<string> listeRessources = new();
-            foreach ((RessourceEnum ressource, Qte quantité) in _ressourcesDict)
+            foreach ((RessourceEnum ressource, Qte quantitÃ©) in _ressourcesDict)
             {
-                if (quantité.qte > 0)
+                if (quantitÃ©.qte > 0)
                 {
-                    string texte = $"{quantité.qte} {InventaireRessources.Instance.RessourceConfigDict[ressource].Nom}";
+                    string texte = $"{quantitÃ©.qte} {InventaireRessources.Instance.RessourceConfigDict[ressource].Nom}";
                     listeRessources.Add(texte);
                 }
             }
@@ -65,10 +65,10 @@ namespace Ressource
 
         #region accesseurs_mutateurs
         /// <summary>
-        /// Donne accès à la quantité d'une ressource.
+        /// Donne accÃ¨s Ã  la quantitÃ© d'une ressource.
         /// </summary>
-        /// <param name="ressource">La ressource dont on veut avoir la quantité</param>
-        /// <returns>La quantité de la ressource</returns>
+        /// <param name="ressource">La ressource dont on veut avoir la quantitÃ©</param>
+        /// <returns>La quantitÃ© de la ressource</returns>
         public long AccesQteRessource(RessourceEnum ressource)
         {
             long qte = 0;
@@ -86,10 +86,10 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Attribue une valeur spécifique à la _qte d'une ressource.
+        /// Attribue une valeur spÃ©cifique Ã  la _qte d'une ressource.
         /// </summary>
-        /// <param name="ressource">La ressource à attribuer</param>
-        /// <param name="qte">La quantité à attribuer</param>
+        /// <param name="ressource">La ressource Ã  attribuer</param>
+        /// <param name="qte">La quantitÃ© Ã  attribuer</param>
         public void AttribuerQteRessource(RessourceEnum ressource, long qte)
         {
             try
@@ -103,9 +103,9 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Attribue une valeur spécifique aux _qte des ressources du lot.
+        /// Attribue une valeur spÃ©cifique aux _qte des ressources du lot.
         /// </summary>
-        /// <param name="lotRessource">Le lot de ressources avec les _qte à attribuer à celui-ci</param>
+        /// <param name="lotRessource">Le lot de ressources avec les _qte Ã  attribuer Ã  celui-ci</param>
         public void AttribuerQteRessource(LotRessources lotRessource)
         {
             foreach (RessourceEnum ressource in _ressourcesDict.Keys)
@@ -113,10 +113,10 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Donne accès à la limite minimal d'une ressource.
+        /// Donne accÃ¨s Ã  la limite minimal d'une ressource.
         /// </summary>
         /// <param name="ressource">Le type de ressource</param>
-        /// <returns>La quantité minimal de la ressource</returns>
+        /// <returns>La quantitÃ© minimal de la ressource</returns>
         public long AccesQteMinRessource(RessourceEnum ressource)
         {
             long qteMin = 0;
@@ -143,10 +143,10 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Donne accès à la limite maximal d'une ressource.
+        /// Donne accÃ¨s Ã  la limite maximal d'une ressource.
         /// </summary>
         /// <param name="ressource">Le type de ressource</param>
-        /// <returns>La quantité maximale de la ressource</returns>
+        /// <returns>La quantitÃ© maximale de la ressource</returns>
         public long AccesQteMaxRessource(RessourceEnum ressource)
         {
             long qteMax = 0;
@@ -167,7 +167,7 @@ namespace Ressource
         /// Modifie la limite maximale d'un type de ressource.
         /// </summary>
         /// <param name="ressource">Le type de ressource</param>
-        /// <param name="qteMax">La quantité maximale</param>
+        /// <param name="qteMax">La quantitÃ© maximale</param>
         public void ModifierLimiteMaxRessource(RessourceEnum ressource, long qteMax)
         {
             try
@@ -183,9 +183,9 @@ namespace Ressource
 
         #region operateurs
         /// <summary>
-        /// Additionne les _qte de ressources du lot en entrée à notre lot.
+        /// Additionne les _qte de ressources du lot en entrÃ©e Ã  notre lot.
         /// </summary>
-        /// <param name="lot">Le lot de _qte à ajouter</param>
+        /// <param name="lot">Le lot de _qte Ã  ajouter</param>
         public void AdditionnerQteRessources(LotRessources lot)
         {
             foreach (RessourceEnum ressource in _ressourcesDict.Keys)
@@ -195,12 +195,12 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Crée l'opposé du lot actuel.
-        /// Exemple, l'opposé de la _qte 5 est -5.
-        /// Util pour transformer un lot de ressource en coût que l'on veut additionner à un autre lot par la suite.
+        /// CrÃ©e l'opposÃ© du lot actuel.
+        /// Exemple, l'opposÃ© de la _qte 5 est -5.
+        /// Util pour transformer un lot de ressource en coÃ»t que l'on veut additionner Ã  un autre lot par la suite.
         /// </summary>
-        /// <param name="lot">Le lot dont on veut l'opposé</param>
-        /// <returns>Un lot de ressource dont les _qte sont opposées de celles du lot actuel</returns>
+        /// <param name="lot">Le lot dont on veut l'opposÃ©</param>
+        /// <returns>Un lot de ressource dont les _qte sont opposÃ©es de celles du lot actuel</returns>
         public static LotRessources operator -(LotRessources lot)
         {
             LotRessources lotResultant = new LotRessources();
@@ -211,12 +211,12 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Compare si le premier lot de ressources est plus petit ou égale au deuxième.
-        /// On vient comparer la quantité pour chaque type de ressource.
+        /// Compare si le premier lot de ressources est plus petit ou Ã©gale au deuxiÃ¨me.
+        /// On vient comparer la quantitÃ© pour chaque type de ressource.
         /// </summary>
         /// <param name="lot1">Premier lot de ressources</param>
-        /// <param name="lot2">Deuxième lot de ressources</param>
-        /// <returns>Vrai si la quantité de chaque type de ressource est plus petit ou égale</returns>
+        /// <param name="lot2">DeuxiÃ¨me lot de ressources</param>
+        /// <returns>Vrai si la quantitÃ© de chaque type de ressource est plus petit ou Ã©gale</returns>
         public static bool operator <=(LotRessources lot1, LotRessources lot2)
         {
         foreach ((RessourceEnum batiment, Qte qteRessource) in lot1._ressourcesDict)
@@ -232,12 +232,12 @@ namespace Ressource
         }
 
         /// <summary>
-        /// Compare si le premier lot de ressources est plus grand ou égale au deuxième.
-        /// On vient comparer la quantité pour chaque type de ressource.
+        /// Compare si le premier lot de ressources est plus grand ou Ã©gale au deuxiÃ¨me.
+        /// On vient comparer la quantitÃ© pour chaque type de ressource.
         /// </summary>
         /// <param name="lot1">Premier lot de ressources.</param>
-        /// <param name="lot2">Deuxième lot de ressources.</param>
-        /// <returns>Vrai si la quantité de chaque type de ressource est plus grand ou égale</returns>
+        /// <param name="lot2">DeuxiÃ¨me lot de ressources.</param>
+        /// <returns>Vrai si la quantitÃ© de chaque type de ressource est plus grand ou Ã©gale</returns>
         public static bool operator >=(LotRessources lot1, LotRessources lot2)
         {
             foreach ((RessourceEnum batiment, Qte qteRessource) in lot1._ressourcesDict)

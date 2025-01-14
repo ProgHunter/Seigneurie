@@ -37,7 +37,7 @@ namespace Production
         }
 
         /// <summary>
-        /// Ex�cute un tick de production pour le jeu.
+        /// Exécute un tick de production pour le jeu.
         /// Comprend les types de ressources dans l'inventaire et la construction de batiment.
         /// </summary>
         public void Production()

@@ -10,8 +10,8 @@ namespace Profession
             Id = "P2_Bucheron";
             Nom = "Bucheron";
             Icone = null; // TODO
-            Description = "Contribut à la production de bois dans la Seigneurie";
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Description = "Contribut Ã© la production de bois dans la Seigneurie";
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
             ProfessionPourcent = new Qte(0 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
         }
     }

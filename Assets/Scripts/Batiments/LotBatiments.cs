@@ -21,8 +21,8 @@ namespace Batiment
         }
 
         /// <summary>
-        /// Constructeur pour un lot de b‚timents qui exprime seulement une quantitÈ.
-        /// Pas de min ni de max spÈcifiÈ.
+        /// Constructeur pour un lot de b√¢timents qui exprime seulement une quantit√©.
+        /// Pas de min ni de max sp√©cifi√©.
         /// </summary>
         public LotBatiments(long qteMaison = 0, long qteFerme = 0, long qteScierie = 0, long qteMine = 0, long qteHotelDeVille = 0)
         {
@@ -37,9 +37,9 @@ namespace Batiment
         }
 
         /// <summary>
-        /// CrÈe un clone profond du lot de b‚timents
+        /// Cr√©e un clone profond du lot de b√¢timents
         /// </summary>
-        /// <returns>Nouvel objet LotBatiments avec les mÍmes valeurs</returns>
+        /// <returns>Nouvel objet LotBatiments avec les  √† s valeurs</returns>
         public LotBatiments Clone()
         {
             return new LotBatiments(_batimentsDict[BatimentEnum.MAISON].Clone(),
@@ -51,10 +51,10 @@ namespace Batiment
 
         #region accesseurs_mutateurs
         /// <summary>
-        /// Donne accËs ‡ la quantitÈ d'un type de b‚timent.
+        /// Donne acc√®s √† la quantit√© d'un type de b√¢timent.
         /// </summary>
-        /// <param name="batiment">Le b‚timent dont on veut avoir la quantitÈ</param>
-        /// <returns>La quantitÈ de ce b‚timent</returns>
+        /// <param name="batiment">Le b√¢timent dont on veut avoir la quantit√©</param>
+        /// <returns>La quantit√© de ce b√¢timent</returns>
         public long AccesQteBatiment(BatimentEnum batiment)
         {
             long quantite = 0;
@@ -65,19 +65,19 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
             }
 
             return quantite;
         }
 
         /// <summary>
-        /// Attribue une quantitÈ spÈcifique d'un b‚timent.
-        /// Ne valide pas avec le min et le max de cette quantitÈ.
-        /// Cette responsabilitÈ est lessÈe ‡ l'appelant.
+        /// Attribue une quantit√© sp√©cifique d'un b√¢timent.
+        /// Ne valide pas avec le min et le max de cette quantit√©.
+        /// Cette responsabilit√© est laiss√©e √† l'appelant.
         /// </summary>
-        /// <param name="batiment">Le b‚timent</param>
-        /// <param name="qte">La quantitÈ ‡ attribuer</param>
+        /// <param name="batiment">Le b√¢timent</param>
+        /// <param name="qte">La quantit√© √† attribuer</param>
         public void AttribuerQteBatiment(BatimentEnum batiment, long qte)
         {
             try
@@ -86,12 +86,12 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
             }
         }
 
         /// <summary>
-        /// Attribue la valeur minimale (qteMin) aux _qte des b‚timents du lot.
+        /// Attribue la valeur minimale (qteMin) aux _qte des b√¢timents du lot.
         /// </summary>
         public void AttribuerQteMinBatiment()
         {
@@ -100,10 +100,10 @@ namespace Batiment
         }
 
         /// <summary>
-        /// Donne accËs ‡ la quantitÈ maximal d'un type de b‚timent.
+        /// Donne acc√®s √† la quantit√© maximal d'un type de b√¢timent.
         /// </summary>
-        /// <param name="batiment">Le b‚timent dont on veut avoir la quantitÈ maximal</param>
-        /// <returns>La quantitÈ de ce b‚timent</returns>
+        /// <param name="batiment">Le b√¢timent dont on veut avoir la quantit√© maximal</param>
+        /// <returns>La quantit√© de ce b√¢timent</returns>
         public long AccesQteMaxBatiment(BatimentEnum batiment)
         {
             long qteMax = 0;
@@ -114,17 +114,17 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
             }
 
             return qteMax;
         }
 
         /// <summary>
-        /// Attribue la quantitÈ maximal d'un b‚timent.
+        /// Attribue la quantit√© maximal d'un b√¢timent.
         /// </summary>
-        /// <param name="batiment">Le b‚timent</param>
-        /// <param name="qteMax">La quantitÈ ‡ attribuer</param>
+        /// <param name="batiment">Le b√¢timent</param>
+        /// <param name="qteMax">La quantit√© √† attribuer</param>
         public void ModifierLimiteMaxBatiment(BatimentEnum batiment, long qteMax)
         {
             try
@@ -133,18 +133,18 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
             }
         }
         #endregion accesseurs_mutateurs
 
         #region operateurs
         /// <summary>
-        /// Ajoute un b‚timent du type voulu au lot
-        /// Valide la quantitÈ maximale.
+        /// Ajoute un b√¢timent du type voulu au lot
+        /// Valide la quantit√© maximale.
         /// </summary>
         /// <param name="batiment">Le batiment que l'on veut un de plus</param>
-        /// <returns>Vrai si le nombre a ÈtÈ incrÈmentÈ</returns>
+        /// <returns>Vrai si le nombre a √©t√© incr√©ment√©</returns>
         public bool AjouterUnBatiment(BatimentEnum batiment)
         {
             long qte;
@@ -155,7 +155,7 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
                 return false;
             }
 
@@ -167,12 +167,12 @@ namespace Batiment
         }
 
         /// <summary>
-        /// Compare si le premier lot de batiments est plus petit ou Ègale au deuxiËme.
-        /// On vient comparer la quantitÈ pour chaque type de batiment.
+        /// Compare si le premier lot de batiments est plus petit ou √©gale au deuxi√®me.
+        /// On vient comparer la quantit√© pour chaque type de batiment.
         /// </summary>
         /// <param name="lot1">Premier lot de batiments</param>
-        /// <param name="lot2">DeuxiËme lot de batiments</param>
-        /// <returns>Vrai si la quantitÈ de chaque type de batiment est plus petit ou Ègale</returns>
+        /// <param name="lot2">Deuxi√®me lot de batiments</param>
+        /// <returns>Vrai si la quantit√© de chaque type de batiment est plus petit ou √©gale</returns>
         public static bool operator <=(LotBatiments lot1, LotBatiments lot2)
         {
             foreach ((BatimentEnum batiment, Qte qteBatiment) in lot1._batimentsDict)
@@ -188,12 +188,12 @@ namespace Batiment
         }
 
         /// <summary>
-        /// Compare si le premier lot de batiments est plus grand ou Ègale au deuxiËme.
-        /// On vient comparer la quantitÈ pour chaque type de batiment.
+        /// Compare si le premier lot de batiments est plus grand ou √©gale au deuxi√®me.
+        /// On vient comparer la quantit√© pour chaque type de batiment.
         /// </summary>
         /// <param name="lot1">Premier lot de batiments</param>
-        /// <param name="lot2">DeuxiËme lot de batiments</param>
-        /// <returns>Vrai si la quantitÈ de chaque type de batiment est plus grand ou Ègale</returns>
+        /// <param name="lot2">deuxi√®me lot de batiments</param>
+        /// <returns>Vrai si la quantit√© de chaque type de batiment est plus grand ou √©gale</returns>
         public static bool operator >=(LotBatiments lot1, LotBatiments lot2)
         {
             foreach ((BatimentEnum batiment, Qte qteBatiment) in lot1._batimentsDict)

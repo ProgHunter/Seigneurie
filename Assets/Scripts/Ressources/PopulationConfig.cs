@@ -13,7 +13,7 @@ namespace Ressource
         private float _croissancePourcent;
         /// <summary>
         /// <see cref="MortaliteFaminePourcent"/> 
-        /// Indice de mortalité des membres de la population en famine. Impacte la production de population.
+        /// Indice de mortalitÃ© des membres de la population en famine. Impacte la production de population.
         /// </summary>
         private float _mortaliteFaminePourcent;
         /// <summary>
@@ -33,7 +33,7 @@ namespace Ressource
             CroissancePourcent = 0.05f;
             MortaliteFaminePourcent = 0.25f;
             FaimPourcent = 0.5f;
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
         }
 
         #region accesseurs_mutateurs

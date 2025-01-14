@@ -12,7 +12,7 @@ namespace Ressource
             Icone = null;  // TODO
             Description = "";
             Qte = new Qte(100 /*Qte de base*/, 10_000 /*Max*/, 0 /*Min*/);
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
         }
     }
 }

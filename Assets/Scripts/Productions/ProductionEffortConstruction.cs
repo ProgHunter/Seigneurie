@@ -18,8 +18,8 @@ namespace Production
 
         /// <summary>
         /// E(p) = p^e
-        /// p : Le nombre de population participant � g�n�rer l'effort
-        /// e : L'exposant calcul� � partir de l'indice de parall�lisation
+        /// p : Le nombre de population participant é générer l'effort
+        /// e : L'exposant calculé é partir de l'indice de parallélisation
         /// </summary>
         /// <param name="professions">Lot de professions à partir duquel on calcule la production.</param>
         /// <returns>E(p) soit l'effort produit par un nombre de population</returns>
@@ -48,7 +48,7 @@ namespace Production
         /// sinon on effectue le calcul sur l'effort total du bâtiment spécifié.</param>
         /// <param name="batiment">Le type de bâtimment dont on veut le nombre de ticks que prendrait sa contruction total.</param>
         /// <returns>Le nombre de ticks estimés pour la complétion du bâtiment.
-        /// "-1" si "infini", ex: on ne fournira pas d'effort pour compl�ter la contruction
+        /// "-1" si "infini", ex: on ne fournira pas d'effort pour compléter la contruction
         /// </returns>
         public long EstimeNombreTicksRestants(long pourcentMacon = -1, bool ConstructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
         {
@@ -76,10 +76,10 @@ namespace Production
         /// <summary>
         /// exp = (ln(p) / ln(eff)) + 1
         /// p : est l'indice de parallelisation. 
-        /// Exemple si p = 80%, l'exposant retourn� permet de g�n�rer 80 d'effort avec 100 personnes pour une construction de 100 d'effort.
+        /// Exemple si p = 80%, l'exposant retourné permet de générer 80 d'effort avec 100 personnes pour une construction de 100 d'effort.
         /// eff : l'effort total pour une construction
         /// </summary>
-        /// <returns>exp soit l'exposant calcul� � partir d'un indice de parallelisation pour un effort de construction</returns>
+        /// <returns>exp soit l'exposant calculé à partir d'un indice de parallelisation pour un effort de construction</returns>
         private float CalculerExposantEffortConstruction(bool ConstructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
         {
             float parallelisable = ((MaconConfig)GestionnaireProfessions.Instance.ProfessionDictConfig[ProfessionEnum.MACON]).ParallelisablePourcent;

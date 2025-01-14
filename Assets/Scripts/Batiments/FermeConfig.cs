@@ -17,7 +17,7 @@ namespace Batiment
             CoutConstruction = new LotRessources(0, 0, 50, 10);
             EffortConstruction = 20;
             BonusProductionPourcent = 0.05f;
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
         }
 
         public float BonusProductionPourcent { get => _bonusProductionPourcent; private set => _bonusProductionPourcent = value; }

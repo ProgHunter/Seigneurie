@@ -379,6 +379,7 @@ MonoBehaviour:
   _vueGestionnaireProfessions: {fileID: 2361667830459103756}
   _vueGestionnaireProductions: {fileID: 8626794171284216672}
   _vueGestionnaireBatiments: {fileID: 2307491946077771369}
+  _onglets: {fileID: 4931817514004688223}
 --- !u!1 &2386754729256622988
 GameObject:
   m_ObjectHideFlags: 0

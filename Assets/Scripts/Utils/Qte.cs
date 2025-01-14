@@ -14,9 +14,9 @@ namespace Utils
         }
 
         /// <summary>
-        /// Crée un clone profond de la Qte
+        /// CrÃ©e un clone profond de la Qte
         /// </summary>
-        /// <returns>Nouvel objet Qte avec les mêmes valeurs</returns>
+        /// <returns>Nouvel objet Qte avec les mÃªmes valeurs</returns>
         public Qte Clone()
         {
             return new Qte(qte, qteMax, qteMin);

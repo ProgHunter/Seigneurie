@@ -19,7 +19,7 @@ namespace UI
         public void Init(VueGestionnaireProfessions vueGestionnaireProfessions)
         {
             if (vueGestionnaireProfessions == null)
-                Debug.LogError("vueGestionnaireProfessions est null � la cr�ation de VueGestionnaireProductions.");
+                Debug.LogError("vueGestionnaireProfessions est null à la création de VueGestionnaireProductions.");
 
             _vueGestionnaireProfessions = vueGestionnaireProfessions;
 
@@ -27,11 +27,11 @@ namespace UI
         }
 
         /// <summary>
-        /// Permet de mettre � jour la liste des productions affich�es.
-        /// Met aussi � jour les valeurs de production actuelle et/ou anticip�e.
+        /// Permet de mettre à jour la liste des productions affichées.
+        /// Met aussi à jour les valeurs de production actuelle et/ou anticipée.
         /// </summary>
-        /// <param name="productionActuelle">Mettre � jour la vue de la production actuelle</param>
-        /// <param name="productionAnticipée">Mettre � jour la vue de la production anticip�e</param>
+        /// <param name="productionActuelle">Mettre à jour la vue de la production actuelle</param>
+        /// <param name="productionAnticipée">Mettre à jour la vue de la production anticipée</param>
         public void MiseAJourListeProductions(bool productionActuelle = true, bool productionAnticipée = true)
         {
             if (!gameObject.activeInHierarchy)

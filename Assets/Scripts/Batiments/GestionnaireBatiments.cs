@@ -12,8 +12,8 @@ namespace Batiment
         private LotBatiments _batiments;
         public Dictionary<BatimentEnum, AbstraitBatimentConfig> BatimentConfigDict;
         /// <summary>
-        /// <see cref="BatimentEnum"/> Constitue le b‚timent en contruction
-        /// <see cref="long"/> Effort restant pour complÈter la construction
+        /// <see cref="BatimentEnum"/> Constitue le b√¢timent en contruction
+        /// <see cref="long"/> Effort restant pour compl√©ter la construction
         /// </summary>
         public Paire<BatimentEnum, long> EnConstruction = null;
         #endregion members
@@ -75,7 +75,7 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
                 return new LotBatiments();
             }
 
@@ -84,31 +84,31 @@ namespace Batiment
         #endregion accesseurs_mutateurs
 
         /// <summary>
-        /// Valide si les b‚timents mentionnÈs dans le lot sont construits et en quantitÈ suffisante.
+        /// Valide si les b√¢timents mentionn√©s dans le lot sont construits et en quantit√© suffisante.
         /// </summary>
-        /// <param name="prerequis">Le lot de b‚timents qui constitu le prÈrequis</param>
-        /// <returns>Vrai si on a au moins la mÍme quantitÈ que spÈcifiÈe dans le lot</returns>
+        /// <param name="prerequis">Le lot de b√¢timents qui constitu le pr√©requis</param>
+        /// <returns>Vrai si on a au moins la m√™me quantit√© que sp√©cifi√©e dans le lot</returns>
         public bool PrerequisEstRespecte(LotBatiments prerequis)
         {
             return _batiments >= prerequis;
         }
 
         /// <summary>
-        /// Indique si le b‚timent est dÈverrouillÈ.
-        /// On valide avec le prÈrequis du b‚timent.
-        /// Si le b‚timent est verouillÈ, on ne doit pas pouvoir le construire.
+        /// Indique si le b√¢timent est d√©verrouill√©.
+        /// On valide avec le pr√©requis du b√¢timent.
+        /// Si le b√¢timent est verouill√©, on ne doit pas pouvoir le construire.
         /// </summary>
-        /// <returns>Vrai si le batiment est disponible pour Ítre construit</returns>
+        /// <returns>Vrai si le batiment est disponible pour √™tre construit</returns>
         public bool EstDeverrouille(BatimentEnum batiment)
         {
             return PrerequisEstRespecte(AccesPrerequis(batiment));
         }
 
         /// <summary>
-        /// AccËs au co˚t de contruction du b‚timent
+        /// Acc√®s au co√ªt de contruction du b√¢timent
         /// </summary>
-        /// <param name="batiment">Le b‚timent dont on veut avoir le co˚t.</param>
-        /// <returns>Le lot de ressource avec les quantitÈes correspondant au co˚t du b‚timent</returns>
+        /// <param name="batiment">Le b√¢timent dont on veut avoir le co√ªt.</param>
+        /// <returns>Le lot de ressource avec les quantit√©es correspondant au co√ªt du b√¢timent</returns>
         public LotRessources AccesCoutBatiment(BatimentEnum batiment)
         {
             LotRessources Cout;
@@ -119,7 +119,7 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
                 return null;
             }
 
@@ -127,9 +127,9 @@ namespace Batiment
         }
 
         /// <summary>
-        /// Valide si les ressources sont disponibles pour le co˚t de construction du b‚timent.
+        /// Valide si les ressources sont disponibles pour le co√ªt de construction du b√¢timent.
         /// </summary>
-        /// <param name="batiment">Le batiment ‡ valider le co˚t</param>
+        /// <param name="batiment">Le batiment √† valider le co√ªt</param>
         /// <returns>Vrai si les ressources sont disponibles</returns>
         public bool CoutConstructionEstDisponible(BatimentEnum batiment)
         {
@@ -152,7 +152,7 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
                 return 0;
             }
 
@@ -176,24 +176,24 @@ namespace Batiment
         }
 
         /// <summary>
-        /// DÈmarrer une nouvelle construction.
-        /// Une seul construction ‡ la fois. RefusÈ si dÈj‡ au max de ce type de b‚timent.
+        /// D√©marrer une nouvelle construction.
+        /// Une seul construction √† la fois. Refus√© si d√©j√† au max de ce type de b√¢timent.
         /// </summary>
-        /// <param name="batiment">Le b‚timent ‡ construire</param>
-        /// <returns>Vrai si la construction peut Ítre dÈmarrÈe</returns>
+        /// <param name="batiment">Le b√¢timent √† construire</param>
+        /// <returns>Vrai si la construction peut √™tre d√©marr√©e</returns>
         public bool DemarrerConstruction(BatimentEnum batiment)
         {
-            // S'il y a dÈj‡ une construction en cours, ou
-            // Si le b‚timent n'est pas encore disponible, ou
-            // Si on est ‡ la limite max, on ne commance pas la nouvelle construction
+            // S'il y a d√©j√† une construction en cours, ou
+            // Si le b√¢timent n'est pas encore disponible, ou
+            // Si on est √† la limite max, on ne commance pas la nouvelle construction
             if (ConstructionEstEnCours() ||
                 !EstDeverrouille(batiment) ||
                 (_batiments.AccesQteBatiment(batiment) >= _batiments.AccesQteMaxBatiment(batiment)))
                 return false;
 
             // On essaie d'effectuer la transaction avec l'inventaire.
-            // Si le co˚t est trop ÈlevÈ pour le nombre de ressources dans l'inventaire, 
-            // les ressources ne sont pas retirÈes et la construction n'est pas dÈmarrÈe.
+            // Si le co√ªt est trop √©lev√© pour le nombre de ressources dans l'inventaire, 
+            // les ressources ne sont pas retir√©es et la construction n'est pas d√©marr√©e.
             if (!InventaireRessources.Instance.AjouterQteRessourceAvecLimites(-AccesCoutBatiment(batiment), true))
                 return false;
 
@@ -205,7 +205,7 @@ namespace Batiment
             }
             catch (KeyNotFoundException)
             {
-                Debug.LogError($"Le b‚timent {batiment} n'est pas dans le dictionnaire.");
+                Debug.LogError($"Le b√¢timent {batiment} n'est pas dans le dictionnaire.");
                 return false;
             }
 
@@ -214,10 +214,10 @@ namespace Batiment
         }
 
         /// <summary>
-        /// Permet de faire progresser la construction d'un b‚timent en indiquant l'effort fournis
+        /// Permet de faire progresser la construction d'un b√¢timent en indiquant l'effort fournis
         /// </summary>
-        /// <param name="effort">L'effort ‡ soustraire de la construction</param>
-        /// <returns>Vrai quand la contruction est complÈtÈe</returns>
+        /// <param name="effort">L'effort √† soustraire de la construction</param>
+        /// <returns>Vrai quand la contruction est compl√©t√©e</returns>
         public bool AvancerConstruction(long effort)
         {
             // Aucune construction en cours
@@ -226,11 +226,11 @@ namespace Batiment
 
             EnConstruction.Item2 -= effort;
 
-            // S'il reste de l'effort ‡ fournir pour la construction, elle reste en cours
+            // S'il reste de l'effort √† fournir pour la construction, elle reste en cours
             if (EnConstruction.Item2 > 0)
                 return false;
 
-            // La construction est complÈtÈe
+            // La construction est compl√©t√©e
             _batiments.AjouterUnBatiment(EnConstruction.Item1);
             EnConstruction = null;
             return true;
@@ -238,7 +238,7 @@ namespace Batiment
 
         /// <summary>
         /// Annuler une construction en cours.
-        /// Le co˚t ne sera pas remboursÈ et la progression ne sera pas sauvegardÈ.
+        /// Le co√ªt ne sera pas rembours√© et la progression ne sera pas sauvegard√©.
         /// </summary>
         public void AnnulerConstruction()
         {
@@ -246,7 +246,7 @@ namespace Batiment
         }
 
         /// <summary>
-        /// RÈtablie les valeurs (Qte) de la config pour les b‚timents.
+        /// R√©tablie les valeurs (Qte) de la config pour les b√¢timents.
         /// Annule la construction en cours.
         /// </summary>
         public void Reinitialiser()

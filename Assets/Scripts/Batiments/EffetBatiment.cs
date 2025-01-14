@@ -1,6 +1,6 @@
 namespace Batiment
 {
-    // TODO: place holder, sujet à changement
+    // TODO: place holder, sujet Ã  changement
     public class EffetBatiment
     {
         public EffetBatiment() { }

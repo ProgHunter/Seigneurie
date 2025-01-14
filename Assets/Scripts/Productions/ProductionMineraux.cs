@@ -10,7 +10,7 @@ namespace Production
         /// Production des mineurs avec le bonus des mines.
         /// </summary>
         /// <param name="professions">Lot de professions à partir duquel on calcule la production.</param>
-        /// <returns>Production de min�raux</returns>
+        /// <returns>Production de minéraux</returns>
         public override long CalculerProduction(LotProfessions professions)
         {
             // Calcul de l'effort des mineurs

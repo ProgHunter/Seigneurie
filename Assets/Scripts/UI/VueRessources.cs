@@ -15,6 +15,8 @@ namespace UI
         }
         public void MetAJourListeDeRessources()
         {
+            if (!gameObject.activeInHierarchy)
+                return;
             _barreDeResource.MetAJourListeDeRessources();
         }
     }

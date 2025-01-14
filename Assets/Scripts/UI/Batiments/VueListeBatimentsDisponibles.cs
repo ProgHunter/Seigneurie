@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Batiment;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace UI.Batiments
         [SerializeField] private Transform _parent;
         [SerializeField] private VueBatimentDisponible _vueInstancier;
         private readonly Dictionary<BatimentEnum, VueBatimentDisponible> _dictBatimentsDisponibles = new();
-    
+
+        public Action MettreAJourBatimentsEnCours;
         public void InitListe()
         {
             MetAJourListe();
@@ -55,7 +57,7 @@ namespace UI.Batiments
             VueBatimentDisponible vue = Instantiate(_vueInstancier, _parent);
             AbstraitBatimentConfig config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
 
-            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description);
+            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description,MettreAJourBatimentsEnCours);
             _dictBatimentsDisponibles.Add(batiment, vue);
         }
     }

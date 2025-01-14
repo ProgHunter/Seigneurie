@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace UI.Batiments
@@ -10,12 +11,20 @@ namespace UI.Batiments
         [SerializeField] private VueListeBatimentsDisponibles _batimentsDisponibles;
         [SerializeField] private VueListeBatimentsTerminés _batimentsTerminés;
         [SerializeField] private VueListeBatimentsEnCours _batimentsEnCours;
-    
-        public void Init()
+
+        private Action MettreAJourLorsDeConstruction;
+        private void Awake()
+        {
+            _batimentsDisponibles.MettreAJourBatimentsEnCours += MetAJourListeVuesBatiments;
+            _batimentsDisponibles.MettreAJourBatimentsEnCours += MettreAJourLorsDeConstruction;
+        }
+
+        public void Init(Action mettreAJour)
         {
             _batimentsTerminés.InitListe();
             _batimentsDisponibles.InitListe();
             _batimentsEnCours.InitListe();
+            MettreAJourLorsDeConstruction += mettreAJour;
         }
 
         public void MetAJourListeVuesBatiments()

@@ -24,7 +24,7 @@ namespace UI
             _vueRessources.Init();
             _vueGestionnaireProfessions.Init(_vueGestionnaireProductions.MiseAJourListeProductions);
             _vueGestionnaireProductions.Init(_vueGestionnaireProfessions);
-            _vueGestionnaireBatiments.Init();
+            _vueGestionnaireBatiments.Init(MetAJourLesVues);
         }
         
         public void MetAJourLesVues()

@@ -264,7 +264,7 @@ namespace Test
         [Test]
         public void TestTransactionLotRessourcesVerrouille()
         {
-            // TODO: Cr�er un test avec une ressource verrouill�e lors qu'elle sera ajout�e au jeu
+            // TODO: Créer un test avec une ressource verrouillée lors qu'elle sera ajoutée au jeu
             Assert.IsTrue(true);
         }
     }

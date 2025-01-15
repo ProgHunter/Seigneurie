@@ -1,4 +1,5 @@
 using System;
+using Batiment;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,12 @@ namespace UI.Batiments
         [SerializeField] private Image _icone;
         [SerializeField] private TextMeshProUGUI _nom;
         [SerializeField] private TextMeshProUGUI _completion;
+        [SerializeField] private Button _boutonAnnuler;
+
+        private void Awake()
+        {
+            _boutonAnnuler.onClick.AddListener(AnnulerConstruction);
+        }
 
         public void Init(Sprite icone, string nom, string completion)
         {
@@ -31,6 +38,11 @@ namespace UI.Batiments
             _completion.text = completion + " ticks";
         }
 
+        private void AnnulerConstruction()
+        {
+            GestionnaireBatiments.Instance.AnnulerConstruction();
+        }
+        
         public void Dispose()
         {
             Destroy(gameObject);

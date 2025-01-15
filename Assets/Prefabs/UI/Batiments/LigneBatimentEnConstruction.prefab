@@ -429,6 +429,7 @@ MonoBehaviour:
   _icone: {fileID: 6264553963420486258}
   _nom: {fileID: 4534965760975615896}
   _completion: {fileID: 8493474334741798597}
+  _boutonAnnuler: {fileID: 2812503375729801174}
 --- !u!1001 &7468881835221262267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -522,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4660883246082238575, guid: 9128b610b9289d84b9b037c6e77803a3, type: 3}
       propertyPath: m_Name
-      value: BoutonRouge
+      value: BoutonAnnuler
       objectReference: {fileID: 0}
     - target: {fileID: 4660883246641217764, guid: 9128b610b9289d84b9b037c6e77803a3, type: 3}
       propertyPath: m_text
@@ -547,3 +548,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4660883246082238574, guid: 9128b610b9289d84b9b037c6e77803a3, type: 3}
   m_PrefabInstance: {fileID: 7468881835221262267}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2812503375729801174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4660883246082238573, guid: 9128b610b9289d84b9b037c6e77803a3, type: 3}
+  m_PrefabInstance: {fileID: 7468881835221262267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -25,7 +25,7 @@ namespace UI.Batiments
                 return;
 
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
+            var batiments = EnumUtils.GetEnumValuesWithoutNullValue<BatimentEnum>();
             foreach (var batiment in batiments)
             {
                 long qte = gestionnaireBatiments.AccesQteBatiment(batiment);

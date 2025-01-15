@@ -34,10 +34,11 @@ namespace Batiment
 
     public enum BatimentEnum
     {
-        MAISON = 0,
-        FERME = 1,
-        SCIERIE = 2,
-        MINE = 3,
-        HOTELDEVILLE = 4,
+        NUL = 0,
+        MAISON = 1,
+        FERME = 2,
+        SCIERIE = 3,
+        MINE = 4,
+        HOTELDEVILLE = 5,
     }
 }

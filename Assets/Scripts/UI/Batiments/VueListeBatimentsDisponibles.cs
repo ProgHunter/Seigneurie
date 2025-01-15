@@ -27,7 +27,7 @@ namespace UI.Batiments
                 return;
 
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            var batiments = EnumUtils.GetEnumValues<BatimentEnum>();
+            var batiments = EnumUtils.GetEnumValuesWithoutNullValue<BatimentEnum>();
             foreach (var batiment in batiments)
             {
                 // Le bâtiment ne doit pas être affiché dans la liste

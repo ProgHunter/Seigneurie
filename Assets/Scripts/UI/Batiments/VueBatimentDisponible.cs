@@ -67,7 +67,7 @@ namespace UI.Batiments
 
         public void UpdateValeurs()
         {
-            long nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, false, _batimentEnum);
+            long nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, _batimentEnum);
             MetAJourCoutTicks(nbTicksConstruction);
 
             _btnDebutConstruction.interactable =

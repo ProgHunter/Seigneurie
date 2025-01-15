@@ -83,9 +83,9 @@ namespace Production
         /// <param name="batiment">Le type de bâtimment dont on veut le nombre de ticks que prendrait sa contruction total.</param>
         /// <returns>Le nombre de ticks estimés pour la complétion du bâtiment.
         /// -1 si aucun effort de construction n'est produit.</returns>
-        public long NbTicksRestantsConstruction(long pourcentMacon = -1, bool ConstructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
+        public long NbTicksRestantsConstruction(long pourcentMacon = -1, BatimentEnum batiment = BatimentEnum.NUL)
         {
-            return _productionEffortConstruction.EstimeNombreTicksRestants(pourcentMacon, ConstructionEnCours, batiment);
+            return _productionEffortConstruction.EstimeNombreTicksRestants(pourcentMacon, batiment);
         }
     }
 }

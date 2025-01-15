@@ -22,10 +22,12 @@ namespace Production
         /// e : L'exposant calculé é partir de l'indice de parallélisation
         /// </summary>
         /// <param name="professions">Lot de professions à partir duquel on calcule la production.</param>
+        /// <param name="constructionEnCours"></param>
+        /// <param name="batiment"></param>
         /// <returns>E(p) soit l'effort produit par un nombre de population</returns>
-        public long CalculerProduction(LotProfessions professions, bool ConstructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
+        public long CalculerProduction(LotProfessions professions, bool constructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
         {
-            if (ConstructionEnCours && !GestionnaireBatiments.Instance.ConstructionEstEnCours())
+            if (constructionEnCours && !GestionnaireBatiments.Instance.ConstructionEstEnCours())
                 return 0;
 
             float professionPourcent = professions.AccesPourcentProfessionFraction(ProfessionEnum.MACON);
@@ -34,7 +36,7 @@ namespace Production
             if (nbPopTravaille <= 0)
                 return 0;
 
-            float exposant = CalculerExposantEffortConstruction(ConstructionEnCours, batiment);
+            float exposant = CalculerExposantEffortConstruction(constructionEnCours, batiment);
             long result = (long)(Mathf.Pow(nbPopTravaille, exposant) * EfficacitePourcent);
             return result;
         }
@@ -44,13 +46,11 @@ namespace Production
         /// </summary>
         /// <param name="pourcentMacon">Le pourcentage de la population qui travaillera sur la profession de maçon. [0, 100]
         /// Laisser -1 si on veut évaluer une construction avec le pourcentage de maçons actuel.</param>
-        /// <param name="ConstructionEnCours">Vrai si on veut l'information de la construction en cours,
-        /// sinon on effectue le calcul sur l'effort total du bâtiment spécifié.</param>
         /// <param name="batiment">Le type de bâtimment dont on veut le nombre de ticks que prendrait sa contruction total.</param>
         /// <returns>Le nombre de ticks estimés pour la complétion du bâtiment.
         /// "-1" si "infini", ex: on ne fournira pas d'effort pour compléter la contruction
         /// </returns>
-        public long EstimeNombreTicksRestants(long pourcentMacon = -1, bool ConstructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
+        public long EstimeNombreTicksRestants(long pourcentMacon = -1, BatimentEnum batiment = BatimentEnum.NUL)
         {
             // Si le pourcentage de macons n'est pas explicitement fourni, on prend celui actuel dans
             // le gestionnaire de professions.
@@ -61,12 +61,13 @@ namespace Production
             // Si ConstructionEnCours, on retourne l'information pour la construction en cours, sinon
             // pour le bâtiment mentionné en param.
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            long effortRestant = ConstructionEnCours ? gestionnaireBatiments.AccesEffortConstructionRestant() :
+            bool calculerLaConstructionEnCours = batiment == BatimentEnum.NUL;
+            long effortRestant = batiment == BatimentEnum.NUL ? gestionnaireBatiments.AccesEffortConstructionRestant() :
                gestionnaireBatiments.AccesEffortConstructionTotal(batiment);
             if (effortRestant <= 0)
                 return 0;
 
-            long effortProduit = CalculerProduction(professions, ConstructionEnCours, batiment);
+            long effortProduit = CalculerProduction(professions, calculerLaConstructionEnCours, batiment);
             if (effortProduit <= 0)
                 return -1;
 

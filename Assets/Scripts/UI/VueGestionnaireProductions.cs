@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Profession;
 using Ressource;
 using UnityEngine;
@@ -42,7 +43,7 @@ namespace UI
                 professions = _vueGestionnaireProfessions.AccesLotProfessionUtilisateur();
 
             var inventaireRessources = InventaireRessources.Instance;
-            var ressourceEnum = EnumUtils.GetEnumValues<RessourceEnum>();
+            List<RessourceEnum> ressourceEnum = inventaireRessources.RessourceConfigDict.Keys.ToList();
             
             foreach (var ressource in ressourceEnum)
             {

@@ -30,9 +30,10 @@ namespace Ressource
 
     public enum RessourceEnum
     {
-        POPULATION = 0,
-        NOURRITURE = 1,
-        BOIS = 2,
-        MINERAUX = 3,
+        NUL = 0,
+        POPULATION = 1,
+        NOURRITURE = 2,
+        BOIS = 3,
+        MINERAUX = 4,
     }
 }

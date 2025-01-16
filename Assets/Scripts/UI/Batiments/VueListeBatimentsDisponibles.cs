@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Batiment;
 using UnityEngine;
 using Utils;
@@ -27,7 +28,7 @@ namespace UI.Batiments
                 return;
 
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            var batiments = EnumUtils.GetEnumValuesWithoutNullValue<BatimentEnum>();
+            List<BatimentEnum> batiments = gestionnaireBatiments.BatimentConfigDict.Keys.ToList();
             foreach (var batiment in batiments)
             {
                 // Le bâtiment ne doit pas être affiché dans la liste

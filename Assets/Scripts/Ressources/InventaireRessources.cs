@@ -2,6 +2,7 @@
 using Batiment;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ressource
 {
@@ -150,10 +151,11 @@ namespace Ressource
         /// <returns>Vrai si toutes les ressources ont pu être modifiées sans atteindre une limite</returns>
         public bool AjouterQteRessourceAvecLimites(LotRessources ressources, bool limitesBloquantes = false)
         {
+            var listeRessources = RessourceConfigDict.Keys.ToList();
             if (limitesBloquantes)
             {
                 long resultat;
-                foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
+                foreach (RessourceEnum ressource in listeRessources)
                 {
                     if (ressources.AccesQteRessource(ressource) == 0)
                         continue;
@@ -168,7 +170,7 @@ namespace Ressource
             }
 
             bool respecteLimites = true;
-            foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
+            foreach (RessourceEnum ressource in listeRessources)
             {
                 if (ressources.AccesQteRessource(ressource) == 0)
                     continue;

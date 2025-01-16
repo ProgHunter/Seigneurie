@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Ressource;
 using UnityEngine;
 using Utils;
@@ -16,7 +17,7 @@ namespace UI
 
         public void Init()
         {
-            var ressources = EnumUtils.GetEnumValues<RessourceEnum>();
+            List<RessourceEnum> ressources = InventaireRessources.Instance.RessourceConfigDict.Keys.ToList();
             foreach (var ressource in ressources)
             {
                 if (!InventaireRessources.Instance.EstDeverrouille(ressource))
@@ -31,7 +32,7 @@ namespace UI
             if (!gameObject.activeInHierarchy)
                 return;
 
-            var ressources = EnumUtils.GetEnumValues<RessourceEnum>();
+            List<RessourceEnum> ressources = InventaireRessources.Instance.RessourceConfigDict.Keys.ToList();
             foreach (var ressource in ressources)
             {
                 if (!InventaireRessources.Instance.EstDeverrouille(ressource))

@@ -15,7 +15,7 @@ namespace Profession
         private const long _pcTotalMin = 0;
         #endregion members
 
-        public GestionnaireProfessions()
+        private GestionnaireProfessions()
         {
             ProfessionDictConfig = new Dictionary<ProfessionEnum, AbstraitProfessionConfig>
             {
@@ -33,13 +33,7 @@ namespace Profession
                                               ProfessionDictConfig[ProfessionEnum.MACON].ProfessionPourcent);
         }
 
-        public static GestionnaireProfessions Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public static GestionnaireProfessions Instance => _instance;
 
         #region accesseurs_mutateurs
         public LotProfessions Professions => _professions;

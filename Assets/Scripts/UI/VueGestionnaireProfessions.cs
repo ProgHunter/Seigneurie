@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Profession;
 using TMPro;
 using UnityEngine;
@@ -36,7 +37,7 @@ namespace UI
         public LotProfessions AccesLotProfessionUtilisateur()
         {
             LotProfessions lotProfessions = new LotProfessions();
-            var professions = EnumUtils.GetEnumValues<ProfessionEnum>();
+            List<ProfessionEnum> professions = GestionnaireProfessions.Instance.ProfessionDictConfig.Keys.ToList();
             foreach (var profession in professions)
             {
                 var pourcentActuelle = 0;
@@ -71,7 +72,7 @@ namespace UI
                 return;
 
             var gestionnaireProfessions = GestionnaireProfessions.Instance;
-            var professions = EnumUtils.GetEnumValues<ProfessionEnum>();
+            List<ProfessionEnum> professions = GestionnaireProfessions.Instance.ProfessionDictConfig.Keys.ToList();
             foreach (var profession in professions)
             {
                 if (!gestionnaireProfessions.EstDeverrouille(profession))

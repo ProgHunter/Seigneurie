@@ -50,7 +50,7 @@ namespace UI.Batiments
         {
             if (GestionnaireBatiments.Instance.DemarrerConstruction(_batimentEnum))
             {
-                Debug.Log(_msgConstructionCommencé + _nomBatiment.text);
+                //Debug.Log(_msgConstructionCommencé + _nomBatiment.text);
                 MettreAJourBatimentsEnCours?.Invoke();
             }
             else

@@ -30,10 +30,11 @@ namespace Profession
 
     public enum ProfessionEnum
     {
-        NATALITE = 0,
-        FERMIER = 1,
-        BUCHERON = 2,
-        MINEUR = 3,
-        MACON = 4
+        NUL = 0,
+        NATALITE = 1,
+        FERMIER = 2,
+        BUCHERON = 3,
+        MINEUR = 4,
+        MACON = 5
     }
 }

@@ -15,7 +15,7 @@ namespace Production
         private ProductionEffortConstruction _productionEffortConstruction;
         #endregion members
 
-        public GestionnaireProductions()
+        private GestionnaireProductions()
         {
             _productionRessourceDict = new Dictionary<RessourceEnum, AbstraitProduction>
             {
@@ -28,13 +28,7 @@ namespace Production
             _productionEffortConstruction = new ProductionEffortConstruction();
         }
 
-        public static GestionnaireProductions Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public static GestionnaireProductions Instance => _instance;
 
         /// <summary>
         /// Exécute un tick de production pour le jeu.

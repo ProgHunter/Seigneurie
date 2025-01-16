@@ -36,13 +36,7 @@ namespace Batiment
                                           BatimentConfigDict[BatimentEnum.HOTELDEVILLE].Qte);
         }
 
-        public static GestionnaireBatiments Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public static GestionnaireBatiments Instance => _instance;
 
         #region accesseurs_mutateurs
         public long AccesQteBatiment(BatimentEnum batiment)

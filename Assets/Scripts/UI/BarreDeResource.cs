@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ressource;
 using UnityEngine;
-using Utils;
 
 namespace UI
 {
@@ -17,10 +16,10 @@ namespace UI
 
         public void Init()
         {
-            List<RessourceEnum> ressources = InventaireRessources.Instance.RessourceConfigDict.Keys.ToList();
+            List<RessourceEnum> ressources = GestionnaireRessources.Instance.RessourceConfigDict.Keys.ToList();
             foreach (var ressource in ressources)
             {
-                if (!InventaireRessources.Instance.EstDeverrouille(ressource))
+                if (!GestionnaireRessources.Instance.EstDeverrouille(ressource))
                     continue;
 
                 AjouterIndicateurRessource(ressource);
@@ -32,10 +31,10 @@ namespace UI
             if (!gameObject.activeInHierarchy)
                 return;
 
-            List<RessourceEnum> ressources = InventaireRessources.Instance.RessourceConfigDict.Keys.ToList();
+            List<RessourceEnum> ressources = GestionnaireRessources.Instance.RessourceConfigDict.Keys.ToList();
             foreach (var ressource in ressources)
             {
-                if (!InventaireRessources.Instance.EstDeverrouille(ressource))
+                if (!GestionnaireRessources.Instance.EstDeverrouille(ressource))
                     continue;
 
                 if(!_dictRessources.ContainsKey(ressource))
@@ -48,7 +47,7 @@ namespace UI
         private void AjouterIndicateurRessource(RessourceEnum ressource)
         {
             IndicateurRessource indicateur = Instantiate(_vueInstancier, _parent);
-            var config = InventaireRessources.Instance.RessourceConfigDict[ressource];
+            var config = GestionnaireRessources.Instance.RessourceConfigDict[ressource];
 
             indicateur.InitRessourceRepresentee(ressource);
             _dictRessources.Add(ressource, indicateur);

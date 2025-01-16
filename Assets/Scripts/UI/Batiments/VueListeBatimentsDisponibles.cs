@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Batiment;
 using UnityEngine;
-using Utils;
 
 namespace UI.Batiments
 {

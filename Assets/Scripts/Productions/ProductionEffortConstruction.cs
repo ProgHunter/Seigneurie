@@ -22,21 +22,22 @@ namespace Production
         /// e : L'exposant calculé é partir de l'indice de parallélisation
         /// </summary>
         /// <param name="professions">Lot de professions à partir duquel on calcule la production.</param>
-        /// <param name="constructionEnCours"></param>
-        /// <param name="batiment"></param>
+        /// <param name="batiment">Le type de bâtiment pour lequel on veut l'effort de contruction produit.
+        /// Laisser NUL si on veut le calcul pour la construction en cours, sinon on effectue le calcul pour
+        /// le bâtiment spécifié.</param>
         /// <returns>E(p) soit l'effort produit par un nombre de population</returns>
-        public long CalculerProduction(LotProfessions professions, bool constructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
+        public long CalculerProduction(LotProfessions professions, BatimentEnum batiment = BatimentEnum.NUL)
         {
-            if (constructionEnCours && !GestionnaireBatiments.Instance.ConstructionEstEnCours())
+            if (batiment != BatimentEnum.NUL && !GestionnaireBatiments.Instance.ConstructionEstEnCours())
                 return 0;
 
             float professionPourcent = professions.AccesPourcentProfessionFraction(ProfessionEnum.MACON);
-            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            long popActuelle = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;
 
-            float exposant = CalculerExposantEffortConstruction(constructionEnCours, batiment);
+            float exposant = CalculerExposantEffortConstruction(batiment);
             long result = (long)(Mathf.Pow(nbPopTravaille, exposant) * EfficacitePourcent);
             return result;
         }
@@ -46,7 +47,9 @@ namespace Production
         /// </summary>
         /// <param name="pourcentMacon">Le pourcentage de la population qui travaillera sur la profession de maçon. [0, 100]
         /// Laisser -1 si on veut évaluer une construction avec le pourcentage de maçons actuel.</param>
-        /// <param name="batiment">Le type de bâtimment dont on veut le nombre de ticks que prendrait sa contruction total.</param>
+        /// <param name="batiment">Le type de bâtiment dont on veut le nombre de ticks que prendrait sa contruction total.
+        /// Laisser NUL si on veut l'information de la construction en cours, sinon on effectue le calcul sur l'effort total
+        /// du bâtiment spécifié.</param>
         /// <returns>Le nombre de ticks estimés pour la complétion du bâtiment.
         /// "-1" si "infini", ex: on ne fournira pas d'effort pour compléter la contruction
         /// </returns>
@@ -61,13 +64,12 @@ namespace Production
             // Si ConstructionEnCours, on retourne l'information pour la construction en cours, sinon
             // pour le bâtiment mentionné en param.
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            bool calculerLaConstructionEnCours = batiment == BatimentEnum.NUL;
-            long effortRestant = batiment == BatimentEnum.NUL ? gestionnaireBatiments.AccesEffortConstructionRestant() :
+            long effortRestant = batiment != BatimentEnum.NUL ? gestionnaireBatiments.AccesEffortConstructionRestant() :
                gestionnaireBatiments.AccesEffortConstructionTotal(batiment);
             if (effortRestant <= 0)
                 return 0;
 
-            long effortProduit = CalculerProduction(professions, calculerLaConstructionEnCours, batiment);
+            long effortProduit = CalculerProduction(professions, batiment);
             if (effortProduit <= 0)
                 return -1;
 
@@ -80,11 +82,14 @@ namespace Production
         /// Exemple si p = 80%, l'exposant retourné permet de générer 80 d'effort avec 100 personnes pour une construction de 100 d'effort.
         /// eff : l'effort total pour une construction
         /// </summary>
+        /// <param name="batiment">L'effort total pour ce type de bâtiment sera pris pour calculer l'exposant.
+        /// Laisser NUL si on veut le calcul sur l'effort total du bâtiment en cours de construction, sinon on effectue le calcul pour
+        /// le bâtiment spécifié.</param>
         /// <returns>exp soit l'exposant calculé à partir d'un indice de parallelisation pour un effort de construction</returns>
-        private float CalculerExposantEffortConstruction(bool ConstructionEnCours = true, BatimentEnum batiment = BatimentEnum.MAISON)
+        private float CalculerExposantEffortConstruction(BatimentEnum batiment = BatimentEnum.NUL)
         {
             float parallelisable = ((MaconConfig)GestionnaireProfessions.Instance.ProfessionDictConfig[ProfessionEnum.MACON]).ParallelisablePourcent;
-            long effotConstructionTotal = ConstructionEnCours ? GestionnaireBatiments.Instance.AccesEffortConstructionTotalEnCours() :
+            long effotConstructionTotal = batiment != BatimentEnum.NUL ? GestionnaireBatiments.Instance.AccesEffortConstructionTotalEnCours() :
                GestionnaireBatiments.Instance.AccesEffortConstructionTotal(batiment);
 
             return (Mathf.Log(parallelisable) / Mathf.Log(effotConstructionTotal)) + 1;

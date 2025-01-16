@@ -3,7 +3,6 @@ using System.Linq;
 using Profession;
 using Ressource;
 using UnityEngine;
-using Utils;
 
 namespace UI
 {
@@ -42,7 +41,7 @@ namespace UI
             if (productionAnticipée)
                 professions = _vueGestionnaireProfessions.AccesLotProfessionUtilisateur();
 
-            var inventaireRessources = InventaireRessources.Instance;
+            var inventaireRessources = GestionnaireRessources.Instance;
             List<RessourceEnum> ressourceEnum = inventaireRessources.RessourceConfigDict.Keys.ToList();
             
             foreach (var ressource in ressourceEnum)
@@ -60,7 +59,7 @@ namespace UI
         /// <param name="inventaireRessources"></param>
         /// <param name="ressource"></param>
         /// <returns></returns>
-        private bool MetAJourListeRessourcesVisibles(InventaireRessources inventaireRessources, RessourceEnum ressource)
+        private bool MetAJourListeRessourcesVisibles(GestionnaireRessources inventaireRessources, RessourceEnum ressource)
         {
             if (!inventaireRessources.EstDeverrouille(ressource))
             {

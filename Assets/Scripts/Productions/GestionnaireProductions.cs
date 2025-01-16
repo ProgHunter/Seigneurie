@@ -3,7 +3,6 @@ using Batiment;
 using System.Collections.Generic;
 using Productions;
 using Profession;
-using UnityEngine;
 
 namespace Production
 {
@@ -46,7 +45,7 @@ namespace Production
                 //Debug.Log($"Production de {production} pour la ressource {ressource.Key}.");
                 ressourcesProduites.AttribuerQteRessource(ressource.Key, production);
             }
-            InventaireRessources.Instance.AjouterQteRessourceAvecLimites(ressourcesProduites);
+            GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(ressourcesProduites);
 
             // Progression de la construction
             long effort = _productionEffortConstruction.CalculerProduction(professions);
@@ -72,9 +71,9 @@ namespace Production
         /// </summary>
         /// <param name="pourcentMacon">Le pourcentage de la population qui travaillera sur la profession de maçon. [0, 100]
         /// Laisser -1 si on veut évaluer une construction avec le pourcentage de maçons actuel.</param>
-        /// <param name="ConstructionEnCours">Vrai si on veut l'information de la construction en cours,
-        /// sinon on effectue le calcul sur l'effort total du bâtiment spécifié.</param>
-        /// <param name="batiment">Le type de bâtimment dont on veut le nombre de ticks que prendrait sa contruction total.</param>
+        /// <param name="batiment">Le type de bâtiment dont on veut le nombre de ticks que prendrait sa contruction total.
+        /// Laisser NUL si on veut l'information de la construction en cours, sinon on effectue le calcul sur l'effort total
+        /// du bâtiment spécifié.</param>
         /// <returns>Le nombre de ticks estimés pour la complétion du bâtiment.
         /// -1 si aucun effort de construction n'est produit.</returns>
         public long NbTicksRestantsConstruction(long pourcentMacon = -1, BatimentEnum batiment = BatimentEnum.NUL)

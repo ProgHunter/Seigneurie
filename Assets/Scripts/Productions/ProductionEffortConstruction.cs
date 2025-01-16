@@ -28,7 +28,7 @@ namespace Production
         /// <returns>E(p) soit l'effort produit par un nombre de population</returns>
         public long CalculerProduction(LotProfessions professions, BatimentEnum batiment = BatimentEnum.NUL)
         {
-            if (batiment != BatimentEnum.NUL && !GestionnaireBatiments.Instance.ConstructionEstEnCours())
+            if (batiment == BatimentEnum.NUL && !GestionnaireBatiments.Instance.ConstructionEstEnCours())
                 return 0;
 
             float professionPourcent = professions.AccesPourcentProfessionFraction(ProfessionEnum.MACON);
@@ -64,7 +64,7 @@ namespace Production
             // Si ConstructionEnCours, on retourne l'information pour la construction en cours, sinon
             // pour le bâtiment mentionné en param.
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            long effortRestant = batiment != BatimentEnum.NUL ? gestionnaireBatiments.AccesEffortConstructionRestant() :
+            long effortRestant = batiment == BatimentEnum.NUL ? gestionnaireBatiments.AccesEffortConstructionRestant() :
                gestionnaireBatiments.AccesEffortConstructionTotal(batiment);
             if (effortRestant <= 0)
                 return 0;
@@ -89,7 +89,7 @@ namespace Production
         private float CalculerExposantEffortConstruction(BatimentEnum batiment = BatimentEnum.NUL)
         {
             float parallelisable = ((MaconConfig)GestionnaireProfessions.Instance.ProfessionDictConfig[ProfessionEnum.MACON]).ParallelisablePourcent;
-            long effotConstructionTotal = batiment != BatimentEnum.NUL ? GestionnaireBatiments.Instance.AccesEffortConstructionTotalEnCours() :
+            long effotConstructionTotal = batiment == BatimentEnum.NUL ? GestionnaireBatiments.Instance.AccesEffortConstructionTotalEnCours() :
                GestionnaireBatiments.Instance.AccesEffortConstructionTotal(batiment);
 
             return (Mathf.Log(parallelisable) / Mathf.Log(effotConstructionTotal)) + 1;

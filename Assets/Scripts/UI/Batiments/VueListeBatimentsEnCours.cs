@@ -35,7 +35,7 @@ namespace UI.Batiments
                 {
                     _vueBatiment = Instantiate(_vueInstancier, _content);
                     string nom = gestionnaireBatiments.BatimentConfigDict[batiment.Item1].Nom;
-                    _vueBatiment.Init(null, nom, nbTicks.ToString());
+                    _vueBatiment.Init(null, nom, nbTicks.ToString(), MetAJourListe);
                 }
                 else
                 {

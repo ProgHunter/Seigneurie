@@ -15,17 +15,19 @@ namespace UI.Batiments
         [SerializeField] private TextMeshProUGUI _nom;
         [SerializeField] private TextMeshProUGUI _completion;
         [SerializeField] private Button _boutonAnnuler;
-
+        private Action MettreAJourBatiments;
+        
         private void Awake()
         {
             _boutonAnnuler.onClick.AddListener(AnnulerConstruction);
         }
 
-        public void Init(Sprite icone, string nom, string completion)
+        public void Init(Sprite icone, string nom, string completion, Action mettreAJourBatiments)
         {
             //TODO icone
             _nom.text = nom;
             ModifierValeurCompletion(completion);
+            MettreAJourBatiments = mettreAJourBatiments;
         }
 
         public void UpdateValeurs(string completion)
@@ -41,6 +43,7 @@ namespace UI.Batiments
         private void AnnulerConstruction()
         {
             GestionnaireBatiments.Instance.AnnulerConstruction();
+            MettreAJourBatiments?.Invoke();
         }
         
         public void Dispose()

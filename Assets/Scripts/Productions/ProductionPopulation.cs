@@ -19,17 +19,17 @@ namespace Productions
         private long CalculerCroissance(float professionPourcent)
         {
             long capaciteMax = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON) * ((MaisonConfig)GestionnaireBatiments.Instance.BatimentConfigDict[BatimentEnum.MAISON]).Capacite;
-            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            long popActuelle = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long popActive = (long)(popActuelle * professionPourcent);
 
             // Valider si nos nombres sont positifs et si la population actuelle n'est pas déjà presqu'à notre capacité ou plus grand
             if (capaciteMax < 0 || popActive <= 0 || popActuelle >= capaciteMax)
                 return 0;
 
-            long popMin = InventaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION);
+            long popMin = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION);
             popMin = popMin < 1 ? 1 : popMin;
 
-            float croissance = ((PopulationConfig)InventaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).CroissancePourcent;
+            float croissance = ((PopulationConfig)GestionnaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).CroissancePourcent;
             if (croissance <= 0)
                 return 0;
 
@@ -52,8 +52,8 @@ namespace Productions
         {
             ProductionNouriture productionNouriture = new ProductionNouriture();
             float manqueNourriturePourcent = productionNouriture.CalculManqueNourriturePourcent(pourcentFermiers);
-            long nbPop = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            float mortaliteFaminePc = ((PopulationConfig)InventaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).MortaliteFaminePourcent;
+            long nbPop = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            float mortaliteFaminePc = ((PopulationConfig)GestionnaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).MortaliteFaminePourcent;
 
             return (long)(nbPop * mortaliteFaminePc * manqueNourriturePourcent);
         }

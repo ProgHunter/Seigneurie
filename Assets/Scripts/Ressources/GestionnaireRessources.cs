@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 using Batiment;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Ressource
 {
-    public sealed class InventaireRessources
+    public sealed class GestionnaireRessources
     {
         #region members
-        private static readonly InventaireRessources _instance = new();
+        private static readonly GestionnaireRessources _instance = new();
         private LotRessources _quantiteRessources;
         public Dictionary<RessourceEnum, AbstraitRessourceConfig> RessourceConfigDict;
         #endregion members
 
-        private InventaireRessources()
+        private GestionnaireRessources()
         {
             RessourceConfigDict = new Dictionary<RessourceEnum, AbstraitRessourceConfig>
             {
@@ -30,7 +29,7 @@ namespace Ressource
                                                     RessourceConfigDict[RessourceEnum.MINERAUX].Qte);
         }
 
-        public static InventaireRessources Instance
+        public static GestionnaireRessources Instance
         {
             get
             {

@@ -13,7 +13,7 @@ namespace Test
         {
             GestionnaireBatiments.Instance.Reinitialiser();
             GestionnaireProfessions.Instance.Reinitialiser();
-            InventaireRessources.Instance.Reinitialiser();
+            GestionnaireRessources.Instance.Reinitialiser();
         }
 
         [Test]
@@ -32,16 +32,16 @@ namespace Test
             var qteBoisBase = 1000;
             var qteMinerauxBase = 1000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
             // Production!
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 0%
-            var qtePopApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerauxApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerauxApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
 
             // Aucune ressource produite. Nouriture consommée
             Assert.AreEqual(qtePopBase, qtePopApres);
@@ -73,16 +73,16 @@ namespace Test
             var qteBoisBase = 1000;
             var qteMinerauxBase = 1000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
             // Production!
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 25%
-            var qtePopApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerauxApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerauxApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
 
             // Population ne grandie pas puisqu'il n'y a pas de maisons
             Assert.AreEqual(qtePopBase, qtePopApres);
@@ -116,16 +116,16 @@ namespace Test
             var qteBoisBase = 1000;
             var qteMinerauxBase = 1000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
             // Production!
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 25%
-            var qtePopApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerauxApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerauxApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
 
             // Population grandie avec maisons
             Assert.IsTrue(qtePopBase < qtePopApres);
@@ -153,7 +153,7 @@ namespace Test
             var qteBoisBase = 1000;
             var qteMinerauxBase = 1000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
             // Initialiser le nombre de maisons à 0
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
@@ -189,14 +189,14 @@ namespace Test
             var qtePopBase = 10000;
             var qteNourritureBase = 0;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase);
-            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
             // Production! (Famine)
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 0%
-            var qtePopApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             // Aucune ressource produite. Population en déclin
             Assert.IsTrue(qtePopBase > qtePopApres);

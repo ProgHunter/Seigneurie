@@ -128,7 +128,7 @@ namespace Batiment
         public bool CoutConstructionEstDisponible(BatimentEnum batiment)
         {
             LotRessources coutConstruction = AccesCoutBatiment(batiment);
-            return InventaireRessources.Instance.QteRessourcesSuffisantes(coutConstruction);
+            return GestionnaireRessources.Instance.QteRessourcesSuffisantes(coutConstruction);
         }
 
         public bool ConstructionEstEnCours()
@@ -188,7 +188,7 @@ namespace Batiment
             // On essaie d'effectuer la transaction avec l'inventaire.
             // Si le coût est trop élevé pour le nombre de ressources dans l'inventaire, 
             // les ressources ne sont pas retirées et la construction n'est pas démarrée.
-            if (!InventaireRessources.Instance.AjouterQteRessourceAvecLimites(-AccesCoutBatiment(batiment), true))
+            if (!GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(-AccesCoutBatiment(batiment), true))
                 return false;
 
             Paire<BatimentEnum, long> Chantier = new Paire<BatimentEnum, long>();

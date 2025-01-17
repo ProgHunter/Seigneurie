@@ -10,7 +10,7 @@ namespace Test
         public void SetUp()
         {
             GestionnaireBatiments.Instance.Reinitialiser();
-            InventaireRessources.Instance.Reinitialiser();
+            GestionnaireRessources.Instance.Reinitialiser();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace Test
             // Initialisation des données du test
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
             GestionnaireBatiments.Instance.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteMax);
-            InventaireRessources.Instance.AttribuerQteRessource(coutConstruction);
+            GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
             GestionnaireBatiments.Instance.AnnulerConstruction();
 
             // Démarrer la première construction
@@ -146,7 +146,7 @@ namespace Test
             // Initialisation des données du test
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
             GestionnaireBatiments.Instance.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteMax);
-            InventaireRessources.Instance.AttribuerQteRessource(coutConstruction);
+            GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
             GestionnaireBatiments.Instance.AnnulerConstruction();
 
             // Démarrer la première construction
@@ -187,7 +187,7 @@ namespace Test
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteHDV);
-            InventaireRessources.Instance.AttribuerQteRessource(coutConstruction);
+            GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
             GestionnaireBatiments.Instance.AnnulerConstruction();
 
             // Essayer de démarrer la contruction de l'hotel de ville alors qu'elle est verrouillée

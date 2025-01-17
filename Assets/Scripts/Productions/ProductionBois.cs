@@ -15,7 +15,7 @@ namespace Production
         {
             // Calcul de l'effort des bucherons
             float professionPourcent = professions.AccesPourcentProfessionFraction(ProfessionEnum.BUCHERON);
-            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            long popActuelle = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;

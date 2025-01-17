@@ -100,7 +100,7 @@ namespace Seigneurie
             int qteBoisBase = 1_000;
             int qteMinerauxBase = 1_000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            InventaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
         }
     }
 }

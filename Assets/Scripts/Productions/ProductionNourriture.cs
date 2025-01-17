@@ -27,7 +27,7 @@ namespace Production
         public float CalculManqueNourriturePourcent(float pourcentFermiers)
         {
             long consommation = ConsommationPopulation();
-            long nourritureDisponible = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE) + ProductionFermiers(pourcentFermiers) - consommation;
+            long nourritureDisponible = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE) + ProductionFermiers(pourcentFermiers) - consommation;
 
             long nourritureManquante = nourritureDisponible >= 0 ? 0 : -nourritureDisponible;
 
@@ -37,7 +37,7 @@ namespace Production
         private long ProductionFermiers(float pourcentFermiers)
         {
             // Calcul de l'effort des fermiers
-            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            long popActuelle = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * pourcentFermiers);
             if (nbPopTravaille <= 0)
                 return 0;
@@ -51,8 +51,8 @@ namespace Production
 
         private long ConsommationPopulation()
         {
-            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            float indiceDeFaim = ((PopulationConfig)InventaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).FaimPourcent;
+            long popActuelle = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            float indiceDeFaim = ((PopulationConfig)GestionnaireRessources.Instance.RessourceConfigDict[RessourceEnum.POPULATION]).FaimPourcent;
 
             return (long)(popActuelle * indiceDeFaim);
         }

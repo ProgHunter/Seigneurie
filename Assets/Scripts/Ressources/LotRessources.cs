@@ -54,7 +54,7 @@ namespace Ressource
             {
                 if (quantité.qte > 0)
                 {
-                    string texte = $"{quantité.qte} {InventaireRessources.Instance.RessourceConfigDict[ressource].Nom}";
+                    string texte = $"{quantité.qte} {GestionnaireRessources.Instance.RessourceConfigDict[ressource].Nom}";
                     listeRessources.Add(texte);
                 }
             }

@@ -80,7 +80,7 @@ namespace Batiment
         /// <summary>
         /// Valide si les bâtiments mentionnés dans le lot sont construits et en quantité suffisante.
         /// </summary>
-        /// <param name="prerequis">Le lot de bâtiments qui constitu le prérequis</param>
+        /// <param name="prerequis">Le lot de bâtiments qui constitue le prérequis</param>
         /// <returns>Vrai si on a au moins la même quantité que spécifiée dans le lot</returns>
         public bool PrerequisEstRespecte(LotBatiments prerequis)
         {

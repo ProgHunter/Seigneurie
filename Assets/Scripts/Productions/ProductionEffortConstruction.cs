@@ -18,8 +18,8 @@ namespace Production
 
         /// <summary>
         /// E(p) = p^e
-        /// p : Le nombre de population participant é générer l'effort
-        /// e : L'exposant calculé é partir de l'indice de parallélisation
+        /// p : Le nombre de population participant à générer l'effort
+        /// e : L'exposant calculé à partir de l'indice de parallélisation
         /// </summary>
         /// <param name="professions">Lot de professions à partir duquel on calcule la production.</param>
         /// <param name="constructionEnCours"></param>

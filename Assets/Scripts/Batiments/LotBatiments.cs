@@ -39,7 +39,7 @@ namespace Batiment
         /// <summary>
         /// Crée un clone profond du lot de bâtiments
         /// </summary>
-        /// <returns>Nouvel objet LotBatiments avec les  à s valeurs</returns>
+        /// <returns>Nouvel objet LotBatiments avec les mêmes valeurs</returns>
         public LotBatiments Clone()
         {
             return new LotBatiments(_batimentsDict[BatimentEnum.MAISON].Clone(),
@@ -192,7 +192,7 @@ namespace Batiment
         /// On vient comparer la quantité pour chaque type de batiment.
         /// </summary>
         /// <param name="lot1">Premier lot de batiments</param>
-        /// <param name="lot2">deuxième lot de batiments</param>
+        /// <param name="lot2">Deuxième lot de batiments</param>
         /// <returns>Vrai si la quantité de chaque type de batiment est plus grand ou égale</returns>
         public static bool operator >=(LotBatiments lot1, LotBatiments lot2)
         {

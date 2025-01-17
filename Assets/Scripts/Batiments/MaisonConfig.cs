@@ -24,7 +24,7 @@ namespace Batiment
             Capacite = 10;
             Prerequis = new LotBatiments();  // Aucun prérequis
             Description = "Permet d'augmenter la croissance de la population. \n" +
-                          $"Une {Nom} peut héberger jusqu'é {Capacite} personnes.";
+                          $"Une {Nom} peut héberger jusqu'à {Capacite} personnes.";
         }
 
         public int Capacite { get => _capacite; private set => _capacite = value; }

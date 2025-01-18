@@ -18,10 +18,15 @@ namespace Utils
                 return popMin;
             // Prévenir une division par zéro
             popMin = popMin < 1 ? 1 : popMin;
-            capaciteMax = capaciteMax < popMin ? popMin + 1 : capaciteMax;
+            capaciteMax = capaciteMax <= popMin ? popMin + 1 : capaciteMax;
 
             double expP0 = Math.Exp(tick * croissance) * popMin;
-            return (capaciteMax * expP0) / (expP0 + capaciteMax + popMin);
+
+            double numerateur = expP0 * capaciteMax;
+            double denominateur = expP0 + capaciteMax + popMin;
+
+            var resultat = numerateur / denominateur;
+            return resultat;
         }
 
         /// <summary>
@@ -40,7 +45,12 @@ namespace Utils
             
             croissance = croissance <= 0 ? 0.01f : croissance;
 
-            return Math.Log(-(double)(popActuelle * (capaciteMax - popMin)) / ((popActuelle - capaciteMax) * popMin)) / croissance;
+            long numerateurLog = popActuelle * (capaciteMax - popMin);
+            long denominateurlog = (popActuelle - capaciteMax) * popMin;
+            double numerateur = Math.Log(-(double)numerateurLog / denominateurlog);
+
+            var resultat = numerateur / croissance;
+            return resultat;
         }
 
         /// <summary>

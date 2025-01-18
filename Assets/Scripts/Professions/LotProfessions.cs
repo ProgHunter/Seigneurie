@@ -1,5 +1,6 @@
-using System;
+using Ressource;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils;
 
@@ -8,7 +9,7 @@ namespace Profession
     public class LotProfessions
     {
         /// <summary>
-        /// <see cref="_professionsDict"/> Chaque profession a un pourcentage attribué [0,100].
+        /// <see cref="_professionsDict"/> Chaque profession a un pourcentage attribuÃ© [0,100].
         ///                                Celui-ci impacte la production de ressources.
         /// </summary>
         private Dictionary<ProfessionEnum, Qte> _professionsDict;
@@ -25,7 +26,7 @@ namespace Profession
             };
         }
 
-        public LotProfessions(long pcNatalite, long pcFermier, long pcBucheron, long pcMineur, long pcMacon)
+        public LotProfessions(long pcNatalite = 0, long pcFermier = 0, long pcBucheron = 0, long pcMineur = 0, long pcMacon = 0)
         {
             _professionsDict = new Dictionary<ProfessionEnum, Qte>
             {
@@ -38,9 +39,9 @@ namespace Profession
         }
 
         /// <summary>
-        /// Crée un clone profond du lot de professions
+        /// CrÃ©e un clone profond du lot de professions
         /// </summary>
-        /// <returns>Nouvel objet LotProfessions avec les mêmes valeurs</returns>
+        /// <returns>Nouvel objet LotProfessions avec les mÃªmes valeurs</returns>
         public LotProfessions Clone()
         {
             return new LotProfessions(_professionsDict[ProfessionEnum.NATALITE].Clone(),
@@ -51,7 +52,7 @@ namespace Profession
         }
 
         /// <summary>
-        /// Donne accès au pourcentage d'une profession.
+        /// Donne accÃ¨s au pourcentage d'une profession.
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <returns>Le pourcentage [0,100]</returns>
@@ -72,7 +73,7 @@ namespace Profession
         }
 
         /// <summary>
-        /// Donne accès au pourcentage d'une profession en fraction [0,1].
+        /// Donne accÃ¨s au pourcentage d'une profession en fraction [0,1].
         /// </summary>
         /// <param name="profession">La profession</param>
         /// <returns>Le pourcentage [0,1]</returns>
@@ -82,11 +83,11 @@ namespace Profession
         }
 
         /// <summary>
-        /// Attribue un pourcentage à une profession.
+        /// Attribue un pourcentage Ã  une profession.
         /// Aucune validation.
         /// </summary>
         /// <param name="profession">La profession</param>
-        /// <param name="pcProfession">Le pourcentage à attribuer [0, 100].</param>
+        /// <param name="pcProfession">Le pourcentage Ã  attribuer [0, 100].</param>
         public void AttribuerPourcentProfession(ProfessionEnum profession, long pcProfession)
         {
             try
@@ -100,7 +101,7 @@ namespace Profession
         }
 
         /// <summary>
-        /// Attribue le pourcentage de chaque profession du lot à celui-ci.
+        /// Attribue le pourcentage de chaque profession du lot Ã  celui-ci.
         /// Aucune validation.
         /// </summary>
         /// <param name="pcProfessions">Le lot de professions avec les pourcentages</param>
@@ -146,6 +147,21 @@ namespace Profession
             }
 
             return pcMax;
+        }
+
+        /// <summary>
+        /// Les pourcentages des professions sont Ã©gaux.
+        /// </summary>
+        /// <param name="lot2">Le deuxiÃ¨me lot Ã  commparer.</param>
+        /// <returns>Vrai si tous les pourcentages des professions sont Ã©gaux.</returns>
+        public bool EstEgale(LotProfessions lot2)
+        {
+            var professions = _professionsDict.Keys.ToList();
+            foreach (var profession in professions)
+                if (AccesPourcentProfession(profession) != lot2.AccesPourcentProfession(profession))
+                    return false;
+
+            return true;
         }
     }
 }

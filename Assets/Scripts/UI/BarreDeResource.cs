@@ -1,31 +1,56 @@
 using System.Collections.Generic;
+using System.Linq;
 using Ressource;
 using UnityEngine;
-using Utils;
 
 namespace UI
 {
+    /// <summary>
+    /// Liste des ressources du joueur
+    /// </summary>
     public class BarreDeResource : MonoBehaviour
     {
-        [SerializeField] private List<IndicateurRessource> _listeIndicateurRessources;
+        [SerializeField] private Transform _parent;
+        [SerializeField] private IndicateurRessource _vueInstancier;
+        private readonly Dictionary<RessourceEnum, IndicateurRessource> _dictRessources = new();
 
         public void Init()
         {
-            int i = 0;
-            foreach (var ressource in EnumUtils.GetEnumValues<RessourceEnum>())
+            List<RessourceEnum> ressources = GestionnaireRessources.Instance.RessourceConfigDict.Keys.ToList();
+            foreach (var ressource in ressources)
             {
-                _listeIndicateurRessources?[i].InitRessourceRepresentee(ressource);
+                if (!GestionnaireRessources.Instance.EstDeverrouille(ressource))
+                    continue;
 
-                i++;
+                AjouterIndicateurRessource(ressource);
             }
         }
 
-        public void UpdateRessources()
+        public void MetAJourListeDeRessources()
         {
-            foreach (IndicateurRessource ressource in _listeIndicateurRessources)
+            if (!gameObject.activeInHierarchy)
+                return;
+
+            List<RessourceEnum> ressources = GestionnaireRessources.Instance.RessourceConfigDict.Keys.ToList();
+            foreach (var ressource in ressources)
             {
-                ressource.UpdateValeur();
+                if (!GestionnaireRessources.Instance.EstDeverrouille(ressource))
+                    continue;
+
+                if(!_dictRessources.ContainsKey(ressource))
+                    AjouterIndicateurRessource(ressource);
+
+                _dictRessources[ressource].UpdateValeur();
             }
+        }
+
+        private void AjouterIndicateurRessource(RessourceEnum ressource)
+        {
+            IndicateurRessource indicateur = Instantiate(_vueInstancier, _parent);
+            var config = GestionnaireRessources.Instance.RessourceConfigDict[ressource];
+
+            indicateur.InitRessourceRepresentee(ressource);
+            _dictRessources.Add(ressource, indicateur);
         }
     }
 }

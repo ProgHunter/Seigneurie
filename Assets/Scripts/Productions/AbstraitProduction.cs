@@ -1,3 +1,5 @@
+using Profession;
+
 namespace Production
 {
     public abstract class AbstraitProduction
@@ -11,6 +13,6 @@ namespace Production
 
         public float EfficacitePourcent { get => _efficacitePourcent; protected set => _efficacitePourcent = value; }
 
-        public abstract long CalculerProduction();
+        public abstract long CalculerProduction(LotProfessions professions);
     }
 }

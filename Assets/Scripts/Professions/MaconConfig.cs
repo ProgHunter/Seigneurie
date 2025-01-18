@@ -10,11 +10,11 @@ namespace Profession
         public MaconConfig() : base()
         {
             Id = "P4_Macon";
-            Nom = "Maçon";
+            Nom = "MaÃ§on";
             Icone = null; // TODO
-            Description = "Contribut à la construction dans la Seigneurie";
+            Description = "Contribut Ã  la construction dans la Seigneurie";
             ParallelisablePourcent = 0.75f;
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
             ProfessionPourcent = new Qte(20 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
         }
     }

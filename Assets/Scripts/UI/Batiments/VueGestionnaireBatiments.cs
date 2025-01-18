@@ -1,0 +1,40 @@
+using System;
+using UnityEngine;
+
+namespace UI.Batiments
+{
+    /// <summary>
+    /// Gestionnaire des vues portants sur les bâtiments
+    /// </summary>
+    public class VueGestionnaireBatiments : MonoBehaviour
+    {
+        [SerializeField] private VueListeBatimentsDisponibles _batimentsDisponibles;
+        [SerializeField] private VueListeBatimentsTerminés _batimentsTerminés;
+        [SerializeField] private VueListeBatimentsEnCours _batimentsEnCours;
+
+        private Action MettreAJourLorsDeConstruction;
+        private void Awake()
+        {
+            _batimentsDisponibles.MettreAJourBatimentsEnCours += MetAJourListeVuesBatiments;
+            _batimentsDisponibles.MettreAJourBatimentsEnCours += MettreAJourLorsDeConstruction;
+        }
+
+        public void Init(Action mettreAJour)
+        {
+            _batimentsTerminés.InitListe();
+            _batimentsDisponibles.InitListe();
+            _batimentsEnCours.InitListe();
+            MettreAJourLorsDeConstruction += mettreAJour;
+        }
+
+        public void MetAJourListeVuesBatiments()
+        {
+            if (!gameObject.activeInHierarchy)
+                return;
+
+            _batimentsEnCours.MetAJourListe();
+            _batimentsTerminés.MetAJourListe();
+            _batimentsDisponibles.MetAJourListe();
+        }
+    }
+}

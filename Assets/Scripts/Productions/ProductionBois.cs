@@ -9,12 +9,13 @@ namespace Production
         /// <summary>
         /// Production des bucherons avec le bonus des scieries.
         /// </summary>
+        /// <param name="professions">Lot de professions à partir duquel on calcule la production.</param>
         /// <returns>Production de bois</returns>
-        public override long CalculerProduction()
+        public override long CalculerProduction(LotProfessions professions)
         {
             // Calcul de l'effort des bucherons
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.BUCHERON);
-            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            float professionPourcent = professions.AccesPourcentProfessionFraction(ProfessionEnum.BUCHERON);
+            long popActuelle = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;

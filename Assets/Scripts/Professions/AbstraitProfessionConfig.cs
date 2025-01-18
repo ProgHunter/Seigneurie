@@ -12,7 +12,7 @@ namespace Profession
         private Sprite _icone;
         private string _description;
         /// <summary>
-        /// <see cref="ProfessionPourcent"/> Pourcentage de la population affecté de base à la profession.
+        /// <see cref="ProfessionPourcent"/> Pourcentage de la population affectÃ© de base Ã  la profession.
         /// </summary>
         private Qte _professionPourcent;
         private LotBatiments _prerequis;
@@ -30,10 +30,11 @@ namespace Profession
 
     public enum ProfessionEnum
     {
-        NATALITE = 0,
-        FERMIER = 1,
-        BUCHERON = 2,
-        MINEUR = 3,
-        MACON = 4
+        NUL = 0,
+        NATALITE = 1,
+        FERMIER = 2,
+        BUCHERON = 3,
+        MINEUR = 4,
+        MACON = 5
     }
 }

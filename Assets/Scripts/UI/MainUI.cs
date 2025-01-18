@@ -1,26 +1,37 @@
+using UI.Batiments;
 using UnityEngine;
 
 namespace UI
 {
     /// <summary>
-    /// Kinda a manager for all UI
+    /// Un manager de toutes les Vues
     /// </summary>
     public class MainUI : MonoBehaviour
     {
-        [SerializeField] private RessourcesUI _ressources;
+        [SerializeField] private VueRessources _vueRessources;
         [SerializeField] private VueGestionnaireProfessions _vueGestionnaireProfessions;
         [SerializeField] private VueGestionnaireProductions _vueGestionnaireProductions;
+        [SerializeField] private VueGestionnaireBatiments _vueGestionnaireBatiments;
+        [SerializeField] private GestionOnglets _onglets;
+
+        private void Awake()
+        {
+            _onglets.QuandBoutonAppuyé += MetAJourLesVues;
+        }
 
         public void Init()
         {
-            _ressources.Init();
-            _vueGestionnaireProfessions.Init();
-            _vueGestionnaireProductions.Init();
+            _vueRessources.Init();
+            _vueGestionnaireProfessions.Init(_vueGestionnaireProductions.MiseAJourListeProductions);
+            _vueGestionnaireProductions.Init(_vueGestionnaireProfessions);
+            _vueGestionnaireBatiments.Init(MetAJourLesVues);
         }
         
-        public void UpdateAll()
+        public void MetAJourLesVues()
         {
-            _ressources.UpdateBarre();
+            _vueRessources.MetAJourListeDeRessources();
+            _vueGestionnaireBatiments.MetAJourListeVuesBatiments();
+            _vueGestionnaireProductions.MiseAJourListeProductions();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Ressource
     public abstract class AbstraitRessourceConfig
     {
         /// <summary>
-        /// <see cref="Prerequis"/> Indique les b‚timents prÈrequis pour dÈbloquer celle-ci.
+        /// <see cref="Prerequis"/> Indique les b√¢timents pr√©requis pour d√©bloquer celle-ci.
         /// </summary>
         #region membres
         private string _id;
@@ -30,9 +30,10 @@ namespace Ressource
 
     public enum RessourceEnum
     {
-        POPULATION = 0,
-        NOURRITURE = 1,
-        BOIS = 2,
-        MINERAUX = 3,
+        NUL = 0,
+        POPULATION = 1,
+        NOURRITURE = 2,
+        BOIS = 3,
+        MINERAUX = 4,
     }
 }

@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using Batiment;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ressource
 {
-    public sealed class InventaireRessources
+    public sealed class GestionnaireRessources
     {
         #region members
-        private static readonly InventaireRessources _instance = new();
+        private static readonly GestionnaireRessources _instance = new();
         private LotRessources _quantiteRessources;
         public Dictionary<RessourceEnum, AbstraitRessourceConfig> RessourceConfigDict;
         #endregion members
 
-        private InventaireRessources()
+        private GestionnaireRessources()
         {
             RessourceConfigDict = new Dictionary<RessourceEnum, AbstraitRessourceConfig>
             {
@@ -29,7 +29,7 @@ namespace Ressource
                                                     RessourceConfigDict[RessourceEnum.MINERAUX].Qte);
         }
 
-        public static InventaireRessources Instance
+        public static GestionnaireRessources Instance
         {
             get
             {
@@ -150,10 +150,11 @@ namespace Ressource
         /// <returns>Vrai si toutes les ressources ont pu être modifiées sans atteindre une limite</returns>
         public bool AjouterQteRessourceAvecLimites(LotRessources ressources, bool limitesBloquantes = false)
         {
+            var listeRessources = RessourceConfigDict.Keys.ToList();
             if (limitesBloquantes)
             {
                 long resultat;
-                foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
+                foreach (RessourceEnum ressource in listeRessources)
                 {
                     if (ressources.AccesQteRessource(ressource) == 0)
                         continue;
@@ -168,7 +169,7 @@ namespace Ressource
             }
 
             bool respecteLimites = true;
-            foreach (RessourceEnum ressource in Enum.GetValues(typeof(RessourceEnum)))
+            foreach (RessourceEnum ressource in listeRessources)
             {
                 if (ressources.AccesQteRessource(ressource) == 0)
                     continue;

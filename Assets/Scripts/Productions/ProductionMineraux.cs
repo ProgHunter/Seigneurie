@@ -9,12 +9,13 @@ namespace Production
         /// <summary>
         /// Production des mineurs avec le bonus des mines.
         /// </summary>
-        /// <returns>Production de min�raux</returns>
-        public override long CalculerProduction()
+        /// <param name="professions">Lot de professions à partir duquel on calcule la production.</param>
+        /// <returns>Production de minéraux</returns>
+        public override long CalculerProduction(LotProfessions professions)
         {
             // Calcul de l'effort des mineurs
-            float professionPourcent = GestionnaireProfessions.Instance.AccederPourcentFraction(ProfessionEnum.MINEUR);
-            long popActuelle = InventaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            float professionPourcent = professions.AccesPourcentProfessionFraction(ProfessionEnum.MINEUR);
+            long popActuelle = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
             long nbPopTravaille = (long)(popActuelle * professionPourcent);
             if (nbPopTravaille <= 0)
                 return 0;

@@ -8,10 +8,10 @@ namespace Profession
         public NataliteConfig() : base()
         {
             Id = "P0_Natalite";
-            Nom = "Natalité";
+            Nom = "NatalitÃ©";
             Icone = null; // TODO
-            Description = "Contribut à la natalité dans la Seigneurie";
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Description = "Contribut Ã  la natalitÃ© dans la Seigneurie";
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
             ProfessionPourcent = new Qte(30 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
         }
     }

@@ -10,8 +10,8 @@ namespace Profession
             Id = "P1_Fermier";
             Nom = "Fermier";
             Icone = null; // TODO
-            Description = "Contribut à la production de nouriture dans la Seigneurie";
-            Prerequis = new LotBatiments();  // Aucun prérequis
+            Description = "Contribut Ã  la production de nouriture dans la Seigneurie";
+            Prerequis = new LotBatiments();  // Aucun prÃ©requis
             ProfessionPourcent = new Qte(50 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
         }
     }

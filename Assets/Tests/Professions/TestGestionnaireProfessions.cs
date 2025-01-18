@@ -15,7 +15,7 @@ namespace Test
         public void TestProfession50pc()
         {
             var pourcentTest = 50;
-            // Mettre toutes les professions à 0%, et Maçon à 50%
+            // Mettre toutes les professions Ã  0%, et MaÃ§on Ã  50%
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
@@ -31,7 +31,7 @@ namespace Test
         public void TestProfessionMoins10pc()
         {
             var pourcentTest = -10;
-            // Mettre toutes les professions à 0%, et Maçon à -10%
+            // Mettre toutes les professions Ã  0%, et MaÃ§on Ã  -10%
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
@@ -47,7 +47,7 @@ namespace Test
         public void TestProfession110pc()
         {
             var pourcentTest = 110;
-            // Mettre toutes les professions à 0%, et Maçon à 110%
+            // Mettre toutes les professions Ã  0%, et MaÃ§on Ã  110%
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
@@ -64,7 +64,7 @@ namespace Test
         {
             var pourcentTest = 50;
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
-            // Mettre toutes les professions à 20%, et Maçon à 50%
+            // Mettre toutes les professions Ã  0%, et MaÃ§on Ã  50%
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 20);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 20);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 20);
@@ -72,7 +72,7 @@ namespace Test
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, pourcentTest);
 
             var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
-            // 20, puisque le total attribué aux professions ne peut cumuler plus de 100%
+            // 20, puisque le total attribuÃ© aux professions ne peut cumuler plus de 100%
             Assert.AreEqual(20, pourcentRetour);
         }
 
@@ -81,7 +81,7 @@ namespace Test
         {
             var pourcentTest = 10;
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
-            // Mettre toutes les professions à 25%, et Maçon à 10%
+            // Mettre toutes les professions Ã  0%, et MaÃ§on Ã  10%
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
@@ -89,14 +89,14 @@ namespace Test
             GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, pourcentTest);
 
             var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
-            // 0, puisque le total attribué aux professions ne peut cumuler plus de 100%
+            // 0, puisque le total attribuÃ© aux professions ne peut cumuler plus de 100%
             Assert.AreEqual(0, pourcentRetour);
         }
 
         [Test]
         public void TestProfessionVerrouilleeAttribuerPc()
         {
-            // TODO: Créer un test avec une profession verrouillée lors qu'elle sera ajoutée au jeu
+            // TODO: CrÃ©er un test avec une profession verrouillÃ©e lors qu'elle sera ajoutÃ©e au jeu
             Assert.IsTrue(true);
         }
     }

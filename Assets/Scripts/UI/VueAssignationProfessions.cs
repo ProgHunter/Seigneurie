@@ -34,7 +34,7 @@ namespace UI
         {
             _boutonMoins.onClick.AddListener(ClicBoutonMoins);
             _boutonPlus.onClick.AddListener(ClicBoutonPlus);
-            _slider.onValueChanged.AddListener(OnSliderValueChanged);
+            _slider.onValueChanged.AddListener(PourcentageModifié);
         }
 
         public void InitProfession(ProfessionEnum profession, Action professionEstModifie)
@@ -63,8 +63,6 @@ namespace UI
         
         private void ClicBoutonPlus()
         {
-            /*if (GestionnaireProfessions.Instance.PourcentPopLibre() < 1)
-                return;*/
             if (_pourcentageActuel >= _pcMax)
             {
                 return;
@@ -75,24 +73,8 @@ namespace UI
             //Debug.Log($"Pourcentage pour {_profession}: {GestionnaireProfessions.Instance.AccederPourcent(_profession)}");
         }
 
-        private void OnSliderValueChanged(float value)
+        private void PourcentageModifié(float value)
         {
-            //si on essaie de augmenter
-            /*if (value > _pourcentageActuel && GestionnaireProfessions.Instance.PourcentPopLibre() < 1)
-            {
-                _slider.value = _pourcentageActuel;
-                Debug.LogWarning("Tried to add more profession");
-                return;
-            }
-
-            if (value <_pourcentageActuel && _pourcentageActuel < 1)
-            {
-                
-                _slider.value = _pourcentageActuel;
-                Debug.LogWarning("Tried to remove profession");
-                return;
-            }*/
-            
             _pourcentageActuel = (int)value;
             MetAJourPourcentage();
             //Debug.Log("Slider "+ value);

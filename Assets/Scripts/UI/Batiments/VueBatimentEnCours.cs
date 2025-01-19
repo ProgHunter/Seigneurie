@@ -19,7 +19,7 @@ namespace UI.Batiments
         private Action MettreAJourBatiments;
 
         private const string _aucunMaçon = "Aucun maçon";
-        private const string _ticksTexte = " ticks";
+        private const string _ticksTexte = " tick(s)";
 
         private void Awake()
         {

@@ -23,7 +23,7 @@ namespace UI.Batiments
         private Action MettreAJourBatimentsEnCours;
 
         private const string _aucunMaçon = "Aucun maçon";
-        private const string _ticksTexte = " ticks";
+        private const string _ticksTexte = " tick(s)";
         private const string _msgConstructionCommencé = "Construction de ";
         private const string _msgErreurConstruction = "Ne peut pas construire. Le bouton ne devrait pas être clickable";
 

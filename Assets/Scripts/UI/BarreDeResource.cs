@@ -24,6 +24,8 @@ namespace UI
 
                 AjouterIndicateurRessource(ressource);
             }
+
+            MetAJourListeDeRessources();
         }
 
         public void MetAJourListeDeRessources()

@@ -21,11 +21,12 @@ namespace UI.Batiments
         [SerializeField] private Button _btnDebutConstruction;
 
         private BatimentEnum _batimentEnum;
+        private Action MettreAJourBatimentsEnCours;
+
         private const string _aucunMaçon = "Aucun maçon";
-        private const string _ticksString = " ticks";
+        private const string _ticksTexte = " tick(s)";
         private const string _msgConstructionCommencé = "Construction de ";
         private const string _msgErreurConstruction = "Ne peut pas construire. Le bouton ne devrait pas être clickable";
-        private Action MettreAJourBatimentsEnCours;
 
         public void Init(BatimentEnum batimentEnum, Sprite icone, string nomBatiment, string coutRessources,
             string description, Action mettreAJourBatimentsEnCours)
@@ -36,15 +37,29 @@ namespace UI.Batiments
             _nomBatiment.text = nomBatiment;
             _coutRessources.text = coutRessources;
             _description.text = description;
-            UpdateValeurs();
+            MetAjourValeurs();
             _btnDebutConstruction.onClick.AddListener(DémarrerConstruction);
             MettreAJourBatimentsEnCours += mettreAJourBatimentsEnCours;
         }
-        
-        private void MetAJourCoutTicks(long nb)
+
+        public void Dispose()
         {
-            string texte = nb == -1 ? _aucunMaçon : nb.ToString("#,0", CultureInfo.CurrentCulture) + _ticksString;
-            _coutTemps.text = texte;
+            Destroy(gameObject);
+        }
+
+        public void MetAjourValeurs()
+        {
+            long nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, _batimentEnum);
+            MetAJourCoutTicks(nbTicksConstruction);
+
+            _btnDebutConstruction.interactable =
+                GestionnaireBatiments.Instance.PeutDemarrerConstruction(_batimentEnum);
+        }
+
+        private void MetAJourCoutTicks(long nbTicks)
+        {
+            string nbTicksTexte = nbTicks == -1 ? _aucunMaçon : nbTicks.ToString("#,0", CultureInfo.CurrentCulture) + _ticksTexte;
+            _coutTemps.text = nbTicksTexte;
         }
 
         private void DémarrerConstruction()
@@ -58,21 +73,6 @@ namespace UI.Batiments
             {
                 Debug.LogError(_msgErreurConstruction);
             }
-            
-        }
-
-        public void Dispose()
-        {
-            Destroy(gameObject);
-        }
-
-        public void UpdateValeurs()
-        {
-            long nbTicksConstruction = GestionnaireProductions.Instance.NbTicksRestantsConstruction(-1, _batimentEnum);
-            MetAJourCoutTicks(nbTicksConstruction);
-
-            _btnDebutConstruction.interactable =
-                GestionnaireBatiments.Instance.CoutConstructionEstDisponible(_batimentEnum);
         }
     }
 }

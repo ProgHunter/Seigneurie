@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Batiment;
 using TMPro;
 using UnityEngine;
@@ -15,40 +16,40 @@ namespace UI.Batiments
         [SerializeField] private TextMeshProUGUI _nom;
         [SerializeField] private TextMeshProUGUI _completion;
         [SerializeField] private Button _boutonAnnuler;
-        private Action MettreAJourBatiments;
         
+        private Action MettreAJourBatiments;
+
+        private const string _aucunMaçon = "Aucun maçon";
+        private const string _ticksTexte = " tick(s)";
+
         private void Awake()
         {
             _boutonAnnuler.onClick.AddListener(AnnulerConstruction);
         }
 
-        public void Init(Sprite icone, string nom, string completion, Action mettreAJourBatiments)
+        public void Init(Sprite icone, string nom, long nbTicksRestants, Action mettreAJourBatiments)
         {
             //TODO icone
             _nom.text = nom;
-            ModifierValeurCompletion(completion);
+            MetAJourTicksRestants(nbTicksRestants);
             MettreAJourBatiments = mettreAJourBatiments;
         }
 
-        public void UpdateValeurs(string completion)
+        public void MetAJourTicksRestants(long nbTicksRestants)
         {
-            ModifierValeurCompletion(completion);
+            string nbTicksRestantsTexte = nbTicksRestants == -1 ? _aucunMaçon : nbTicksRestants.ToString("#,0", CultureInfo.CurrentCulture) + _ticksTexte;
+            _completion.text = nbTicksRestantsTexte;
         }
-
-        private void ModifierValeurCompletion(string completion)
+        
+        public void Dispose()
         {
-            _completion.text = completion + " ticks";
+            Destroy(gameObject);
         }
 
         private void AnnulerConstruction()
         {
             GestionnaireBatiments.Instance.AnnulerConstruction();
             MettreAJourBatiments?.Invoke();
-        }
-        
-        public void Dispose()
-        {
-            Destroy(gameObject);
         }
     }
 }

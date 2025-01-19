@@ -52,7 +52,7 @@ namespace UI.Batiments
             MetAJourCoutTicks(nbTicksConstruction);
 
             _btnDebutConstruction.interactable =
-                GestionnaireBatiments.Instance.CoutConstructionEstDisponible(_batimentEnum);
+                GestionnaireBatiments.Instance.PeutDemarrerConstruction(_batimentEnum);
         }
 
         private void MetAJourCoutTicks(long nbTicks)

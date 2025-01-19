@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace UI.Batiments
 
         public void UpdateValeurs(long quantiteConstruite)
         {
-            _quantiteConstruite.text = quantiteConstruite.ToString();
+            _quantiteConstruite.text = quantiteConstruite.ToString("#,0", CultureInfo.CurrentCulture);
         }
 
         public void Dispose()

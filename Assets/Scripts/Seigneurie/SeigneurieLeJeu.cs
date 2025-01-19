@@ -54,7 +54,7 @@ namespace Seigneurie
         // Innitialise des valeurs pour les ressources, batiments et professions
         private void Start()
         {
-            //AttribuerDesValeursDeDepart();
+            AttribuerDesValeursDeDepart();
 
             _ui.Init();
             _tickeur = new Tickeur(NbSecEntreTicks);
@@ -88,17 +88,17 @@ namespace Seigneurie
             //GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
 
             // Création de bâtiments
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 10);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, 1);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 1_000);
+            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, 100);
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, 0);
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MINE, 0);
             GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, 0);
 
             // Attribuer des ressources de base
             int qtePopBase = 1_000;
-            int qteNourritureBase = 100;
+            int qteNourritureBase = 1_000_000;
             int qteBoisBase = 1_000;
-            int qteMinerauxBase = 1_000;
+            int qteMinerauxBase = 0;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
             GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
         }

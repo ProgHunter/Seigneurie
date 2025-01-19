@@ -1,6 +1,7 @@
 using Batiment;
 using Production;
 using System;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +43,7 @@ namespace UI.Batiments
         
         private void MetAJourCoutTicks(long nb)
         {
-            string texte = nb == -1 ? _aucunMaçon : nb + _ticksString;
+            string texte = nb == -1 ? _aucunMaçon : nb.ToString("#,0", CultureInfo.CurrentCulture) + _ticksString;
             _coutTemps.text = texte;
         }
 

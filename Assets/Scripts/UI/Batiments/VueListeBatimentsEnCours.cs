@@ -1,3 +1,4 @@
+using System.Globalization;
 using Batiment;
 using Production;
 using Profession;
@@ -35,11 +36,11 @@ namespace UI.Batiments
                 {
                     _vueBatiment = Instantiate(_vueInstancier, _content);
                     string nom = gestionnaireBatiments.BatimentConfigDict[batiment.Item1].Nom;
-                    _vueBatiment.Init(null, nom, nbTicks.ToString(), MetAJourListe);
+                    _vueBatiment.Init(null, nom, nbTicks.ToString("#,0", CultureInfo.CurrentCulture), MetAJourListe);
                 }
                 else
                 {
-                    _vueBatiment.UpdateValeurs(nbTicks.ToString());
+                    _vueBatiment.UpdateValeurs(nbTicks.ToString("#,0", CultureInfo.CurrentCulture));
                 }
             }
             else

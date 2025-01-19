@@ -170,6 +170,22 @@ namespace Batiment
         }
 
         /// <summary>
+        /// Indique qu'il n'y a pas déjà une construction en cours, et
+        /// qu'on a les ressources nécessaires
+        /// que le bâtiment est déverrouillé, et
+        /// qu'on est en dessous de la limite max de ce bâtiment.
+        /// </summary>
+        /// <param name="batiment">Le bâtiment dont on veut savoir si on peut lancer la construction.</param>
+        /// <returns>Vrai si on pourrait lancer la construction du bâtiment.</returns>
+        public bool PeutDemarrerConstruction(BatimentEnum batiment)
+        {
+            return !ConstructionEstEnCours() &&
+                   CoutConstructionEstDisponible(batiment) &&
+                   EstDeverrouille(batiment) &&
+                   (_batiments.AccesQteBatiment(batiment) < _batiments.AccesQteMaxBatiment(batiment));
+        }
+
+        /// <summary>
         /// Démarrer une nouvelle construction.
         /// Une seul construction à la fois. Refusé si déjà au max de ce type de bâtiment.
         /// </summary>
@@ -177,12 +193,7 @@ namespace Batiment
         /// <returns>Vrai si la construction peut être démarrée</returns>
         public bool DemarrerConstruction(BatimentEnum batiment)
         {
-            // S'il y a déjà une construction en cours, ou
-            // Si le bâtiment n'est pas encore disponible, ou
-            // Si on est à la limite max, on ne commance pas la nouvelle construction
-            if (ConstructionEstEnCours() ||
-                !EstDeverrouille(batiment) ||
-                (_batiments.AccesQteBatiment(batiment) >= _batiments.AccesQteMaxBatiment(batiment)))
+            if (!PeutDemarrerConstruction(batiment))
                 return false;
 
             // On essaie d'effectuer la transaction avec l'inventaire.

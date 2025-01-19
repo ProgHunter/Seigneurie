@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -12,10 +13,13 @@ namespace UI
         [SerializeField] List<GameObject> _ongletsVues;
         private int _indexActif;
         public Action QuandBoutonAppuyé;
+        //Bouton qui est appuyé par défaut
+        [SerializeField]private Button _boutonDéfaut;
         public void Awake()
         {
             _ongletsVues[_indexActif].SetActive(true);
             MetAJourLesBoutonsOnglets();
+            _boutonDéfaut.Select();
         }
 
         //Utilisé dans Ui

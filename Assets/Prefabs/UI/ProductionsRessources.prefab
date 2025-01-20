@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 807518195055280980}
   - component: {fileID: 807518195055280982}
   - component: {fileID: 807518195055280983}
-  - component: {fileID: 807518195055281001}
+  - component: {fileID: 220597941044487752}
   m_Layer: 5
   m_Name: ProductionsRessources
   m_TagString: Untagged
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &807518195055281001
+--- !u!114 &220597941044487752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -846,8 +846,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 807518195890684224}
   m_HandleRect: {fileID: 807518195890684225}
   m_Direction: 2
-  m_Value: 1.000001
-  m_Size: 0.7768564
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

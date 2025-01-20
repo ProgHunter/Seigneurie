@@ -1602,6 +1602,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 807518195055281001, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
+      propertyPath: _vueInstancier
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 807518195792501845, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

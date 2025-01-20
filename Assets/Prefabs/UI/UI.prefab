@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vueRessources: {fileID: 2386754729187020338}
   _vueGestionnaireProfessions: {fileID: 2361667830459103756}
-  _vueGestionnaireProductions: {fileID: 8626794171284216672}
+  _vueGestionnaireProductions: {fileID: 9188432555580505665}
   _vueGestionnaireBatiments: {fileID: 2307491946077771369}
   _onglets: {fileID: 4931817514004688223}
 --- !u!1 &2386754729256622988
@@ -2062,9 +2062,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1963669336282503186, guid: e82694bcf2bc5e847a39ae63b77346ff, type: 3}
   m_PrefabInstance: {fileID: 4206131277247010681}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8626794171284216672 stripped
+--- !u!114 &9188432555580505665 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5613641875060263961, guid: e82694bcf2bc5e847a39ae63b77346ff, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5034163081479285048, guid: e82694bcf2bc5e847a39ae63b77346ff, type: 3}
   m_PrefabInstance: {fileID: 4206131277247010681}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -2215,10 +2215,6 @@ PrefabInstance:
     - target: {fileID: 2115935806669213876, guid: 0fa1bfb79a47f3346a7910c6a3aaa60c, type: 3}
       propertyPath: m_Name
       value: Ressources
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115935806669213876, guid: 0fa1bfb79a47f3346a7910c6a3aaa60c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2115935807198177446, guid: 0fa1bfb79a47f3346a7910c6a3aaa60c, type: 3}
       propertyPath: m_AnchorMax.y

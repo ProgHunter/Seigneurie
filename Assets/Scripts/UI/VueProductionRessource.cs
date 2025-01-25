@@ -2,6 +2,7 @@ using Production;
 using Profession;
 using Ressource;
 using System;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
@@ -27,13 +28,13 @@ namespace UI
         public void ModifierValeurProductionActuelle()
         {
             var production = GestionnaireProductions.Instance.EvaluerProduction(_ressourceRepresentee);
-            _productionActuelle.text = production + "/tick";
+            _productionActuelle.text = production.ToString("#,0", CultureInfo.CurrentCulture) + "/tick";
         }
 
         public void ModifierValeurProductionAnticipee(LotProfessions professions = null)
         {
             var production = GestionnaireProductions.Instance.EvaluerProduction(_ressourceRepresentee, professions);
-            _productionAnticipee.text = production + "/tick";
+            _productionAnticipee.text = production.ToString("#,0", CultureInfo.CurrentCulture) + "/tick";
         }
 
         public void Dispose()

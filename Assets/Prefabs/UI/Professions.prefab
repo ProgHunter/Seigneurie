@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -17}
+  m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &1963669334318798366
 CanvasRenderer:
@@ -1023,7 +1023,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 0
+  m_Spacing: 3
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -1602,6 +1602,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 807518195055281001, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
+      propertyPath: _vueInstancier
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 807518195792501845, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1626,6 +1630,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 807518196280657680, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 807518196280657683, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
       propertyPath: m_Size
       value: 1
@@ -1637,6 +1645,14 @@ PrefabInstance:
     - target: {fileID: 807518196407380698, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
       propertyPath: m_ScrollSensitivity
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 807518196596933629, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 240.7813
+      objectReference: {fileID: 0}
+    - target: {fileID: 807518196596933629, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -137.95593
       objectReference: {fileID: 0}
     - target: {fileID: 8067422540563000091, guid: dbb894e2e1b39754a83a72fb13109639, type: 3}
       propertyPath: m_AnchorMax.y

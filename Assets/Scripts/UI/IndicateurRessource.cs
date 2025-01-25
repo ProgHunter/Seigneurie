@@ -1,3 +1,4 @@
+using System.Globalization;
 using Ressource;
 using UnityEngine;
 using TMPro;
@@ -22,7 +23,7 @@ namespace UI
 
         public void UpdateValeur()
         {
-            _nombre.text = GestionnaireRessources.Instance.AccesQteRessource(_ressourceRepresentee).ToString();
+            _nombre.text = GestionnaireRessources.Instance.AccesQteRessource(_ressourceRepresentee).ToString("#,0", CultureInfo.CurrentCulture);
         }
     }
 }

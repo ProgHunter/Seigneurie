@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Batiment;
 using TMPro;
 using UnityEngine;
@@ -36,7 +37,7 @@ namespace UI.Batiments
 
         public void MetAJourTicksRestants(long nbTicksRestants)
         {
-            string nbTicksRestantsTexte = nbTicksRestants == -1 ? _aucunMaçon : nbTicksRestants + _ticksTexte;
+            string nbTicksRestantsTexte = nbTicksRestants == -1 ? _aucunMaçon : nbTicksRestants.ToString("#,0", CultureInfo.CurrentCulture) + _ticksTexte;
             _completion.text = nbTicksRestantsTexte;
         }
         

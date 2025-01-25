@@ -14,6 +14,7 @@ namespace UI.Batiments
         [SerializeField] private VueBatimentEnCours _vueInstancier;
         [SerializeField] private GameObject _msgAucunEnCours;
         private VueBatimentEnCours _vueBatiment;
+        
         public void InitListe()
         {
             MetAJourListe();
@@ -35,6 +36,7 @@ namespace UI.Batiments
                 {
                     _vueBatiment = Instantiate(_vueInstancier, _content);
                     string nom = gestionnaireBatiments.BatimentConfigDict[batiment.Item1].Nom;
+
                     _vueBatiment.Init(null, nom, nbTicksRestants, MetAJourListe);
                 }
                 else

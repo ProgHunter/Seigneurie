@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using Utils;
 
@@ -54,7 +55,7 @@ namespace Ressource
             {
                 if (quantité.qte > 0)
                 {
-                    string texte = $"{quantité.qte} {GestionnaireRessources.Instance.RessourceConfigDict[ressource].Nom}";
+                    string texte = $"{quantité.qte.ToString("#,0", CultureInfo.CurrentCulture)} {GestionnaireRessources.Instance.RessourceConfigDict[ressource].Nom}";
                     listeRessources.Add(texte);
                 }
             }

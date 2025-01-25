@@ -1,4 +1,3 @@
-using System.Globalization;
 using Batiment;
 using Production;
 using Profession;
@@ -15,6 +14,7 @@ namespace UI.Batiments
         [SerializeField] private VueBatimentEnCours _vueInstancier;
         [SerializeField] private GameObject _msgAucunEnCours;
         private VueBatimentEnCours _vueBatiment;
+        
         public void InitListe()
         {
             MetAJourListe();

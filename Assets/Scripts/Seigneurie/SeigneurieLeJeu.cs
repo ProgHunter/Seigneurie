@@ -54,7 +54,7 @@ namespace Seigneurie
         // Innitialise des valeurs pour les ressources, batiments et professions
         private void Start()
         {
-            AttribuerDesValeursDeDepart();
+            //AttribuerDesValeursDeDepart();
 
             _ui.Init();
             _tickeur = new Tickeur(NbSecEntreTicks);

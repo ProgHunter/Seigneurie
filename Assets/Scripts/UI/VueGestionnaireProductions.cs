@@ -23,7 +23,7 @@ namespace UI
 
             _vueGestionnaireProfessions = vueGestionnaireProfessions;
 
-            MiseAJourListeProductions();
+            MettreAJourListeProductions();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace UI
         /// </summary>
         /// <param name="productionActuelle">Mettre à jour la vue de la production actuelle</param>
         /// <param name="productionAnticipée">Mettre à jour la vue de la production anticipée</param>
-        public void MiseAJourListeProductions(bool productionActuelle = true, bool productionAnticipée = true)
+        public void MettreAJourListeProductions(bool productionActuelle = true, bool productionAnticipée = true)
         {
             if (!gameObject.activeInHierarchy)
                 return;

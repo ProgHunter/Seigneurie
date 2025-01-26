@@ -9,7 +9,7 @@ namespace UI
     /// <summary>
     /// Gère les pourcentages de population assignés à chaque profession
     /// </summary>
-    public class VueAssignationProfessions : MonoBehaviour, IDisposable
+    public sealed class VueAssignationProfessions : MonoBehaviour, IDisposable
     {
         private ProfessionEnum _profession;
         [SerializeField] private Button _boutonMoins;

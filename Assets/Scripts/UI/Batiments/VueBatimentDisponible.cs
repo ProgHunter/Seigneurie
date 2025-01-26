@@ -11,7 +11,7 @@ namespace UI.Batiments
     /// <summary>
     /// Ligne de la description d'un bâtiment qui est disponible à la construction 
     /// </summary>
-    public class VueBatimentDisponible : MonoBehaviour, IDisposable
+    public sealed class VueBatimentDisponible : MonoBehaviour, IDisposable
     {
         [SerializeField] private Image _icone;
         [SerializeField] private TextMeshProUGUI _nomBatiment;
@@ -21,7 +21,7 @@ namespace UI.Batiments
         [SerializeField] private Button _btnDebutConstruction;
 
         private BatimentEnum _batimentEnum;
-        private Action MettreAJourBatimentsEnCours;
+        private Action _mettreAJourToutesLesVues;
 
         private const string _aucunMaçon = "Aucun maçon";
         private const string _ticksTexte = " tick(s)";
@@ -29,7 +29,7 @@ namespace UI.Batiments
         private const string _msgErreurConstruction = "Ne peut pas construire. Le bouton ne devrait pas être clickable";
 
         public void Init(BatimentEnum batimentEnum, Sprite icone, string nomBatiment, string coutRessources,
-            string description, Action mettreAJourBatimentsEnCours)
+            string description, Action mettreAJourToutesLesVues)
         {
             _batimentEnum = batimentEnum;
             //TODO icone
@@ -39,7 +39,7 @@ namespace UI.Batiments
             _description.text = description;
             MetAjourValeurs();
             _btnDebutConstruction.onClick.AddListener(DémarrerConstruction);
-            MettreAJourBatimentsEnCours += mettreAJourBatimentsEnCours;
+            _mettreAJourToutesLesVues += mettreAJourToutesLesVues;
         }
 
         public void Dispose()
@@ -67,7 +67,10 @@ namespace UI.Batiments
             if (GestionnaireBatiments.Instance.DemarrerConstruction(_batimentEnum))
             {
                 //Debug.Log(_msgConstructionCommencé + _nomBatiment.text);
-                MettreAJourBatimentsEnCours?.Invoke();
+                // TODO (2.0): Changer pour un patron MVC pour que les vues se mettent à jour lorsque le modèle est modifié.
+                
+                // On doit mettre à jour la liste de ressources et la liste de contruction en cours
+                _mettreAJourToutesLesVues?.Invoke();
             }
             else
             {

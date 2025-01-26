@@ -10,14 +10,15 @@ namespace UI.Batiments
     /// <summary>
     /// Ligne d'un bâtiment qui est en cours de construction qui affiche combien de ticks restes avant la fin de la construction
     /// </summary>
-    public class VueBatimentEnCours : MonoBehaviour, IDisposable
+    public sealed class VueBatimentEnCours : MonoBehaviour, IDisposable
     {
         [SerializeField] private Image _icone;
         [SerializeField] private TextMeshProUGUI _nom;
         [SerializeField] private TextMeshProUGUI _completion;
         [SerializeField] private Button _boutonAnnuler;
-        
-        private Action MettreAJourBatiments;
+
+        private Action _mettreAJourListBatimentsDisponibles;
+        private Action _mettreAJourListeBatimentsEnCours;
 
         private const string _aucunMaçon = "Aucun maçon";
         private const string _ticksTexte = " tick(s)";
@@ -27,12 +28,13 @@ namespace UI.Batiments
             _boutonAnnuler.onClick.AddListener(AnnulerConstruction);
         }
 
-        public void Init(Sprite icone, string nom, long nbTicksRestants, Action mettreAJourBatiments)
+        public void Init(Sprite icone, string nom, long nbTicksRestants, Action mettreAJourListBatimentsDisponibles, Action mettreAJourListeBatimentsEnCours)
         {
             //TODO icone
             _nom.text = nom;
             MetAJourTicksRestants(nbTicksRestants);
-            MettreAJourBatiments = mettreAJourBatiments;
+            _mettreAJourListBatimentsDisponibles += mettreAJourListBatimentsDisponibles;
+            _mettreAJourListeBatimentsEnCours += mettreAJourListeBatimentsEnCours;
         }
 
         public void MetAJourTicksRestants(long nbTicksRestants)
@@ -49,7 +51,11 @@ namespace UI.Batiments
         private void AnnulerConstruction()
         {
             GestionnaireBatiments.Instance.AnnulerConstruction();
-            MettreAJourBatiments?.Invoke();
+            // On doit mettre à jour la liste des bâtiments disponibles pour dégriser le bouton pour
+            // construire un autre bâtiment.
+            _mettreAJourListBatimentsDisponibles?.Invoke();
+            // Se retirer de la liste
+            _mettreAJourListeBatimentsEnCours?.Invoke();
         }
     }
 }

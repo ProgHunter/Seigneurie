@@ -16,10 +16,10 @@ namespace UI.Batiments
 
         public void InitListe()
         {
-            MetAJourListe();
+            MettreAJourListe();
         }
 
-        public void MetAJourListe()
+        public void MettreAJourListe()
         {
             if (!gameObject.activeInHierarchy)
                 return;

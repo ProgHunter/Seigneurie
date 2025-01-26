@@ -71,7 +71,7 @@ namespace Seigneurie
         private void EffectuerLeTick()
         {
             GestionnaireProductions.Instance.Production();
-            _ui.MetAJourLesVues();
+            _ui.MettreAJourLesVues();
         }
 
         /// <summary>

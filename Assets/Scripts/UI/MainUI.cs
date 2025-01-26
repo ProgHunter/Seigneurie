@@ -16,22 +16,22 @@ namespace UI
 
         private void Awake()
         {
-            _onglets.QuandBoutonAppuyé += MetAJourLesVues;
+            _onglets.QuandBoutonAppuyé += MettreAJourLesVues;
         }
 
         public void Init()
         {
             _vueRessources.Init();
-            _vueGestionnaireProfessions.Init(_vueGestionnaireProductions.MiseAJourListeProductions);
+            _vueGestionnaireProfessions.Init(_vueGestionnaireProductions.MettreAJourListeProductions);
             _vueGestionnaireProductions.Init(_vueGestionnaireProfessions);
-            _vueGestionnaireBatiments.Init(MetAJourLesVues);
+            _vueGestionnaireBatiments.Init(MettreAJourLesVues);
         }
         
-        public void MetAJourLesVues()
+        public void MettreAJourLesVues()
         {
-            _vueRessources.MetAJourListeDeRessources();
-            _vueGestionnaireBatiments.MetAJourListeVuesBatiments();
-            _vueGestionnaireProductions.MiseAJourListeProductions();
+            _vueRessources.MettreAJourListeDeRessources();
+            _vueGestionnaireBatiments.MettreAJourListeVuesBatiments();
+            _vueGestionnaireProductions.MettreAJourListeProductions();
         }
     }
 }

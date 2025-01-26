@@ -12,29 +12,21 @@ namespace UI.Batiments
         [SerializeField] private VueListeBatimentsTerminés _batimentsTerminés;
         [SerializeField] private VueListeBatimentsEnCours _batimentsEnCours;
 
-        private Action MettreAJourLorsDeConstruction;
-        private void Awake()
-        {
-            _batimentsDisponibles.MettreAJourBatimentsEnCours += MetAJourListeVuesBatiments;
-            _batimentsDisponibles.MettreAJourBatimentsEnCours += MettreAJourLorsDeConstruction;
-        }
-
-        public void Init(Action mettreAJour)
+        public void Init(Action mettreAJourToutesLesVues)
         {
             _batimentsTerminés.InitListe();
-            _batimentsDisponibles.InitListe();
-            _batimentsEnCours.InitListe();
-            MettreAJourLorsDeConstruction += mettreAJour;
+            _batimentsDisponibles.InitListe(mettreAJourToutesLesVues);
+            _batimentsEnCours.InitListe(_batimentsDisponibles.MettreAJourListe);
         }
 
-        public void MetAJourListeVuesBatiments()
+        public void MettreAJourListeVuesBatiments()
         {
             if (!gameObject.activeInHierarchy)
                 return;
 
-            _batimentsEnCours.MetAJourListe();
-            _batimentsTerminés.MetAJourListe();
-            _batimentsDisponibles.MetAJourListe();
+            _batimentsEnCours.MettreAJourListe();
+            _batimentsTerminés.MettreAJourListe();
+            _batimentsDisponibles.MettreAJourListe();
         }
     }
 }

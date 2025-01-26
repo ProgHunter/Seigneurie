@@ -15,13 +15,16 @@ namespace UI.Batiments
         [SerializeField] private VueBatimentDisponible _vueInstancier;
         private readonly Dictionary<BatimentEnum, VueBatimentDisponible> _dictBatimentsDisponibles = new();
 
-        public Action MettreAJourBatimentsEnCours;
-        public void InitListe()
+        private Action _mettreAJourToutesLesVues;
+
+        public void InitListe(Action mettreAJourToutesLesVues)
         {
-            MetAJourListe();
+            _mettreAJourToutesLesVues += mettreAJourToutesLesVues;
+            
+            MettreAJourListe();
         }
         
-        public void MetAJourListe()
+        public void MettreAJourListe()
         {
             if (!gameObject.activeInHierarchy)
                 return;
@@ -57,7 +60,7 @@ namespace UI.Batiments
             VueBatimentDisponible vue = Instantiate(_vueInstancier, _parent);
             AbstraitBatimentConfig config = GestionnaireBatiments.Instance.BatimentConfigDict[batiment];
 
-            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description,MettreAJourBatimentsEnCours);
+            vue.Init(batiment, config.Icone, config.Nom, config.CoutConstruction.ToString(), config.Description, _mettreAJourToutesLesVues);
             _dictBatimentsDisponibles.Add(batiment, vue);
         }
     }

@@ -9,7 +9,7 @@ namespace UI.Batiments
     /// <summary>
     /// Vue qui affiche le nombre de bâtiments de ce type qui sont déjà construits
     /// </summary>
-    public class VueBatimentTerminé : MonoBehaviour, IDisposable
+    public sealed class VueBatimentTerminé : MonoBehaviour, IDisposable
     {
         [SerializeField] private Image _icone;
         [SerializeField] private TextMeshProUGUI _nomBatiment;

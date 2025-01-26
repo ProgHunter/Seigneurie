@@ -13,7 +13,7 @@ namespace UI
         {
             _barreDeResource.Init();
         }
-        public void MetAJourListeDeRessources()
+        public void MettreAJourListeDeRessources()
         {
             if (!gameObject.activeInHierarchy)
                 return;

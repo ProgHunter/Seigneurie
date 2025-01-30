@@ -1,11 +1,10 @@
 using System;
 using Batiment;
-using Production;
 using Profession;
 using Ressource;
 using Utils;
 
-namespace Productions
+namespace Production
 {
     public class ProductionPopulation : AbstraitProduction
     {

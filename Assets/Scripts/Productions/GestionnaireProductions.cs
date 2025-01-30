@@ -1,7 +1,6 @@
 using Ressource;
 using Batiment;
 using System.Collections.Generic;
-using Productions;
 using Profession;
 
 namespace Production

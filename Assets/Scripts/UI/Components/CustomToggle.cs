@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI.Components
 {
-    public class CustomToggle : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
+    public class CustomToggle : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
         private bool _estSelectionné;
         [SerializeField] private bool _commenceSelectionné;
@@ -26,20 +26,27 @@ namespace UI.Components
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _graphicCible.color = _couleursActives.highlightedColor;
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            _estSelectionné = true;
-            _graphicCible.color = _couleursActives.selectedColor;
-            QuandAppuyé?.Invoke(this);
+            if(!_estSelectionné)
+                _graphicCible.color = _couleursActives.highlightedColor;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if(!_estSelectionné)
                 _graphicCible.color = _couleursActives.normalColor;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if(!_estSelectionné)
+                _graphicCible.color = _couleursActives.pressedColor;
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            _estSelectionné = true;
+            _graphicCible.color = _couleursActives.selectedColor;
+            QuandAppuyé?.Invoke(this);
         }
     }
 }

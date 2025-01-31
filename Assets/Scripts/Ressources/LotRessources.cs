@@ -137,7 +137,7 @@ namespace Ressource
         /// <summary>
         /// Attribue la valeur minimale (qteMin) aux _qte des ressources du lot.
         /// </summary>
-        public void AttribuerQteMinRessource()
+        public void AttribuerQteMinRessources()
         {
             foreach (RessourceEnum ressource in _ressourcesDict.Keys)
                 _ressourcesDict[ressource].qte = _ressourcesDict[ressource].qteMin;

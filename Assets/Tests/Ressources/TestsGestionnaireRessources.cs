@@ -1,4 +1,6 @@
+using Batiment;
 using NUnit.Framework;
+using Profession;
 using Ressource;
 using Utils;
 
@@ -9,16 +11,20 @@ namespace Test
         [SetUp]
         public void SetUp()
         {
+            // Attribuer les valeurs des configs
+            GestionnaireProfessions.Instance.Reinitialiser();
             GestionnaireRessources.Instance.Reinitialiser();
+            GestionnaireBatiments.Instance.Reinitialiser();
         }
 
         [Test]
         public void TestAttribuerEtAccesQtePopulation()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 2;
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.POPULATION, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.POPULATION, qteAttribuee);
 
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -26,10 +32,11 @@ namespace Test
         [Test]
         public void TestAttribuerEtAccesQteNouriture()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 2;
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
 
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -37,10 +44,11 @@ namespace Test
         [Test]
         public void TestAttribuerEtAccesQteBois()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 2;
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.BOIS, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.BOIS, qteAttribuee);
 
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.BOIS);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -48,10 +56,11 @@ namespace Test
         [Test]
         public void TestAttribuerEtAccesQteMineraux()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 2;
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.MINERAUX, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.MINERAUX, qteAttribuee);
 
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -59,13 +68,14 @@ namespace Test
         [Test]
         public void TestModifierQteNouritureAjout()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 100;
             var qteAjoutee = 100;
 
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
 
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             Assert.IsTrue(resultOK);
             Assert.AreEqual(qteAttribuee + qteAjoutee, qteRetour);
@@ -74,13 +84,14 @@ namespace Test
         [Test]
         public void TestModifierQteNouritureSoustraction()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 300;
             var qteAjoutee = -100;
 
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
 
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             Assert.IsTrue(resultOK);
             Assert.AreEqual(qteAttribuee + qteAjoutee, qteRetour);
@@ -89,12 +100,13 @@ namespace Test
         [Test]
         public void TestModifierQteNouritureDepasseMin()
         {
-            var qteMin = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.NOURRITURE);
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteMin);
+            var gestionnaireRessources = GestionnaireRessources.Instance;
+            var qteMin = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.NOURRITURE);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteMin);
 
             var qteAjoutee = -300;
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qteMin, qteRetour);
@@ -103,13 +115,14 @@ namespace Test
         [Test]
         public void TestModifierQteNouritureDepasseMinBloquant()
         {
-            var qteMin = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.NOURRITURE);
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteMin + 1);
+            var gestionnaireRessources = GestionnaireRessources.Instance;
+            var qteMin = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.NOURRITURE);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteMin + 1);
 
             var qteAjoutee = -300;
             // La transaction n'est pas complétée puisque le résultat serait sous la limite min
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee, true /*limitesBloquantes*/);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteAjoutee, true /*limitesBloquantes*/);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qteMin + 1, qteRetour);
@@ -118,13 +131,14 @@ namespace Test
         [Test]
         public void TestModifierQtePopulationDepasseMax()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 100;
 
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.POPULATION, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.POPULATION, qteAttribuee);
 
-            var qteMax = GestionnaireRessources.Instance.AccesQteMaxRessource(RessourceEnum.POPULATION);
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.POPULATION, qteMax);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteMax = gestionnaireRessources.AccesQteMaxRessource(RessourceEnum.POPULATION);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.POPULATION, qteMax);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qteMax, qteRetour);
@@ -133,13 +147,14 @@ namespace Test
         [Test]
         public void TestModifierQteNouritureDepasseMax()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 100;
 
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.NOURRITURE, qteAttribuee);
 
-            var qteMax = GestionnaireRessources.Instance.AccesQteMaxRessource(RessourceEnum.NOURRITURE);
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteMax);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteMax = gestionnaireRessources.AccesQteMaxRessource(RessourceEnum.NOURRITURE);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.NOURRITURE, qteMax);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qteMax, qteRetour);
@@ -148,13 +163,14 @@ namespace Test
         [Test]
         public void TestModifierQteBoisDepasseMax()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 100;
 
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.BOIS, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.BOIS, qteAttribuee);
 
-            var qteMax = GestionnaireRessources.Instance.AccesQteMaxRessource(RessourceEnum.BOIS);
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.BOIS, qteMax);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMax = gestionnaireRessources.AccesQteMaxRessource(RessourceEnum.BOIS);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.BOIS, qteMax);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.BOIS);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qteMax, qteRetour);
@@ -163,13 +179,14 @@ namespace Test
         [Test]
         public void TestModifierQteMinerauxDepasseMax()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 100;
 
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.MINERAUX, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.MINERAUX, qteAttribuee);
 
-            var qteMax = GestionnaireRessources.Instance.AccesQteMaxRessource(RessourceEnum.MINERAUX);
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.MINERAUX, qteMax);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qteMax = gestionnaireRessources.AccesQteMaxRessource(RessourceEnum.MINERAUX);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.MINERAUX, qteMax);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qteMax, qteRetour);
@@ -178,14 +195,15 @@ namespace Test
         [Test]
         public void TestModifierQteMinerauxDepasseMaxBloquant()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             var qteAttribuee = 100;
 
-            GestionnaireRessources.Instance.AttribuerQteRessource(RessourceEnum.MINERAUX, qteAttribuee);
+            gestionnaireRessources.AttribuerQteRessource(RessourceEnum.MINERAUX, qteAttribuee);
 
-            var qteMax = GestionnaireRessources.Instance.AccesQteMaxRessource(RessourceEnum.MINERAUX);
+            var qteMax = gestionnaireRessources.AccesQteMaxRessource(RessourceEnum.MINERAUX);
             // La transaction n'est pas complétée puisque le résultat serait au dessus de la limite max
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(RessourceEnum.MINERAUX, qteMax, true /*limitesBloquantes*/);
-            var qteRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.MINERAUX, qteMax, true /*limitesBloquantes*/);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qteAttribuee, qteRetour);
@@ -194,8 +212,9 @@ namespace Test
         [Test]
         public void TestTransactionLotRessourcesBloquantAcceptee()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             // Réinitialise les quantitées de ressources dans l'inventaire pour le minimum de chaque
-            GestionnaireRessources.Instance.AttribuerQteMinRessource();
+            gestionnaireRessources.AttribuerQteMinRessources();
 
             var qtePopulationAjoutee = 2;
             var qteNourritureAjoutee = 3;
@@ -207,17 +226,17 @@ namespace Test
                                                             new Qte(qteBoisAjoutee),
                                                             new Qte(qteMinerauxAjoutee));
 
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(LotRessources, true /*limitesBloquantes*/);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(LotRessources, true /*limitesBloquantes*/);
 
-            var qtePopRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
-            var qtePopAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION) + qtePopulationAjoutee;
-            var qteNourAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.NOURRITURE) + qteNourritureAjoutee;
-            var qteBoisAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.BOIS) + qteBoisAjoutee;
-            var qteMinerAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.MINERAUX) + qteMinerauxAjoutee;
+            var qtePopAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.POPULATION) + qtePopulationAjoutee;
+            var qteNourAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.NOURRITURE) + qteNourritureAjoutee;
+            var qteBoisAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.BOIS) + qteBoisAjoutee;
+            var qteMinerAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.MINERAUX) + qteMinerauxAjoutee;
 
             Assert.IsTrue(resultOK);
             Assert.AreEqual(qtePopAttendu, qtePopRetour);
@@ -227,32 +246,33 @@ namespace Test
         }
 
         [Test]
-        public void TestTransactionLotRessourcesBloquantRefusé()
+        public void TestTransactionLotRessourcesBloquantRefuse()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             // Réinitialise les quantitées de ressources dans l'inventaire pour le minimum de chaque
-            GestionnaireRessources.Instance.AttribuerQteMinRessource();
+            gestionnaireRessources.AttribuerQteMinRessources();
 
             var qtePopulationAjoutee = 2;
             var qteNourritureAjoutee = 3;
             var qteBoisAjoutee = 4;
-            var qteMinerauxAjoutee = GestionnaireRessources.Instance.AccesQteMaxRessource(RessourceEnum.MINERAUX) + 1;
+            var qteMinerauxAjoutee = gestionnaireRessources.AccesQteMaxRessource(RessourceEnum.MINERAUX) + 1;
 
             LotRessources LotRessources = new LotRessources(new Qte(qtePopulationAjoutee),
                                                             new Qte(qteNourritureAjoutee),
                                                             new Qte(qteBoisAjoutee),
                                                             new Qte(qteMinerauxAjoutee));
 
-            var resultOK = GestionnaireRessources.Instance.AjouterQteRessourceAvecLimites(LotRessources, true /*limitesBloquantes*/);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(LotRessources, true /*limitesBloquantes*/);
 
-            var qtePopRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerRetour = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
-            var qtePopAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.POPULATION);
-            var qteNourAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.NOURRITURE);
-            var qteBoisAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.BOIS);
-            var qteMinerAttendu = GestionnaireRessources.Instance.AccesQteMinRessource(RessourceEnum.MINERAUX);
+            var qtePopAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.POPULATION);
+            var qteNourAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.NOURRITURE);
+            var qteBoisAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.BOIS);
+            var qteMinerAttendu = gestionnaireRessources.AccesQteMinRessource(RessourceEnum.MINERAUX);
 
             Assert.IsFalse(resultOK);
             Assert.AreEqual(qtePopAttendu, qtePopRetour);
@@ -262,10 +282,28 @@ namespace Test
         }
 
         [Test]
-        public void TestTransactionLotRessourcesVerrouille()
+        public void TestTransactionModifierLimiteMaxRessource()
         {
-            // TODO: Créer un test avec une ressource verrouillée lors qu'elle sera ajoutée au jeu
-            Assert.IsTrue(true);
+            var gestionnaireRessources = GestionnaireRessources.Instance;
+            gestionnaireRessources.AttribuerQteMinRessources();
+            var qteMin = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteMax = gestionnaireRessources.AccesQteMaxRessource(RessourceEnum.POPULATION) + 1;
+            // On modifie la limite à 2 au dessus celle actuelle
+            gestionnaireRessources.ModifierLimiteMaxRessource(RessourceEnum.POPULATION, qteMax + 1);
+            var resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.POPULATION, qteMax - qteMin, true /*limitesBloquantes*/);
+            var qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+
+            Assert.IsTrue(resultOK);
+            Assert.AreEqual(qteMax, qteRetour);
+
+            // On remet la limite de départ
+            gestionnaireRessources.ModifierLimiteMaxRessource(RessourceEnum.POPULATION, qteMax + 1);
+            resultOK = gestionnaireRessources.AjouterQteRessourceAvecLimites(RessourceEnum.POPULATION, qteMax, true /*limitesBloquantes*/);
+            qteRetour = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+
+            // On est déjà au dessus de la limite de +1
+            Assert.IsFalse(resultOK);
+            Assert.AreEqual(qteMax, qteRetour);
         }
     }
 }

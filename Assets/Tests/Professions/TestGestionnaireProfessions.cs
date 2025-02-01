@@ -56,6 +56,17 @@ namespace Test
             var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
 
             Assert.AreEqual(pourcentTest, pourcentRetour);
+
+            // Test d'égalité de lots
+            var lotProfession = new LotProfessions(0, 0, 0, 0, pourcentTest);
+            var result = gestionnaireProfessions.Professions.EstEgale(lotProfession);
+
+            Assert.IsTrue(result);
+
+            lotProfession.AttribuerPourcentProfession(ProfessionEnum.MINEUR, 1);
+            result = gestionnaireProfessions.Professions.EstEgale(lotProfession);
+
+            Assert.IsFalse(result);
         }
 
         [Test]

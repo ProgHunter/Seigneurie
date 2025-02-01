@@ -50,7 +50,13 @@ namespace Test
 
             // Aucun maçon
             var nbTicksRestant = GestionnaireProductions.Instance.NbTicksRestantsConstruction();
-            //Assert.AreEqual(-1, nbTicksRestant);  // TODO: Debug, et ajouter tests EvaluerProduction()
+
+            Assert.AreEqual(0, nbTicksRestant);
+
+            GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
+            nbTicksRestant = GestionnaireProductions.Instance.NbTicksRestantsConstruction();
+
+            Assert.AreEqual(-1, nbTicksRestant);
         }
 
         [Test]
@@ -96,10 +102,11 @@ namespace Test
         }
 
         [Test]
-        public void TestProfessions25PourcentAvecBatiments()
+        public void TestProfessions25PourcentAvecBatimentsEtPrediction()
         {
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var gestionnaireRessources = GestionnaireRessources.Instance;
+            var gestionnaireProductions = GestionnaireProductions.Instance;
             // Mettre toutes les productions de ressources à 25%
             var lotProfessionInit = new LotProfessions(25, 25, 25, 25, 0);
             GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessionInit);
@@ -119,6 +126,12 @@ namespace Test
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
             gestionnaireRessources.AttribuerQteRessource(ressourcesBase);
 
+            // Prédiction de la production
+            var prodPop = gestionnaireProductions.EvaluerProduction(RessourceEnum.POPULATION);
+            var prodNourriture = gestionnaireProductions.EvaluerProduction(RessourceEnum.NOURRITURE);
+            var prodBois = gestionnaireProductions.EvaluerProduction(RessourceEnum.BOIS);
+            var prodMineraux = gestionnaireProductions.EvaluerProduction(RessourceEnum.MINERAUX);
+
             // Production!
             GestionnaireProductions.Instance.Production();
 
@@ -129,13 +142,13 @@ namespace Test
             var qteMinerauxApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
             // Population grandie avec maisons
-            Assert.IsTrue(qtePopBase < qtePopApres);
+            Assert.AreEqual(qtePopBase + prodPop, qtePopApres);
             // Nourriture net produite avec bonus fermes
-            Assert.IsTrue(qteNourritureBase < qteNourritureApres);  // Peut échouer si on ajuste la production de nourriture ou la faim de la pop
+            Assert.AreEqual(qteNourritureBase + prodNourriture, qteNourritureApres);
             // Bois produit avec bonus scieries
-            Assert.IsTrue(qteBoisBase < qteBoisApres);
+            Assert.AreEqual(qteBoisBase + prodBois, qteBoisApres);
             // Mineraux produits avec bonus mines
-            Assert.IsTrue(qteMinerauxBase < qteMinerauxApres);
+            Assert.AreEqual(qteMinerauxBase + prodMineraux, qteMinerauxApres);
         }
 
         [Test]

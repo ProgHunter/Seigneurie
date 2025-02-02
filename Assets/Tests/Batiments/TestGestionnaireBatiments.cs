@@ -68,11 +68,24 @@ namespace Test
         public void TestAttribuerEtAccesQteHotelDeVille()
         {
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            var qteAttribuee = 2;
+            var qteDepartMaison = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            var qteDepartFerme = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.FERME);
+            var qteDepartScierie = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.SCIERIE);
+            var qteDepartMine = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MINE);
+            var qteAttribuee = 69;
             gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteAttribuee);
 
+            var qteFinMaison = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            var qteFinFerme = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.FERME);
+            var qteFinScierie = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.SCIERIE);
+            var qteFinMine = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MINE);
             var qteRetour = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.HOTELDEVILLE);
 
+            // Valider que seul "Hotel de ville" a vu sa valeur changer
+            Assert.AreEqual(qteDepartMaison, qteFinMaison);
+            Assert.AreEqual(qteDepartFerme, qteFinFerme);
+            Assert.AreEqual(qteDepartScierie, qteFinScierie);
+            Assert.AreEqual(qteDepartMine, qteFinMine);
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
 

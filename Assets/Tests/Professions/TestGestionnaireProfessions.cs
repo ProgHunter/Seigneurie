@@ -21,28 +21,25 @@ namespace Test
         public void TestProfessionAttribuerLot()
         {
             var gestionnaireProfessions = GestionnaireProfessions.Instance;
-            // Assigner la config au lot de profession
-            gestionnaireProfessions.Reinitialiser();
-
             // Attribuer 0% à toutes les professions
             var lotProfessionVide = new LotProfessions();
             gestionnaireProfessions.AttribuerPourcent(lotProfessionVide);
 
-            var pourcentRetouNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
-            var pourcentRetouFermier = gestionnaireProfessions.AccederPourcent(ProfessionEnum.FERMIER);
-            var pourcentRetouBucheron = gestionnaireProfessions.AccederPourcent(ProfessionEnum.BUCHERON);
-            var pourcentRetouMineur = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MINEUR);
-            var pourcentRetouMacon = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MACON);
+            var pourcentRetourNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
+            var pourcentRetourFermier = gestionnaireProfessions.AccederPourcent(ProfessionEnum.FERMIER);
+            var pourcentRetourBucheron = gestionnaireProfessions.AccederPourcent(ProfessionEnum.BUCHERON);
+            var pourcentRetourMineur = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MINEUR);
+            var pourcentRetourMacon = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MACON);
             
-            Assert.AreEqual(0, pourcentRetouNatalite);
-            Assert.AreEqual(0, pourcentRetouFermier);
-            Assert.AreEqual(0, pourcentRetouBucheron);
-            Assert.AreEqual(0, pourcentRetouMineur);
-            Assert.AreEqual(0, pourcentRetouMacon);
+            Assert.AreEqual(0, pourcentRetourNatalite);
+            Assert.AreEqual(0, pourcentRetourFermier);
+            Assert.AreEqual(0, pourcentRetourBucheron);
+            Assert.AreEqual(0, pourcentRetourMineur);
+            Assert.AreEqual(0, pourcentRetourMacon);
         }
 
         [Test]
-        public void TestProfession50pc()
+        public void TestProfessionAttribuerPourcentValide()
         {
             var gestionnaireProfessions = GestionnaireProfessions.Instance;
             var pourcentTest = 50;
@@ -51,10 +48,11 @@ namespace Test
             gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
             gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
             gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, pourcentTest);
+            var valide = gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, pourcentTest);
 
             var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
 
+            Assert.IsTrue(valide);
             Assert.AreEqual(pourcentTest, pourcentRetour);
 
             // Test d'égalité de lots
@@ -70,35 +68,37 @@ namespace Test
         }
 
         [Test]
-        public void TestProfessionMoins10pc()
+        public void TestProfessionAttribuerPourcentPlusPetitQueMinInvalide()
         {
             var gestionnaireProfessions = GestionnaireProfessions.Instance;
             // Mettre toutes les professions à 0%, et Maçon à -10%
             var lotProfessionVide = new LotProfessions();
             gestionnaireProfessions.AttribuerPourcent(lotProfessionVide);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, -10);
+            var valide = gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, -10);
 
             var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
             // 0, puisqu'on ne peut pas attribuer moins que 0%
+            Assert.IsFalse(valide);
             Assert.AreEqual(0, pourcentRetour);
         }
 
         [Test]
-        public void TestProfession110pc()
+        public void TestProfessionAttribuerPourcentPlusGrandQueMaxInvalide()
         {
             var gestionnaireProfessions = GestionnaireProfessions.Instance;
             // Mettre toutes les professions à 0%, et Maçon à 110%
             var lotProfessionVide = new LotProfessions();
             gestionnaireProfessions.AttribuerPourcent(lotProfessionVide);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, 110);
+            var valide = gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, 110);
 
             var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
             // 100, puisqu'on ne peut pas attribuer plus de 100%
+            Assert.IsFalse(valide);
             Assert.AreEqual(100, pourcentRetour);
         }
 
         [Test]
-        public void TestProfessionReste20pcTotal()
+        public void TestProfessionPourcentTotalPlusGrandQue100Invalide()
         {
             var gestionnaireProfessions = GestionnaireProfessions.Instance;
             var lotProfessionVide = new LotProfessions();
@@ -107,30 +107,14 @@ namespace Test
             gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.NATALITE, 20);
             gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.FERMIER, 20);
             gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 20);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MINEUR, 20);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, 50);
+            var valideMineur = gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MINEUR, 20);
+            var valideMacon = gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, 50);
 
             var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
             // 20, puisque le total attribué aux professions ne peut cumuler plus de 100%
+            Assert.IsTrue(valideMineur);
+            Assert.IsFalse(valideMacon);
             Assert.AreEqual(20, pourcentRetour);
-        }
-
-        [Test]
-        public void TestProfessionReste0pcTotal()
-        {
-            var gestionnaireProfessions = GestionnaireProfessions.Instance;
-            var lotProfessionVide = new LotProfessions();
-            gestionnaireProfessions.AttribuerPourcent(lotProfessionVide);
-            // Mettre toutes les professions à 0%, et Maçon à 10%
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
-            gestionnaireProfessions.AttribuerPourcentValide(ProfessionEnum.MACON, 10);
-
-            var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
-            // 0, puisque le total attribué aux professions ne peut cumuler plus de 100%
-            Assert.AreEqual(0, pourcentRetour);
         }
 
         [Test]
@@ -139,13 +123,17 @@ namespace Test
             var gestionnaireProfessions = GestionnaireProfessions.Instance;
             var lotProfessionVide = new LotProfessions();
             gestionnaireProfessions.AttribuerPourcent(lotProfessionVide);
-            // Mettre toutes les professions à 20%, et Maçon à 50%
-            var lotProfession = new LotProfessions(20,20,20,20,50);
-            gestionnaireProfessions.AttribuerPourcentValide(lotProfession);
+            // Mettre les professions à 20%, Mineurs à 30% et Maçon à 50%
+            var lotProfession = new LotProfessions(25,25,25,30,50);
+            var valide = gestionnaireProfessions.AttribuerPourcentValide(lotProfession);
 
-            var pourcentRetour = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
-            // 20, puisque le total attribué aux professions ne peut cumuler plus de 100%
-            Assert.AreEqual(20, pourcentRetour);
+            var pourcentRetourMineur = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MINEUR);
+            var pourcentRetourMacon = GestionnaireProfessions.Instance.AccederPourcent(ProfessionEnum.MACON);
+            // Le total attribué aux professions ne peut cumuler plus de 100%
+            // Il reste 25% qui peut être attribuer aux mineurs et 0% aux maçons
+            Assert.IsFalse(valide);
+            Assert.AreEqual(25, pourcentRetourMineur);
+            Assert.AreEqual(0, pourcentRetourMacon);
         }
 
         [Test]
@@ -176,17 +164,17 @@ namespace Test
 
             gestionnaireProfessions.AttribuerPourcent(lotProfession);
 
-            var pourcentRetouNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
-            var pourcentRetouFermier = gestionnaireProfessions.AccederPourcent(ProfessionEnum.FERMIER);
-            var pourcentRetouBucheron = gestionnaireProfessions.AccederPourcent(ProfessionEnum.BUCHERON);
-            var pourcentRetouMineur = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MINEUR);
-            var pourcentRetouMacon = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MACON);
+            var pourcentRetourNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
+            var pourcentRetourFermier = gestionnaireProfessions.AccederPourcent(ProfessionEnum.FERMIER);
+            var pourcentRetourBucheron = gestionnaireProfessions.AccederPourcent(ProfessionEnum.BUCHERON);
+            var pourcentRetourMineur = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MINEUR);
+            var pourcentRetourMacon = gestionnaireProfessions.AccederPourcent(ProfessionEnum.MACON);
 
-            Assert.AreEqual(pourcentTestNatalite, pourcentRetouNatalite);
-            Assert.AreEqual(pourcentTestFermier, pourcentRetouFermier);
-            Assert.AreEqual(pourcentTestBucheron, pourcentRetouBucheron);
-            Assert.AreEqual(pourcentTestMineur, pourcentRetouMineur);
-            Assert.AreEqual(pourcentTestMacon, pourcentRetouMacon);
+            Assert.AreEqual(pourcentTestNatalite, pourcentRetourNatalite);
+            Assert.AreEqual(pourcentTestFermier, pourcentRetourFermier);
+            Assert.AreEqual(pourcentTestBucheron, pourcentRetourBucheron);
+            Assert.AreEqual(pourcentTestMineur, pourcentRetourMineur);
+            Assert.AreEqual(pourcentTestMacon, pourcentRetourMacon);
         }
 
         [Test]
@@ -197,22 +185,22 @@ namespace Test
             gestionnaireProfessions.AttribuerPourcent(lotProfessionVide);
 
             var succes = gestionnaireProfessions.DecrementerPourcent(ProfessionEnum.NATALITE);
-            var pourcentRetouNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
+            var pourcentRetourNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
 
             Assert.IsTrue(succes);
-            Assert.AreEqual(19, pourcentRetouNatalite);
+            Assert.AreEqual(19, pourcentRetourNatalite);
 
             succes = gestionnaireProfessions.IncrementerPourcent(ProfessionEnum.NATALITE);
-            pourcentRetouNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
+            pourcentRetourNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
 
             Assert.IsTrue(succes);
-            Assert.AreEqual(20, pourcentRetouNatalite);
+            Assert.AreEqual(20, pourcentRetourNatalite);
 
             succes = gestionnaireProfessions.IncrementerPourcent(ProfessionEnum.NATALITE);
-            pourcentRetouNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
+            pourcentRetourNatalite = gestionnaireProfessions.AccederPourcent(ProfessionEnum.NATALITE);
             // Max 100%
             Assert.IsFalse(succes);
-            Assert.AreEqual(20, pourcentRetouNatalite);
+            Assert.AreEqual(20, pourcentRetourNatalite);
         }
     }
 }

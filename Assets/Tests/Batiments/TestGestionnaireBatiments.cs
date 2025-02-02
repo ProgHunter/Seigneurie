@@ -89,14 +89,62 @@ namespace Test
         }
 
         [Test]
+        public void TestConstructionMaisonsSansRessources()
+        {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var qteDebut = 0;
+
+            // Initialisation des données du test
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
+            GestionnaireRessources.Instance.AttribuerQteRessource(new LotRessources());
+
+            // Essayer de démarrer une construction sans les ressources
+            var retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
+            Assert.IsFalse(retour);
+
+            // On ne peut avancer si aucune construction n'est en cours
+            var effortTot = gestionnaireBatiments.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            retour = gestionnaireBatiments.AvancerConstruction(effortTot + 1);
+            Assert.IsFalse(retour);
+
+            // On est toujours à 0 maison
+            var qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            Assert.AreEqual(qteDebut, qte);
+        }
+
+        [Test]
+        public void TestConstructionMaisonsAvecRessources()
+        {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var qteDebut = 0;
+            var coutConstruction = gestionnaireBatiments.AccesCoutBatiment(BatimentEnum.MAISON);
+
+            // Initialisation des données du test
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
+            GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
+
+            // Démarrer la première construction
+            var retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
+            Assert.IsTrue(retour);
+
+            var effortTot = gestionnaireBatiments.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            // Construction complétée
+            retour = gestionnaireBatiments.AvancerConstruction(effortTot + 1);
+            Assert.IsTrue(retour);
+
+            // On devrait avoir une maison de plus
+            var qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            Assert.AreEqual(qteDebut + 1, qte);
+        }
+
+        [Test]
         public void TestConstruction3Maisons2Max()
         {
             var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteDebut = 0;
             var qteMax = 2;
             var coutConstruction = GestionnaireBatiments.Instance.AccesCoutBatiment(BatimentEnum.MAISON);
-            coutConstruction.AdditionnerQteRessources(coutConstruction);
-            coutConstruction.AdditionnerQteRessources(coutConstruction); // Coût de 3 maisons
+            coutConstruction.MultiplierQteRessources(3); // Coût de 3 maisons
 
             // Initialisation des données du test
             gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
@@ -154,47 +202,6 @@ namespace Test
             // On est toujours au maximum de construction
             qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
             Assert.AreEqual(qteMax, qte);
-        }
-
-        [Test]
-        public void TestConstructionMaisonsAvecEtSansRessources()
-        {
-            var gestionnaireBatiments = GestionnaireBatiments.Instance;
-            var qteDebut = 0;
-            var qteMax = 2;
-            var coutConstruction = gestionnaireBatiments.AccesCoutBatiment(BatimentEnum.MAISON);
-
-            // Initialisation des données du test
-            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
-            gestionnaireBatiments.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteMax);
-            GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
-            gestionnaireBatiments.AnnulerConstruction();
-
-            // Démarrer la première construction
-            var retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
-            Assert.IsTrue(retour);
-
-            var effortTot = gestionnaireBatiments.AccesEffortConstructionTotal(BatimentEnum.MAISON);
-            // Construction complétée
-            retour = gestionnaireBatiments.AvancerConstruction(effortTot + 1);
-            Assert.IsTrue(retour);
-
-            // On devrait avoir une maison de plus
-            var qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
-            Assert.AreEqual(qteDebut + 1, qte);
-
-            // La première construction devrait être fini, une nouvelle peut être lancé,
-            // mais on avait juste les ressource pour une.
-            retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
-            Assert.IsFalse(retour);
-
-            // On ne peut avancer si aucune construction n'est en cours
-            retour = gestionnaireBatiments.AvancerConstruction(effortTot + 1);
-            Assert.IsFalse(retour);
-
-            // On est toujours à +1 maison et non +2
-            qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
-            Assert.AreEqual(qteDebut + 1, qte);
         }
 
         [Test]

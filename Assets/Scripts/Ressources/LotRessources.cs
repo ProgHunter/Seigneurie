@@ -190,9 +190,17 @@ namespace Ressource
         public void AdditionnerQteRessources(LotRessources lot)
         {
             foreach (RessourceEnum ressource in _ressourcesDict.Keys)
-            {
                 _ressourcesDict[ressource].qte += lot._ressourcesDict[ressource].qte;
-            }
+        }
+
+        /// <summary>
+        /// Multiplie la _qte des ressources de notre lot par un scalaire.
+        /// </summary>
+        /// <param name="scalaire">Nombre par lequel sera multiplié les qte</param>
+        public void MultiplierQteRessources(long scalaire)
+        {
+            foreach (RessourceEnum ressource in _ressourcesDict.Keys)
+                _ressourcesDict[ressource].qte *= scalaire;
         }
 
         /// <summary>

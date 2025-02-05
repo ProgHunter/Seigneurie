@@ -92,9 +92,9 @@ namespace Ressource
         /// <summary>
         /// Attribue la valeur minimal à chaque quantité de ressource de l'inventaire.
         /// </summary>
-        public void AttribuerQteMinRessource()
+        public void AttribuerQteMinRessources()
         {
-            _quantiteRessources.AttribuerQteMinRessource();
+            _quantiteRessources.AttribuerQteMinRessources();
         }
 
         /// <summary>

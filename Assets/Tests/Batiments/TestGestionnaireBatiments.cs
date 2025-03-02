@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Batiment;
 using Ressource;
+using Profession;
 
 namespace Test
 {
@@ -9,17 +10,20 @@ namespace Test
         [SetUp]
         public void SetUp()
         {
-            GestionnaireBatiments.Instance.Reinitialiser();
+            // Attribuer les valeurs des configs
+            GestionnaireProfessions.Instance.Reinitialiser();
             GestionnaireRessources.Instance.Reinitialiser();
+            GestionnaireBatiments.Instance.Reinitialiser();
         }
 
         [Test]
         public void TestAttribuerEtAccesQteMaison()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteAttribuee = 2;
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteAttribuee);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteAttribuee);
 
-            var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
+            var qteRetour = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -27,10 +31,11 @@ namespace Test
         [Test]
         public void TestAttribuerEtAccesQteFerme()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteAttribuee = 2;
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteAttribuee);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.FERME, qteAttribuee);
 
-            var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.FERME);
+            var qteRetour = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.FERME);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -38,10 +43,11 @@ namespace Test
         [Test]
         public void TestAttribuerEtAccesQteScierie()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteAttribuee = 2;
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, qteAttribuee);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.SCIERIE, qteAttribuee);
 
-            var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.SCIERIE);
+            var qteRetour = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.SCIERIE);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -49,10 +55,11 @@ namespace Test
         [Test]
         public void TestAttribuerEtAccesQteMine()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteAttribuee = 2;
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MINE, qteAttribuee);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MINE, qteAttribuee);
 
-            var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MINE);
+            var qteRetour = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MINE);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
@@ -60,158 +67,193 @@ namespace Test
         [Test]
         public void TestAttribuerEtAccesQteHotelDeVille()
         {
-            var qteAttribuee = 2;
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteAttribuee);
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var qteDepartMaison = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            var qteDepartFerme = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.FERME);
+            var qteDepartScierie = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.SCIERIE);
+            var qteDepartMine = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MINE);
+            var qteAttribuee = 69;
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteAttribuee);
 
-            var qteRetour = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.HOTELDEVILLE);
+            var qteFinMaison = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            var qteFinFerme = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.FERME);
+            var qteFinScierie = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.SCIERIE);
+            var qteFinMine = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MINE);
+            var qteRetour = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.HOTELDEVILLE);
 
+            // Valider que seul "Hotel de ville" a vu sa valeur changer
+            Assert.AreEqual(qteDepartMaison, qteFinMaison);
+            Assert.AreEqual(qteDepartFerme, qteFinFerme);
+            Assert.AreEqual(qteDepartScierie, qteFinScierie);
+            Assert.AreEqual(qteDepartMine, qteFinMine);
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
 
         [Test]
         public void TestAttribuerEtAccesQteMaxMaison()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteAttribuee = 3;
-            GestionnaireBatiments.Instance.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteAttribuee);
+            gestionnaireBatiments.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteAttribuee);
 
-            var qteRetour = GestionnaireBatiments.Instance.AccesQteMaxBatiment(BatimentEnum.MAISON);
+            var qteRetour = gestionnaireBatiments.AccesQteMaxBatiment(BatimentEnum.MAISON);
 
             Assert.AreEqual(qteAttribuee, qteRetour);
         }
 
         [Test]
-        public void TestConstruction3Maisons2Max()
+        public void TestConstructionMaisonsSansRessources()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteDebut = 0;
-            var qteMax = 2;
-            var coutConstruction = GestionnaireBatiments.Instance.AccesCoutBatiment(BatimentEnum.MAISON);
-            coutConstruction.AdditionnerQteRessources(coutConstruction);
-            coutConstruction.AdditionnerQteRessources(coutConstruction); // Coût de 3 maisons
 
             // Initialisation des données du test
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
-            GestionnaireBatiments.Instance.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteMax);
-            GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
-            GestionnaireBatiments.Instance.AnnulerConstruction();
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
+            GestionnaireRessources.Instance.AttribuerQteRessource(new LotRessources());
 
-            // Démarrer la première construction
-            var retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
-            Assert.IsTrue(retour);
-
-            // La construction n'est pas fini
-            var effortTot = GestionnaireBatiments.Instance.AccesEffortConstructionTotal(BatimentEnum.MAISON);
-            retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot / 2);
-            Assert.IsTrue(!retour);
-
-            // Une seul construction à la fois
-            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
-            Assert.IsFalse(retour);
-
-            // Construction complétée
-            retour = GestionnaireBatiments.Instance.AvancerConstruction((effortTot / 2) + 1);
-            Assert.IsTrue(retour);
-
-            // On devrait avoir une maison de plus
-            var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
-            Assert.AreEqual(qteDebut + 1, qte);
-
-            // La première construction devrait être fini, une nouvelle peut être lancée
-            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
-            Assert.IsTrue(retour);
-
-            // La 2e construction est complétée
-            retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot);
-            Assert.IsTrue(retour);
-
-            // On est au Maximum de maison, le démarrage de la 3e construction est refusé
-            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
+            // Essayer de démarrer une construction sans les ressources
+            var retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
             Assert.IsFalse(retour);
 
             // On ne peut avancer si aucune construction n'est en cours
-            retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot);
+            var effortTot = gestionnaireBatiments.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            retour = gestionnaireBatiments.AvancerConstruction(effortTot + 1);
             Assert.IsFalse(retour);
 
-            // On est toujours au maximum de construction
-            qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
-            Assert.AreEqual(qteMax, qte);
+            // On est toujours à 0 maison
+            var qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            Assert.AreEqual(qteDebut, qte);
         }
 
         [Test]
-        public void TestConstructionMaisonsAvecEtSansRessources()
+        public void TestConstructionMaisonsAvecRessources()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteDebut = 0;
-            var qteMax = 2;
-            var coutConstruction = GestionnaireBatiments.Instance.AccesCoutBatiment(BatimentEnum.MAISON);
+            var coutConstruction = gestionnaireBatiments.AccesCoutBatiment(BatimentEnum.MAISON);
 
             // Initialisation des données du test
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
-            GestionnaireBatiments.Instance.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteMax);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
             GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
-            GestionnaireBatiments.Instance.AnnulerConstruction();
 
             // Démarrer la première construction
-            var retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
+            var retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
             Assert.IsTrue(retour);
 
-            var effortTot = GestionnaireBatiments.Instance.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            var effortTot = gestionnaireBatiments.AccesEffortConstructionTotal(BatimentEnum.MAISON);
             // Construction complétée
-            retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot + 1);
+            retour = gestionnaireBatiments.AvancerConstruction(effortTot + 1);
             Assert.IsTrue(retour);
 
             // On devrait avoir une maison de plus
-            var qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
+            var qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            Assert.AreEqual(qteDebut + 1, qte);
+        }
+
+        [Test]
+        public void TestConstruction3Maisons2Max()
+        {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var qteDebut = 0;
+            var qteMax = 2;
+            var coutConstruction = GestionnaireBatiments.Instance.AccesCoutBatiment(BatimentEnum.MAISON);
+            coutConstruction.MultiplierQteRessources(3); // Coût de 3 maisons
+
+            // Initialisation des données du test
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteDebut);
+            gestionnaireBatiments.ModifierLimiteMaxBatiment(BatimentEnum.MAISON, qteMax);
+            GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
+            gestionnaireBatiments.AnnulerConstruction();
+
+            // Aucune construction en cours
+            var effortRestant = gestionnaireBatiments.AccesEffortConstructionRestant();
+            Assert.AreEqual(0, effortRestant);
+
+            // Démarrer la première construction
+            var retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
+            Assert.IsTrue(retour);
+
+            // La construction n'est pas fini
+            var effortTot = gestionnaireBatiments.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            effortRestant = gestionnaireBatiments.AccesEffortConstructionRestant();
+            Assert.AreEqual(effortTot, effortRestant);
+
+            // Construction en cours avancée
+            retour = gestionnaireBatiments.AvancerConstruction(effortTot / 2);
+            effortRestant = gestionnaireBatiments.AccesEffortConstructionRestant();
+            Assert.IsTrue(effortRestant <= ((effortTot / 2) + 1));
+            Assert.IsTrue(!retour);
+
+            // Une seul construction à la fois
+            retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
+            Assert.IsFalse(retour);
+
+            // Construction complétée
+            retour = gestionnaireBatiments.AvancerConstruction((effortTot / 2) + 1);
+            Assert.IsTrue(retour);
+
+            // On devrait avoir une maison de plus
+            var qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
             Assert.AreEqual(qteDebut + 1, qte);
 
-            // La première construction devrait être fini, une nouvelle peut être lancé,
-            // mais on avait juste les ressource pour une.
-            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
+            // La première construction devrait être fini, une nouvelle peut être lancée
+            retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
+            Assert.IsTrue(retour);
+
+            // La 2e construction est complétée
+            retour = gestionnaireBatiments.AvancerConstruction(effortTot);
+            Assert.IsTrue(retour);
+
+            // On est au Maximum de maison, le démarrage de la 3e construction est refusé
+            retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
             Assert.IsFalse(retour);
 
             // On ne peut avancer si aucune construction n'est en cours
-            retour = GestionnaireBatiments.Instance.AvancerConstruction(effortTot + 1);
+            retour = gestionnaireBatiments.AvancerConstruction(effortTot);
             Assert.IsFalse(retour);
 
-            // On est toujours à +1 maison et non +2
-            qte = GestionnaireBatiments.Instance.AccesQteBatiment(BatimentEnum.MAISON);
-            Assert.AreEqual(qteDebut + 1, qte);
+            // On est toujours au maximum de construction
+            qte = gestionnaireBatiments.AccesQteBatiment(BatimentEnum.MAISON);
+            Assert.AreEqual(qteMax, qte);
         }
 
         [Test]
         public void TestConstructionBatimentVerrouille()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
             var qteMaisons = 0L;
             var qteFermes = 0L;
             var qteHDV = 0L;
-            var coutConstruction = GestionnaireBatiments.Instance.AccesCoutBatiment(BatimentEnum.HOTELDEVILLE);
+            var coutConstruction = gestionnaireBatiments.AccesCoutBatiment(BatimentEnum.HOTELDEVILLE);
             // Initialisation des données du test avec 0 bâtiments
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteHDV);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, qteHDV);
             GestionnaireRessources.Instance.AttribuerQteRessource(coutConstruction);
-            GestionnaireBatiments.Instance.AnnulerConstruction();
+            gestionnaireBatiments.AnnulerConstruction();
 
             // Essayer de démarrer la contruction de l'hotel de ville alors qu'elle est verrouillée
             // Il faut minimalement 10 maisons et 1 ferme pour la déverrouiller
-            var retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
+            var retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
             Assert.IsFalse(retour);
 
             // Cas où il manque encore 1 maison
-            var prerequisHDV = GestionnaireBatiments.Instance.AccesPrerequis(BatimentEnum.HOTELDEVILLE);
+            var prerequisHDV = gestionnaireBatiments.AccesPrerequis(BatimentEnum.HOTELDEVILLE);
             qteMaisons = prerequisHDV.AccesQteBatiment(BatimentEnum.MAISON) - 1;
             qteFermes = prerequisHDV.AccesQteBatiment(BatimentEnum.FERME) + 1;
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
 
-            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
+            retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
             Assert.IsFalse(retour);
 
             // Cas où on a exactement le prérequis pour construire l'hotel de ville
             qteMaisons = prerequisHDV.AccesQteBatiment(BatimentEnum.MAISON);
             qteFermes = prerequisHDV.AccesQteBatiment(BatimentEnum.FERME);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, qteMaisons);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.FERME, qteFermes);
 
-            retour = GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
+            retour = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.HOTELDEVILLE);
             Assert.IsTrue(retour);
         }
     }

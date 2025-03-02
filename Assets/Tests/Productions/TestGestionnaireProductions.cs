@@ -11,20 +11,19 @@ namespace Test
         [SetUp]
         public void SetUp()
         {
-            GestionnaireBatiments.Instance.Reinitialiser();
+            // Attribuer les valeurs des configs
             GestionnaireProfessions.Instance.Reinitialiser();
             GestionnaireRessources.Instance.Reinitialiser();
+            GestionnaireBatiments.Instance.Reinitialiser();
         }
 
         [Test]
         public void TestProfessions0Pourcent()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             // Mettre toutes les professions à 0%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            var lotProfessionInit = new LotProfessions();
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessionInit);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -32,40 +31,49 @@ namespace Test
             var qteBoisBase = 1000;
             var qteMinerauxBase = 1000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            gestionnaireRessources.AttribuerQteRessource(ressourcesBase);
 
             // Production!
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 0%
-            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerauxApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerauxApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
             // Aucune ressource produite. Nouriture consommée
             Assert.AreEqual(qtePopBase, qtePopApres);
             Assert.IsTrue(qteNourritureBase > qteNourritureApres);
             Assert.AreEqual(qteBoisBase, qteBoisApres);
             Assert.AreEqual(qteMinerauxBase, qteMinerauxApres);
+
+            // Aucun maçon
+            var nbTicksRestant = GestionnaireProductions.Instance.NbTicksRestantsConstruction();
+
+            Assert.AreEqual(0, nbTicksRestant);
+
+            GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON);
+            nbTicksRestant = GestionnaireProductions.Instance.NbTicksRestantsConstruction();
+
+            Assert.AreEqual(-1, nbTicksRestant);
         }
 
         [Test]
         public void TestProfessions25Pourcent0Batiments()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             // Mettre toutes les productions de ressources à 25%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            var lotProfessionInit = new LotProfessions(25, 25, 25, 25, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessionInit);
 
             // Aucun batiments
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, 0);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, 0);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MINE, 0);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, 0);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.FERME, 0);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.SCIERIE, 0);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MINE, 0);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, 0);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -73,16 +81,16 @@ namespace Test
             var qteBoisBase = 1000;
             var qteMinerauxBase = 1000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            gestionnaireRessources.AttribuerQteRessource(ressourcesBase);
 
             // Production!
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 25%
-            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerauxApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerauxApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
             // Population ne grandie pas puisqu'il n'y a pas de maisons
             Assert.AreEqual(qtePopBase, qtePopApres);
@@ -94,21 +102,21 @@ namespace Test
         }
 
         [Test]
-        public void TestProfessions25PourcentAvecBatiments()
+        public void TestProfessions25PourcentAvecBatimentsEtPrediction()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var gestionnaireRessources = GestionnaireRessources.Instance;
+            var gestionnaireProductions = GestionnaireProductions.Instance;
             // Mettre toutes les productions de ressources à 25%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 25);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            var lotProfessionInit = new LotProfessions(25, 25, 25, 25, 0);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessionInit);
 
             // Création de bâtiments
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 1000);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.FERME, 100);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.SCIERIE, 100);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MINE, 100);
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, 1);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, 1000);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.FERME, 100);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.SCIERIE, 100);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MINE, 100);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.HOTELDEVILLE, 1);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -116,36 +124,41 @@ namespace Test
             var qteBoisBase = 1000;
             var qteMinerauxBase = 1000;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase, qteBoisBase, qteMinerauxBase);
-            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            gestionnaireRessources.AttribuerQteRessource(ressourcesBase);
+
+            // Prédiction de la production
+            var prodPop = gestionnaireProductions.EvaluerProduction(RessourceEnum.POPULATION);
+            var prodNourriture = gestionnaireProductions.EvaluerProduction(RessourceEnum.NOURRITURE);
+            var prodBois = gestionnaireProductions.EvaluerProduction(RessourceEnum.BOIS);
+            var prodMineraux = gestionnaireProductions.EvaluerProduction(RessourceEnum.MINERAUX);
 
             // Production!
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 25%
-            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
-            var qteBoisApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.BOIS);
-            var qteMinerauxApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.MINERAUX);
+            var qtePopApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qteBoisApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.BOIS);
+            var qteMinerauxApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.MINERAUX);
 
             // Population grandie avec maisons
-            Assert.IsTrue(qtePopBase < qtePopApres);
+            Assert.AreEqual(qtePopBase + prodPop, qtePopApres);
             // Nourriture net produite avec bonus fermes
-            Assert.IsTrue(qteNourritureBase < qteNourritureApres);  // Peut échouer si on ajuste la production de nourriture ou la faim de la pop
+            Assert.AreEqual(qteNourritureBase + prodNourriture, qteNourritureApres);
             // Bois produit avec bonus scieries
-            Assert.IsTrue(qteBoisBase < qteBoisApres);
+            Assert.AreEqual(qteBoisBase + prodBois, qteBoisApres);
             // Mineraux produits avec bonus mines
-            Assert.IsTrue(qteMinerauxBase < qteMinerauxApres);
+            Assert.AreEqual(qteMinerauxBase + prodMineraux, qteMinerauxApres);
         }
 
         [Test]
         public void TestMaconConstructionMaison()
         {
+            var gestionnaireBatiments = GestionnaireBatiments.Instance;
+            var gestionnaireProductions = GestionnaireProductions.Instance;
             // Attribuer des maçons
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 50);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 1);
+            var lotProfessionInit = new LotProfessions(0, 50, 0, 0, 1);
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessionInit);
 
             // Attribuer des ressources de base
             var qtePopBase = 1000;
@@ -156,47 +169,58 @@ namespace Test
             GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
 
             // Initialiser le nombre de maisons à 0
-            GestionnaireBatiments.Instance.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
+            gestionnaireBatiments.AttribuerQteBatiment(BatimentEnum.MAISON, 0);
+
+            // Aucune construction en cours
+            gestionnaireBatiments.AnnulerConstruction();
+            var nbTicksRestant = gestionnaireProductions.NbTicksRestantsConstruction();
+            Assert.AreEqual(0, nbTicksRestant);
 
             // Démarer une construction
-            GestionnaireBatiments.Instance.AnnulerConstruction();
-            Assert.IsTrue(GestionnaireBatiments.Instance.DemarrerConstruction(BatimentEnum.MAISON));
+            var result = gestionnaireBatiments.DemarrerConstruction(BatimentEnum.MAISON);
+            Assert.IsTrue(result);
+
+            var nbTicksMax = gestionnaireBatiments.AccesEffortConstructionTotal(BatimentEnum.MAISON);
+            nbTicksRestant = gestionnaireProductions.NbTicksRestantsConstruction();
+            Assert.IsTrue(nbTicksRestant > 0);
+            Assert.IsTrue(nbTicksRestant <= nbTicksMax);
 
             // Production! Une maison devrait être construite en nbTicksMax ou moins
             var nbTicks = 0;
-            var nbTicksMax = GestionnaireBatiments.Instance.AccesEffortConstructionTotal(BatimentEnum.MAISON);
-            while (GestionnaireBatiments.Instance.ConstructionEstEnCours() && nbTicks < nbTicksMax)
+            
+            while (gestionnaireBatiments.ConstructionEstEnCours() && nbTicks < nbTicksMax)
             {
-                GestionnaireProductions.Instance.Production();
+                gestionnaireProductions.Production();
                 nbTicks++;
             }
 
-            // Construction complété
-            Assert.IsFalse(GestionnaireBatiments.Instance.ConstructionEstEnCours());
+            // Construction complétée
+            result = gestionnaireBatiments.ConstructionEstEnCours();
+            nbTicksRestant = gestionnaireProductions.NbTicksRestantsConstruction();
+            Assert.IsFalse(result);
+            Assert.AreEqual(0, nbTicksRestant);
         }
 
         [Test]
         public void TestFamine()
         {
+            var gestionnaireRessources = GestionnaireRessources.Instance;
             // Mettre toutes les professions à 0%
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.NATALITE, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.FERMIER, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.BUCHERON, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MINEUR, 0);
-            GestionnaireProfessions.Instance.AttribuerPourcentValide(ProfessionEnum.MACON, 0);
+            var lotProfessionInit = new LotProfessions();
+            GestionnaireProfessions.Instance.AttribuerPourcentValide(lotProfessionInit);
 
             // Attribuer des ressources de base
             var qtePopBase = 10000;
             var qteNourritureBase = 0;
             LotRessources ressourcesBase = new(qtePopBase, qteNourritureBase);
-            GestionnaireRessources.Instance.AttribuerQteRessource(ressourcesBase);
+            gestionnaireRessources.AttribuerQteRessource(ressourcesBase);
 
             // Production! (Famine)
             GestionnaireProductions.Instance.Production();
 
             // Lecture des ressources après production 0%
-            var qtePopApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.POPULATION);
-            var qteNourritureApres = GestionnaireRessources.Instance.AccesQteRessource(RessourceEnum.NOURRITURE);
+            var qtePopApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.POPULATION);
+            var qteNourritureApres = gestionnaireRessources.AccesQteRessource(RessourceEnum.NOURRITURE);
 
             // Aucune ressource produite. Population en déclin
             Assert.IsTrue(qtePopBase > qtePopApres);

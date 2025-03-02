@@ -29,12 +29,18 @@ namespace Audio
                 son.Source.clip = son.Clip;
 
                 son.Source.volume = son.Volume;
-                son.Source.pitch = son.Hauteur;
+                son.Source.pitch = son.Vitesse;
                 son.Source.playOnAwake = son.JouerSurAwake;
                 son.Source.loop = son.Loop;
                 
                 _sonsDict.Add(son.Nom, son);
             }
+        }
+
+        public void Start()
+        {
+            //Play background music
+            Play("Musique principale");
         }
 
         public void Play(string nom)

@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 namespace Audio
 {
     [Serializable]
-    public class Sound
+    public class Son
     {
         public string Nom;
         public AudioClip Clip;
@@ -19,5 +19,15 @@ namespace Audio
         public AudioMixerGroup AudioMixerGroupe;
 
         [HideInInspector] public AudioSource Source;
+
+        public void Initialiser(AudioSource source)
+        {
+            Source = source;
+            Source.clip = Clip;
+            Source.volume = Volume;
+            Source.pitch = Vitesse;
+            Source.playOnAwake = JouerSurAwake;
+            Source.loop = Loop;
+        }
     }
 }

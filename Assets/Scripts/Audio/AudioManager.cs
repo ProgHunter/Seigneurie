@@ -5,8 +5,8 @@ namespace Audio
 {
     public class AudioManager : MonoBehaviour
     {
-        private readonly Dictionary<string, Sound> _sonsDict = new();
-        [SerializeField] private Sound[] _sons;
+        private readonly Dictionary<string, Son> _sonsDict = new();
+        [SerializeField] private Son[] _sons;
 
         public static AudioManager Instance;
         private void Awake()
@@ -25,13 +25,8 @@ namespace Audio
             
             foreach (var son in _sons)
             {
-                son.Source = gameObject.AddComponent<AudioSource>();
-                son.Source.clip = son.Clip;
-
-                son.Source.volume = son.Volume;
-                son.Source.pitch = son.Vitesse;
-                son.Source.playOnAwake = son.JouerSurAwake;
-                son.Source.loop = son.Loop;
+                var audioSource = gameObject.AddComponent<AudioSource>();
+                son.Initialiser(audioSource);
                 
                 _sonsDict.Add(son.Nom, son);
             }

@@ -26,6 +26,7 @@ namespace Audio
             Source.clip = Clip;
             Source.volume = Volume;
             Source.pitch = Vitesse;
+            Source.outputAudioMixerGroup = AudioMixerGroupe;
             Source.playOnAwake = JouerSurAwake;
             Source.loop = Loop;
         }

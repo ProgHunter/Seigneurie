@@ -18,7 +18,7 @@ namespace Audio
 
         public AudioMixerGroup AudioMixerGroupe;
 
-        [HideInInspector] public AudioSource Source;
+        private AudioSource Source;
 
         public void Initialiser(AudioSource source)
         {
@@ -29,6 +29,11 @@ namespace Audio
             Source.outputAudioMixerGroup = AudioMixerGroupe;
             Source.playOnAwake = JouerSurAwake;
             Source.loop = Loop;
+        }
+
+        public void Jouer()
+        {
+            Source.Play();
         }
     }
 }

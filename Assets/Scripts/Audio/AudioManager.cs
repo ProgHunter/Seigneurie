@@ -46,7 +46,7 @@ namespace Audio
                 Debug.LogWarning($"Avertissement, son {nom} pas trouvé");
                 return;
             }
-            son.Source.Play();
+            son.Jouer();
         }
     }
 }

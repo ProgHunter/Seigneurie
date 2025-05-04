@@ -28,9 +28,10 @@ namespace Ressource
             Id = "R0_Population";
             Nom = "Population";
             Icone = null;  // TODO
-            Description = "";
-            Qte = new Qte(50 /*Qte de base*/, 1_000_000 /*Max*/, 2 /*Min*/);
-            CroissancePourcent = 0.05f;
+            Description = "La population peut être attribuée à une profession pour produire des ressources, ou un effort de construction.\n" +
+                          "Elle consomme de la nouriture, et peut décroitre lorsqu'en famine.";
+            Qte = new Qte(100 /*Qte de base*/, 10_000_000 /*Max*/, 2 /*Min*/);
+            CroissancePourcent = 0.1f;
             MortaliteFaminePourcent = 0.25f;
             FaimPourcent = 0.5f;
             Prerequis = new LotBatiments();  // Aucun prérequis

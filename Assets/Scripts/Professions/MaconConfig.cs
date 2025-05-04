@@ -13,7 +13,7 @@ namespace Profession
             Nom = "Maçon";
             Icone = null; // TODO
             Description = "Contribut à la construction dans la Seigneurie";
-            ParallelisablePourcent = 0.75f;
+            ParallelisablePourcent = 0.50f;
             Prerequis = new LotBatiments();  // Aucun prérequis
             ProfessionPourcent = new Qte(20 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
         }

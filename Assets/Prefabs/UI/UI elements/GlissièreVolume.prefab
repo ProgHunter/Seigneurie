@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 3028368578012805627}
   - component: {fileID: 2016117635712888399}
   m_Layer: 5
-  m_Name: VolumeSlider
+  m_Name: "Glissi\xE8reVolume"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,5 +542,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf0bf0c3e56adc499d6bb52a7775439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _masterVolumeSlider: {fileID: 3028368578012805627}
+  _glisseurVolumeMaitre: {fileID: 3028368578012805627}
   _mixer: {fileID: 24100000, guid: dc3fa50f06273a24eaf66cb1c117dd54, type: 2}

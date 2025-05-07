@@ -1672,7 +1672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9094707334243549718, guid: 707616163d7ca654c910407e84ba0328, type: 3}
       propertyPath: m_Name
-      value: VolumeSlider
+      value: VolumePrincipal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707616163d7ca654c910407e84ba0328, type: 3}

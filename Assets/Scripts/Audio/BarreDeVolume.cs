@@ -6,7 +6,7 @@ namespace Audio
 {
     public class BarreDeVolume : MonoBehaviour
     {
-        [SerializeField] private Slider _glisseurVolumeMaitre;
+        [SerializeField] private Slider _barreDeGlissementMaitre;
 
         [SerializeField] private AudioMixer _mixer;
         private const string _volumeMaitre = "masterVolume";
@@ -15,15 +15,15 @@ namespace Audio
         // Start is called before the first frame update
         private void Start()
         {
-            _glisseurVolumeMaitre.onValueChanged.AddListener(OnMasterVolumeChanged);
+            _barreDeGlissementMaitre.onValueChanged.AddListener(OnMasterVolumeChanged);
 
             if (PlayerPrefs.HasKey(_volumeMaitre))
             {
-                LoadVolume();
+                ChargerParamètreVolume();
             }
             else
             {
-                OnMasterVolumeChanged(_glisseurVolumeMaitre.value); 
+                OnMasterVolumeChanged(_barreDeGlissementMaitre.value); 
             }
         }
 
@@ -33,9 +33,9 @@ namespace Audio
             PlayerPrefs.SetFloat(_volumeMaitre, volume);
         }
 
-        private void LoadVolume()
+        private void ChargerParamètreVolume()
         {
-            _glisseurVolumeMaitre.value = PlayerPrefs.GetFloat(_volumeMaitre);
+            _barreDeGlissementMaitre.value = PlayerPrefs.GetFloat(_volumeMaitre);
         }
     }
 }

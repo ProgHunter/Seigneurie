@@ -251,11 +251,10 @@ MonoBehaviour:
   - Nom: Musique principale
     Clip: {fileID: 8300000, guid: d6c2061d11ba14345b92cae188262486, type: 3}
     JouerSurAwake: 1
-    Loop: 1
+    JouerEnBoucle: 1
     Volume: 1
     Vitesse: 1
     AudioMixerGroupe: {fileID: 7312881827531811159, guid: dc3fa50f06273a24eaf66cb1c117dd54, type: 2}
-    Source: {fileID: 0}
 --- !u!4 &1195483076
 Transform:
   m_ObjectHideFlags: 0

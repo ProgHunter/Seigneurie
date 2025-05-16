@@ -8,7 +8,7 @@ namespace Batiment
     {
         private Dictionary<BatimentEnum, Qte> _batimentsDict;
 
-        public LotBatiments(Qte qteMaison, Qte qteFerme, Qte qteScierie, Qte qteMine, Qte qteHotelDeVille)
+        public LotBatiments(Qte qteMaison, Qte qteFerme, Qte qteScierie, Qte qteMine, Qte qteHotelDeVille, Qte qteChateau)
         {
             _batimentsDict = new Dictionary<BatimentEnum, Qte>
             {
@@ -16,7 +16,8 @@ namespace Batiment
                 { BatimentEnum.FERME,        qteFerme.Clone()        },
                 { BatimentEnum.SCIERIE,      qteScierie.Clone()      },
                 { BatimentEnum.MINE,         qteMine.Clone()         },
-                { BatimentEnum.HOTELDEVILLE, qteHotelDeVille.Clone() }
+                { BatimentEnum.HOTELDEVILLE, qteHotelDeVille.Clone() },
+                { BatimentEnum.CHATEAU,      qteChateau.Clone()      }
             };
         }
 
@@ -24,7 +25,7 @@ namespace Batiment
         /// Constructeur pour un lot de bâtiments qui exprime seulement une quantité.
         /// Pas de min ni de max spécifié.
         /// </summary>
-        public LotBatiments(long qteMaison = 0, long qteFerme = 0, long qteScierie = 0, long qteMine = 0, long qteHotelDeVille = 0)
+        public LotBatiments(long qteMaison = 0, long qteFerme = 0, long qteScierie = 0, long qteMine = 0, long qteHotelDeVille = 0, long qteChateau = 0)
         {
             _batimentsDict = new Dictionary<BatimentEnum, Qte>
             {
@@ -32,7 +33,8 @@ namespace Batiment
                 { BatimentEnum.FERME,        new Qte(qteFerme)        },
                 { BatimentEnum.SCIERIE,      new Qte(qteScierie)      },
                 { BatimentEnum.MINE,         new Qte(qteMine)         },
-                { BatimentEnum.HOTELDEVILLE, new Qte(qteHotelDeVille) }
+                { BatimentEnum.HOTELDEVILLE, new Qte(qteHotelDeVille) },
+                { BatimentEnum.CHATEAU,      new Qte(qteChateau)      }
             };
         }
 
@@ -46,7 +48,8 @@ namespace Batiment
                                     _batimentsDict[BatimentEnum.FERME].Clone(),
                                     _batimentsDict[BatimentEnum.SCIERIE].Clone(),
                                     _batimentsDict[BatimentEnum.MINE].Clone(),
-                                    _batimentsDict[BatimentEnum.HOTELDEVILLE].Clone());
+                                    _batimentsDict[BatimentEnum.HOTELDEVILLE].Clone(),
+                                    _batimentsDict[BatimentEnum.CHATEAU].Clone());
         }
 
         #region accesseurs_mutateurs

@@ -11,7 +11,7 @@ namespace Ressource
             Nom = "Minéraux";
             Icone = null;  // TODO
             Description = "Ressource essentiel à la construction de bâtiments.";
-            Qte = new Qte(100 /*Qte de base*/, 100_000 /*Max*/, 0 /*Min*/);
+            Qte = new Qte(100 /*Qte de base*/, 1_000_000 /*Max*/, 0 /*Min*/);
             Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }

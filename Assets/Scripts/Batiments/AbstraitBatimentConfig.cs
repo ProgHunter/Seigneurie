@@ -40,5 +40,6 @@ namespace Batiment
         SCIERIE = 3,
         MINE = 4,
         HOTELDEVILLE = 5,
+        CHATEAU = 6
     }
 }

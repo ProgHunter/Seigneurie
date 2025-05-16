@@ -17,7 +17,7 @@ namespace Batiment
             CoutConstruction = new LotRessources(0, 0, 500, 100);
             EffortConstruction = 800;
             BonusProductionPourcent = 0.1f;
-            Prerequis = new LotBatiments(0, 0, 0, 0, 1);  // Hotel de ville
+            Prerequis = new LotBatiments(qteHotelDeVille:1);
         }
 
         public float BonusProductionPourcent { get => _bonusProductionPourcent; private set => _bonusProductionPourcent = value; }

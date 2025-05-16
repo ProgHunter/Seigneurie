@@ -16,7 +16,7 @@ namespace Batiment
         public MaisonConfig() : base()
         {
             Id = "B0_Maison";
-            Nom = "Paté de maisons";
+            Nom = "Pâté de maisons";
             Icone = null;  // TODO
             Qte = new Qte(10 /*Qte de base*/, 1000 /*Max*/, 1 /*Min*/);
             CoutConstruction = new LotRessources(0, 0, 100, 50);  // TODO: Mettres les valeurs dans un fichier de config

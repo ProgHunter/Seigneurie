@@ -10,8 +10,8 @@ namespace Ressource
             Id = "R1_Nourriture";
             Nom = "Nourriture";
             Icone = null;  // TODO
-            Description = "";
-            Qte = new Qte(1000 /*Qte de base*/, 1_000_000 /*Max*/, 0 /*Min*/);
+            Description = "Ressource essentiel à la survie de la population.";
+            Qte = new Qte(1000 /*Qte de base*/, 10_000_000 /*Max*/, 0 /*Min*/);
             Prerequis = new LotBatiments();  // Aucun prérequis
         }
     }

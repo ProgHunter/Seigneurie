@@ -14,9 +14,9 @@ namespace Batiment
             Icone = null;  // TODO
             Description = "Permet d'augmenter production de nourriture.";
             Qte = new Qte(0 /*Qte de base*/, 1000 /*Max*/, 0 /*Min*/);
-            CoutConstruction = new LotRessources(0, 0, 50, 10);
-            EffortConstruction = 20;
-            BonusProductionPourcent = 0.05f;
+            CoutConstruction = new LotRessources(0, 0, 250, 100);
+            EffortConstruction = 200;
+            BonusProductionPourcent = 0.25f;
             Prerequis = new LotBatiments();  // Aucun prérequis
         }
 

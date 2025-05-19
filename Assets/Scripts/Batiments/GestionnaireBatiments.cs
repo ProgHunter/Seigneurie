@@ -26,14 +26,16 @@ namespace Batiment
                 { BatimentEnum.FERME,        new FermeConfig()        },
                 { BatimentEnum.SCIERIE,      new ScierieConfig()      },
                 { BatimentEnum.MINE,         new MineConfig()         },
-                { BatimentEnum.HOTELDEVILLE, new HotelDeVilleConfig() }
+                { BatimentEnum.HOTELDEVILLE, new HotelDeVilleConfig() },
+                { BatimentEnum.CHATEAU,      new ChateauConfig()      }
             };
 
             _batiments = new LotBatiments(BatimentConfigDict[BatimentEnum.MAISON].Qte,
                                           BatimentConfigDict[BatimentEnum.FERME].Qte,
                                           BatimentConfigDict[BatimentEnum.SCIERIE].Qte,
                                           BatimentConfigDict[BatimentEnum.MINE].Qte,
-                                          BatimentConfigDict[BatimentEnum.HOTELDEVILLE].Qte);
+                                          BatimentConfigDict[BatimentEnum.HOTELDEVILLE].Qte,
+                                          BatimentConfigDict[BatimentEnum.CHATEAU].Qte);
         }
 
         public static GestionnaireBatiments Instance => _instance;
@@ -76,6 +78,22 @@ namespace Batiment
             return prerequis;
         }
         #endregion accesseurs_mutateurs
+
+        /// <summary>
+        /// Rétablie les valeurs (Qte) de la config pour les bâtiments.
+        /// Annule la construction en cours.
+        /// </summary>
+        public void Reinitialiser()
+        {
+            _batiments = new LotBatiments(BatimentConfigDict[BatimentEnum.MAISON].Qte,
+                                          BatimentConfigDict[BatimentEnum.FERME].Qte,
+                                          BatimentConfigDict[BatimentEnum.SCIERIE].Qte,
+                                          BatimentConfigDict[BatimentEnum.MINE].Qte,
+                                          BatimentConfigDict[BatimentEnum.HOTELDEVILLE].Qte,
+                                          BatimentConfigDict[BatimentEnum.CHATEAU].Qte);
+
+            AnnulerConstruction();
+        }
 
         /// <summary>
         /// Valide si les bâtiments mentionnés dans le lot sont construits et en quantité suffisante.
@@ -248,21 +266,6 @@ namespace Batiment
         public void AnnulerConstruction()
         {
             EnConstruction = null;
-        }
-
-        /// <summary>
-        /// Rétablie les valeurs (Qte) de la config pour les bâtiments.
-        /// Annule la construction en cours.
-        /// </summary>
-        public void Reinitialiser()
-        {
-            _batiments = new LotBatiments(BatimentConfigDict[BatimentEnum.MAISON].Qte,
-                                          BatimentConfigDict[BatimentEnum.FERME].Qte,
-                                          BatimentConfigDict[BatimentEnum.SCIERIE].Qte,
-                                          BatimentConfigDict[BatimentEnum.MINE].Qte,
-                                          BatimentConfigDict[BatimentEnum.HOTELDEVILLE].Qte);
-
-            AnnulerConstruction();
         }
     }
 }

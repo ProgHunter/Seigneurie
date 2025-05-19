@@ -14,10 +14,10 @@ namespace Batiment
             Icone = null;  // TODO
             Description = "Permet d'augmenter production de minéraux.";
             Qte = new Qte(0 /*Qte de base*/, 100 /*Max*/, 0 /*Min*/);
-            CoutConstruction = new LotRessources(0, 0, 50, 10);
-            EffortConstruction = 20;
-            BonusProductionPourcent = 0.05f;
-            Prerequis = new LotBatiments(0, 0, 0, 0, 1);  // Hotel de ville
+            CoutConstruction = new LotRessources(0, 0, 500, 100);
+            EffortConstruction = 800;
+            BonusProductionPourcent = 0.1f;
+            Prerequis = new LotBatiments(qteHotelDeVille:1);
         }
 
         public float BonusProductionPourcent { get => _bonusProductionPourcent; private set => _bonusProductionPourcent = value; }

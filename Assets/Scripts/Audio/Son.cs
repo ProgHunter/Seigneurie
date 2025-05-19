@@ -10,7 +10,7 @@ namespace Audio
         public string Nom;
         public AudioClip Clip;
         public bool JouerSurAwake;
-        public bool Loop;
+        public bool JouerEnBoucle;
         [Range(0f,1f)]
         public float Volume = 1;
         [Range(0f,1f)]
@@ -18,7 +18,7 @@ namespace Audio
 
         public AudioMixerGroup AudioMixerGroupe;
 
-        [HideInInspector] public AudioSource Source;
+        private AudioSource Source;
 
         public void Initialiser(AudioSource source)
         {
@@ -26,8 +26,14 @@ namespace Audio
             Source.clip = Clip;
             Source.volume = Volume;
             Source.pitch = Vitesse;
+            Source.outputAudioMixerGroup = AudioMixerGroupe;
             Source.playOnAwake = JouerSurAwake;
-            Source.loop = Loop;
+            Source.loop = JouerEnBoucle;
+        }
+
+        public void Jouer()
+        {
+            Source.Play();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Batiment
         public ChateauConfig() : base()
         {
             Id = "B5_Chateau";
-            Nom = "Ch‚teau";
+            Nom = "Ch√¢teau";
             Icone = null;  // TODO
-            Description = "IcÙne de la rÈussite de votre Seignerie. Ceci constitue le dernier objectif du jeu, pour le moment.";
+            Description = "Ic√¥ne de la r√©ussite de votre Seignerie. Ceci constitue le dernier objectif du jeu, pour le moment.";
             Qte = new Qte(0 /*Qte de base*/, 1 /*Max*/, 0 /*Min*/);
             CoutConstruction = new LotRessources(0, 0, 250000, 100000);
             EffortConstruction = 100000;
